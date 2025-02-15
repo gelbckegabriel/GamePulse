@@ -1,5 +1,11 @@
 {
   "name": "game-pulse",
+  "author": {
+    "name": "Gabriel Gelbcke",
+    "email": "gabrielgelbcke@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/gabrielgelbcke/",
+    "github": "https://github.com/gelbckegabriel"
+  },
   "version": "0.1.0",
   "private": true,
   "scripts": {
