@@ -41,7 +41,7 @@ export const Hero = () => {
           exit="hidden"
           viewport={{ amount: 0.98 }}
         >
-          <h1 className="text-5xl font-bold mb-10">
+          <h1 className="text-4xl md:text-5xl font-bold mb-10">
             Players are waiting. <br />
             Are you in?
           </h1>

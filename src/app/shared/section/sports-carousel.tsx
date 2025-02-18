@@ -1,14 +1,20 @@
 "use client";
 
-import { useScroll, useTransform, motion } from "framer-motion";
+import {
+  useScroll,
+  useTransform,
+  motion,
+  useMotionValueEvent,
+} from "framer-motion";
 import {
   mainSports,
   randomSportsSet1,
   randomSportsSet2,
   SportImages,
 } from "./sports-images";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useWindowSize } from "react-use";
+import { Button } from "../button";
 
 export const SportsCarousel = () => {
   const { width, height } = useWindowSize();
@@ -22,7 +28,7 @@ export const SportsCarousel = () => {
 
   const maximumScale = useMemo(() => {
     const windowYRatio = height / width;
-    const xScale = 1.66667;
+    const xScale = width >= 768 ? 1.66667 : 0.3;
     const yScale = xScale * (16 / 9) * windowYRatio;
     return Math.max(xScale, yScale);
   }, [width, height]);
@@ -30,7 +36,7 @@ export const SportsCarousel = () => {
   const scale = useTransform(
     scrollYProgress,
     [0.3, 0.5, 0.66],
-    [maximumScale * 1.1, maximumScale, 1]
+    [maximumScale * 1.8, maximumScale, 1]
   );
 
   const secondaryCardsOpacity = useTransform(
@@ -38,6 +44,7 @@ export const SportsCarousel = () => {
     [0.64, 0.66],
     [0, 1]
   );
+
   const secondaryCardsTranslateXLeft = useTransform(
     scrollYProgress,
     [0.64, 0.66],
@@ -49,8 +56,19 @@ export const SportsCarousel = () => {
     [20, 0]
   );
 
+  const [carouselVariant, setCarouselVariant] = useState<"inactive" | "active">(
+    "inactive"
+  );
+  useMotionValueEvent(scrollYProgress, "change", (progress) => {
+    if (progress > 0.67) {
+      setCarouselVariant("active");
+    } else {
+      setCarouselVariant("inactive");
+    }
+  });
+
   return (
-    <div className="bg-background pb-8">
+    <motion.div animate={carouselVariant} className="bg-background pb-16">
       <div
         ref={carouselWrapperRef}
         className="overflow-clip mt-[-100vh] h-[300vh]"
@@ -62,7 +80,7 @@ export const SportsCarousel = () => {
                 opacity: secondaryCardsOpacity,
                 x: secondaryCardsTranslateXLeft,
               }}
-              className="shrink-0 w-[120vh] aspect-video rounded-2xl overflow-clip"
+              className="shrink-0 w-[250px] md:w-[120vh] aspect-[9/16] md:aspect-video rounded-2xl overflow-clip"
             >
               <img
                 className="h-full w-full object-cover"
@@ -72,20 +90,30 @@ export const SportsCarousel = () => {
             </motion.div>
             <motion.div
               style={{ scale }}
-              className="shrink-0 w-[120vh] aspect-video rounded-2xl overflow-clip"
+              className="relative shrink-0 w-[250px] md:w-[120vh] aspect-[9/16] md:aspect-video rounded-2xl overflow-clip"
             >
               <img
                 className="h-full w-full object-cover"
                 src={mainSports[0].image}
                 alt={mainSports[0].title}
               />
+              <motion.div
+                variants={{
+                  active: { opacity: 1 },
+                  inactive: { opacity: 0 },
+                }}
+                className="absolute text-white text-lg left-0 bottom-0 p-8 w-full flex flex-col gap-4 md:gap-0 md:flex-row md:justify-between items-center"
+              >
+                <p>Basketball</p>
+                <Button>Pick a court!</Button>
+              </motion.div>
             </motion.div>
             <motion.div
               style={{
                 opacity: secondaryCardsOpacity,
                 x: secondaryCardsTranslateXRight,
               }}
-              className="shrink-0 w-[120vh] aspect-video rounded-2xl overflow-clip"
+              className="shrink-0 w-[250px] md:w-[120vh] aspect-[9/16] md:aspect-video rounded-2xl overflow-clip"
             >
               <img
                 className="h-full w-full object-cover"
@@ -97,13 +125,20 @@ export const SportsCarousel = () => {
         </div>
       </div>
 
-      <div className="space-y-3 -mt-[calc(100vh - (60vw * (16 / 9) / 2))]">
+      <motion.div
+        variants={{
+          active: { opacity: 1, y: 0 },
+          inactive: { opacity: 0, y: 20 },
+        }}
+        transition={{ duration: 0.3 }}
+        className="space-y-3 -mt-[calc((100vh-(250px*(16/9)))/2)] md:-mt-[calc((100vh-(60vw*(9/16)))/2)] pt-4"
+      >
         <SmallVideoCarousel sports={randomSportsSet1} />
         <div className="[--duration:68s] [--carousel-offset:-32px]">
           <SmallVideoCarousel sports={randomSportsSet2} />
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
@@ -113,7 +148,7 @@ const SmallVideoCarousel = ({ sports }: { sports: SportImages[] }) => {
       <div className="flex gap-3 animate-carousel-move relative left-[var(--carousel-offset,0px)]">
         {sports.map((sport, index) => (
           <div
-            className="w-[23vh] aspect-video shrink-0"
+            className="w-[15vh] md:w-[23vh] aspect-video shrink-0"
             key={`${sport.title}-${index}`}
           >
             <img

@@ -12,7 +12,6 @@ export default function Home() {
         <HeroSub />
       </div>
       <SportsCarousel />
-      <div className="h-[300vh]" />
     </>
   );
 }

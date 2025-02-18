@@ -6,7 +6,7 @@ import { FadeIn } from "../fade-in";
 export const HeroSub = () => {
   return (
     <div>
-      <Container className="z-10 relative text-white text-4xl font-bold space-y-12 py-36 max-w-[692px]">
+      <Container className="z-10 relative text-white text-3xl md:text-4xl font-bold space-y-12 py-36 max-w-[692px]">
         <FadeIn>
           <p>Find public courts near you and start playing today.</p>
         </FadeIn>
