@@ -19,8 +19,8 @@ export default {
         "Helvetica Neue",
         "Helvetica",
         "Arial",
-        "sans-serif"
-      ]
+        "sans-serif",
+      ],
     },
     fontSize: {
       xs: "0.75rem", // 12px
@@ -32,6 +32,15 @@ export default {
       "3xl": "1.75rem", // 28px
       "4xl": ["2.5rem", "1.1"], // 40px
       "5xl": ["4.5rem", "1.05"], // 72px
+    },
+    keyframes: {
+      "carousel-move": {
+        "0%": { transform: "translateX(0)" },
+        "100%": { transform: "translateX(-100%)" },
+      },
+    },
+    animation: {
+      "carousel-move": "carousel-move var(--duration,80s) linear infinite",
     },
     extend: {},
   },

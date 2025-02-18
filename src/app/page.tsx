@@ -7,7 +7,7 @@ import { VideoCarousel } from "./shared/section/video-carousel";
 export default function Home() {
   return (
     <>
-      <div className="bg-background">
+      <div className="bg-background relative z-10">
         <Hero />
         <HeroSub />
       </div>
