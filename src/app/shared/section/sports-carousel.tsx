@@ -6,12 +6,11 @@ import {
   randomSportsSet1,
   randomSportsSet2,
   SportImages,
-  sports,
 } from "./sports-images";
 import { useMemo, useRef } from "react";
 import { useWindowSize } from "react-use";
 
-export const VideoCarousel = () => {
+export const SportsCarousel = () => {
   const { width, height } = useWindowSize();
 
   const carouselWrapperRef = useRef<HTMLDivElement>(null);

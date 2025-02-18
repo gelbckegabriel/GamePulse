@@ -2,7 +2,7 @@ import { Button } from "./shared/button";
 import { Container } from "./shared/container";
 import { Hero } from "./shared/section/hero";
 import { HeroSub } from "./shared/section/hero-sub";
-import { VideoCarousel } from "./shared/section/video-carousel";
+import { SportsCarousel } from "./shared/section/sports-carousel";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
         <Hero />
         <HeroSub />
       </div>
-      <VideoCarousel />
+      <SportsCarousel />
       <div className="h-[300vh]" />
     </>
   );
