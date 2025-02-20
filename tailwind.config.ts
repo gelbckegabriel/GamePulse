@@ -15,9 +15,9 @@ export default {
     },
     fontFamily: {
       sans: [
-        "SF Pro Display",
-        "Helvetica Neue",
-        "Helvetica",
+        "Roboto",
+        "Inter",
+        "San Francisco",
         "Arial",
         "sans-serif",
       ],
