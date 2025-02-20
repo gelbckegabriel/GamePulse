@@ -27,7 +27,7 @@ export default function Header() {
       <div className="sticky top-0 z-20 bg-backgroundContrast text-white">
         <Container className="flex items-center justify-between min-h-[--header-row-height]">
           <p className="text-xl font-semibold">GamePulse</p>
-          <Button size="small">Sign up</Button>
+          <Link href="/auth"><Button size="small">Sign up</Button></Link>
         </Container>
       </div>
     </>

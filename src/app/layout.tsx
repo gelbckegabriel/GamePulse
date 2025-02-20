@@ -4,7 +4,6 @@ import "./globals.css";
 import Header from "./shared/header";
 import Footer from "./shared/footer";
 
-
 const roboto = Roboto({
   weight: ["400", "500", "700"],
   variable: "--font-roboto",
@@ -33,6 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* <link rel="icon" href="/favicon.png" type="image/png" /> */}
+      </head>
       <body
         className={`${roboto.variable} ${inter.variable} ${notoSans.variable} antialiased`}
       >
