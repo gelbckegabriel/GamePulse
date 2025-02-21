@@ -15,6 +15,7 @@ import {
 import { useMemo, useRef, useState } from "react";
 import { useWindowSize } from "react-use";
 import { Button } from "../button";
+import Image from "next/image";
 
 export const SportsCarousel = () => {
   const { width, height } = useWindowSize();
@@ -151,10 +152,12 @@ const SmallVideoCarousel = ({ sports }: { sports: SportImages[] }) => {
             className="w-[15vh] md:w-[23vh] aspect-video shrink-0"
             key={`${sport.title}-${index}`}
           >
-            <img
+            <Image
               className="w-full h-full object-cover rounded-xl"
               src={sport.image}
               alt={sport.title}
+              width={150}
+              height={84}
             />
           </div>
         ))}
