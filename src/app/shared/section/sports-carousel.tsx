@@ -83,7 +83,7 @@ export const SportsCarousel = () => {
               }}
               className="shrink-0 w-[250px] md:w-[120vh] aspect-[9/16] md:aspect-video rounded-2xl overflow-clip"
             >
-              <Image
+              <img
                 className="h-full w-full object-cover"
                 src={mainSports[1].image}
                 alt={mainSports[1].title}
@@ -93,7 +93,7 @@ export const SportsCarousel = () => {
               style={{ scale }}
               className="relative shrink-0 w-[250px] md:w-[120vh] aspect-[9/16] md:aspect-video rounded-2xl overflow-clip"
             >
-              <Image
+              <img
                 className="h-full w-full object-cover"
                 src={mainSports[0].image}
                 alt={mainSports[0].title}
@@ -116,7 +116,7 @@ export const SportsCarousel = () => {
               }}
               className="shrink-0 w-[250px] md:w-[120vh] aspect-[9/16] md:aspect-video rounded-2xl overflow-clip"
             >
-              <Image
+              <img
                 className="h-full w-full object-cover"
                 src={mainSports[2].image}
                 alt={mainSports[0].title}
@@ -156,6 +156,8 @@ const SmallVideoCarousel = ({ sports }: { sports: SportImages[] }) => {
               className="w-full h-full object-cover rounded-xl"
               src={sport.image}
               alt={sport.title}
+              width={150}
+              height={84}
             />
           </div>
         ))}
