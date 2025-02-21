@@ -14,7 +14,7 @@ export const HeroSub = () => {
           <p>Connect with local players and join pick-up games.</p>
         </FadeIn>
         <FadeIn>
-          <p>From casual matches to serious competition, it's all here.</p>
+          <p>From casual matches to serious competition, it is all here.</p>
         </FadeIn>
         <FadeIn>
           <p>Your city, your court, your game!</p>
