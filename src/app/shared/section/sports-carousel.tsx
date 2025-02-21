@@ -15,6 +15,7 @@ import {
 import { useMemo, useRef, useState } from "react";
 import { useWindowSize } from "react-use";
 import { Button } from "../button";
+import Image from "next/image";
 
 export const SportsCarousel = () => {
   const { width, height } = useWindowSize();
@@ -82,7 +83,7 @@ export const SportsCarousel = () => {
               }}
               className="shrink-0 w-[250px] md:w-[120vh] aspect-[9/16] md:aspect-video rounded-2xl overflow-clip"
             >
-              <img
+              <Image
                 className="h-full w-full object-cover"
                 src={mainSports[1].image}
                 alt={mainSports[1].title}
@@ -92,7 +93,7 @@ export const SportsCarousel = () => {
               style={{ scale }}
               className="relative shrink-0 w-[250px] md:w-[120vh] aspect-[9/16] md:aspect-video rounded-2xl overflow-clip"
             >
-              <img
+              <Image
                 className="h-full w-full object-cover"
                 src={mainSports[0].image}
                 alt={mainSports[0].title}
@@ -115,7 +116,7 @@ export const SportsCarousel = () => {
               }}
               className="shrink-0 w-[250px] md:w-[120vh] aspect-[9/16] md:aspect-video rounded-2xl overflow-clip"
             >
-              <img
+              <Image
                 className="h-full w-full object-cover"
                 src={mainSports[2].image}
                 alt={mainSports[0].title}
@@ -151,7 +152,7 @@ const SmallVideoCarousel = ({ sports }: { sports: SportImages[] }) => {
             className="w-[15vh] md:w-[23vh] aspect-video shrink-0"
             key={`${sport.title}-${index}`}
           >
-            <img
+            <Image
               className="w-full h-full object-cover rounded-xl"
               src={sport.image}
               alt={sport.title}
