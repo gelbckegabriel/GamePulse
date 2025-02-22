@@ -36,13 +36,13 @@ export const SportsCarousel = () => {
 
   const scale = useTransform(
     scrollYProgress,
-    [0.3, 0.5, 0.66],
+    [0.3, 0.35, 0.6],
     [maximumScale * 1.8, maximumScale, 1]
   );
 
   const secondaryCardsOpacity = useTransform(
     scrollYProgress,
-    [0.64, 0.66],
+    [0.56, 0.66],
     [0, 1]
   );
 
