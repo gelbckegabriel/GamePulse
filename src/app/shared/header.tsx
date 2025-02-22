@@ -7,11 +7,7 @@ import { Container } from "./container";
 import { UserLogin } from "./login";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(true);
-
-  // useEffect(() => {
-  //   console.log("isOpen", isOpen);
-  // }, [isOpen]);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
