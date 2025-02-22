@@ -1,13 +1,12 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Button } from "../button";
 import { Container } from "../container";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { UserAuth } from "../auth";
+import Link from "next/link";
 
 export const Hero = () => {
-  const [isOpen, setIsOpen] = useState(true);
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: videoContainerRef,
@@ -48,15 +47,15 @@ export const Hero = () => {
               Players are waiting. <br />
               Are you in?
             </h1>
-            <Button className="mb-16" size="large" onClick={() => setIsOpen(true)}>
-              Sign up
-            </Button>
+            <Link href="/courts">
+              <Button className="mb-16" size="large">
+                Courts
+              </Button>
+            </Link>
             <p className="font-semibold">Only on GamePulse.</p>
           </motion.div>
         </Container>
       </div>
-
-      <UserAuth isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };

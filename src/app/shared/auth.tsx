@@ -20,17 +20,17 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
         {isOpen && (
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { duration: 0.2 } }}
+            exit={{ opacity: 0, transition: { duration: 0.2 } }}
             onClick={() => setIsOpen(false)}
             className="bg-slate-900/20 backdrop-blur p-8 fixed inset-0 z-50 grid place-items-center overflow-y-scroll"
           >
             <motion.div
-              initial={{ scale: 0, rotate: "12.5deg" }}
-              animate={{ scale: 1, rotate: "0deg" }}
-              exit={{ scale: 0, rotate: "0deg" }}
+              initial={{ scale: 0, rotate: "22.5deg", transition: { duration: 0.3 } }}
+              animate={{ scale: 1, rotate: "0deg", transition: { duration: 0.3 } }}
+              exit={{ scale: 0, rotate: "0deg", transition: { duration: 0.2 } }}
               onClick={(e) => e.stopPropagation()}
-              className="m-auto w-full md:w-[70%] lg:w-[35%] h-fit p-4 md:p-8 lg:p-12 bg-white bg-opacity-40 backdrop-blur-md border border-white border-opacity-50 rounded-lg shadow-lg"
+              className="m-auto w-full md:w-[70%] lg:w-[35%] h-fit p-4 md:p-8 lg:p-12 bg-white bg-opacity-45 backdrop-blur-md border border-white border-opacity-50 rounded-lg shadow-lg"
             >
               {/* CLOSE BUTTON */}
               <div
@@ -76,7 +76,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                 </div>
                 <div className="mt-6 flex justify-between">
                   <p className="text-sm2 mb-1">Password</p>
-                  <p className="text-sm text-white text-opacity-40 cursor-pointer hover:text-gray-700 hover:underline">
+                  <p className="text-sm text-[#727070] text-opacity-90 cursor-pointer hover:text-[gray-700] hover:underline">
                     Forgot Password?
                   </p>
                 </div>
@@ -113,7 +113,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
               <div className="mt-8 flex justify-center text-sm">
                 <p>
                   Do not have an account?{" "}
-                  <span className="text-white text-opacity-40 cursor-pointer hover:text-gray-700 hover:underline">
+                  <span className="text-[#727070] text-opacity-90 cursor-pointer hover:text-[gray-700] hover:underline">
                     Sign Up
                   </span>
                 </p>
