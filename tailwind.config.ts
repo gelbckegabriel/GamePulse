@@ -12,6 +12,7 @@ export default {
       backgroundContrast: "#111",
       textBlack: "#1d1d1f",
       white: "#fff",
+      purpleTest: "rgb(147 51 234)"
     },
     fontFamily: {
       sans: [
@@ -25,6 +26,7 @@ export default {
     fontSize: {
       xs: "0.75rem", // 12px
       sm: "0.875rem", // 14px
+      sm2: "1rem", // 16px
       base: "1.0625rem", // 17px
       lg: ["1.1875rem", "1.21"], // 19px
       xl: "1.3125rem", // 21px
