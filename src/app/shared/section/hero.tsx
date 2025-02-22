@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { Button } from "../button";
 import { Container } from "../container";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { UserLogin } from "../login";
+import { UserAuth } from "../auth";
 
 export const Hero = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -56,7 +56,7 @@ export const Hero = () => {
         </Container>
       </div>
 
-      <UserLogin isOpen={isOpen} setIsOpen={setIsOpen} />
+      <UserAuth isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };

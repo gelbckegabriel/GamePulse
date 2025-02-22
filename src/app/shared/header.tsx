@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "./button";
 import { Container } from "./container";
-import { UserLogin } from "./login";
+import { UserAuth } from "./auth";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +39,7 @@ export default function Header() {
         </Container>
       </div>
 
-      <UserLogin isOpen={isOpen} setIsOpen={setIsOpen} />
+      <UserAuth isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 }

@@ -10,7 +10,7 @@ type Props = {
   setIsOpen: (isOpen: boolean) => void;
 };
 
-export const UserLogin = ({ isOpen, setIsOpen }: Props) => {
+export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const togglePasswordView = () => setShowPassword(!showPassword);
 
