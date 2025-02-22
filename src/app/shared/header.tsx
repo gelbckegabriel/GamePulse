@@ -1,8 +1,11 @@
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "./button";
 import { Container } from "./container";
 
 export default function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
       <header className="bg-backgroundContrast text-white">
@@ -27,7 +30,9 @@ export default function Header() {
       <div className="sticky top-0 z-20 bg-backgroundContrast text-white">
         <Container className="flex items-center justify-between min-h-[--header-row-height]">
           <p className="text-xl font-semibold">GamePulse</p>
-          <Link href="/auth"><Button size="small">Sign up</Button></Link>
+          <Button size="small" onClick={() => setIsOpen(true)}>
+            Sign up
+          </Button>
         </Container>
       </div>
     </>

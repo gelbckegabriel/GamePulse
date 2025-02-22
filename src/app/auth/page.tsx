@@ -12,7 +12,7 @@ export default function userAuth() {
   return (
     <>
       <div className="bg-[url('/home/basketball2.webp')] h-[100vh]">
-        <div className="mx-auto w-[85%] md:w-[50%] lg:w-[35%] h-fit p-6 md:p-8 lg:p-12 bg-white bg-opacity-40 backdrop-blur-md border border-white border-opacity-50 rounded-lg shadow-lg">
+        <div className="m-auto w-[85%] md:w-[50%] lg:w-[35%] h-fit p-6 md:p-8 lg:p-12 bg-white bg-opacity-40 backdrop-blur-md border border-white border-opacity-50 rounded-lg shadow-lg">
           {/* REGISTER WITH */}
           <div className="flex flex-col align-center items-center justify-center">
             <p className="text-sm2">Register with:</p>
