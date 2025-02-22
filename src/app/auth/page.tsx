@@ -11,20 +11,18 @@ export default function userAuth() {
 
   return (
     <>
-      {/* <div className="bg-background h-[100vh]"> */}
-      {/* <div className="bg-white h-[100vh]"> */}
       <div className="bg-[url('/home/basketball2.webp')] h-[100vh]">
-        <div className="mx-auto w-[80vh] h-[80vh] p-12 bg-white bg-opacity-40 backdrop-blur-md border border-white border-opacity-50 rounded-lg shadow-lg">
+        <div className="mx-auto w-[85%] md:w-[50%] lg:w-[35%] h-fit p-6 md:p-8 lg:p-12 bg-white bg-opacity-40 backdrop-blur-md border border-white border-opacity-50 rounded-lg shadow-lg">
           {/* REGISTER WITH */}
           <div className="flex flex-col align-center items-center justify-center">
             <p className="text-sm2">Register with:</p>
             <div className="flex justify-between w-full pt-4">
-              <button className="flex justify-center p-2 bg-white bg-opacity-15 border-white border-opacity-10 backdrop-blur-md rounded-lg shadow-lg min-w-[45%]">
+              <button className="flex justify-center p-2 bg-white bg-opacity-15 border-white border-opacity-10 backdrop-blur-md rounded-lg shadow-lg min-w-[45%] hover:bg-opacity-45 hover:scale-105 duration-500 ease-in-out">
                 <FaFacebook className="text-lg md:text-xl" />
                 <span className="pl-2 text-sm">Facebook</span>
               </button>
 
-              <button className="flex justify-center p-2 bg-white bg-opacity-15 border-white border-opacity-10 backdrop-blur-md rounded-lg shadow-lg min-w-[45%]">
+              <button className="flex justify-center p-2 bg-white bg-opacity-15 border-white border-opacity-10 backdrop-blur-md rounded-lg shadow-lg min-w-[45%] hover:bg-opacity-45 hover:scale-105 duration-500 ease-in-out">
                 <FaGoogle className="text-lg md:text-xl" />
                 <span className="pl-2 text-sm">Google</span>
               </button>
@@ -51,7 +49,7 @@ export default function userAuth() {
             </div>
             <div className="mt-6 flex justify-between">
               <p className="text-sm2 mb-1">Password</p>
-              <p className="text-sm">Forgot Password?</p>
+              <p className="text-sm text-white text-opacity-40 cursor-pointer hover:text-gray-700 hover:underline">Forgot Password?</p>
             </div>
             <div className="bg-white bg-opacity-15 border-white border-opacity-10 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
               <FaFingerprint />
@@ -77,12 +75,14 @@ export default function userAuth() {
               <input type="checkbox" />
               <p>Remember me</p>
             </div> */}
-            <button className="mt-8 py-2.5 px-10 w-full bg-white bg-opacity-75 border-white border-opacity-80 backdrop-blur-md rounded-lg shadow-lg text-sm2">Login</button>
+            <button className="mt-8 py-2.5 px-10 w-full bg-white bg-opacity-75 border-white border-opacity-80 backdrop-blur-md rounded-lg shadow-lg text-sm2 hover:bg-opacity-85 hover:scale-105 duration-300 ease-in-out">
+              Login
+            </button>
           </div>
 
           {/* FOOTER */}
           <div className="mt-8 flex justify-center text-sm">
-            <p>Do not have an account? Sign Up</p>
+            <p>Do not have an account? <span className="text-white text-opacity-40 cursor-pointer hover:text-gray-700 hover:underline">Sign Up</span></p>
           </div>
         </div>
       </div>
