@@ -1,10 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Button } from "./button";
 import { Container } from "./container";
+import { UserLogin } from "./login";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+
+  // useEffect(() => {
+  //   console.log("isOpen", isOpen);
+  // }, [isOpen]);
 
   return (
     <>
@@ -35,6 +40,8 @@ export default function Header() {
           </Button>
         </Container>
       </div>
+
+      <UserLogin isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 }
