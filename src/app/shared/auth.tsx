@@ -54,7 +54,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
               <div className="flex flex-col align-center items-center justify-center">
                 <p className="text-sm2">Register with:</p>
                 <div className="flex justify-between w-full pt-4">
-                  <button className="flex justify-center p-2 bg-white bg-opacity-15 backdrop-blur-md rounded-lg shadow-lg min-w-[45%] hover:bg-opacity-45 hover:scale-105 duration-500 ease-in-out">
+                  <button className="flex justify-center p-2 bg-white bg-opacity-15 backdrop-blur-md rounded-lg shadow-lg min-w-[45%] duration-500 ease-in-out">
                     <FaFacebook className="text-lg md:text-xl" />
                     <span className="pl-2 text-sm">Facebook</span>
                   </button>
