@@ -113,6 +113,7 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
               className="absolute left-0 right-0 top-0 z-10 flex justify-center p-4"
             >
               <button
+                onClick={() => setOpenCreate(false)}
                 className="h-2 w-14 cursor-grab touch-none rounded-full bg-darkGray active:cursor-grabbing"
               ></button>
             </div>
