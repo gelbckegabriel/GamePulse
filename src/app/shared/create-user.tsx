@@ -106,11 +106,13 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
               bottom: 0.5,
             }}
           >
-            <div className="absolute left-0 right-0 top-0 z-10 flex justify-center p-4">
+            <div
+              onPointerDown={(e) => {
+                controls.start(e);
+              }}
+              className="absolute left-0 right-0 top-0 z-10 flex justify-center p-4"
+            >
               <button
-                onPointerDown={(e) => {
-                  controls.start(e);
-                }}
                 className="h-2 w-14 cursor-grab touch-none rounded-full bg-darkGray active:cursor-grabbing"
               ></button>
             </div>
@@ -146,7 +148,7 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
                           type="text"
                           maxLength={30}
                           style={{ backgroundColor: "transparent" }}
-                          className="pl-1 border-0 w-full outline-none text-sm"
+                          className="pl-1 border-0 w-full outline-none text-sm2"
                           required
                         />
                       </div>
@@ -177,7 +179,7 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
                         type="email"
                         maxLength={50}
                         style={{ backgroundColor: "transparent" }}
-                        className="pl-1 border-0 w-full outline-none text-sm"
+                        className="pl-1 border-0 w-full outline-none text-sm2"
                         required
                       />
                     </div>
@@ -201,7 +203,7 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
                         maxLength={20}
                         style={{ backgroundColor: "transparent" }}
                         onChange={handlePasswordChange}
-                        className="pl-1 border-0 w-full outline-none text-sm"
+                        className="pl-1 border-0 w-full outline-none text-sm2"
                         required
                       />
                       {showPassword ? (

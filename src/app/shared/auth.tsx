@@ -81,7 +81,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                   <input
                     type="email"
                     style={{ backgroundColor: "transparent" }}
-                    className="pl-1 border-0 w-full outline-none text-sm"
+                    className="pl-1 border-0 w-full outline-none text-sm2"
                   />
                 </div>
                 <div className="mt-6 flex justify-between">
@@ -95,7 +95,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                   <input
                     type={showPassword ? "text" : "password"}
                     style={{ backgroundColor: "transparent" }}
-                    className="pl-1 border-0 w-full outline-none text-sm"
+                    className="pl-1 border-0 w-full outline-none text-sm2"
                   />
                   {showPassword ? (
                     <FaRegEye
