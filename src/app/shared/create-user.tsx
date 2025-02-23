@@ -87,7 +87,7 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
             transition={{
               ease: "easeInOut",
             }}
-            className="absolute bottom-0 h-[80vh] md:h-[55vh] lg:h-[85vh] w-full overflow-hidden rounded-t-3xl bg-backgroundModal"
+            className="absolute bottom-0 h-[70vh] md:h-[55vh] lg:h-[75vh] w-full overflow-hidden rounded-t-3xl bg-backgroundModal"
             style={{ y }}
             drag="y"
             dragControls={controls}
@@ -120,7 +120,7 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
 
             <div className="relative z-0 h-full overflow-y-scroll p-4 pt-12">
               <div className="mx-auto max-w-2xl space-y-4 text-neutral-400 text-white">
-                <h2 className="text-4xl font-bold text-center">
+                <h2 className="text-3xl md:text-4xl lg:text-4xl font-bold text-center">
                   Create a new account
                 </h2>
 
