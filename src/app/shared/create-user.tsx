@@ -87,7 +87,7 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
             transition={{
               ease: "easeInOut",
             }}
-            className="absolute bottom-0 h-[75vh] md:h-[55vh] lg:h-[85vh] w-full overflow-hidden rounded-t-3xl bg-backgroundModal"
+            className="absolute bottom-0 h-[80vh] md:h-[55vh] lg:h-[85vh] w-full overflow-hidden rounded-t-3xl bg-backgroundModal"
             style={{ y }}
             drag="y"
             dragControls={controls}
@@ -132,7 +132,7 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
                           type="text"
                           maxLength={20}
                           style={{ backgroundColor: "transparent" }}
-                          className="pl-1 border-0 w-full outline-none text-sm"
+                          className="pl-1 border-0 w-full outline-none text-sm2"
                           required
                         />
                       </div>
@@ -162,7 +162,7 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
                         type="text"
                         maxLength={15}
                         style={{ backgroundColor: "transparent" }}
-                        className="pl-1 border-0 w-full outline-none text-sm"
+                        className="pl-1 border-0 w-full outline-none text-sm2"
                         required
                       />
                     </div>
