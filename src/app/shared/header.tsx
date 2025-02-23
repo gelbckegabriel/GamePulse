@@ -7,7 +7,7 @@ import { Container } from "./container";
 import { UserAuth } from "./auth";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <>

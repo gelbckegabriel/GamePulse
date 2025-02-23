@@ -10,9 +10,10 @@ export default {
     colors: {
       background: "#000",
       backgroundContrast: "#111",
+      backgroundModal: "#171717",
       textBlack: "#1d1d1f",
       white: "#fff",
-      purpleTest: "rgb(147 51 234)"
+      darkGray: "#404040"
     },
     fontFamily: {
       sans: [

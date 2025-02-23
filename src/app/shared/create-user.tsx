@@ -4,7 +4,7 @@ import {
   useMotionValue,
   motion,
 } from "framer-motion";
-import { useMeasure } from "react-use";
+import useMeasure from "react-use-measure";
 
 type Props = {
   openCreate: boolean;
@@ -40,7 +40,7 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           onClick={handleClose}
-          className="fixed inset-0 z-50 bg-[neutral-950/70]"
+          className="fixed inset-0 z-50 bg-background/50"
         >
           <motion.div
             id="drawer"
@@ -51,7 +51,7 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
             transition={{
               ease: "easeInOut",
             }}
-            className="absolute bottom-0 h-[75vh] w-full overflow-hidden rounded-t-3xl bg-[neutral-900]"
+            className="absolute bottom-0 h-[75vh] w-full overflow-hidden rounded-t-3xl bg-backgroundModal"
             style={{ y }}
             drag="y"
             dragControls={controls}
@@ -72,17 +72,19 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
               bottom: 0.5,
             }}
           >
-            <div className="absolute left-0 right-0 top-0 z-10 flex justify-center bg-[neutral-900] p-4">
+            <div className="absolute left-0 right-0 top-0 z-10 flex justify-center p-4">
               <button
                 onPointerDown={(e) => {
                   controls.start(e);
                 }}
-                className="h-2 w-14 cursor-grab touch-none rounded-full bg-[neutral-700] active:cursor-grabbing"
+                className="h-2 w-14 cursor-grab touch-none rounded-full bg-darkGray active:cursor-grabbing"
               ></button>
             </div>
 
             <div className="relative z-0 h-full overflow-y-scroll p-4 pt-12">
-              <h1>test</h1>
+              <div className="mx-auto max-w-2xl space-y-4 text-neutral-400 text-white">
+                <h2 className="text-4xl font-bold">Create a new account</h2>
+              </div>
             </div>
           </motion.div>
         </motion.div>
