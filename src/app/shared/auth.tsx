@@ -4,6 +4,7 @@ import { FaFingerprint, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { FaFacebook, FaGoogle } from "react-icons/fa6";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
+import { CreateUser } from "./create-user";
 
 type Props = {
   isOpen: boolean;
@@ -11,6 +12,7 @@ type Props = {
 };
 
 export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
+  const [openCreate, setOpenCreate] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const togglePasswordView = () => setShowPassword(!showPassword);
 
@@ -26,8 +28,16 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
             className="bg-slate-900/20 backdrop-blur p-8 fixed inset-0 z-50 grid place-items-center overflow-y-scroll"
           >
             <motion.div
-              initial={{ scale: 0, rotate: "22.5deg", transition: { duration: 0.3 } }}
-              animate={{ scale: 1, rotate: "0deg", transition: { duration: 0.3 } }}
+              initial={{
+                scale: 0,
+                rotate: "22.5deg",
+                transition: { duration: 0.3 },
+              }}
+              animate={{
+                scale: 1,
+                rotate: "0deg",
+                transition: { duration: 0.3 },
+              }}
               exit={{ scale: 0, rotate: "0deg", transition: { duration: 0.2 } }}
               onClick={(e) => e.stopPropagation()}
               className="m-auto w-full md:w-[70%] lg:w-[35%] h-fit p-4 md:p-8 lg:p-12 bg-white bg-opacity-45 backdrop-blur-md border border-white border-opacity-50 rounded-lg shadow-lg"
@@ -113,7 +123,10 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
               <div className="mt-8 flex justify-center text-sm">
                 <p>
                   Do not have an account?{" "}
-                  <span className="text-[#727070] text-opacity-90 cursor-pointer hover:text-[gray-700] hover:underline">
+                  <span
+                    onClick={() => setOpenCreate(true)}
+                    className="text-[#727070] text-opacity-90 cursor-pointer hover:text-[gray-700] hover:underline"
+                  >
                     Sign Up
                   </span>
                 </p>
@@ -122,6 +135,8 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <CreateUser openCreate={openCreate} setOpenCreate={setOpenCreate} />
     </>
   );
 };
