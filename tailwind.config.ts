@@ -13,7 +13,9 @@ export default {
       backgroundModal: "#171717",
       textBlack: "#1d1d1f",
       white: "#fff",
-      darkGray: "#404040"
+      lightGray: "#727070",
+      darkGray: "#404040",
+      issueRed: "#cc0000",
     },
     fontFamily: {
       sans: [

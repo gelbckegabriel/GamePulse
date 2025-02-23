@@ -54,12 +54,12 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
               <div className="flex flex-col align-center items-center justify-center">
                 <p className="text-sm2">Register with:</p>
                 <div className="flex justify-between w-full pt-4">
-                  <button className="flex justify-center p-2 bg-white bg-opacity-15 border-white border-opacity-10 backdrop-blur-md rounded-lg shadow-lg min-w-[45%] hover:bg-opacity-45 hover:scale-105 duration-500 ease-in-out">
+                  <button className="flex justify-center p-2 bg-white bg-opacity-15 backdrop-blur-md rounded-lg shadow-lg min-w-[45%] hover:bg-opacity-45 hover:scale-105 duration-500 ease-in-out">
                     <FaFacebook className="text-lg md:text-xl" />
                     <span className="pl-2 text-sm">Facebook</span>
                   </button>
 
-                  <button className="flex justify-center p-2 bg-white bg-opacity-15 border-white border-opacity-10 backdrop-blur-md rounded-lg shadow-lg min-w-[45%] hover:bg-opacity-45 hover:scale-105 duration-500 ease-in-out">
+                  <button className="flex justify-center p-2 bg-white bg-opacity-15 backdrop-blur-md rounded-lg shadow-lg min-w-[45%] hover:bg-opacity-45 hover:scale-105 duration-500 ease-in-out">
                     <FaGoogle className="text-lg md:text-xl" />
                     <span className="pl-2 text-sm">Google</span>
                   </button>
@@ -76,7 +76,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
               {/* FORM */}
               <div className="login_form">
                 <p className="text-sm2 mb-1">Username or email</p>
-                <div className="bg-white bg-opacity-15 border-white border-opacity-10 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
+                <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                   <MdEmail />
                   <input
                     type="email"
@@ -86,11 +86,11 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                 </div>
                 <div className="mt-6 flex justify-between">
                   <p className="text-sm2 mb-1">Password</p>
-                  <p className="text-sm text-[#727070] text-opacity-90 cursor-pointer hover:text-[gray-700] hover:underline">
+                  <p className="text-sm text-[#474646] text-opacity-90 cursor-pointer hover:text-[gray-700] hover:underline">
                     Forgot Password?
                   </p>
                 </div>
-                <div className="bg-white bg-opacity-15 border-white border-opacity-10 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
+                <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                   <FaFingerprint />
                   <input
                     type={showPassword ? "text" : "password"}
@@ -125,7 +125,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                   Do not have an account?{" "}
                   <span
                     onClick={() => setOpenCreate(true)}
-                    className="text-[#727070] text-opacity-90 cursor-pointer hover:text-[gray-700] hover:underline"
+                    className="text-[#474646] text-opacity-90 cursor-pointer hover:text-[gray-700] hover:underline"
                   >
                     Sign Up
                   </span>

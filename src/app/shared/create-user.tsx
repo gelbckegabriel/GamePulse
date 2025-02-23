@@ -17,6 +17,7 @@ import { FaPerson } from "react-icons/fa6";
 import { IoMdPerson } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import useMeasure from "react-use-measure";
+import { Button } from "./button";
 
 type Props = {
   openCreate: boolean;
@@ -24,8 +25,13 @@ type Props = {
 };
 
 export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
+  // FORM
+  const [password, setPassword] = useState<string>("");
+  const [isPasswordInvalid, setIsPasswordInvalid] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const togglePasswordView = () => setShowPassword(!showPassword);
+
+  // ANIMATION
   const [scope, animate] = useAnimate();
   const [drawerRef, { height }] = useMeasure();
 
@@ -44,6 +50,22 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
     });
 
     setOpenCreate(false);
+  };
+
+  const validatePassword = (password: string) => {
+    return password.length >= 8;
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setPassword(value);
+    setIsPasswordInvalid(!validatePassword(value));
+  };
+
+  const handleSubmit = () => {
+    if (validatePassword(password)) {
+      // Handle form submission
+    }
   };
 
   return (
@@ -65,7 +87,7 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
             transition={{
               ease: "easeInOut",
             }}
-            className="absolute bottom-0 h-[75vh] w-full overflow-hidden rounded-t-3xl bg-backgroundModal"
+            className="absolute bottom-0 h-[75vh] md:h-[55vh] lg:h-[85vh] w-full overflow-hidden rounded-t-3xl bg-backgroundModal"
             style={{ y }}
             drag="y"
             dragControls={controls}
@@ -77,12 +99,10 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
             dragListener={false}
             dragConstraints={{
               top: 0,
-
               bottom: 0,
             }}
             dragElastic={{
               top: 0,
-
               bottom: 0.5,
             }}
           >
@@ -97,7 +117,7 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
 
             <div className="relative z-0 h-full overflow-y-scroll p-4 pt-12">
               <div className="mx-auto max-w-2xl space-y-4 text-neutral-400 text-white">
-                <h2 className="text-4xl font-bold mx-auto">
+                <h2 className="text-4xl font-bold text-center">
                   Create a new account
                 </h2>
 
@@ -106,81 +126,117 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
                   <div className="flex justify-between">
                     <div className="w-[40%] md:w-[35%] lg:w-[35%]">
                       <p className="text-sm2 mb-1">First Name</p>
-                      <div className="bg-white bg-opacity-15 border-white border-opacity-10 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
+                      <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                         <IoMdPerson />
                         <input
                           type="text"
+                          maxLength={20}
                           style={{ backgroundColor: "transparent" }}
                           className="pl-1 border-0 w-full outline-none text-sm"
+                          required
                         />
                       </div>
                     </div>
 
                     <div className="w-[55%]">
                       <p className="text-sm2 mb-1">Last Name</p>
-                      <div className="bg-white bg-opacity-15 border-white border-opacity-10 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
+                      <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                         <FaPerson />
                         <input
                           type="text"
+                          maxLength={30}
                           style={{ backgroundColor: "transparent" }}
                           className="pl-1 border-0 w-full outline-none text-sm"
+                          required
                         />
                       </div>
                     </div>
                   </div>
 
-                  {/* EMAIL FIELD */}
-                  <p className="mt-6 text-sm2 mb-1">Username</p>
-                  <div className="bg-white bg-opacity-15 border-white border-opacity-10 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
-                    <FaRegUserCircle />
-                    <input
-                      type="text"
-                      style={{ backgroundColor: "transparent" }}
-                      className="pl-1 border-0 w-full outline-none text-sm"
-                    />
+                  {/* USERNAME FIELD */}
+                  <div>
+                    <p className="mt-6 text-sm2 mb-1">Username</p>
+                    <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
+                      <FaRegUserCircle />
+                      <input
+                        type="text"
+                        maxLength={15}
+                        style={{ backgroundColor: "transparent" }}
+                        className="pl-1 border-0 w-full outline-none text-sm"
+                        required
+                      />
+                    </div>
                   </div>
 
                   {/* EMAIL FIELD */}
-                  <p className="mt-6 text-sm2 mb-1">Email</p>
-                  <div className="bg-white bg-opacity-15 border-white border-opacity-10 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
-                    <MdEmail />
-                    <input
-                      type="email"
-                      style={{ backgroundColor: "transparent" }}
-                      className="pl-1 border-0 w-full outline-none text-sm"
-                    />
+                  <div>
+                    <p className="mt-6 text-sm2 mb-1">Email</p>
+                    <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
+                      <MdEmail />
+                      <input
+                        type="email"
+                        maxLength={50}
+                        style={{ backgroundColor: "transparent" }}
+                        className="pl-1 border-0 w-full outline-none text-sm"
+                        required
+                      />
+                    </div>
                   </div>
 
                   {/* PASSWORD FIELD */}
-                  <p className="mt-6 text-sm2 mb-1">Password</p>
-                  <div className="bg-white bg-opacity-15 border-white border-opacity-10 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
-                    <FaFingerprint />
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      style={{ backgroundColor: "transparent" }}
-                      className="pl-1 border-0 w-full outline-none text-sm"
-                    />
-                    {showPassword ? (
-                      <FaRegEye
-                        className="cursor-pointer mr-1"
-                        onClick={togglePasswordView}
+                  <div>
+                    <p className="mt-6 text-sm2 mb-1">Password</p>
+                    <div
+                      className={`bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl ${
+                        isPasswordInvalid ? "border-issueRed border-2" : ""
+                      }`}
+                    >
+                      <FaFingerprint
+                        className={`transition-all duration-300 ease-in-out ${
+                          isPasswordInvalid ? "text-issueRed" : ""
+                        }`}
                       />
-                    ) : (
-                      <FaRegEyeSlash
-                        className="cursor-pointer mr-1"
-                        onClick={togglePasswordView}
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        maxLength={20}
+                        style={{ backgroundColor: "transparent" }}
+                        onChange={handlePasswordChange}
+                        className="pl-1 border-0 w-full outline-none text-sm"
+                        required
                       />
-                    )}
+                      {showPassword ? (
+                        <FaRegEye
+                          className={`transition-all duration-300 ease-in-out cursor-pointer mr-1 ${
+                            isPasswordInvalid ? "text-issueRed" : ""
+                          }`}
+                          onClick={togglePasswordView}
+                        />
+                      ) : (
+                        <FaRegEyeSlash
+                          className={`transition-all duration-300 ease-in-out cursor-pointer mr-1 ${
+                            isPasswordInvalid ? "text-issueRed" : ""
+                          }`}
+                          onClick={togglePasswordView}
+                        />
+                      )}
+                    </div>
+                    <p
+                      className={`transition-all duration-300 ease-in-out text-sm text-lightGray text-opacity-90 ${
+                        isPasswordInvalid ? "text-issueRed" : ""
+                      }`}
+                    >
+                      Minimum length is 8 characters.
+                    </p>
                   </div>
                 </div>
 
                 {/* CREATE BUTTON */}
-                <div className="create">
-                  <button>Create Account</button>
+                <div className="mt-6 flex justify-center">
+                  <Button onClick={() => handleSubmit}>Create Account</Button>
                 </div>
 
                 {/* TERMS OF ACCEPTANCE */}
-                <div className="terms"></div>
+                {/* <div className="terms"></div> */}
               </div>
             </div>
           </motion.div>
