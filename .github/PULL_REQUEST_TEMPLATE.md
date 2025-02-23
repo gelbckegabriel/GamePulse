@@ -2,11 +2,6 @@
 
 ⚠️ <strong style="color: red;">(Copy and paste this example into the PR title, then remove this line)</strong> PR #0 | 01/01/2025 -> Summary
 
-
-<div align="center">
-    <img src="https://media.giphy.com/media/doXBzUFJRxpaUbuaqz/giphy.gif" style="border-radius: 10px"/>
-</div>
-
 <br>
 
 
@@ -18,16 +13,6 @@
 - Integrated a shared component featuring new mathematical algorithms.
 - <span style="color: red;">[ OUT OF SCOPE 🚫]</span> Fixed a bug on the home page.
 
-<br>
-
-
-## Checklist
-
-- [x] My code follows the style guidelines of this project
-- [ ] My changes generate no new warnings
-- [x] I have performed a self-review of my code
-- [ ] I have manually tested every new addition to the code
-- [x] I have commented my code, particularly in hard-to-understand areas
 
 <br>
 
