@@ -44,7 +44,6 @@ body {
 .column {
   float: left;
   padding: 0.5rem;
-  margin-bottom: 1.5rem;
 }
 
 .card {
@@ -55,7 +54,7 @@ body {
   overflow: hidden;
   display: block;
   width: 100%;
-  max-width: 25rem;
+  max-width: 22rem;
   height: 10rem;
   font-size: var(--fontOrigin);
   border-radius: 1rem;

@@ -11,10 +11,6 @@ export const SportCard = ({ backgroundImage, name }: Props) => {
     <>
       {/* CHOOSE DATA-EFFECT BETWEEN: 'zoom', 'blur' and 'color' */}
       <div className="column">
-        {/* <Link
-              href={`/portfolio/${row.name}`}
-              style={{ textDecoration: "none" }}
-            > */}
         <div className="card" data-effect="blur">
           <button className="card__save" type="button">
             <i></i>
@@ -24,14 +20,13 @@ export const SportCard = ({ backgroundImage, name }: Props) => {
             <img src={backgroundImage} />
           </figure>
 
-          <div className="card__body mt-[10vh]">
+          <div className="card__body mt-[15%]">
             <h3 className="card__name">{name}</h3>
             <p className="card__bio">
               Filter locations where you can find a '{name}' court
             </p>
           </div>
         </div>
-        {/* </Link> */}
       </div>
     </>
   );
