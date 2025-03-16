@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+game-pulse.UI/node_modules
 /.pnp
 .pnp.*
 .yarn/*
@@ -14,28 +14,28 @@
 /coverage
 
 # next.js
-/.next/
-/out/
+/game-pulse.UI/.next/
+/game-pulse.UI/out/
 
 # production
-/build
+game-pulse.UI/build
 
 # misc
 .DS_Store
 *.pem
 
 # debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
+game-pulse.UI/npm-debug.log*
+game-pulse.UI/yarn-debug.log*
+game-pulse.UI/yarn-error.log*
+game-pulse.UI/.pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+game-pulse.UI/.env*
 
 # vercel
-.vercel
+game-pulse.UI/.vercel
 
 # typescript
-*.tsbuildinfo
-next-env.d.ts
+game-pulse.UI/*.tsbuildinfo
+game-pulse.UI/next-env.d.ts
