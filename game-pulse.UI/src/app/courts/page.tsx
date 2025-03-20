@@ -2,13 +2,12 @@
 
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { SportCard } from "../shared/sport-card/sport-card";
 
 export default function Courts() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(0); // -1 for left, 1 for right
   const visibleCards = 3;
 
   const filterCards = [
@@ -35,12 +34,10 @@ export default function Courts() {
   ];
 
   const handleNext = () => {
-    setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % filterCards.length);
   };
 
   const handlePrev = () => {
-    setDirection(-1);
     setCurrentIndex((prev) => (prev === 0 ? filterCards.length - 1 : prev - 1));
   };
 
@@ -65,7 +62,7 @@ export default function Courts() {
               <SportCard
                 name={card.name}
                 backgroundImage={card.backgroundImage}
-                key={`${card.name}-${index}`}
+                key={index}
               />
             ))}
           </div>

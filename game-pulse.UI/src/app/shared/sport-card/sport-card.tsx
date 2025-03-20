@@ -1,4 +1,3 @@
-import Link from "next/link";
 import "./sport-card.scss";
 
 type Props = {
@@ -23,7 +22,7 @@ export const SportCard = ({ backgroundImage, name }: Props) => {
           <div className="card__body mt-[15%]">
             <h3 className="card__name">{name}</h3>
             <p className="card__bio">
-              Filter locations where you can find a '{name}' court
+              Filter locations where you can find a {name} court
             </p>
           </div>
         </div>
