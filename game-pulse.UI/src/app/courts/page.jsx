@@ -133,11 +133,11 @@ export default function Courts() {
           </Menu>
         </div>
 
-        <div className="flex justify-center">
+        <div className="flex justify-center my-20">
           <h1>CARDS CONTENT</h1>
         </div>
 
-        <div>
+        <div className="flex justify-center mt-5">
           <Paginator index={1} />
         </div>
       </div>
