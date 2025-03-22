@@ -17,13 +17,6 @@ export default function Courts() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const visibleCards = 3;
   const [distanceFilter, setDistanceFilter] = useState(25);
-  const [activeFilter, setActiveFilter] = useState<string | null>(null);
-  const ref = useRef<HTMLLIElement | null>(null);
-  const [position, setPosition] = useState({
-    left: 0,
-    width: 0,
-    opacity: 0,
-  });
 
   const filterCards = [
     {
@@ -59,10 +52,6 @@ export default function Courts() {
       Math.max(0, currentIndex + visibleCards - filterCards.length)
     ),
   ];
-
-  const toggleFilter = (filterName: string) => {
-    setActiveFilter((prev) => (prev === filterName ? null : filterName));
-  };
 
   return (
     <>
