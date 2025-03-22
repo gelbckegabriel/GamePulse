@@ -87,76 +87,7 @@ export default function Courts() {
 
         {/* FILTERS BAR */}
         <div className="flex justify-center">
-          <div className="flex gap-8 md:gap-16 rounded-3xl p-4 bg-slate-900/20 backdrop-blur shadow-xl text-sm2 relative">
-            <button
-              className="cursor-pointer pl-4 relative"
-              onClick={() => toggleFilter("sports")}
-            >
-              Sports
-              {activeFilter === "sports" && (
-                <div className="absolute flex flex-col bg-white text-black p-4 rounded shadow-lg top-full mt-2">
-                  <form>
-                    <div className="flex flex-row gap-2">
-                      <input type="checkbox" placeholder="Football" />{" "}
-                      <span>Football</span>
-                    </div>
-                  </form>
-                  <span>Football</span>
-                  <span>Basketball</span>
-                  <span>Volleyball</span>
-                  <span>Tennis</span>
-                  <span>Baseball</span>
-                </div>
-              )}
-            </button>
-            <button
-              className="cursor-pointer relative"
-              onClick={() => toggleFilter("distance")}
-            >
-              Distance
-              {activeFilter === "distance" && (
-                <div className="absolute flex flex-col bg-white text-black p-4 rounded shadow-lg top-full mt-2 w-48">
-                  <label className="block mb-2 text-sm font-medium text-center">
-                    {distanceFilter} km
-                  </label>
-                  <input
-                    id="default-range"
-                    type="range"
-                    value={distanceFilter}
-                    min="0"
-                    max="50"
-                    step="1"
-                    onChange={(e) => setDistanceFilter(Number(e.target.value))}
-                    className="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-                  />
-                </div>
-              )}
-            </button>
-            <button
-              className="cursor-pointer relative"
-              onClick={() => toggleFilter("type")}
-            >
-              Type
-              {activeFilter === "type" && (
-                <div className="absolute flex flex-col bg-white text-black p-4 rounded shadow-lg top-full mt-2">
-                  <span>Indoor</span>
-                  <span>Outdoor</span>
-                </div>
-              )}
-            </button>
-            <button
-              className="cursor-pointer pr-4 relative"
-              onClick={() => toggleFilter("parking")}
-            >
-              Parking
-              {activeFilter === "parking" && (
-                <div className="absolute flex flex-col bg-white text-black p-4 rounded shadow-lg top-full mt-2">
-                  <span>Available</span>
-                  <span>Not Available</span>
-                </div>
-              )}
-            </button>
-          </div>
+          
         </div>
       </div>
     </>

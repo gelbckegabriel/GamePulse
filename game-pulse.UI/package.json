@@ -15,6 +15,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@material-tailwind/react": "^2.1.10",
     "framer-motion": "^12.4.7",
     "next": "15.1.7",
     "react": "^19.0.0",
