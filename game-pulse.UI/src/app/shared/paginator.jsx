@@ -2,19 +2,15 @@ import { useState } from "react";
 import { Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
-type Props = {
-    index: number;
-}
-
-export default function Paginator({ index }: Props) {
+export default function Paginator({ index }) {
   const [active, setActive] = useState(index);
 
-  const getItemProps = (index: number) =>
+  const getItemProps = (index) =>
     ({
       variant: active === index ? "filled" : "text",
       color: "gray",
       onClick: () => setActive(index),
-    } as any);
+    });
 
   const next = () => {
     if (active === 5) return;
