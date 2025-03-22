@@ -3,7 +3,15 @@
 import { useRef, useState } from "react";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { SportCard } from "../shared/sport-card/sport-card";
-import { motion } from "framer-motion";
+import {
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+  Button,
+  Checkbox,
+  Slider,
+} from "@material-tailwind/react";
 
 export default function Courts() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -33,10 +41,6 @@ export default function Courts() {
     {
       backgroundImage: "/home/volleyball3.webp",
       name: "Tennis",
-    },
-    {
-      backgroundImage: "/home/football.webp",
-      name: "Baseball",
     },
   ];
 
@@ -86,8 +90,55 @@ export default function Courts() {
         <br />
 
         {/* FILTERS BAR */}
-        <div className="flex justify-center">
-          
+        <div className="flex justify-center gap-6">
+          <Menu
+            animate={{
+              mount: { y: 0 },
+              unmount: { y: 25 },
+            }}
+          >
+            <MenuHandler>
+              <Button> Sports </Button>
+            </MenuHandler>
+            <MenuList>
+              <MenuItem>
+                <Checkbox id="football" label="Football" ripple={false} />
+              </MenuItem>
+              <MenuItem>
+                <Checkbox id="basketball" label="Basketball" ripple={false} />
+              </MenuItem>
+              <MenuItem>
+                <Checkbox id="volleyball" label="Volleyball" ripple={false} />
+              </MenuItem>
+              <MenuItem>
+                <Checkbox id="tennis" label="Tennis" ripple={false} />
+              </MenuItem>
+            </MenuList>
+          </Menu>
+
+          <Menu
+            animate={{
+              mount: { y: 0 },
+              unmount: { y: 25 },
+            }}
+          >
+            <MenuHandler>
+              <Button> Distance </Button>
+            </MenuHandler>
+            <MenuList>
+              <span className="flex justify-center mb-3">
+                {distanceFilter} km
+              </span>
+              <Slider
+                step={1}
+                min={1}
+                defaultValue={distanceFilter}
+                onChange={(event) =>
+                  setDistanceFilter(Number(event.target.value))
+                }
+              />
+            </MenuList>
+          </Menu>
         </div>
       </div>
     </>
