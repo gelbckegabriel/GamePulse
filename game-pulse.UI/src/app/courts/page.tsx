@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { SportCard } from "../shared/sport-card/sport-card";
 import {
