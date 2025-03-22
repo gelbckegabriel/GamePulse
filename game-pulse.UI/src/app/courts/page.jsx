@@ -12,6 +12,7 @@ import {
   Checkbox,
   Slider,
 } from "@material-tailwind/react";
+import Paginator from "../shared/paginator";
 
 export default function Courts() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -87,7 +88,9 @@ export default function Courts() {
             }}
           >
             <MenuHandler>
-              <Button> Sports </Button>
+              <Button>
+                <span>Sports</span>
+              </Button>
             </MenuHandler>
             <MenuList>
               <MenuItem>
@@ -128,6 +131,14 @@ export default function Courts() {
               />
             </MenuList>
           </Menu>
+        </div>
+
+        <div className="flex justify-center">
+          <h1>CARDS CONTENT</h1>
+        </div>
+
+        <div>
+          <Paginator index={1} />
         </div>
       </div>
     </>
