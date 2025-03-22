@@ -1,5 +1,3 @@
-import { BiBasketball } from "react-icons/bi";
-
 export const CourtDetails = () => {
   return (
     <>
