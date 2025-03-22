@@ -3,21 +3,21 @@
 import { useState } from "react";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { SportCard } from "../shared/sport-card/sport-card";
-import {
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
-  Button,
-  Checkbox,
-  Slider,
-} from "@material-tailwind/react";
+import { Menu, MenuHandler, MenuList, MenuItem, Button, Checkbox, Slider } from "@material-tailwind/react";
 import Paginator from "../shared/paginator";
 
 export default function Courts() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const visibleCards = 3;
+  const [sportFilter, setSportFilter] = useState([
+    { name: "football", checked: false },
+    { name: "basketball", checked: false },
+    { name: "volleyball", checked: false },
+    { name: "tennis", checked: false },
+  ]);
   const [distanceFilter, setDistanceFilter] = useState(25);
+
+  console.log();
 
   const filterCards = [
     {
@@ -48,10 +48,7 @@ export default function Courts() {
 
   const currentCards = [
     ...filterCards.slice(currentIndex, currentIndex + visibleCards),
-    ...filterCards.slice(
-      0,
-      Math.max(0, currentIndex + visibleCards - filterCards.length)
-    ),
+    ...filterCards.slice(0, Math.max(0, currentIndex + visibleCards - filterCards.length)),
   ];
 
   return (
@@ -64,11 +61,7 @@ export default function Courts() {
           </button>
           <div className="flex w-full relative justify-center gap-10">
             {currentCards.map((card, index) => (
-              <SportCard
-                name={card.name}
-                backgroundImage={card.backgroundImage}
-                key={index}
-              />
+              <SportCard name={card.name} backgroundImage={card.backgroundImage} key={index} />
             ))}
           </div>
           <button onClick={handleNext}>
@@ -94,16 +87,56 @@ export default function Courts() {
             </MenuHandler>
             <MenuList>
               <MenuItem>
-                <Checkbox id="football" label="Football" ripple={false} />
+                <Checkbox
+                  checked={sportFilter.find((item) => item.name === "football")?.checked}
+                  id="football"
+                  label="Football"
+                  onChange={() => {
+                    const updatedSportFilter = [...sportFilter];
+                    const sportIndex = updatedSportFilter.findIndex((item) => item.name === "football");
+                    updatedSportFilter[sportIndex].checked = !updatedSportFilter[sportIndex].checked;
+                    setSportFilter(updatedSportFilter);
+                  }}
+                />
               </MenuItem>
               <MenuItem>
-                <Checkbox id="basketball" label="Basketball" ripple={false} />
+                <Checkbox
+                  checked={sportFilter.find((item) => item.name === "basketball")?.checked}
+                  id="basketball"
+                  label="Basketball"
+                  onChange={() => {
+                    const updatedSportFilter = [...sportFilter];
+                    const sportIndex = updatedSportFilter.findIndex((item) => item.name === "basketball");
+                    updatedSportFilter[sportIndex].checked = !updatedSportFilter[sportIndex].checked;
+                    setSportFilter(updatedSportFilter);
+                  }}
+                />
               </MenuItem>
               <MenuItem>
-                <Checkbox id="volleyball" label="Volleyball" ripple={false} />
+                <Checkbox
+                  checked={sportFilter.find((item) => item.name === "volleyball")?.checked}
+                  id="volleyball"
+                  label="Volleyball"
+                  onChange={() => {
+                    const updatedSportFilter = [...sportFilter];
+                    const sportIndex = updatedSportFilter.findIndex((item) => item.name === "volleyball");
+                    updatedSportFilter[sportIndex].checked = !updatedSportFilter[sportIndex].checked;
+                    setSportFilter(updatedSportFilter);
+                  }}
+                />
               </MenuItem>
               <MenuItem>
-                <Checkbox id="tennis" label="Tennis" ripple={false} />
+                <Checkbox
+                  checked={sportFilter.find((item) => item.name === "tennis")?.checked}
+                  id="tennis"
+                  label="Tennis"
+                  onChange={() => {
+                    const updatedSportFilter = [...sportFilter];
+                    const sportIndex = updatedSportFilter.findIndex((item) => item.name === "tennis");
+                    updatedSportFilter[sportIndex].checked = !updatedSportFilter[sportIndex].checked;
+                    setSportFilter(updatedSportFilter);
+                  }}
+                />
               </MenuItem>
             </MenuList>
           </Menu>
@@ -118,17 +151,8 @@ export default function Courts() {
               <Button> Distance </Button>
             </MenuHandler>
             <MenuList>
-              <span className="flex justify-center mb-3">
-                {distanceFilter} km
-              </span>
-              <Slider
-                step={1}
-                min={1}
-                defaultValue={distanceFilter}
-                onChange={(event) =>
-                  setDistanceFilter(Number(event.target.value))
-                }
-              />
+              <span className="flex justify-center mb-3">{distanceFilter} km</span>
+              <Slider step={1} min={1} defaultValue={distanceFilter} onChange={(event) => setDistanceFilter(Number(event.target.value))} />
             </MenuList>
           </Menu>
         </div>
