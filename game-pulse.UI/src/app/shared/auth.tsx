@@ -25,7 +25,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
             animate={{ opacity: 1, transition: { duration: 0.2 } }}
             exit={{ opacity: 0, transition: { duration: 0.2 } }}
             onClick={() => setIsOpen(false)}
-            className="bg-slate-900/20 backdrop-blur p-8 fixed inset-0 z-50 grid place-items-center overflow-y-scroll"
+            className="bg-slate-900/80 backdrop-blur p-8 fixed inset-0 z-50 grid place-items-center overflow-y-scroll"
           >
             <motion.div
               initial={{
@@ -40,7 +40,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
               }}
               exit={{ scale: 0, rotate: "0deg", transition: { duration: 0.2 } }}
               onClick={(e) => e.stopPropagation()}
-              className="m-auto w-full md:w-[70%] lg:w-[35%] h-fit p-4 md:p-8 lg:p-12 bg-white bg-opacity-55 backdrop-blur-md border border-white border-opacity-50 rounded-lg shadow-lg"
+              className="m-auto w-full md:w-[70%] lg:w-[35%] h-fit p-4 md:p-8 lg:p-12 bg-gray-500 bg-opacity-60 backdrop-blur-md border border-gray-300 border-opacity-50 rounded-lg shadow-lg"
             >
               {/* CLOSE BUTTON */}
               <div
