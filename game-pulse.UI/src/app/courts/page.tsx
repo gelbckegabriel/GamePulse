@@ -1,14 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { SportCard } from "../shared/sport-card/sport-card";
+import { motion } from "framer-motion";
 
 export default function Courts() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const visibleCards = 3;
   const [distanceFilter, setDistanceFilter] = useState(25);
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
+  const ref = useRef<HTMLLIElement | null>(null);
+  const [position, setPosition] = useState({
+    left: 0,
+    width: 0,
+    opacity: 0,
+  });
 
   const filterCards = [
     {
@@ -57,11 +64,10 @@ export default function Courts() {
     <>
       <div>
         {/* SPORTS FILTER */}
-        <div className="flex mt-10 mx-4 h-fit flex-row items-center justify-between gap-5">
-          <BiChevronLeft
-            className="text-4xl cursor-pointer"
-            onClick={handlePrev}
-          />
+        <div className="hidden lg:flex mt-10 mx-4 h-fit flex-row items-center justify-between gap-5">
+          <button onClick={handlePrev}>
+            <BiChevronLeft className="text-4xl" />
+          </button>
           <div className="flex w-full relative justify-center gap-10">
             {currentCards.map((card, index) => (
               <SportCard
@@ -71,10 +77,9 @@ export default function Courts() {
               />
             ))}
           </div>
-          <BiChevronRight
-            className="text-4xl cursor-pointer"
-            onClick={handleNext}
-          />
+          <button onClick={handleNext}>
+            <BiChevronRight className="text-4xl" />
+          </button>
         </div>
 
         <br />
@@ -82,14 +87,20 @@ export default function Courts() {
 
         {/* FILTERS BAR */}
         <div className="flex justify-center">
-          <div className="flex gap-16 rounded-3xl p-4 bg-slate-900/20 backdrop-blur shadow-xl text-sm2 relative">
-            <span
+          <div className="flex gap-8 md:gap-16 rounded-3xl p-4 bg-slate-900/20 backdrop-blur shadow-xl text-sm2 relative">
+            <button
               className="cursor-pointer pl-4 relative"
               onClick={() => toggleFilter("sports")}
             >
               Sports
               {activeFilter === "sports" && (
                 <div className="absolute flex flex-col bg-white text-black p-4 rounded shadow-lg top-full mt-2">
+                  <form>
+                    <div className="flex flex-row gap-2">
+                      <input type="checkbox" placeholder="Football" />{" "}
+                      <span>Football</span>
+                    </div>
+                  </form>
                   <span>Football</span>
                   <span>Basketball</span>
                   <span>Volleyball</span>
@@ -97,8 +108,8 @@ export default function Courts() {
                   <span>Baseball</span>
                 </div>
               )}
-            </span>
-            <span
+            </button>
+            <button
               className="cursor-pointer relative"
               onClick={() => toggleFilter("distance")}
             >
@@ -120,8 +131,8 @@ export default function Courts() {
                   />
                 </div>
               )}
-            </span>
-            <span
+            </button>
+            <button
               className="cursor-pointer relative"
               onClick={() => toggleFilter("type")}
             >
@@ -132,8 +143,8 @@ export default function Courts() {
                   <span>Outdoor</span>
                 </div>
               )}
-            </span>
-            <span
+            </button>
+            <button
               className="cursor-pointer pr-4 relative"
               onClick={() => toggleFilter("parking")}
             >
@@ -144,7 +155,7 @@ export default function Courts() {
                   <span>Not Available</span>
                 </div>
               )}
-            </span>
+            </button>
           </div>
         </div>
       </div>
