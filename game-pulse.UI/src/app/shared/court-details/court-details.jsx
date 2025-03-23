@@ -8,6 +8,7 @@ import { useState } from "react";
 
 export const CourtDetails = () => {
   const [loved, setLoved] = useState(false);
+  const [distance, setDistance] = useState(13);
 
   return (
     <>
@@ -23,7 +24,7 @@ export const CourtDetails = () => {
             <a href="https://www.curitiba.pr.gov.br/conteudo/parque-municipal-atuba/288">View more</a>
           </div>
         </div>
-        <div className="court-info p-[10px] md:p-[30px]">
+        <div className="court-info flex flex-col justify-between p-[10px] md:p-[30px]">
           <div className="progress-container">
             {/* <div className="progress"></div>
             <span className="progress-text">6/9 Challenges</span> */}
@@ -31,9 +32,14 @@ export const CourtDetails = () => {
               {loved ? <FaHeart className="text-[30px] text-red-900" /> : <FaHeartBroken className="text-[30px] text-darkGray" />}
             </IconButton>
           </div>
-          <h6>Parque Atuba</h6>
-          <h2>Curitiba, PR</h2>
-          <h4>R. Pintor Ricardo Krieger, 550 - Atuba, Curitiba - PR, 82630-143</h4>
+          <div>
+            <h6>Parque Atuba (~{distance}km)</h6>
+            <h2>Curitiba, PR</h2>
+            <h4>R. Pintor Ricardo Krieger, 550 - Atuba, Curitiba - PR, 82630-143</h4>
+          </div>
+          <div>
+            <a href="">How to get there?</a>
+          </div>
           <button className="btn bottom-[10px] md:bottom-[30px] right-[10px] md:right-[30px] ">Access</button>
         </div>
       </div>

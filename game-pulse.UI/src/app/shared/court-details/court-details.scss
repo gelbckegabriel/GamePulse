@@ -26,7 +26,6 @@
   display: inline-block;
   font-size: 12px;
   opacity: 0.6;
-  margin-top: 30px;
   text-decoration: none;
 }
 
@@ -34,6 +33,14 @@
   position: relative;
   width: 100%;
 }
+
+.court-info a {
+    color: #535050;
+    display: inline-block;
+    font-size: 12px;
+    opacity: 0.6;
+    text-decoration: none;
+  }
 
 .progress-container {
   position: absolute;
