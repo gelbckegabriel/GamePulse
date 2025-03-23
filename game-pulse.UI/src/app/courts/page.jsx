@@ -164,7 +164,7 @@ export default function Courts() {
             <CourtDetails />
           </div>
 
-          <div className="flex justify-center mt-5">
+          <div className="flex justify-center my-5">
             <Paginator index={1} />
           </div>
         </div>

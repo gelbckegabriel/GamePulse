@@ -12,7 +12,7 @@ export const CourtDetails = () => {
   return (
     <>
       <div className="court-card h-[200px]">
-        <div className="court-preview flex flex-col justify-between bg-[#2a265f] text-white p-[10px] md:p-[30px] w-[30%] max-w-[30%]">
+        <div className="court-preview bg-backgroundContrast flex flex-col justify-between text-white p-[10px] md:p-[30px] w-[30%] max-w-[30%]">
           <h6>Court</h6>
           <div className="flex flex-row flex-wrap gap-4 py-4">
             <img src="/logos/basketball.webp" alt="basketball" className="w-[20px] md:w-[40px]" />
@@ -24,8 +24,6 @@ export const CourtDetails = () => {
         </div>
         <div className="court-info flex flex-col justify-between p-[10px] md:p-[30px]">
           <div className="progress-container">
-            {/* <div className="progress"></div>
-            <span className="progress-text">6/9 Challenges</span> */}
             <IconButton variant="text" onClick={() => setLoved(!loved)}>
               {loved ? <FaHeart className="text-[30px] text-red-900" /> : <FaHeartBroken className="text-[30px] text-darkGray" />}
             </IconButton>
@@ -38,7 +36,7 @@ export const CourtDetails = () => {
           <div>
             <a href="">How to get there?</a>
           </div>
-          <button className="btn bottom-[10px] md:bottom-[30px] right-[10px] md:right-[30px] ">Access</button>
+          <button className="btn bg-backgroundContrast bottom-[10px] md:bottom-[30px] right-[10px] md:right-[30px] ">Access</button>
         </div>
       </div>
     </>
