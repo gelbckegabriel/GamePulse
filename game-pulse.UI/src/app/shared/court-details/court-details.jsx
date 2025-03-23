@@ -2,7 +2,6 @@
 
 import { IconButton } from "@material-tailwind/react";
 import "./court-details.scss";
-import { HeartIcon } from "@heroicons/react/24/outline";
 import { FaHeart, FaHeartBroken } from "react-icons/fa";
 import { useState } from "react";
 
@@ -15,7 +14,6 @@ export const CourtDetails = () => {
       <div className="court-card h-[200px]">
         <div className="court-preview flex flex-col justify-between bg-[#2a265f] text-white p-[10px] md:p-[30px] w-[30%] max-w-[30%]">
           <h6>Court</h6>
-          {/* <h2>JavaScript Fundamentals</h2> */}
           <div className="flex flex-row flex-wrap gap-4 py-4">
             <img src="/logos/basketball.webp" alt="basketball" className="w-[20px] md:w-[40px]" />
             <img src="/logos/football.webp" alt="football" className="w-[20px] md:w-[40px]" />
