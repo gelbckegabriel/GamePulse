@@ -13,10 +13,7 @@ export default function Header() {
     <>
       <header className="bg-backgroundContrast text-white">
         <Container className="flex items-center min-h-[--header-row-height]">
-          <Link
-            href="/"
-            className="text-xl -ml-6 flex h-[--header-row-height] items-center px-6"
-          >
+          <Link href="/" className="text-xl -ml-6 flex h-[--header-row-height] items-center px-6">
             🍏 <span className="sr-only">Back to homepage</span>
           </Link>
           <div className="flex mx-auto text-xs gap-8">
@@ -26,8 +23,6 @@ export default function Header() {
             <Link href="/contact">Contact</Link>
             <Link href="/"></Link>
           </div>
-
-          {/* <Link href="/"></Link> */}
         </Container>
       </header>
       <div className="sticky top-0 z-20 bg-backgroundContrast text-white">

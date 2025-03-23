@@ -5,7 +5,7 @@ import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { SportCard } from "../shared/sport-card/sport-card";
 import { Menu, MenuHandler, MenuList, MenuItem, Button, Checkbox, Slider } from "@material-tailwind/react";
 import Paginator from "../shared/paginator";
-import { CourtDetails } from "../shared/court-details";
+import { CourtDetails } from "../shared/court-details/court-details";
 import { Container } from "../shared/container";
 
 export default function Courts() {
@@ -24,19 +24,19 @@ export default function Courts() {
   const filterCards = [
     {
       backgroundImage: "/home/football2.webp",
-      name: "Football",
+      name: "football",
     },
     {
       backgroundImage: "/home/basketball6.webp",
-      name: "Basketball",
+      name: "basketball",
     },
     {
       backgroundImage: "/home/volleyball.webp",
-      name: "Volleyball",
+      name: "volleyball",
     },
     {
       backgroundImage: "/home/volleyball3.webp",
-      name: "Tennis",
+      name: "tennis",
     },
   ];
 
