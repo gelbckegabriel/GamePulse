@@ -228,6 +228,7 @@ export default function Courts() {
           <div className="flex flex-wrap justify-center my-10">
             {courts.map((court, index) => (
               <CourtDetails
+                key={index}
                 name={court.name}
                 city={court.city}
                 distance={court.distance}
