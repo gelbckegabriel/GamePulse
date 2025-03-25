@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { SportCard } from "../shared/sport-card/sport-card";
-import { Menu, MenuHandler, MenuList, MenuItem, Button, Checkbox, Slider } from "@material-tailwind/react";
+import { Menu, MenuHandler, MenuList, MenuItem, Button, Checkbox, Slider, Select, Option } from "@material-tailwind/react";
 import Paginator from "../shared/paginator";
 import { CourtDetails } from "../shared/court-details/court-details";
 import { Container } from "../shared/container";
@@ -12,12 +12,13 @@ export default function Courts() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const visibleCards = 3;
   const [sportFilter, setSportFilter] = useState([
-    { name: "football", checked: false },
-    { name: "basketball", checked: false },
-    { name: "volleyball", checked: false },
-    { name: "tennis", checked: false },
+    { name: "football", checked: true },
+    { name: "basketball", checked: true },
+    { name: "volleyball", checked: true },
+    { name: "tennis", checked: true },
   ]);
   const [distanceFilter, setDistanceFilter] = useState(25);
+  const [cityFilter, setCityFilter] = useState("curitiba");
 
   console.log();
 
@@ -77,7 +78,10 @@ export default function Courts() {
 
           {/* FILTERS BAR */}
           <div className="flex justify-center gap-6">
+            {/* SPORTS */}
             <Menu
+              lockScroll={true}
+              dismiss={false}
               animate={{
                 mount: { y: 0 },
                 unmount: { y: 25 },
@@ -144,7 +148,10 @@ export default function Courts() {
               </MenuList>
             </Menu>
 
+            {/* DISTANCE */}
             <Menu
+              lockScroll={true}
+              dismiss={false}
               animate={{
                 mount: { y: 0 },
                 unmount: { y: 25 },
@@ -156,6 +163,25 @@ export default function Courts() {
               <MenuList>
                 <span className="flex justify-center mb-3">{distanceFilter} km</span>
                 <Slider step={1} min={1} defaultValue={distanceFilter} onChange={(event) => setDistanceFilter(Number(event.target.value))} />
+              </MenuList>
+            </Menu>
+
+            {/* CITY */}
+            <Menu
+              lockScroll={true}
+              dismiss={false}
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <MenuHandler>
+                <Button> City </Button>
+              </MenuHandler>
+              <MenuList className="!min-h-[25vh]">
+                <Select value={cityFilter} onChange={(val) => setCityFilter(val)} label="Select City">
+                  <Option value="curitiba">Curitiba, PR</Option>
+                </Select>
               </MenuList>
             </Menu>
           </div>
