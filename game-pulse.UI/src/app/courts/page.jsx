@@ -9,19 +9,6 @@ import { CourtDetails } from "../shared/court-details/court-details";
 import { Container } from "../shared/container";
 
 export default function Courts() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const visibleCards = 3;
-  const [sportFilter, setSportFilter] = useState([
-    { name: "football", checked: true },
-    { name: "basketball", checked: true },
-    { name: "volleyball", checked: true },
-    { name: "tennis", checked: true },
-  ]);
-  const [distanceFilter, setDistanceFilter] = useState(25);
-  const [cityFilter, setCityFilter] = useState("curitiba");
-
-  console.log();
-
   const filterCards = [
     {
       backgroundImage: "/home/football2.webp",
@@ -40,6 +27,40 @@ export default function Courts() {
       name: "tennis",
     },
   ];
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const visibleCards = 3;
+  const [sportFilter, setSportFilter] = useState([
+    { name: "football", checked: true },
+    { name: "basketball", checked: true },
+    { name: "volleyball", checked: true },
+    { name: "tennis", checked: true },
+  ]);
+  const [distanceFilter, setDistanceFilter] = useState(25);
+  const [cityFilter, setCityFilter] = useState("curitiba");
+  const [courts, setCourts] = useState([
+    {
+      name: "Parque Atuba",
+      city: "Curitiba, PR",
+      distance: 13,
+      address: "R. Pintor Ricardo Krieger, 550 - Atuba, Curitiba - PR, 82630-143",
+      web_address: "https://www.curitiba.pr.gov.br/conteudo/parque-municipal-atuba/288",
+      gps_assist: "http://localhost:3000/courts",
+      sports: ["basketball", "football"],
+      favorite: false,
+      redirect_link: "http://localhost:3000/courts",
+    },
+    {
+      name: "",
+      city: "",
+      distance: "",
+      address: "",
+      web_address: "",
+      gps_assist: "",
+      sports: [],
+      favorite: false,
+      redirect_link: "",
+    },
+  ]);
 
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % filterCards.length);
@@ -53,6 +74,12 @@ export default function Courts() {
     ...filterCards.slice(currentIndex, currentIndex + visibleCards),
     ...filterCards.slice(0, Math.max(0, currentIndex + visibleCards - filterCards.length)),
   ];
+
+  const handleFavoriteToggle = (index) => {
+    const updatedCourts = [...courts];
+    updatedCourts[index].favorite = !updatedCourts[index].favorite;
+    setCourts(updatedCourts);
+  };
 
   return (
     <>
@@ -186,8 +213,22 @@ export default function Courts() {
             </Menu>
           </div>
 
-          <div className="flex justify-center my-20">
-            <CourtDetails />
+          {/* COURTS */}
+          <div className="flex flex-wrap justify-center my-20">
+            {courts.map((court, index) => (
+              <CourtDetails
+                name={court.name}
+                city={court.city}
+                distance={court.distance}
+                address={court.address}
+                web_address={court.web_address}
+                gps_assist={court.gps_assist}
+                sports={court.sports}
+                redirect_link={court.redirect_link}
+                favorite={court.favorite}
+                onFavoriteToggle={() => handleFavoriteToggle(index)}
+              />
+            ))}
           </div>
 
           <div className="flex justify-center my-5">
