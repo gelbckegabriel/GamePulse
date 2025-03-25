@@ -2,6 +2,7 @@
 
 import { IconButton } from "@material-tailwind/react";
 import { FaHeart, FaHeartBroken } from "react-icons/fa";
+import Link from "next/link";
 
 import "./court-details.scss";
 
@@ -36,7 +37,11 @@ export const CourtDetails = ({ name, city, distance, address, web_address, gps_a
           <div>
             <a href={gps_assist}>How to get there?</a>
           </div>
-          <button className="btn bg-backgroundContrast bottom-[10px] md:bottom-[30px] right-[10px] md:right-[30px] ">Access</button>
+          <Link href={redirect_link}>
+            <button className="btn bg-backgroundContrast bottom-[10px] md:bottom-[30px] right-[10px] md:right-[30px] hover:scale-110 transition duration-500 ease-in-out">
+              Access
+            </button>
+          </Link>
         </div>
       </div>
     </>
