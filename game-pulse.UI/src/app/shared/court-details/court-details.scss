@@ -3,7 +3,6 @@
   border-radius: 10px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
   display: flex;
-  margin: 20px;
   overflow: hidden;
   width: 90%;
   max-width: 90%;
@@ -44,8 +43,6 @@
 
 .progress-container {
   position: absolute;
-  top: 30px;
-  right: 30px;
   text-align: right;
   width: 150px;
 }

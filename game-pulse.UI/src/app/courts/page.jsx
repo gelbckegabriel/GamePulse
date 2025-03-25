@@ -225,7 +225,7 @@ export default function Courts() {
           </div>
 
           {/* COURTS */}
-          <div className="flex flex-wrap justify-center my-20">
+          <div className="flex flex-wrap justify-center my-10">
             {courts.map((court, index) => (
               <CourtDetails
                 name={court.name}
