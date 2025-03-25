@@ -1,9 +1,13 @@
-// ABOUT THE USER/PROFILE.
+// https://codepen.io/leonam-silva-de-souza/pen/vYowKqP
+
+import { Container } from "../shared/container";
 
 export default function Profile() {
   return (
-    <div>
-      <h1>Profile Page</h1>
-    </div>
+    <>
+      <Container>
+        <h1>Profile Page</h1>
+      </Container>
+    </>
   );
 }

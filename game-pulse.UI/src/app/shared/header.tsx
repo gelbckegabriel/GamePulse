@@ -21,6 +21,7 @@ export default function Header() {
             <Link href="/leaderboard">Leaderboard</Link>
             <Link href="/courts">Courts</Link>
             <Link href="/contact">Contact</Link>
+            <Link href="/profile">Test</Link>
             <Link href="/"></Link>
           </div>
         </Container>
