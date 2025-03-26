@@ -43,10 +43,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
               className="m-auto w-full md:w-[70%] lg:w-[35%] h-fit p-4 md:p-8 lg:p-12 bg-gray-500 bg-opacity-60 backdrop-blur-md border border-gray-300 border-opacity-50 rounded-lg shadow-lg"
             >
               {/* CLOSE BUTTON */}
-              <div
-                className="absolute right-2 top-2 md:right-3 md:top-3 lg:right-3 lg:top-3 w-8 h-8"
-                onClick={() => setIsOpen(false)}
-              >
+              <div className="absolute right-2 top-2 md:right-3 md:top-3 lg:right-3 lg:top-3 w-8 h-8" onClick={() => setIsOpen(false)}>
                 <IoIosCloseCircleOutline className="mx-auto mt-1 cursor-pointer text-xl md:text-xl" />
               </div>
 
@@ -78,17 +75,11 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                 <p className="text-sm2 mb-1">Username or email</p>
                 <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                   <MdEmail />
-                  <input
-                    type="email"
-                    style={{ backgroundColor: "transparent" }}
-                    className="pl-1 border-0 w-full outline-none text-sm2"
-                  />
+                  <input type="email" style={{ backgroundColor: "transparent" }} className="pl-1 border-0 w-full outline-none text-sm2" />
                 </div>
                 <div className="mt-6 flex justify-between">
                   <p className="text-sm2 mb-1">Password</p>
-                  <p className="text-sm text-[#474646] text-opacity-90 cursor-pointer hover:text-[gray-700] hover:underline">
-                    Forgot Password?
-                  </p>
+                  <p className="text-sm text-[#474646] text-opacity-90 cursor-pointer hover:text-[gray-700] hover:underline">Forgot Password?</p>
                 </div>
                 <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                   <FaFingerprint />
@@ -98,15 +89,9 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                     className="pl-1 border-0 w-full outline-none text-sm2"
                   />
                   {showPassword ? (
-                    <FaRegEye
-                      className="cursor-pointer mr-1"
-                      onClick={togglePasswordView}
-                    />
+                    <FaRegEye className="cursor-pointer mr-1" onClick={togglePasswordView} />
                   ) : (
-                    <FaRegEyeSlash
-                      className="cursor-pointer mr-1"
-                      onClick={togglePasswordView}
-                    />
+                    <FaRegEyeSlash className="cursor-pointer mr-1" onClick={togglePasswordView} />
                   )}
                 </div>
 

@@ -1,18 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import {
-  useAnimate,
-  useDragControls,
-  useMotionValue,
-  motion,
-} from "framer-motion";
-import {
-  FaFingerprint,
-  FaRegEye,
-  FaRegEyeSlash,
-  FaRegUserCircle,
-} from "react-icons/fa";
+import { useAnimate, useDragControls, useMotionValue, motion } from "framer-motion";
+import { FaFingerprint, FaRegEye, FaRegEyeSlash, FaRegUserCircle } from "react-icons/fa";
 import { FaPerson } from "react-icons/fa6";
 import { IoMdPerson } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
@@ -120,9 +110,7 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
 
             <div className="relative z-0 h-full overflow-y-scroll p-4 pt-12">
               <div className="mx-auto max-w-2xl space-y-4 text-neutral-400 text-white">
-                <h2 className="text-3xl md:text-4xl lg:text-4xl font-bold text-center">
-                  Create a new account
-                </h2>
+                <h2 className="text-3xl md:text-4xl lg:text-4xl font-bold text-center">Create a new account</h2>
 
                 <div className="form">
                   {/* NAME AND LASTNAME CONTAINER */}
@@ -194,11 +182,7 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
                         isPasswordInvalid ? "border-issueRed border-2" : ""
                       }`}
                     >
-                      <FaFingerprint
-                        className={`transition-all duration-300 ease-in-out ${
-                          isPasswordInvalid ? "text-issueRed" : ""
-                        }`}
-                      />
+                      <FaFingerprint className={`transition-all duration-300 ease-in-out ${isPasswordInvalid ? "text-issueRed" : ""}`} />
                       <input
                         type={showPassword ? "text" : "password"}
                         maxLength={20}
@@ -209,16 +193,12 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
                       />
                       {showPassword ? (
                         <FaRegEye
-                          className={`transition-all duration-300 ease-in-out cursor-pointer mr-1 ${
-                            isPasswordInvalid ? "text-issueRed" : ""
-                          }`}
+                          className={`transition-all duration-300 ease-in-out cursor-pointer mr-1 ${isPasswordInvalid ? "text-issueRed" : ""}`}
                           onClick={togglePasswordView}
                         />
                       ) : (
                         <FaRegEyeSlash
-                          className={`transition-all duration-300 ease-in-out cursor-pointer mr-1 ${
-                            isPasswordInvalid ? "text-issueRed" : ""
-                          }`}
+                          className={`transition-all duration-300 ease-in-out cursor-pointer mr-1 ${isPasswordInvalid ? "text-issueRed" : ""}`}
                           onClick={togglePasswordView}
                         />
                       )}
