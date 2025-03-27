@@ -92,9 +92,10 @@
   box-shadow: var(--shadow1);
   z-index: 1;
   padding: 15px;
-  max-height: 405px;
+  max-height: max-content;
   margin-bottom: 15px;
   overflow: hidden;
+  position: sticky;
   transition: var(--transition2);
 }
 
@@ -182,17 +183,98 @@
   z-index: -1;
 }
 
+// MAIN CONTENT (RIGHT)
+.mainbar {
+  width: 60%;
+  background: var(--eerie-black2);
+  border: 1px solid var(--jet);
+  border-radius: 20px;
+  box-shadow: var(--shadow1);
+  z-index: 1;
+  padding: 15px;
+}
 
-// MainContent
+// ABOUT
+.about .article-title {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.about-text {
+  color: var(--light-gray);
+  font-size: var(--fs6);
+  font-weight: var(--fw300);
+  line-height: 1.6;
+}
+
+.about-text p {
+  margin-bottom: 15px;
+  text-align: justify;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.service {
+  margin-bottom: 35px;
+}
+
+.service-title {
+  margin-bottom: 20px;
+}
+
+.service-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.service-item {
+  position: relative;
+  background: var(--border-gradient-onyx);
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: var(--shadow2);
+  z-index: 1;
+}
+
+.service-item::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: var(--bg-gradient-jet);
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.service-icon-box {
+  margin-bottom: 10px;
+}
+.service-icon-box img {
+  margin: auto;
+}
+
+.service-content-box {
+  text-align: center;
+}
+.service-item-title {
+  margin-bottom: 7px;
+}
+
+.service-item-text {
+  color: var(--light-gray);
+  font-size: var(--fs6);
+  font-weight: var(--fw300);
+  line-height: 1.6;
+}
 
 /*MEDIA QUERIES*/
 
 @media (min-width: 580px) {
   .sidebar {
-    width: 520px;
+    width: 90%;
     margin-inline: auto;
     padding: 30px;
-    max-height: 584px;
+    max-height: max-content;
     margin-bottom: 30px;
   }
 
@@ -224,11 +306,44 @@
   .separator {
     margin: 32px 0;
   }
+
+  .mainbar {
+    width: 90%;
+    margin-inline: auto;
+  }
+
+  .about .article-title {
+    margin-bottom: 20px;
+  }
+  .about-text {
+    margin-bottom: 40px;
+  }
+
+  .service-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 30px;
+  }
+
+  .service-icon-box {
+    margin-bottom: 0;
+    margin-top: 5px;
+  }
+
+  .service-content-box {
+    text-align: left;
+  }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 720px) {
   .sidebar {
-    width: 30%;
+    width: 35%;
+  }
+
+  .mainbar {
+    width: 55%;
   }
 
   .has-scrollbar::-webkit-scrollbar-button {
@@ -271,7 +386,6 @@
 
   .sidebar {
     width: 30%;
-    position: sticky;
     top: 60px;
     max-height: max-content;
     height: 100%;
