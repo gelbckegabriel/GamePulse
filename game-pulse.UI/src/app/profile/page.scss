@@ -169,7 +169,7 @@
 
 // MAIN CONTENT (RIGHT)
 .mainbar {
-  width: 60%;
+  width: 100%;
   background: var(--eerie-black2);
   border: 1px solid var(--jet);
   border-radius: 20px;
@@ -179,19 +179,20 @@
 }
 
 // ABOUT
-.about .article-title {
+.about .article-title,
+.location .article-title {
   margin-bottom: 15px;
   margin-top: 15px;
 }
 
-.about-text {
+.mainbar-card {
   color: var(--light-gray);
   font-size: var(--fs6);
   font-weight: var(--fw300);
   line-height: 1.6;
 }
 
-.about-text p {
+.mainbar-card p {
   margin-bottom: 15px;
   text-align: justify;
   padding-left: 10px;
@@ -258,57 +259,25 @@
   text-align: justify;
 }
 
-.service {
-  margin-bottom: 35px;
-}
-
-.service-title {
-  margin-bottom: 20px;
-}
-
-.service-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-}
-
-.service-item {
+.mapbox {
   position: relative;
-  background: var(--border-gradient-onyx);
-  padding: 20px;
-  border-radius: 14px;
-  box-shadow: var(--shadow2);
-  z-index: 1;
+  height: 250px;
+  width: 100%;
+  border-radius: 16px;
+  margin-bottom: 30px;
+  border: 1px solid var(--jet);
+  overflow: hidden;
 }
 
-.service-item::before {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  background: var(--bg-gradient-jet);
-  border-radius: inherit;
-  z-index: -1;
+.mapbox figure {
+  height: 100%;
 }
 
-.service-icon-box {
-  margin-bottom: 10px;
-}
-.service-icon-box img {
-  margin: auto;
-}
-
-.service-content-box {
-  text-align: center;
-}
-.service-item-title {
-  margin-bottom: 7px;
-}
-
-.service-item-text {
-  color: var(--light-gray);
-  font-size: var(--fs6);
-  font-weight: var(--fw300);
-  line-height: 1.6;
+.mapbox iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  filter: grayscale(1) invert(1);
 }
 
 /*MEDIA QUERIES*/
@@ -322,7 +291,7 @@
     margin-bottom: 30px;
   }
 
-  .mainbar {
+  .mainbar-content {
     width: 90%;
     margin-inline: auto;
   }
@@ -366,33 +335,17 @@
     margin: 32px 0;
   }
 
-  .mainbar {
+  .mainbar-content {
     width: 90%;
     margin-inline: auto;
   }
 
-  .about .article-title {
+  .about .article-title,
+  .location .article-title {
     margin-bottom: 20px;
   }
-  .about-text {
+  .mainbar-card {
     margin-bottom: 40px;
-  }
-
-  .service-item {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 18px;
-    padding: 30px;
-  }
-
-  .service-icon-box {
-    margin-bottom: 0;
-    margin-top: 5px;
-  }
-
-  .service-content-box {
-    text-align: left;
   }
 
   .timeline-list {
@@ -415,7 +368,7 @@
     width: 35%;
   }
 
-  .mainbar {
+  .mainbar-content {
     width: 55%;
   }
 

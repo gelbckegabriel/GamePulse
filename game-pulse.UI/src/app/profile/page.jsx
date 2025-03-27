@@ -6,7 +6,17 @@ import { AtSymbolIcon, CalendarDaysIcon, DevicePhoneMobileIcon, MapPinIcon } fro
 import { Container } from "../shared/container";
 import "./page.scss";
 import { useState } from "react";
-import { PiCoinsThin, PiGameController, PiMapTrifold, PiPerson, PiStar, PiTrophy } from "react-icons/pi";
+import {
+  PiBasketballDuotone,
+  PiCoinsThin,
+  PiGameController,
+  PiMapTrifold,
+  PiPerson,
+  PiSoccerBallDuotone,
+  PiTennisBallDuotone,
+  PiTrophy,
+  PiVolleyballDuotone,
+} from "react-icons/pi";
 
 export default function Profile() {
   const [userInfo, setUserInfo] = useState({
@@ -22,12 +32,13 @@ export default function Profile() {
     xpPoints: 1254,
     totalCoins: 256,
     basketballGames: 301,
-    footballGames: 5,
+    footballGames: 0,
     tennisGames: 0,
-    volleyballGames: 10,
-    totalGames: 316,
+    volleyballGames: 17,
     favoriteSport: "basketball",
-    playerPosition: "Point Guard",
+    basketballPosition: "Point Guard",
+    footballPosition: null,
+    volleyballPosition: null,
     bestPlayerAward: 57,
     address: "Rua Voluntários da Pátria, 475 - Curitiba, PR",
   });
@@ -40,7 +51,7 @@ export default function Profile() {
       <div className="bg-background text-white min-h-[100vh]">
         <Container>
           <div className="md:flex md:justify-between pt-10">
-            {/* SIDEBAR USER INFO */}
+            {/* USER INFO */}
             <aside className="sidebar">
               <div className="sidebar-info">
                 <figure className="avatar-box">
@@ -112,15 +123,15 @@ export default function Profile() {
               </div>
             </aside>
 
-            {/* MAINBAR */}
-            <article className="about mainbar active">
-              <header>
-                <h2 className="h2 article-title">About the player</h2>
-              </header>
-
-              <section className="about-text">
-                {/* XP */}
-                <section className="timeline mb-8">
+            <div className="mainbar-content">
+              {/* ABOUT THE PLAYER */}
+              <article className="about mainbar">
+                <header>
+                  <h2 className="headings text-2xl article-title">About the player</h2>
+                </header>
+                <section>
+                  {/* XP */}
+                  {/* <section className="timeline mb-8">
                   <div className="title-wrapper">
                     <div className="icon-box">
                       <PiCoinsThin className="text-[2rem]" />
@@ -144,192 +155,230 @@ export default function Profile() {
                       </span>
                     </li>
                   </ol>
-                </section>
+                </section> */}
 
-                {/* TOTAL GAMES */}
-                <section className="timeline mb-8">
-                  <div className="title-wrapper">
-                    <div className="icon-box">
-                      <PiGameController className="text-[2rem]" />
+                  {/* TOTAL GAMES */}
+                  <section className="timeline mb-8">
+                    <div className="title-wrapper">
+                      <div className="icon-box">
+                        <PiGameController className="text-[2rem]" />
+                      </div>
+
+                      <h3 className="headings text-lg tracking-wider">Total Games</h3>
                     </div>
 
-                    <h3 className="headings text-lg tracking-wider">Total Games</h3>
-                  </div>
+                    <ol className="timeline-list">
+                      {playerInfo.basketballGames != 0 ? (
+                        <>
+                          {" "}
+                          <li className="timeline-item">
+                            <h4 className="headings text-sm2 timeline-item-title">Basketball</h4>
+                            <span>
+                              <strong>{playerInfo.basketballGames}</strong>
+                            </span>
+                          </li>
+                        </>
+                      ) : null}
 
-                  <ol className="timeline-list">
-                    {playerInfo.basketballGames != 0 ? (
-                      <>
-                        {" "}
-                        <li className="timeline-item">
-                          <h4 className="headings text-sm2 timeline-item-title">Basketball</h4>
-                          <span>{playerInfo.basketballGames}</span>
-                        </li>
-                      </>
-                    ) : null}
+                      {playerInfo.footballGames != 0 ? (
+                        <>
+                          {" "}
+                          <li className="timeline-item">
+                            <h4 className="headings text-sm2 timeline-item-title">Football</h4>
+                            <span>
+                              <strong>{playerInfo.footballGames}</strong>
+                            </span>
+                          </li>
+                        </>
+                      ) : null}
 
-                    {playerInfo.footballGames != 0 ? (
-                      <>
-                        {" "}
-                        <li className="timeline-item">
-                          <h4 className="headings text-sm2 timeline-item-title">Football</h4>
-                          <span>{playerInfo.footballGames}</span>
-                        </li>
-                      </>
-                    ) : null}
+                      {playerInfo.tennisGames != 0 ? (
+                        <>
+                          {" "}
+                          <li className="timeline-item">
+                            <h4 className="headings text-sm2 timeline-item-title">Tennis</h4>
+                            <span>
+                              <strong>{playerInfo.tennisGames}</strong>
+                            </span>
+                          </li>
+                        </>
+                      ) : null}
 
-                    {playerInfo.tennisGames != 0 ? (
-                      <>
-                        {" "}
-                        <li className="timeline-item">
-                          <h4 className="headings text-sm2 timeline-item-title">Tennis</h4>
-                          <span>{playerInfo.tennisGames}</span>
-                        </li>
-                      </>
-                    ) : null}
+                      {playerInfo.volleyballGames != 0 ? (
+                        <>
+                          {" "}
+                          <li className="timeline-item">
+                            <h4 className="headings text-sm2 timeline-item-title">Volleyball</h4>
+                            <span>
+                              <strong>{playerInfo.volleyballGames}</strong>
+                            </span>
+                          </li>
+                        </>
+                      ) : null}
+                    </ol>
+                  </section>
 
-                    {playerInfo.volleyballGames != 0 ? (
-                      <>
-                        {" "}
-                        <li className="timeline-item">
-                          <h4 className="headings text-sm2 timeline-item-title">Volleyball</h4>
-                          <span>{playerInfo.volleyballGames}</span>
-                        </li>
-                      </>
-                    ) : null}
-                  </ol>
-                </section>
+                  {/* BEST PLAYER AWARD */}
+                  <section className="timeline mb-8">
+                    <div className="title-wrapper">
+                      <div className="icon-box">
+                        <PiTrophy className="text-[2rem]" />
+                      </div>
 
-                {/* BEST PLAYER AWARD */}
-                <section className="timeline mb-8">
-                  <div className="title-wrapper">
-                    <div className="icon-box">
-                      <PiTrophy className="text-[2rem]" />
+                      <h3 className="headings text-lg tracking-wider">Best Player Award</h3>
                     </div>
 
-                    <h3 className="headings text-lg tracking-wider">XP</h3>
-                  </div>
+                    <ol className="timeline-list">
+                      <li className="timeline-item">
+                        <h4 className="headings text-sm2 timeline-item-title">Total Awards</h4>
+                        <span>
+                          <strong>{playerInfo.bestPlayerAward}</strong>
+                        </span>
+                      </li>
+                    </ol>
+                  </section>
 
-                  <ol className="timeline-list">
-                    <li className="timeline-item">
-                      <h4 className="headings text-sm2 timeline-item-title">University school of the arts</h4>
-                      <span>2008 - 2010</span>
-                      <p className="timeline-text">
-                        There I learnt a wide range of topics that are essential to understanding both the theory and practical aspects of computing.
-                        This involves programming fundamentals, computer architecture, operating systems, databases, software engineering, problem
-                        solving, collaboration and communication soft skills.
-                      </p>
-                    </li>
+                  {/* FAVORITE SPORT */}
+                  <section className="timeline mb-8">
+                    <div className="title-wrapper">
+                      <div className="icon-box">
+                        {playerInfo.favoriteSport == "basketball" ? <PiBasketballDuotone className="text-[2rem]" /> : null}
+                        {playerInfo.favoriteSport == "football" ? <PiSoccerBallDuotone className="text-[2rem]" /> : null}
+                        {playerInfo.favoriteSport == "tennis" ? <PiTennisBallDuotone className="text-[2rem]" /> : null}
+                        {playerInfo.favoriteSport == "volleyball" ? <PiVolleyballDuotone className="text-[2rem]" /> : null}
+                        {/* <PiStar className="text-[2rem]" /> */}
+                      </div>
 
-                    <li className="timeline-item">
-                      <h4 className="headings text-sm2 timeline-item-title">New York Academy of Art</h4>
-                      <span>2006 - 2007</span>
-                      <p className="timeline-text">
-                        I chose my master degree in technology. There I deepened my knowledge, enhanced my skills in the area and learnt how to
-                        increase my career prospects in a competitive job market.
-                      </p>
-                    </li>
-                  </ol>
-                </section>
-
-                {/* FAVORITE SPORT */}
-                <section className="timeline mb-8">
-                  <div className="title-wrapper">
-                    <div className="icon-box">
-                      <PiStar className="text-[2rem]" />
+                      <h3 className="headings text-lg tracking-wider">Favorite Sport</h3>
                     </div>
 
-                    <h3 className="headings text-lg tracking-wider">XP</h3>
-                  </div>
+                    <ol className="timeline-list">
+                      <li className="timeline-item">
+                        <h4 className="headings text-sm2 timeline-item-title">Sport</h4>
+                        <p className="timeline-text capitalize">{playerInfo.favoriteSport}</p>
+                      </li>
+                    </ol>
+                  </section>
 
-                  <ol className="timeline-list">
-                    <li className="timeline-item">
-                      <h4 className="headings text-sm2 timeline-item-title">University school of the arts</h4>
-                      <span>2008 - 2010</span>
-                      <p className="timeline-text">
-                        There I learnt a wide range of topics that are essential to understanding both the theory and practical aspects of computing.
-                        This involves programming fundamentals, computer architecture, operating systems, databases, software engineering, problem
-                        solving, collaboration and communication soft skills.
-                      </p>
-                    </li>
+                  {/* PLAYER POSITION */}
+                  <section className="timeline mb-8">
+                    <div className="title-wrapper">
+                      <div className="icon-box">
+                        <PiPerson className="text-[2rem]" />
+                      </div>
 
-                    <li className="timeline-item">
-                      <h4 className="headings text-sm2 timeline-item-title">New York Academy of Art</h4>
-                      <span>2006 - 2007</span>
-                      <p className="timeline-text">
-                        I chose my master degree in technology. There I deepened my knowledge, enhanced my skills in the area and learnt how to
-                        increase my career prospects in a competitive job market.
-                      </p>
-                    </li>
-                  </ol>
-                </section>
-
-                {/* PLAYER POSITION */}
-                <section className="timeline mb-8">
-                  <div className="title-wrapper">
-                    <div className="icon-box">
-                      <PiPerson className="text-[2rem]" />
+                      <h3 className="headings text-lg tracking-wider">Player Position</h3>
                     </div>
 
-                    <h3 className="headings text-lg tracking-wider">XP</h3>
-                  </div>
+                    <ol className="timeline-list">
+                      {/* BASKETBALL POSITION */}
+                      {!editPlayerInfo && playerInfo.basketballPosition == null ? null : (
+                        <>
+                          {playerInfo.basketballPosition != null ? (
+                            <>
+                              <li className="timeline-item">
+                                <h4 className="headings text-sm2 timeline-item-title">Basketball</h4>
+                                <p className="timeline-text">{playerInfo.basketballPosition}</p>
+                              </li>
+                            </>
+                          ) : (
+                            <>
+                              <li className="timeline-item">
+                                <h4 className="headings text-sm2 timeline-item-title">Basketball</h4>
+                                <p className="timeline-text">FILL IN</p>
+                              </li>
+                            </>
+                          )}
+                        </>
+                      )}
 
-                  <ol className="timeline-list">
-                    <li className="timeline-item">
-                      <h4 className="headings text-sm2 timeline-item-title">University school of the arts</h4>
-                      <span>2008 - 2010</span>
-                      <p className="timeline-text">
-                        There I learnt a wide range of topics that are essential to understanding both the theory and practical aspects of computing.
-                        This involves programming fundamentals, computer architecture, operating systems, databases, software engineering, problem
-                        solving, collaboration and communication soft skills.
-                      </p>
-                    </li>
+                      {/* FOOTBALL POSITION */}
+                      {!editPlayerInfo && playerInfo.footballPosition == null ? null : (
+                        <>
+                          {playerInfo.footballPosition != null ? (
+                            <>
+                              <li className="timeline-item">
+                                <h4 className="headings text-sm2 timeline-item-title">Football</h4>
+                                <p className="timeline-text">{playerInfo.footballPosition}</p>
+                              </li>
+                            </>
+                          ) : (
+                            <>
+                              <li className="timeline-item">
+                                <h4 className="headings text-sm2 timeline-item-title">Football</h4>
+                                <p className="timeline-text">FILL IN</p>
+                              </li>
+                            </>
+                          )}
+                        </>
+                      )}
 
-                    <li className="timeline-item">
-                      <h4 className="headings text-sm2 timeline-item-title">New York Academy of Art</h4>
-                      <span>2006 - 2007</span>
-                      <p className="timeline-text">
-                        I chose my master degree in technology. There I deepened my knowledge, enhanced my skills in the area and learnt how to
-                        increase my career prospects in a competitive job market.
-                      </p>
-                    </li>
-                  </ol>
+                      {/* VOLLEYBALL POSITION */}
+                      {!editPlayerInfo && playerInfo.volleyballPosition == null ? null : (
+                        <>
+                          {playerInfo.volleyballPosition != null ? (
+                            <>
+                              <li className="timeline-item">
+                                <h4 className="headings text-sm2 timeline-item-title">VolleyBall</h4>
+                                <p className="timeline-text">{playerInfo.volleyballPosition}</p>
+                              </li>
+                            </>
+                          ) : (
+                            <>
+                              <li className="timeline-item">
+                                <h4 className="headings text-sm2 timeline-item-title">VolleyBall</h4>
+                                <p className="timeline-text">FILL IN</p>
+                              </li>
+                            </>
+                          )}
+                        </>
+                      )}
+                    </ol>
+                  </section>
                 </section>
+              </article>
 
-                {/* REFERENCE ADDRESS */}
-                <section className="timeline mb-8">
-                  <div className="title-wrapper">
-                    <div className="icon-box">
-                      <PiMapTrifold className="text-[2rem]" />
+              <br />
+              <br />
+
+              {/* LOCATION */}
+              <article className="location mainbar">
+                <header>
+                  <h2 className="headings text-2xl article-title">Location</h2>
+                </header>
+                <section>
+                  {/* REFERENCE ADDRESS */}
+                  <section className="timeline mb-8">
+                    <div className="title-wrapper">
+                      <div className="icon-box">
+                        <PiMapTrifold className="text-[2rem]" />
+                      </div>
+
+                      <h3 className="headings text-lg tracking-wider">Reference Address</h3>
                     </div>
 
-                    <h3 className="headings text-lg tracking-wider">XP</h3>
-                  </div>
+                    <ol className="timeline-list">
+                      <li className="timeline-item">
+                        <h4 className="headings text-sm2 timeline-item-title">Address</h4>
+                        <p className="timeline-text">{playerInfo.address}</p>
+                      </li>
+                    </ol>
+                  </section>
 
-                  <ol className="timeline-list">
-                    <li className="timeline-item">
-                      <h4 className="headings text-sm2 timeline-item-title">University school of the arts</h4>
-                      <span>2008 - 2010</span>
-                      <p className="timeline-text">
-                        There I learnt a wide range of topics that are essential to understanding both the theory and practical aspects of computing.
-                        This involves programming fundamentals, computer architecture, operating systems, databases, software engineering, problem
-                        solving, collaboration and communication soft skills.
-                      </p>
-                    </li>
-
-                    <li className="timeline-item">
-                      <h4 className="headings text-sm2 timeline-item-title">New York Academy of Art</h4>
-                      <span>2006 - 2007</span>
-                      <p className="timeline-text">
-                        I chose my master degree in technology. There I deepened my knowledge, enhanced my skills in the area and learnt how to
-                        increase my career prospects in a competitive job market.
-                      </p>
-                    </li>
-                  </ol>
+                  {/* LOCATION MAP */}
+                  <section className="mapbox" data-mapbox>
+                    <figure>
+                      <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d199666.5651251294!2d-121.58334177520186!3d38.56165006739519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809ac672b28397f9%3A0x921f6aaa74197fdb!2sSacramento%2C%20CA%2C%20USA!5e0!3m2!1sen!2sbd!4v1647608789441!5m2!1sen!2sbd"
+                        width="400"
+                        height="300"
+                        loading="lazy"
+                      ></iframe>
+                    </figure>
+                  </section>
                 </section>
-
-                {/* LOCATION MAP */}
-              </section>
-            </article>
+              </article>
+            </div>
           </div>
         </Container>
       </div>
