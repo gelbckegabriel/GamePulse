@@ -97,7 +97,7 @@ export default function Profile() {
             {/* MAINBAR */}
             <article className="about mainbar active">
               <header>
-                <h2 className="h2 article-title">About me</h2>
+                <h2 className="h2 article-title">About the player</h2>
               </header>
 
               <section className="about-text">
@@ -161,122 +161,6 @@ export default function Profile() {
                   </li>
                 </ul>
               </section>
-
-              <section className="testimonials">
-                <h3 className="h3 testimonials-title">Testimonials</h3>
-
-                <ul className="testimonials-list has-scrollbar">
-                  <li className="testimonials-item">
-                    <div className="content-card" data-testimonials-item>
-                      <figure className="testimonials-avatar-box">
-                        <img src="https://i.postimg.cc/zGDHfn3G/avatar-1.png" alt="avatar" data-testimonials-avatar width="60" />
-                      </figure>
-
-                      <h4 className="h4 testimonials-item-title" data-testimonials-title>
-                        Daniel Lewis
-                      </h4>
-
-                      <div className="testimonials-text" data-testimonials-text>
-                        <p>
-                          Richard was hired to create a corporate identity. It's modern, clean and with a beautiful design that got a lot of praises
-                          from colleagues and visitors. We were very pleased with the work done. He has a lot of experience and is very concerned
-                          about the needs of client.
-                        </p>
-                      </div>
-                    </div>
-                  </li>
-
-                  <li className="testimonials-item">
-                    <div className="content-card" data-testimonials-item>
-                      <figure className="testimonials-avatar-box">
-                        <img src="https://i.postimg.cc/DwY0yHtx/avatar-2.png" alt="avatar" data-testimonials-avatar width="60" />
-                      </figure>
-
-                      <h4 className="h4 testimonials-item-title" data-testimonials-title>
-                        Jessica Miller
-                      </h4>
-
-                      <div className="testimonials-text" data-testimonials-text>
-                        <p>
-                          Working with Richard has been an absolute pleasure. I was impressed with his attention to detail, his web design skills and
-                          his professional approach to our timelines and processes.
-                        </p>
-                      </div>
-                    </div>
-                  </li>
-
-                  <li className="testimonials-item">
-                    <div className="content-card" data-testimonials-item>
-                      <figure className="testimonials-avatar-box">
-                        <img src="https://i.postimg.cc/fRFWhX9F/avatar-3.png" alt="avatar" data-testimonials-avatar width="60" />
-                      </figure>
-
-                      <h4 className="h4 testimonials-item-title" data-testimonials-title>
-                        Emily Evans
-                      </h4>
-
-                      <div className="testimonials-text" data-testimonials-text>
-                        <p>
-                          I couldn't be happier with the website that Richard created for us. His attention to detail and creativity is unmatched. Our
-                          clients frequently compliment the design, and it has significantly improved our brand image.
-                        </p>
-                      </div>
-                    </div>
-                  </li>
-
-                  <li className="testimonials-item">
-                    <div className="content-card" data-testimonials-item>
-                      <figure className="testimonials-avatar-box">
-                        <img src="https://i.postimg.cc/zXv1Xv81/avatar-4.png" alt="avatar" data-testimonials-avatar width="60" />
-                      </figure>
-
-                      <h4 className="h4 testimonials-item-title" data-testimonials-title>
-                        Henry Williams
-                      </h4>
-
-                      <div className="testimonials-text" data-testimonials-text>
-                        <p>
-                          I was overwhelmed with the thought of redesigning my online store, but Richard made the process seamless. The site is not
-                          only visually appealing but also optimized for conversions. I've seen a 50% increase in traffic since the launch!
-                        </p>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </section>
-
-              <div className="modal-container " data-modal-container>
-                <div className="overlay " data-overlay></div>
-
-                <section className="testimonials-modal">
-                  <button className="modal-close-btn" data-modal-close-btn>
-                    <ion-icon name="close-outline"></ion-icon>
-                  </button>
-
-                  <div className="modal-img-wrapper">
-                    <figure className="modal-avatar-box">
-                      <img src="https://i.postimg.cc/zGDHfn3G/avatar-1.png" alt="Daniel Lewis" width="80" data-modal-img />
-                    </figure>
-
-                    <img src="https://i.postimg.cc/mZ00RwX7/icon-quote.png" alt="quote icon" />
-                  </div>
-
-                  <div className="modal-content">
-                    <h4 className="h3 modal-title" data-modal-title>
-                      Daniel Lewis
-                    </h4>
-                    <time dateTime="2023-06-14">14 June, 2023</time>
-
-                    <div className="modal-text" data-modal-text>
-                      <p>
-                        Richard was hired to create a corporate identity. It's modern, clean and with a beautiful design that got a lot of praises
-                        from colleagues and visitors. We were very pleased with the work done. He has a lot of experience and is very concerned about
-                        the needs of client.
-                      </p>
-                    </div>
-                  </div>
-                </section>
-              </div>
 
               <section className="clients">
                 <h3 className="h3 clients-title">Clients</h3>
