@@ -26,7 +26,7 @@ export default function Profile() {
             <aside className="sidebar">
               <div className="sidebar-info">
                 <figure className="avatar-box">
-                  <img src="./home/basketball.webp" alt="avatar" width="80" className="rounded-[100%]" />
+                  <img src="./home/basketball.webp" alt="avatar" width="80" className="rounded-[15%]" />
                 </figure>
 
                 <div className="info-content">

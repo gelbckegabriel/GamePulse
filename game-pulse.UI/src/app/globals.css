@@ -3,9 +3,56 @@
 @tailwind utilities;
 
 @layer {
-    :root {
-        --header-row-height: 44px;
-        --header-height: calc(var(--header-row-height) * 2);
-        --hero-height: calc(100svh - var(--header-height));
-    }
+  :root {
+    --header-row-height: 44px;
+    --header-height: calc(var(--header-row-height) * 2);
+    --hero-height: calc(100svh - var(--header-height));
+  }
+}
+
+/* SCROLLBAR */
+.has-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.has-scrollbar::-webkit-scrollbar-track {
+  background: var(--onyx);
+  border-radius: 5px;
+}
+
+.has-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--orange-yellow-crayola);
+  border-radius: 5px;
+}
+
+.has-scrollbar::-webkit-scrollbar-button {
+  width: 20px;
+}
+
+/* RESPONSIVENESS */
+@media (min-width: 720px) {
+  .has-scrollbar::-webkit-scrollbar-button {
+    width: 100px;
+  }
+}
+
+@media (min-width: 1250px) {
+  body::-webkit-scrollbar {
+    width: 20px;
+  }
+  body::-webkit-scrollbar-track {
+    background: var(--smoky-black);
+  }
+
+  body::-webkit-scrollbar-thumb {
+    border: 5px solid var(--smoky-black);
+    background: hsla(0, 0%, 100%, 0.1);
+    border-radius: 20px;
+    box-shadow: inset 1px 1px 0 hsla(0, 0%, 100%, 0.11), inset -1px -1px 0 hsla(0, 0%, 100%, 0.11);
+  }
+
+  body::-webkit-scrollbar-thumb:hover {
+    background: hsla(0, 0%, 100%, 0.15);
+  }
 }
