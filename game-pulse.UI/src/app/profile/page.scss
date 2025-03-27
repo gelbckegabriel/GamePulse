@@ -45,20 +45,16 @@
 
   --transition1: 0.25s ease;
   --transition2: 0.5s ease-in-out;
-}
 
-.sidebar,
-article {
-  background: var(--eerie-black2);
-  border: 1px solid var(--jet);
-  border-radius: 20px;
-  box-shadow: var(--shadow1);
-  z-index: 1;
-  padding: 15px;
-}
-
-.sidebar.active {
-  max-height: 405px;
+  // animation: fade 0.5s ease backwards;
+  @keyframes fade {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 }
 
 .separator {
@@ -66,68 +62,6 @@ article {
   height: 1px;
   background: var(--jet);
   margin: 16px 0;
-}
-
-.icon-box {
-  position: relative;
-  background: var(--border-gradient-onyx);
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  color: var(--orange-yellow-crayola);
-  box-shadow: var(--shadow1);
-  z-index: 1;
-}
-
-.icon-box::before {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  background: var(--eerie-black1);
-  border-radius: inherit;
-  z-index: -1;
-}
-
-.icon-box ion-icon {
-  --ionicon-stroke-width: 35px;
-}
-
-article {
-  display: none;
-}
-
-article.active {
-  display: block;
-  animation: fade 0.5s ease backwards;
-}
-
-@keyframes fade {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.article-title {
-  position: relative;
-  padding-bottom: 7px;
-}
-
-.article-title::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 30px;
-  height: 3px;
-  background: var(--text-gradient-yellow);
-  border-radius: 3px;
 }
 
 .has-scrollbar::-webkit-scrollbar {
@@ -149,33 +83,18 @@ article.active {
   width: 20px;
 }
 
-.content-card {
-  position: relative;
-  background: var(--border-gradient-onyx);
-  padding: 15px;
-  padding-top: 45px;
-  border-radius: 14px;
-  box-shadow: var(--shadow2);
-  cursor: pointer;
-  z-index: 1;
-}
-
-.content-card::before {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  background: var(--bg-gradient-jet);
-  border-radius: inherit;
-  z-index: -1;
-}
-
 /*ASIDE - SIDEBAR*/
 
 .sidebar {
-  margin-bottom: 15px;
-  max-height: 112px;
-  overflow: hidden;
+  background: var(--eerie-black2);
+  border: 1px solid var(--jet);
+  border-radius: 20px;
+  box-shadow: var(--shadow1);
+  z-index: 1;
   padding: 15px;
+  max-height: 405px;
+  margin-bottom: 15px;
+  overflow: hidden;
   transition: var(--transition2);
 }
 
@@ -239,24 +158,42 @@ article.active {
   margin-bottom: 2px;
 }
 
+.icon-box {
+  position: relative;
+  background: var(--border-gradient-onyx);
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  color: var(--orange-yellow-crayola);
+  box-shadow: var(--shadow1);
+  z-index: 1;
+}
+
+.icon-box::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: var(--eerie-black1);
+  border-radius: inherit;
+  z-index: -1;
+}
+
+
+// MainContent
+
 /*MEDIA QUERIES*/
 
 @media (min-width: 580px) {
-  .sidebar,
-  article {
+  .sidebar {
     width: 520px;
     margin-inline: auto;
     padding: 30px;
-  }
-
-  .article-title {
-    font-weight: var(--fw600);
-    padding-bottom: 15px;
-  }
-
-  .article-title::after {
-    width: 40px;
-    height: 5px;
+    max-height: 584px;
+    margin-bottom: 30px;
   }
 
   .icon-box {
@@ -264,20 +201,6 @@ article.active {
     height: 48px;
     border-radius: 12px;
     font-size: 18px;
-  }
-
-  main {
-    margin-top: 60px;
-    margin-bottom: 100px;
-  }
-
-  .sidebar {
-    max-height: 180px;
-    margin-bottom: 30px;
-  }
-
-  .sidebar.active {
-    max-height: 584px;
   }
 
   .sidebar-info {
@@ -304,9 +227,8 @@ article.active {
 }
 
 @media (min-width: 768px) {
-  .sidebar,
-  article {
-    width: 700px;
+  .sidebar {
+    width: 30%;
   }
 
   .has-scrollbar::-webkit-scrollbar-button {
@@ -314,15 +236,13 @@ article.active {
   }
 
   .contacts-list {
-    grid-template-columns: 1fr 1fr;
-    gap: 30px 15px;
+    grid-template-columns: 1fr;
   }
 }
 
 @media (min-width: 1024px) {
-  .sidebar,
-  article {
-    width: 950px;
+  .sidebar {
+    width: 30%;
     box-shadow: var(--shadow5);
   }
 }
@@ -349,16 +269,8 @@ article.active {
     height: 60px;
   }
 
-  .sidebar,
-  article {
-    width: auto;
-  }
-
-  article {
-    min-height: 100%;
-  }
-
   .sidebar {
+    width: 30%;
     position: sticky;
     top: 60px;
     max-height: max-content;
