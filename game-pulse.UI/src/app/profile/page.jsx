@@ -1,15 +1,28 @@
 // https://codepen.io/leonam-silva-de-souza/pen/vYowKqP
 
+"use client";
+
 import { AtSymbolIcon, CalendarDaysIcon, ChevronDownIcon, DevicePhoneMobileIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import { Container } from "../shared/container";
 import "./page.scss";
+import { useState } from "react";
 
 export default function Profile() {
+  const [userInfo, setUserInfo] = useState({
+    name: "Gabriel Gelbcke",
+    nickname: "Gelbcke",
+    email: "gabrielgelbcke@gmail.com",
+    phone: "+1 (213) 352-2795",
+    birthday: "12 December, 2001",
+    location: "Curitiba, PR",
+  });
+
   return (
     <>
       <div className="bg-background text-white min-h-[100vh]">
         <Container>
           <div className="md:flex md:justify-between pt-10">
+            {/* SIDEBAR USER INFO */}
             <aside className="sidebar">
               <div className="sidebar-info">
                 <figure className="avatar-box">
@@ -17,8 +30,8 @@ export default function Profile() {
                 </figure>
 
                 <div className="info-content">
-                  <h1 className="name">Gabriel Gelbcke</h1>
-                  <p className="title">Gelbcke</p>
+                  <h1 className="name">{userInfo.name}</h1>
+                  <p className="title">{userInfo.nickname}</p>
                 </div>
               </div>
 
@@ -29,14 +42,13 @@ export default function Profile() {
                   <li className="contact-item">
                     <div className="icon-box">
                       <AtSymbolIcon className="w-[2rem]" />
-                      {/* <ion-icon name="mail-outline"></ion-icon> */}
                     </div>
 
                     <div className="contact-info">
                       <p className="contact-title">Email</p>
 
                       <a href="mailto:richard@example.com" className="contact-link">
-                        richardexample.com
+                        {userInfo.email}
                       </a>
                     </div>
                   </li>
@@ -44,14 +56,13 @@ export default function Profile() {
                   <li className="contact-item">
                     <div className="icon-box">
                       <DevicePhoneMobileIcon className="w-[2rem]" />
-                      {/* <ion-icon name="phone-portrait-outline"></ion-icon> */}
                     </div>
 
                     <div className="contact-info">
                       <p className="contact-title">Phone</p>
 
                       <a href="tel:+12133522795" className="contact-link">
-                        +1 (213) 352-2795
+                        {userInfo.phone}
                       </a>
                     </div>
                   </li>
@@ -59,32 +70,31 @@ export default function Profile() {
                   <li className="contact-item">
                     <div className="icon-box">
                       <CalendarDaysIcon className="w-[2rem]" />
-                      {/* <ion-icon name="calendar-outline"></ion-icon> */}
                     </div>
 
                     <div className="contact-info">
                       <p className="contact-title">Birthday</p>
 
-                      <span>June 23, 1982</span>
+                      <time dateTime="2023-06-14">{userInfo.birthday}</time>
                     </div>
                   </li>
 
                   <li className="contact-item">
                     <div className="icon-box">
                       <MapPinIcon className="w-[2rem]" />
-                      {/* <ion-icon name="location-outline"></ion-icon> */}
                     </div>
 
                     <div className="contact-info">
                       <p className="contact-title">Location</p>
 
-                      <address>Sacramento, California, USA</address>
+                      <address>{userInfo.location}</address>
                     </div>
                   </li>
                 </ul>
               </div>
             </aside>
 
+            {/* MAINBAR */}
             <article className="about mainbar active">
               <header>
                 <h2 className="h2 article-title">About me</h2>

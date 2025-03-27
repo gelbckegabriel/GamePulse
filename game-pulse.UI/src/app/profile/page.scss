@@ -269,6 +269,21 @@
 
 /*MEDIA QUERIES*/
 
+@media (width < 580px) {
+  .sidebar {
+    width: 90%;
+    margin-inline: auto;
+    padding: 30px;
+    max-height: max-content;
+    margin-bottom: 30px;
+  }
+
+  .mainbar {
+    width: 90%;
+    margin-inline: auto;
+  }
+}
+
 @media (min-width: 580px) {
   .sidebar {
     width: 90%;

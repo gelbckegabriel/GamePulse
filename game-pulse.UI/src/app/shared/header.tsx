@@ -28,7 +28,9 @@ export default function Header() {
       </header>
       <div className="sticky top-0 z-20 bg-backgroundContrast text-white">
         <Container className="flex items-center justify-between min-h-[--header-row-height]">
-          <p className="text-xl font-semibold">GamePulse</p>
+          <Link href="/">
+            <p className="text-xl font-semibold">GamePulse</p>
+          </Link>
           <Button size="small" onClick={() => setIsOpen(true)}>
             Sign up
           </Button>
