@@ -2,10 +2,11 @@
 
 "use client";
 
-import { AtSymbolIcon, CalendarDaysIcon, ChevronDownIcon, DevicePhoneMobileIcon, MapPinIcon } from "@heroicons/react/24/outline";
+import { AtSymbolIcon, CalendarDaysIcon, DevicePhoneMobileIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import { Container } from "../shared/container";
 import "./page.scss";
 import { useState } from "react";
+import { PiCoinsThin, PiGameController, PiMapTrifold, PiPerson, PiStar, PiTrophy } from "react-icons/pi";
 
 export default function Profile() {
   const [userInfo, setUserInfo] = useState({
@@ -16,6 +17,23 @@ export default function Profile() {
     birthday: "12 December, 2001",
     location: "Curitiba, PR",
   });
+
+  const [playerInfo, setPlayerInfo] = useState({
+    xpPoints: 1254,
+    totalCoins: 256,
+    basketballGames: 301,
+    footballGames: 5,
+    tennisGames: 0,
+    volleyballGames: 10,
+    totalGames: 316,
+    favoriteSport: "basketball",
+    playerPosition: "Point Guard",
+    bestPlayerAward: 57,
+    address: "Rua Voluntários da Pátria, 475 - Curitiba, PR",
+  });
+
+  const [editUserInfo, setEditUserInfo] = useState(false);
+  const [editPlayerInfo, setEditPlayerInfo] = useState(false);
 
   return (
     <>
@@ -101,107 +119,215 @@ export default function Profile() {
               </header>
 
               <section className="about-text">
-                <p>
-                  I'm Creative Director and UI/UX Designer from Sydney, Australia, working in web development and print media. I enjoy turning complex
-                  problems into simple, beautiful and intuitive designs.
-                </p>
-                <p>
-                  My job is to build your website so that it is functional and user-friendly but at the same time attractive. Moreover, I add personal
-                  touch to your product and make sure that is eye-catching and easy to use. My aim is to bring across your message and identity in the
-                  most creative way. I created web design for many famous brand companies.
-                </p>
-              </section>
-
-              <section className="service">
-                <h3 className="h3 service-title">What I'm doing</h3>
-
-                <ul className="service-list">
-                  <li className="service-item">
-                    <div className="service-icon-box">
-                      <img src="https://i.postimg.cc/4389jZkP/icon-design.png" alt="icon" width="40" />
+                {/* XP */}
+                <section className="timeline mb-8">
+                  <div className="title-wrapper">
+                    <div className="icon-box">
+                      <PiCoinsThin className="text-[2rem]" />
                     </div>
 
-                    <div className="service-content-box">
-                      <h4 className="h4 service-item-title">Web Design</h4>
-                      <p className="service-item-text">The most modern and high-quality design made at a professional level.</p>
-                    </div>
-                  </li>
+                    <h3 className="headings text-lg tracking-wider">XP</h3>
+                  </div>
 
-                  <li className="service-item">
-                    <div className="service-icon-box">
-                      <img src="https://i.postimg.cc/ZqgqrqzG/icon-dev.png" alt="icon" width="40" />
-                    </div>
+                  <ol className="timeline-list">
+                    <li className="timeline-item">
+                      <h4 className="headings text-sm2 timeline-item-title">Total XP</h4>
+                      <span>
+                        <strong>{playerInfo.xpPoints}</strong>
+                      </span>
+                    </li>
 
-                    <div className="service-content-box">
-                      <h4 className="h4 service-item-title">Web development</h4>
-                      <p className="service-item-text">High-quality development of sites at the professional level.</p>
-                    </div>
-                  </li>
+                    <li className="timeline-item">
+                      <h4 className="headings text-sm2 timeline-item-title">Total Coins</h4>
+                      <span>
+                        <strong>{playerInfo.totalCoins}</strong>
+                      </span>
+                    </li>
+                  </ol>
+                </section>
 
-                  <li className="service-item">
-                    <div className="service-icon-box">
-                      <img src="https://i.postimg.cc/xjLdzYxZ/icon-app.png" alt="icon" width="40" />
-                    </div>
-
-                    <div className="service-content-box">
-                      <h4 className="h4 service-item-title">Mobile apps</h4>
-                      <p className="service-item-text">Professional development of applications for iOS and Android.</p>
-                    </div>
-                  </li>
-
-                  <li className="service-item">
-                    <div className="service-icon-box">
-                      <img src="https://i.postimg.cc/0NL8zHpx/icon-photo.png" alt="icon" width="40" />
+                {/* TOTAL GAMES */}
+                <section className="timeline mb-8">
+                  <div className="title-wrapper">
+                    <div className="icon-box">
+                      <PiGameController className="text-[2rem]" />
                     </div>
 
-                    <div className="service-content-box">
-                      <h4 className="h4 service-item-title">Photography</h4>
-                      <p className="service-item-text">I make high-quality photos of any category at a professional level.</p>
+                    <h3 className="headings text-lg tracking-wider">Total Games</h3>
+                  </div>
+
+                  <ol className="timeline-list">
+                    {playerInfo.basketballGames != 0 ? (
+                      <>
+                        {" "}
+                        <li className="timeline-item">
+                          <h4 className="headings text-sm2 timeline-item-title">Basketball</h4>
+                          <span>{playerInfo.basketballGames}</span>
+                        </li>
+                      </>
+                    ) : null}
+
+                    {playerInfo.footballGames != 0 ? (
+                      <>
+                        {" "}
+                        <li className="timeline-item">
+                          <h4 className="headings text-sm2 timeline-item-title">Football</h4>
+                          <span>{playerInfo.footballGames}</span>
+                        </li>
+                      </>
+                    ) : null}
+
+                    {playerInfo.tennisGames != 0 ? (
+                      <>
+                        {" "}
+                        <li className="timeline-item">
+                          <h4 className="headings text-sm2 timeline-item-title">Tennis</h4>
+                          <span>{playerInfo.tennisGames}</span>
+                        </li>
+                      </>
+                    ) : null}
+
+                    {playerInfo.volleyballGames != 0 ? (
+                      <>
+                        {" "}
+                        <li className="timeline-item">
+                          <h4 className="headings text-sm2 timeline-item-title">Volleyball</h4>
+                          <span>{playerInfo.volleyballGames}</span>
+                        </li>
+                      </>
+                    ) : null}
+                  </ol>
+                </section>
+
+                {/* BEST PLAYER AWARD */}
+                <section className="timeline mb-8">
+                  <div className="title-wrapper">
+                    <div className="icon-box">
+                      <PiTrophy className="text-[2rem]" />
                     </div>
-                  </li>
-                </ul>
-              </section>
 
-              <section className="clients">
-                <h3 className="h3 clients-title">Clients</h3>
+                    <h3 className="headings text-lg tracking-wider">XP</h3>
+                  </div>
 
-                <ul className="clients-list has-scrollbar">
-                  <li className="clients-item">
-                    <a href="#">
-                      <img src="https://i.postimg.cc/YqfKyG66/logo-1-color.png" alt="logo" />
-                    </a>
-                  </li>
+                  <ol className="timeline-list">
+                    <li className="timeline-item">
+                      <h4 className="headings text-sm2 timeline-item-title">University school of the arts</h4>
+                      <span>2008 - 2010</span>
+                      <p className="timeline-text">
+                        There I learnt a wide range of topics that are essential to understanding both the theory and practical aspects of computing.
+                        This involves programming fundamentals, computer architecture, operating systems, databases, software engineering, problem
+                        solving, collaboration and communication soft skills.
+                      </p>
+                    </li>
 
-                  <li className="clients-item">
-                    <a href="#">
-                      <img src="https://i.postimg.cc/fWm6JtgG/logo-2-color.png" alt="logo" />
-                    </a>
-                  </li>
+                    <li className="timeline-item">
+                      <h4 className="headings text-sm2 timeline-item-title">New York Academy of Art</h4>
+                      <span>2006 - 2007</span>
+                      <p className="timeline-text">
+                        I chose my master degree in technology. There I deepened my knowledge, enhanced my skills in the area and learnt how to
+                        increase my career prospects in a competitive job market.
+                      </p>
+                    </li>
+                  </ol>
+                </section>
 
-                  <li className="clients-item">
-                    <a href="#">
-                      <img src="https://i.postimg.cc/Bb07xpwd/logo-3-color.png" alt="logo" />
-                    </a>
-                  </li>
+                {/* FAVORITE SPORT */}
+                <section className="timeline mb-8">
+                  <div className="title-wrapper">
+                    <div className="icon-box">
+                      <PiStar className="text-[2rem]" />
+                    </div>
 
-                  <li className="clients-item">
-                    <a href="#">
-                      <img src="https://i.postimg.cc/hv1yMmkh/logo-4-color.png" alt="logo" />
-                    </a>
-                  </li>
+                    <h3 className="headings text-lg tracking-wider">XP</h3>
+                  </div>
 
-                  <li className="clients-item">
-                    <a href="#">
-                      <img src="https://i.postimg.cc/ry1P86Dc/logo-5-color.png" alt="logo" />
-                    </a>
-                  </li>
+                  <ol className="timeline-list">
+                    <li className="timeline-item">
+                      <h4 className="headings text-sm2 timeline-item-title">University school of the arts</h4>
+                      <span>2008 - 2010</span>
+                      <p className="timeline-text">
+                        There I learnt a wide range of topics that are essential to understanding both the theory and practical aspects of computing.
+                        This involves programming fundamentals, computer architecture, operating systems, databases, software engineering, problem
+                        solving, collaboration and communication soft skills.
+                      </p>
+                    </li>
 
-                  <li className="clients-item">
-                    <a href="#">
-                      <img src="https://i.postimg.cc/SsWDN8NV/logo-6-color.png" alt="logo" />
-                    </a>
-                  </li>
-                </ul>
+                    <li className="timeline-item">
+                      <h4 className="headings text-sm2 timeline-item-title">New York Academy of Art</h4>
+                      <span>2006 - 2007</span>
+                      <p className="timeline-text">
+                        I chose my master degree in technology. There I deepened my knowledge, enhanced my skills in the area and learnt how to
+                        increase my career prospects in a competitive job market.
+                      </p>
+                    </li>
+                  </ol>
+                </section>
+
+                {/* PLAYER POSITION */}
+                <section className="timeline mb-8">
+                  <div className="title-wrapper">
+                    <div className="icon-box">
+                      <PiPerson className="text-[2rem]" />
+                    </div>
+
+                    <h3 className="headings text-lg tracking-wider">XP</h3>
+                  </div>
+
+                  <ol className="timeline-list">
+                    <li className="timeline-item">
+                      <h4 className="headings text-sm2 timeline-item-title">University school of the arts</h4>
+                      <span>2008 - 2010</span>
+                      <p className="timeline-text">
+                        There I learnt a wide range of topics that are essential to understanding both the theory and practical aspects of computing.
+                        This involves programming fundamentals, computer architecture, operating systems, databases, software engineering, problem
+                        solving, collaboration and communication soft skills.
+                      </p>
+                    </li>
+
+                    <li className="timeline-item">
+                      <h4 className="headings text-sm2 timeline-item-title">New York Academy of Art</h4>
+                      <span>2006 - 2007</span>
+                      <p className="timeline-text">
+                        I chose my master degree in technology. There I deepened my knowledge, enhanced my skills in the area and learnt how to
+                        increase my career prospects in a competitive job market.
+                      </p>
+                    </li>
+                  </ol>
+                </section>
+
+                {/* REFERENCE ADDRESS */}
+                <section className="timeline mb-8">
+                  <div className="title-wrapper">
+                    <div className="icon-box">
+                      <PiMapTrifold className="text-[2rem]" />
+                    </div>
+
+                    <h3 className="headings text-lg tracking-wider">XP</h3>
+                  </div>
+
+                  <ol className="timeline-list">
+                    <li className="timeline-item">
+                      <h4 className="headings text-sm2 timeline-item-title">University school of the arts</h4>
+                      <span>2008 - 2010</span>
+                      <p className="timeline-text">
+                        There I learnt a wide range of topics that are essential to understanding both the theory and practical aspects of computing.
+                        This involves programming fundamentals, computer architecture, operating systems, databases, software engineering, problem
+                        solving, collaboration and communication soft skills.
+                      </p>
+                    </li>
+
+                    <li className="timeline-item">
+                      <h4 className="headings text-sm2 timeline-item-title">New York Academy of Art</h4>
+                      <span>2006 - 2007</span>
+                      <p className="timeline-text">
+                        I chose my master degree in technology. There I deepened my knowledge, enhanced my skills in the area and learnt how to
+                        increase my career prospects in a competitive job market.
+                      </p>
+                    </li>
+                  </ol>
+                </section>
+
+                {/* LOCATION MAP */}
               </section>
             </article>
           </div>
