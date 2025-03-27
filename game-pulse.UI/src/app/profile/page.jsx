@@ -70,7 +70,7 @@ export default function Profile() {
                 <ul className="contacts-list">
                   <li className="contact-item">
                     <div className="icon-box">
-                      <AtSymbolIcon className="w-[2rem]" />
+                      <AtSymbolIcon className="w-[1.3rem] md:w-[2rem]" />
                     </div>
 
                     <div className="contact-info">
@@ -84,7 +84,7 @@ export default function Profile() {
 
                   <li className="contact-item">
                     <div className="icon-box">
-                      <DevicePhoneMobileIcon className="w-[2rem]" />
+                      <DevicePhoneMobileIcon className="w-[1.3rem] md:w-[2rem]" />
                     </div>
 
                     <div className="contact-info">
@@ -98,7 +98,7 @@ export default function Profile() {
 
                   <li className="contact-item">
                     <div className="icon-box">
-                      <CalendarDaysIcon className="w-[2rem]" />
+                      <CalendarDaysIcon className="w-[1.3rem] md:w-[2rem]" />
                     </div>
 
                     <div className="contact-info">
@@ -110,7 +110,7 @@ export default function Profile() {
 
                   <li className="contact-item">
                     <div className="icon-box">
-                      <MapPinIcon className="w-[2rem]" />
+                      <MapPinIcon className="w-[1.3rem] md:w-[2rem]" />
                     </div>
 
                     <div className="contact-info">
@@ -134,7 +134,7 @@ export default function Profile() {
                   {/* <section className="timeline mb-8">
                   <div className="title-wrapper">
                     <div className="icon-box">
-                      <PiCoinsThin className="text-[2rem]" />
+                      <PiCoinsThin className="text-[1.3rem] md:text-[2rem]" />
                     </div>
 
                     <h3 className="headings text-lg tracking-wider">XP</h3>
@@ -161,7 +161,7 @@ export default function Profile() {
                   <section className="timeline mb-8">
                     <div className="title-wrapper">
                       <div className="icon-box">
-                        <PiGameController className="text-[2rem]" />
+                        <PiGameController className="text-[1.3rem] md:text-[2rem]" />
                       </div>
 
                       <h3 className="headings text-lg tracking-wider">Total Games</h3>
@@ -222,7 +222,7 @@ export default function Profile() {
                   <section className="timeline mb-8">
                     <div className="title-wrapper">
                       <div className="icon-box">
-                        <PiTrophy className="text-[2rem]" />
+                        <PiTrophy className="text-[1.3rem] md:text-[2rem]" />
                       </div>
 
                       <h3 className="headings text-lg tracking-wider">Best Player Award</h3>
@@ -242,11 +242,11 @@ export default function Profile() {
                   <section className="timeline mb-8">
                     <div className="title-wrapper">
                       <div className="icon-box">
-                        {playerInfo.favoriteSport == "basketball" ? <PiBasketballDuotone className="text-[2rem]" /> : null}
-                        {playerInfo.favoriteSport == "football" ? <PiSoccerBallDuotone className="text-[2rem]" /> : null}
-                        {playerInfo.favoriteSport == "tennis" ? <PiTennisBallDuotone className="text-[2rem]" /> : null}
-                        {playerInfo.favoriteSport == "volleyball" ? <PiVolleyballDuotone className="text-[2rem]" /> : null}
-                        {/* <PiStar className="text-[2rem]" /> */}
+                        {playerInfo.favoriteSport == "basketball" ? <PiBasketballDuotone className="text-[1.3rem] md:text-[2rem]" /> : null}
+                        {playerInfo.favoriteSport == "football" ? <PiSoccerBallDuotone className="text-[1.3rem] md:text-[2rem]" /> : null}
+                        {playerInfo.favoriteSport == "tennis" ? <PiTennisBallDuotone className="text-[1.3rem] md:text-[2rem]" /> : null}
+                        {playerInfo.favoriteSport == "volleyball" ? <PiVolleyballDuotone className="text-[1.3rem] md:text-[2rem]" /> : null}
+                        {/* <PiStar className="text-[1.3rem] md:text-[2rem]" /> */}
                       </div>
 
                       <h3 className="headings text-lg tracking-wider">Favorite Sport</h3>
@@ -264,7 +264,7 @@ export default function Profile() {
                   <section className="timeline mb-8">
                     <div className="title-wrapper">
                       <div className="icon-box">
-                        <PiPerson className="text-[2rem]" />
+                        <PiPerson className="text-[1.3rem] md:text-[2rem]" />
                       </div>
 
                       <h3 className="headings text-lg tracking-wider">Player Position</h3>
@@ -351,7 +351,7 @@ export default function Profile() {
                   <section className="timeline mb-8">
                     <div className="title-wrapper">
                       <div className="icon-box">
-                        <PiMapTrifold className="text-[2rem]" />
+                        <PiMapTrifold className="text-[1.3rem] md:text-[2rem]" />
                       </div>
 
                       <h3 className="headings text-lg tracking-wider">Reference Address</h3>
