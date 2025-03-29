@@ -25,7 +25,6 @@ export default function Profile() {
     email: "gabrielgelbcke@gmail.com",
     phone: "+1 (213) 352-2795",
     birthday: "12 December, 2001",
-    location: "Curitiba, PR",
   });
 
   const [playerInfo, setPlayerInfo] = useState({
@@ -40,7 +39,11 @@ export default function Profile() {
     footballPosition: null,
     volleyballPosition: null,
     bestPlayerAward: 57,
-    address: "Rua Voluntários da Pátria, 475 - Curitiba, PR",
+    location: {
+      street: "Rua Voluntários da Pátria",
+      number: "475",
+      city: "Curitiba, PR",
+    },
   });
 
   const [editUserInfo, setEditUserInfo] = useState(false);
@@ -116,7 +119,7 @@ export default function Profile() {
                     <div className="contact-info">
                       <p className="contact-title">Location</p>
 
-                      <address>{userInfo.location}</address>
+                      <address>{playerInfo.location.city}</address>
                     </div>
                   </li>
                 </ul>
@@ -360,7 +363,9 @@ export default function Profile() {
                     <ol className="timeline-list">
                       <li className="timeline-item">
                         <h4 className="headings text-sm2 timeline-item-title">Address</h4>
-                        <p className="timeline-text">{playerInfo.address}</p>
+                        <p className="timeline-text">
+                          {playerInfo.location.street}, {playerInfo.location.number} - {playerInfo.location.city}
+                        </p>
                       </li>
                     </ol>
                   </section>
