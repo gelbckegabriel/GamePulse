@@ -16,11 +16,19 @@ import {
   PiTrophy,
   PiVolleyballDuotone,
 } from "react-icons/pi";
-import { AtSymbolIcon, CalendarDaysIcon, DevicePhoneMobileIcon, MapPinIcon, PaperAirplaneIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
+import {
+  AtSymbolIcon,
+  CalendarDaysIcon,
+  DevicePhoneMobileIcon,
+  GlobeAmericasIcon,
+  MapPinIcon,
+  PaperAirplaneIcon,
+  PencilSquareIcon,
+} from "@heroicons/react/24/outline";
 import "./page.scss";
 
 export default function Profile() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   // {isLoading ? (<></>) : (<></>)}
 
   const [userInfo, setUserInfo] = useState({
@@ -180,9 +188,19 @@ export default function Profile() {
               <article className="about mainbar">
                 <header className="flex justify-between">
                   <h2 className="headings text-2xl article-title">About the player</h2>
-                  <IconButton color="blue-gray" className="rounded-full">
-                    <PencilSquareIcon onClick={() => setEditPlayerInfo(!editPlayerInfo)} className="w-[1.5rem]" />
-                  </IconButton>
+                  {isLoading ? (
+                    <>
+                      <Typography as="div" variant="button" className="mt-2 h-10 w-10 rounded-full bg-gray-700">
+                        &nbsp;
+                      </Typography>
+                    </>
+                  ) : (
+                    <>
+                      <IconButton color="blue-gray" className="rounded-full">
+                        <PencilSquareIcon onClick={() => setEditPlayerInfo(!editPlayerInfo)} className="w-[1.5rem]" />
+                      </IconButton>
+                    </>
+                  )}
                 </header>
                 <section>
                   {/* FAVORITE SPORT */}
@@ -193,7 +211,6 @@ export default function Profile() {
                         {playerInfo.favoriteSport == "football" ? <PiSoccerBallDuotone className="text-[1.3rem] md:text-[2rem]" /> : null}
                         {playerInfo.favoriteSport == "tennis" ? <PiTennisBallDuotone className="text-[1.3rem] md:text-[2rem]" /> : null}
                         {playerInfo.favoriteSport == "volleyball" ? <PiVolleyballDuotone className="text-[1.3rem] md:text-[2rem]" /> : null}
-                        {/* <PiStar className="text-[1.3rem] md:text-[2rem]" /> */}
                       </div>
 
                       <h3 className="headings text-lg tracking-wider">Favorite Sport</h3>
@@ -225,7 +242,17 @@ export default function Profile() {
                         <>
                           <li className="timeline-item">
                             <h4 className="headings text-sm2 timeline-item-title">Sport</h4>
-                            <p className="timeline-text capitalize">{playerInfo.favoriteSport}</p>
+                            {isLoading ? (
+                              <>
+                                <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[20%] rounded-full bg-gray-700">
+                                  &nbsp;
+                                </Typography>
+                              </>
+                            ) : (
+                              <>
+                                <p className="timeline-text capitalize">{playerInfo.favoriteSport}</p>
+                              </>
+                            )}
                           </li>
                         </>
                       )}
@@ -279,7 +306,17 @@ export default function Profile() {
                             <>
                               <li className="timeline-item">
                                 <h4 className="headings text-sm2 timeline-item-title">Basketball</h4>
-                                <p className="timeline-text">{playerInfo.basketballPosition}</p>
+                                {isLoading ? (
+                                  <>
+                                    <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[30%] rounded-full bg-gray-700">
+                                      &nbsp;
+                                    </Typography>
+                                  </>
+                                ) : (
+                                  <>
+                                    <p className="timeline-text">{playerInfo.basketballPosition}</p>
+                                  </>
+                                )}
                               </li>
                             </>
                           )}
@@ -322,7 +359,17 @@ export default function Profile() {
                             <>
                               <li className="timeline-item">
                                 <h4 className="headings text-sm2 timeline-item-title">Football</h4>
-                                <p className="timeline-text">{playerInfo.footballPosition}</p>
+                                {isLoading ? (
+                                  <>
+                                    <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[30%] rounded-full bg-gray-700">
+                                      &nbsp;
+                                    </Typography>
+                                  </>
+                                ) : (
+                                  <>
+                                    <p className="timeline-text">{playerInfo.footballPosition}</p>
+                                  </>
+                                )}
                               </li>
                             </>
                           )}
@@ -365,7 +412,17 @@ export default function Profile() {
                             <>
                               <li className="timeline-item">
                                 <h4 className="headings text-sm2 timeline-item-title">Volleyball</h4>
-                                <p className="timeline-text">{playerInfo.volleyballPosition}</p>
+                                {isLoading ? (
+                                  <>
+                                    <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[30%] rounded-full bg-gray-700">
+                                      &nbsp;
+                                    </Typography>
+                                  </>
+                                ) : (
+                                  <>
+                                    <p className="timeline-text">{playerInfo.volleyballPosition}</p>
+                                  </>
+                                )}
                               </li>
                             </>
                           )}
@@ -446,48 +503,84 @@ export default function Profile() {
                     <ol className="timeline-list">
                       {playerInfo.basketballGames != 0 ? (
                         <>
-                          {" "}
                           <li className="timeline-item">
                             <h4 className="headings text-sm2 timeline-item-title">Basketball</h4>
-                            <span>
-                              <strong>{playerInfo.basketballGames}</strong>
-                            </span>
+                            {isLoading ? (
+                              <>
+                                <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[10%] rounded-full bg-gray-700">
+                                  &nbsp;
+                                </Typography>
+                              </>
+                            ) : (
+                              <>
+                                <span>
+                                  <strong>{playerInfo.basketballGames}</strong>
+                                </span>
+                              </>
+                            )}
                           </li>
                         </>
                       ) : null}
 
                       {playerInfo.footballGames != 0 ? (
                         <>
-                          {" "}
                           <li className="timeline-item">
                             <h4 className="headings text-sm2 timeline-item-title">Football</h4>
-                            <span>
-                              <strong>{playerInfo.footballGames}</strong>
-                            </span>
+                            {isLoading ? (
+                              <>
+                                <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[10%] rounded-full bg-gray-700">
+                                  &nbsp;
+                                </Typography>
+                              </>
+                            ) : (
+                              <>
+                                <span>
+                                  <strong>{playerInfo.footballGames}</strong>
+                                </span>
+                              </>
+                            )}
                           </li>
                         </>
                       ) : null}
 
                       {playerInfo.tennisGames != 0 ? (
                         <>
-                          {" "}
                           <li className="timeline-item">
                             <h4 className="headings text-sm2 timeline-item-title">Tennis</h4>
-                            <span>
-                              <strong>{playerInfo.tennisGames}</strong>
-                            </span>
+                            {isLoading ? (
+                              <>
+                                <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[10%] rounded-full bg-gray-700">
+                                  &nbsp;
+                                </Typography>
+                              </>
+                            ) : (
+                              <>
+                                <span>
+                                  <strong>{playerInfo.tennisGames}</strong>
+                                </span>
+                              </>
+                            )}
                           </li>
                         </>
                       ) : null}
 
                       {playerInfo.volleyballGames != 0 ? (
                         <>
-                          {" "}
                           <li className="timeline-item">
                             <h4 className="headings text-sm2 timeline-item-title">Volleyball</h4>
-                            <span>
-                              <strong>{playerInfo.volleyballGames}</strong>
-                            </span>
+                            {isLoading ? (
+                              <>
+                                <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[10%] rounded-full bg-gray-700">
+                                  &nbsp;
+                                </Typography>
+                              </>
+                            ) : (
+                              <>
+                                <span>
+                                  <strong>{playerInfo.volleyballGames}</strong>
+                                </span>
+                              </>
+                            )}
                           </li>
                         </>
                       ) : null}
@@ -507,9 +600,19 @@ export default function Profile() {
                     <ol className="timeline-list">
                       <li className="timeline-item">
                         <h4 className="headings text-sm2 timeline-item-title">Total Awards</h4>
-                        <span>
-                          <strong>{playerInfo.bestPlayerAward}</strong>
-                        </span>
+                        {isLoading ? (
+                          <>
+                            <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[10%] rounded-full bg-gray-700">
+                              &nbsp;
+                            </Typography>
+                          </>
+                        ) : (
+                          <>
+                            <span>
+                              <strong>{playerInfo.bestPlayerAward}</strong>
+                            </span>
+                          </>
+                        )}
                       </li>
                     </ol>
                   </section>
@@ -538,24 +641,44 @@ export default function Profile() {
                     <ol className="timeline-list">
                       <li className="timeline-item">
                         <h4 className="headings text-sm2 timeline-item-title">Address</h4>
-                        <p className="timeline-text">
-                          {playerInfo.location.street}, {playerInfo.location.number} - {playerInfo.location.city}
-                        </p>
+                        {isLoading ? (
+                          <>
+                            <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[80%] rounded-full bg-gray-700">
+                              &nbsp;
+                            </Typography>
+                          </>
+                        ) : (
+                          <>
+                            <p className="timeline-text">
+                              {playerInfo.location.street}, {playerInfo.location.number} - {playerInfo.location.city}
+                            </p>
+                          </>
+                        )}
                       </li>
                     </ol>
                   </section>
 
                   {/* LOCATION MAP */}
                   <section className="mapbox" data-mapbox>
-                    <figure>
-                      <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230503.43746694!2d-49.43401161685449!3d-25.48448775126223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20Paran%C3%A1!5e0!3m2!1sfr!2sbr!4v1743117337947!5m2!1sfr!2sbr"
-                        width="600"
-                        height="450"
-                        allowFullScreen=""
-                        loading="lazy"
-                      ></iframe>
-                    </figure>
+                    {isLoading ? (
+                      <>
+                        <div className="grid h-full max-h-[300px] min-h-[160px] w-full animate-pulse place-items-center rounded-lg bg-gray-700">
+                          <GlobeAmericasIcon className="h-16 w-16 text-gray-500" />
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <figure>
+                          <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230503.43746694!2d-49.43401161685449!3d-25.48448775126223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20Paran%C3%A1!5e0!3m2!1sfr!2sbr!4v1743117337947!5m2!1sfr!2sbr"
+                            width="600"
+                            height="450"
+                            allowFullScreen=""
+                            loading="lazy"
+                          ></iframe>
+                        </figure>
+                      </>
+                    )}
                   </section>
                 </section>
               </article>
