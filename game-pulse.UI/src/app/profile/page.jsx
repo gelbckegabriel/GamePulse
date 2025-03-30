@@ -2,10 +2,9 @@
 
 "use client";
 
-import { AtSymbolIcon, CalendarDaysIcon, DevicePhoneMobileIcon, MapPinIcon, PaperAirplaneIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
-import { Container } from "../shared/container";
-import "./page.scss";
 import { useState } from "react";
+import { Container } from "../shared/container";
+import { Button, IconButton, Option, Select } from "@material-tailwind/react";
 import {
   PiBasketballDuotone,
   PiCoinsThin,
@@ -17,9 +16,12 @@ import {
   PiTrophy,
   PiVolleyballDuotone,
 } from "react-icons/pi";
-import { Button, Option, Select } from "@material-tailwind/react";
+import { AtSymbolIcon, CalendarDaysIcon, DevicePhoneMobileIcon, MapPinIcon, PaperAirplaneIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
+import "./page.scss";
 
 export default function Profile() {
+  const [isLoading, setIsLoading] = useState(false);
+
   const [userInfo, setUserInfo] = useState({
     name: "Gabriel Gelbcke",
     nickname: "Gelbcke",
@@ -48,7 +50,7 @@ export default function Profile() {
   });
 
   const [editUserInfo, setEditUserInfo] = useState(false);
-  const [editPlayerInfo, setEditPlayerInfo] = useState(true);
+  const [editPlayerInfo, setEditPlayerInfo] = useState(false);
 
   return (
     <>
@@ -132,7 +134,9 @@ export default function Profile() {
               <article className="about mainbar">
                 <header className="flex justify-between">
                   <h2 className="headings text-2xl article-title">About the player</h2>
-                  <PencilSquareIcon onClick={() => setEditPlayerInfo(!editPlayerInfo)} className="top-0 right-0 cursor-pointer ml-5 w-[1.5rem]" />
+                  <IconButton color="blue-gray" className="rounded-full">
+                    <PencilSquareIcon onClick={() => setEditPlayerInfo(!editPlayerInfo)} className="w-[1.5rem]" />
+                  </IconButton>
                 </header>
                 <section>
                   {/* FAVORITE SPORT */}
@@ -331,6 +335,10 @@ export default function Profile() {
                         <Button
                           onClick={() => {
                             setEditPlayerInfo(!editPlayerInfo);
+                            // TODO: Set isLoading variable to true.
+                            // TODO: Use a PUT method to update the Player's info on the DB.
+                            // TODO: Call the method to retrieve user info again.
+                            // TODO: Set isLoading variable to false.
                           }}
                           color="green"
                           className="ml-auto flex items-center gap-3 rounded-full"
