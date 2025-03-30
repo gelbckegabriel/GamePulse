@@ -2,7 +2,7 @@
 
 "use client";
 
-import { AtSymbolIcon, CalendarDaysIcon, DevicePhoneMobileIcon, MapPinIcon } from "@heroicons/react/24/outline";
+import { AtSymbolIcon, CalendarDaysIcon, DevicePhoneMobileIcon, MapPinIcon, PaperAirplaneIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import { Container } from "../shared/container";
 import "./page.scss";
 import { useState } from "react";
@@ -17,6 +17,7 @@ import {
   PiTrophy,
   PiVolleyballDuotone,
 } from "react-icons/pi";
+import { Button, Option, Select } from "@material-tailwind/react";
 
 export default function Profile() {
   const [userInfo, setUserInfo] = useState({
@@ -47,7 +48,7 @@ export default function Profile() {
   });
 
   const [editUserInfo, setEditUserInfo] = useState(false);
-  const [editPlayerInfo, setEditPlayerInfo] = useState(false);
+  const [editPlayerInfo, setEditPlayerInfo] = useState(true);
 
   return (
     <>
@@ -126,39 +127,257 @@ export default function Profile() {
               </div>
             </aside>
 
-            <div className="mainbar-content">
+            <div className="mainbar-content mb-10">
               {/* ABOUT THE PLAYER */}
               <article className="about mainbar">
-                <header>
+                <header className="flex justify-between">
                   <h2 className="headings text-2xl article-title">About the player</h2>
+                  <PencilSquareIcon onClick={() => setEditPlayerInfo(!editPlayerInfo)} className="top-0 right-0 cursor-pointer ml-5 w-[1.5rem]" />
+                </header>
+                <section>
+                  {/* FAVORITE SPORT */}
+                  <section className="timeline mb-8">
+                    <div className="title-wrapper">
+                      <div className="icon-box">
+                        {playerInfo.favoriteSport == "basketball" ? <PiBasketballDuotone className="text-[1.3rem] md:text-[2rem]" /> : null}
+                        {playerInfo.favoriteSport == "football" ? <PiSoccerBallDuotone className="text-[1.3rem] md:text-[2rem]" /> : null}
+                        {playerInfo.favoriteSport == "tennis" ? <PiTennisBallDuotone className="text-[1.3rem] md:text-[2rem]" /> : null}
+                        {playerInfo.favoriteSport == "volleyball" ? <PiVolleyballDuotone className="text-[1.3rem] md:text-[2rem]" /> : null}
+                        {/* <PiStar className="text-[1.3rem] md:text-[2rem]" /> */}
+                      </div>
+
+                      <h3 className="headings text-lg tracking-wider">Favorite Sport</h3>
+                    </div>
+
+                    <ol className="timeline-list">
+                      {editPlayerInfo ? (
+                        <>
+                          <li className="timeline-item">
+                            <h4 className="headings text-sm2 timeline-item-title">Basketball</h4>
+                            <div className="py-3 w-[50%]">
+                              <Select
+                                color="blue-gray"
+                                variant="outlined"
+                                label="Select Favorite Sport"
+                                menuProps={{ className: "bg-[#1e1e1f] border-[#1e1e1f] text-white" }}
+                                value={playerInfo.favoriteSport}
+                                onChange={(val) => (playerInfo.favoriteSport = val)}
+                              >
+                                <Option value="basketball">Basketball</Option>
+                                <Option value="football">Football</Option>
+                                <Option value="tennis">Tennis</Option>
+                                <Option value="volleyball">Volleyball</Option>
+                              </Select>
+                            </div>
+                          </li>
+                        </>
+                      ) : (
+                        <>
+                          <li className="timeline-item">
+                            <h4 className="headings text-sm2 timeline-item-title">Sport</h4>
+                            <p className="timeline-text capitalize">{playerInfo.favoriteSport}</p>
+                          </li>
+                        </>
+                      )}
+                    </ol>
+                  </section>
+
+                  {/* PLAYER POSITION */}
+                  <section className="timeline mb-8">
+                    <div className="title-wrapper">
+                      <div className="icon-box">
+                        <PiPerson className="text-[1.3rem] md:text-[2rem]" />
+                      </div>
+
+                      <h3 className="flex headings text-lg tracking-wider">Player Position</h3>
+                    </div>
+
+                    <ol className="timeline-list">
+                      {/* BASKETBALL POSITION */}
+                      {!editPlayerInfo && playerInfo.basketballPosition == null ? null : (
+                        <>
+                          {editPlayerInfo ? (
+                            <>
+                              <li className="timeline-item">
+                                <h4 className="headings text-sm2 timeline-item-title">Basketball</h4>
+                                <div className="py-3 w-[50%]">
+                                  <Select
+                                    color="blue-gray"
+                                    variant="outlined"
+                                    label="Select Position"
+                                    menuProps={{ className: "bg-[#1e1e1f] border-[#1e1e1f] text-white" }}
+                                    value={playerInfo.basketballPosition}
+                                    onChange={(val) => {
+                                      if (val.length == 0) {
+                                        playerInfo.basketballPosition = null;
+                                      } else {
+                                        playerInfo.basketballPosition = val;
+                                      }
+                                    }}
+                                  >
+                                    <Option value="">None</Option>
+                                    <Option value="Point Guard">Point Guard</Option>
+                                    <Option value="Shooting Guard">Shooting Guard</Option>
+                                    <Option value="Small Forward">Small Forward</Option>
+                                    <Option value="Power Forward">Power Forward</Option>
+                                    <Option value="Center">Center</Option>
+                                  </Select>
+                                </div>
+                              </li>
+                            </>
+                          ) : (
+                            <>
+                              <li className="timeline-item">
+                                <h4 className="headings text-sm2 timeline-item-title">Basketball</h4>
+                                <p className="timeline-text">{playerInfo.basketballPosition}</p>
+                              </li>
+                            </>
+                          )}
+                        </>
+                      )}
+
+                      {/* FOOTBALL POSITION */}
+                      {!editPlayerInfo && playerInfo.footballPosition == null ? null : (
+                        <>
+                          {editPlayerInfo ? (
+                            <>
+                              <li className="timeline-item">
+                                <h4 className="headings text-sm2 timeline-item-title">Football</h4>
+                                <div className="py-3 w-[50%]">
+                                  <Select
+                                    color="blue-gray"
+                                    variant="outlined"
+                                    label="Select Position"
+                                    menuProps={{ className: "bg-[#1e1e1f] border-[#1e1e1f] text-white" }}
+                                    value={playerInfo.footballPosition}
+                                    onChange={(val) => {
+                                      if (val.length == 0) {
+                                        playerInfo.footballPosition = null;
+                                      } else {
+                                        playerInfo.footballPosition = val;
+                                      }
+                                    }}
+                                  >
+                                    <Option value="">None</Option>
+                                    <Option value="Goalkeeper">Goalkeeper</Option>
+                                    <Option value="Defender">Defender</Option>
+                                    <Option value="Midfielder">Midfielder</Option>
+                                    <Option value="Forward">Forward</Option>
+                                    <Option value="Striker">Striker</Option>
+                                  </Select>
+                                </div>
+                              </li>
+                            </>
+                          ) : (
+                            <>
+                              <li className="timeline-item">
+                                <h4 className="headings text-sm2 timeline-item-title">Football</h4>
+                                <p className="timeline-text">{playerInfo.footballPosition}</p>
+                              </li>
+                            </>
+                          )}
+                        </>
+                      )}
+
+                      {/* VOLLEYBALL POSITION */}
+                      {!editPlayerInfo && playerInfo.volleyballPosition == null ? null : (
+                        <>
+                          {editPlayerInfo ? (
+                            <>
+                              <li className="timeline-item">
+                                <h4 className="headings text-sm2 timeline-item-title">Volleyball</h4>
+                                <div className="py-3 w-[50%]">
+                                  <Select
+                                    color="blue-gray"
+                                    variant="outlined"
+                                    label="Select Position"
+                                    menuProps={{ className: "bg-[#1e1e1f] border-[#1e1e1f] text-white" }}
+                                    value={playerInfo.volleyballPosition}
+                                    onChange={(val) => {
+                                      if (val.length == 0) {
+                                        playerInfo.volleyballPosition = null;
+                                      } else {
+                                        playerInfo.volleyballPosition = val;
+                                      }
+                                    }}
+                                  >
+                                    <Option value="">None</Option>
+                                    <Option value="Setter">Setter</Option>
+                                    <Option value="Outside Hitter">Outside Hitter</Option>
+                                    <Option value="Opposite Hitter">Opposite Hitter</Option>
+                                    <Option value="Middle Blocker">Middle Blocker</Option>
+                                    <Option value="Libero">Libero</Option>
+                                  </Select>
+                                </div>
+                              </li>
+                            </>
+                          ) : (
+                            <>
+                              <li className="timeline-item">
+                                <h4 className="headings text-sm2 timeline-item-title">Volleyball</h4>
+                                <p className="timeline-text">{playerInfo.volleyballPosition}</p>
+                              </li>
+                            </>
+                          )}
+                        </>
+                      )}
+                    </ol>
+                  </section>
+
+                  {/* SAVE BUTTON */}
+                  {editPlayerInfo ? (
+                    <>
+                      <div className="w-full mb-2">
+                        <Button
+                          onClick={() => {
+                            setEditPlayerInfo(!editPlayerInfo);
+                          }}
+                          color="green"
+                          className="ml-auto flex items-center gap-3 rounded-full"
+                        >
+                          <PaperAirplaneIcon className="h-4 w-4" /> Save
+                        </Button>
+                      </div>
+                    </>
+                  ) : null}
+                </section>
+              </article>
+
+              <br />
+              <br />
+
+              {/* PLAYER STATS */}
+              <article className="location mainbar">
+                <header>
+                  <h2 className="headings text-2xl article-title">Player Stats</h2>
                 </header>
                 <section>
                   {/* XP */}
                   {/* <section className="timeline mb-8">
-                  <div className="title-wrapper">
-                    <div className="icon-box">
-                      <PiCoinsThin className="text-[1.3rem] md:text-[2rem]" />
+                    <div className="title-wrapper">
+                      <div className="icon-box">
+                        <PiCoinsThin className="text-[1.3rem] md:text-[2rem]" />
+                      </div>
+
+                      <h3 className="headings text-lg tracking-wider">XP</h3>
                     </div>
 
-                    <h3 className="headings text-lg tracking-wider">XP</h3>
-                  </div>
+                    <ol className="timeline-list">
+                      <li className="timeline-item">
+                        <h4 className="headings text-sm2 timeline-item-title">Total XP</h4>
+                        <span>
+                          <strong>{playerInfo.xpPoints}</strong>
+                        </span>
+                      </li>
 
-                  <ol className="timeline-list">
-                    <li className="timeline-item">
-                      <h4 className="headings text-sm2 timeline-item-title">Total XP</h4>
-                      <span>
-                        <strong>{playerInfo.xpPoints}</strong>
-                      </span>
-                    </li>
-
-                    <li className="timeline-item">
-                      <h4 className="headings text-sm2 timeline-item-title">Total Coins</h4>
-                      <span>
-                        <strong>{playerInfo.totalCoins}</strong>
-                      </span>
-                    </li>
-                  </ol>
-                </section> */}
+                      <li className="timeline-item">
+                        <h4 className="headings text-sm2 timeline-item-title">Total Coins</h4>
+                        <span>
+                          <strong>{playerInfo.totalCoins}</strong>
+                        </span>
+                      </li>
+                    </ol>
+                  </section> */}
 
                   {/* TOTAL GAMES */}
                   <section className="timeline mb-8">
@@ -238,104 +457,6 @@ export default function Profile() {
                           <strong>{playerInfo.bestPlayerAward}</strong>
                         </span>
                       </li>
-                    </ol>
-                  </section>
-
-                  {/* FAVORITE SPORT */}
-                  <section className="timeline mb-8">
-                    <div className="title-wrapper">
-                      <div className="icon-box">
-                        {playerInfo.favoriteSport == "basketball" ? <PiBasketballDuotone className="text-[1.3rem] md:text-[2rem]" /> : null}
-                        {playerInfo.favoriteSport == "football" ? <PiSoccerBallDuotone className="text-[1.3rem] md:text-[2rem]" /> : null}
-                        {playerInfo.favoriteSport == "tennis" ? <PiTennisBallDuotone className="text-[1.3rem] md:text-[2rem]" /> : null}
-                        {playerInfo.favoriteSport == "volleyball" ? <PiVolleyballDuotone className="text-[1.3rem] md:text-[2rem]" /> : null}
-                        {/* <PiStar className="text-[1.3rem] md:text-[2rem]" /> */}
-                      </div>
-
-                      <h3 className="headings text-lg tracking-wider">Favorite Sport</h3>
-                    </div>
-
-                    <ol className="timeline-list">
-                      <li className="timeline-item">
-                        <h4 className="headings text-sm2 timeline-item-title">Sport</h4>
-                        <p className="timeline-text capitalize">{playerInfo.favoriteSport}</p>
-                      </li>
-                    </ol>
-                  </section>
-
-                  {/* PLAYER POSITION */}
-                  <section className="timeline mb-8">
-                    <div className="title-wrapper">
-                      <div className="icon-box">
-                        <PiPerson className="text-[1.3rem] md:text-[2rem]" />
-                      </div>
-
-                      <h3 className="headings text-lg tracking-wider">Player Position</h3>
-                    </div>
-
-                    <ol className="timeline-list">
-                      {/* BASKETBALL POSITION */}
-                      {!editPlayerInfo && playerInfo.basketballPosition == null ? null : (
-                        <>
-                          {playerInfo.basketballPosition != null ? (
-                            <>
-                              <li className="timeline-item">
-                                <h4 className="headings text-sm2 timeline-item-title">Basketball</h4>
-                                <p className="timeline-text">{playerInfo.basketballPosition}</p>
-                              </li>
-                            </>
-                          ) : (
-                            <>
-                              <li className="timeline-item">
-                                <h4 className="headings text-sm2 timeline-item-title">Basketball</h4>
-                                <p className="timeline-text">FILL IN</p>
-                              </li>
-                            </>
-                          )}
-                        </>
-                      )}
-
-                      {/* FOOTBALL POSITION */}
-                      {!editPlayerInfo && playerInfo.footballPosition == null ? null : (
-                        <>
-                          {playerInfo.footballPosition != null ? (
-                            <>
-                              <li className="timeline-item">
-                                <h4 className="headings text-sm2 timeline-item-title">Football</h4>
-                                <p className="timeline-text">{playerInfo.footballPosition}</p>
-                              </li>
-                            </>
-                          ) : (
-                            <>
-                              <li className="timeline-item">
-                                <h4 className="headings text-sm2 timeline-item-title">Football</h4>
-                                <p className="timeline-text">FILL IN</p>
-                              </li>
-                            </>
-                          )}
-                        </>
-                      )}
-
-                      {/* VOLLEYBALL POSITION */}
-                      {!editPlayerInfo && playerInfo.volleyballPosition == null ? null : (
-                        <>
-                          {playerInfo.volleyballPosition != null ? (
-                            <>
-                              <li className="timeline-item">
-                                <h4 className="headings text-sm2 timeline-item-title">VolleyBall</h4>
-                                <p className="timeline-text">{playerInfo.volleyballPosition}</p>
-                              </li>
-                            </>
-                          ) : (
-                            <>
-                              <li className="timeline-item">
-                                <h4 className="headings text-sm2 timeline-item-title">VolleyBall</h4>
-                                <p className="timeline-text">FILL IN</p>
-                              </li>
-                            </>
-                          )}
-                        </>
-                      )}
                     </ol>
                   </section>
                 </section>
