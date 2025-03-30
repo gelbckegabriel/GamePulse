@@ -4,7 +4,7 @@
 
 import { useState } from "react";
 import { Container } from "../shared/container";
-import { Button, IconButton, Option, Select } from "@material-tailwind/react";
+import { Button, IconButton, Option, Select, Typography } from "@material-tailwind/react";
 import {
   PiBasketballDuotone,
   PiCoinsThin,
@@ -20,7 +20,8 @@ import { AtSymbolIcon, CalendarDaysIcon, DevicePhoneMobileIcon, MapPinIcon, Pape
 import "./page.scss";
 
 export default function Profile() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  // {isLoading ? (<></>) : (<></>)}
 
   const [userInfo, setUserInfo] = useState({
     name: "Gabriel Gelbcke",
@@ -64,9 +65,22 @@ export default function Profile() {
                   <img src="./home/basketball.webp" alt="avatar" width="80" className="rounded-[15%]" />
                 </figure>
 
-                <div className="info-content">
-                  <h1 className="name">{userInfo.name}</h1>
-                  <p className="title">{userInfo.nickname}</p>
+                <div className="info-content animate-pulse">
+                  {isLoading ? (
+                    <>
+                      <Typography as="div" variant="h1" className="mb-4 h-3 w-[12rem] rounded-full bg-gray-700">
+                        &nbsp;
+                      </Typography>
+                      <Typography as="div" variant="paragraph" className="title mb-2 h-2 !w-[6rem] rounded-full bg-gray-700">
+                        &nbsp;
+                      </Typography>
+                    </>
+                  ) : (
+                    <>
+                      <h1 className="name">{userInfo.name}</h1>
+                      <p className="title">{userInfo.nickname}</p>
+                    </>
+                  )}
                 </div>
               </div>
 
@@ -81,10 +95,17 @@ export default function Profile() {
 
                     <div className="contact-info">
                       <p className="contact-title">Email</p>
-
-                      <a href="mailto:richard@example.com" className="contact-link">
-                        {userInfo.email}
-                      </a>
+                      {isLoading ? (
+                        <>
+                          <Typography as="div" variant="paragraph" className="title mt-2 h-2 rounded-full bg-gray-700">
+                            &nbsp;
+                          </Typography>
+                        </>
+                      ) : (
+                        <>
+                          <p className="contact-link">{userInfo.email}</p>
+                        </>
+                      )}
                     </div>
                   </li>
 
@@ -95,10 +116,17 @@ export default function Profile() {
 
                     <div className="contact-info">
                       <p className="contact-title">Phone</p>
-
-                      <a href="tel:+12133522795" className="contact-link">
-                        {userInfo.phone}
-                      </a>
+                      {isLoading ? (
+                        <>
+                          <Typography as="div" variant="paragraph" className="title mt-2 h-2 w-[70%] rounded-full bg-gray-700">
+                            &nbsp;
+                          </Typography>
+                        </>
+                      ) : (
+                        <>
+                          <p className="contact-link">{userInfo.phone}</p>
+                        </>
+                      )}
                     </div>
                   </li>
 
@@ -109,8 +137,17 @@ export default function Profile() {
 
                     <div className="contact-info">
                       <p className="contact-title">Birthday</p>
-
-                      <time dateTime="2023-06-14">{userInfo.birthday}</time>
+                      {isLoading ? (
+                        <>
+                          <Typography as="div" variant="paragraph" className="title mt-2 h-2 w-[50%] rounded-full bg-gray-700">
+                            &nbsp;
+                          </Typography>
+                        </>
+                      ) : (
+                        <>
+                          <time dateTime="2023-06-14">{userInfo.birthday}</time>
+                        </>
+                      )}
                     </div>
                   </li>
 
@@ -121,8 +158,17 @@ export default function Profile() {
 
                     <div className="contact-info">
                       <p className="contact-title">Location</p>
-
-                      <address>{playerInfo.location.city}</address>
+                      {isLoading ? (
+                        <>
+                          <Typography as="div" variant="paragraph" className="title mt-2 h-2 w-[40%] rounded-full bg-gray-700">
+                            &nbsp;
+                          </Typography>
+                        </>
+                      ) : (
+                        <>
+                          <address>{playerInfo.location.city}</address>
+                        </>
+                      )}
                     </div>
                   </li>
                 </ul>
