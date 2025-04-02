@@ -26,13 +26,13 @@ export default function Leaderboard() {
 
   // PLAYERS
   const leaderboard = [
-    { name: "Lewis Hamilton", team: "mercedes", gap: "Leader" },
-    { name: "Valteri Bottas Test", team: "mercedes", gap: "+6.552s" },
-    { name: "Sebastian Vettel", team: "ferrari", gap: "+13.744s" },
-    { name: "Max Verstappen", team: "red bull", gap: "+27.627s" },
-    { name: "Charles Leclerc", team: "ferrari", gap: "+31.627s" },
-    { name: "Pierre Gasly", team: "red bull", gap: "+89.307s" },
-    { name: "Daniel Ricciardo", team: "renault", gap: "+1 lap" },
+    { name: "Gabriel Gelbcke", team: "mercedes", points: "Leader" },
+    { name: "John Doe", team: "mercedes", points: 1.547 },
+    { name: "Rodolfo Malagueta", team: "ferrari", points: 1.359 },
+    { name: "Peter Jaine", team: "red bull", points: 1.299 },
+    { name: "Pedro Pedrado", team: "ferrari", points: 1.099 },
+    { name: "Paula Torando", team: "red bull", points: 874 },
+    { name: "Mary Doe", team: "renault", points: 474 },
   ];
 
   return (
@@ -59,12 +59,14 @@ export default function Leaderboard() {
 
           <br />
 
-          <p className="mb-5 text-sm md:text-lg text-gray-500 max-w-4xl mx-auto py-4">
+          <p className="text-sm md:text-lg text-gray-500 max-w-4xl mx-auto py-4">
             Here, you can see the best players of each sport, track their progress, and challenge yourself to reach new heights. Perfect for sports
             enthusiasts and competitive spirits.
           </p>
         </div>
       </Container>
+
+      <br />
 
       {/* World Map */}
       <WorldMap
@@ -97,50 +99,43 @@ export default function Leaderboard() {
         Container
       />
 
+      <br />
+
       <Container>
         {/* Leaderboard */}
         <table className="text-white w-full mx-auto">
           <thead>
             <tr>
               <th>Pos</th>
-              <th>Driver</th>
-              <th>Gap</th>
+              <th>Player</th>
+              <th>Points</th>
             </tr>
           </thead>
           <tbody>
-            {leaderboard.map((driver, index) => (
-              <tr key={index} className="driver">
-                <td className="position">{index + 1}</td>
-                <td className="driver px-4 py-2 text-left border-l-4" style={{ borderColor: colors[driver.team] }}>
-                  {driver.name.split(" ").map((part, idx) => (
-                    <React.Fragment key={idx}>{idx > 0 ? <strong>{part}</strong> : part} </React.Fragment>
-                  ))}
-                  <span>{driver.team}</span>
-                </td>
-                <td className="gap">
-                  <span>{driver.gap}</span>
-                </td>
-              </tr>
+            {leaderboard.map((player, index) => (
+              <React.Fragment key={index}>
+                <tr className="player">
+                  <td className="position">{index + 1}</td>
+                  <td className="player px-4 py-2 text-left border-l-4" style={{ borderColor: colors[player.team] }}>
+                    {player.name.split(" ").map((part, idx) => (
+                      <React.Fragment key={idx}>{idx > 0 ? <strong>{part}</strong> : part} </React.Fragment>
+                    ))}
+                    <span>{player.team}</span>
+                  </td>
+                  <td className="points">
+                    <span>{player.points}</span>
+                  </td>
+                </tr>
+                {index < leaderboard.length - 1 ? <tr className="h-[20px]"></tr> : null}
+              </React.Fragment>
             ))}
           </tbody>
         </table>
-
-        {/* {leaderboard.map((driver, index) => (
-          <tr key={index} className="driver">
-            <td className="px-4 py-2 font-medium">{index + 1}</td>
-            <td className="px-4 py-2 text-left border-l-4" style={{ borderColor: colors[driver.team] }}>
-              {driver.name
-                .split(" ")
-                .map((part, idx) => (idx > 0 ? <strong>{part}</strong> : part))
-                .join(" ")}
-              <span className="ml-3 text-sm text-gray-500">{driver.team}</span>
-            </td>
-            <td className="px-4 py-2">
-              <span className="bg-gray-700 rounded-full px-3 py-1 text-sm">{driver.gap}</span>
-            </td>
-          </tr>
-        ))} */}
       </Container>
+
+      <br />
+      <br />
+      <br />
     </div>
   );
 }

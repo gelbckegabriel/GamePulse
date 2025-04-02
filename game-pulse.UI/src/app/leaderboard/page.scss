@@ -8,7 +8,6 @@ table {
   /* spacing to separate the table rows vertically */
   border-spacing: 0 1rem;
 }
-/* with a pseudo element add a band with a repeating linear gradient */
 table:before {
   position: absolute;
   content: "";
@@ -20,17 +19,14 @@ table:before {
   border: 1px solid #38383f;
   background: repeating-linear-gradient(-45deg, #15151e 0px, #15151e 4px, #38383f 4px, #38383f 8px);
 }
-/* center every element nested in a table row */
 table tr > * {
   text-align: center;
   padding: 0.5rem;
 }
-/* align every second item of each row to the left */
 table tr > *:nth-child(2) {
   text-align: left;
 }
 
-/* style the headings to have thin uppercase titles for the columns */
 table th {
   font-weight: 300;
   letter-spacing: 0.04rem;
@@ -39,22 +35,20 @@ table th {
   text-transform: uppercase;
 }
 
-/* slightly increase the weight of the cell describing the position */
 table td.position {
   font-weight: 500;
 }
 
-/* style the cell with the driver visually separating the first, last name and team */
-table td.driver {
+table td.player {
   padding-left: 1rem;
   font-size: 1.1rem;
   letter-spacing: 0.05rem;
 }
-table td.driver strong {
+table td.player strong {
   text-transform: uppercase;
   font-weight: 500;
 }
-table td.driver span {
+table td.player span {
   text-transform: capitalize;
   margin-left: 0.75rem;
   font-size: 0.8rem;
@@ -62,8 +56,7 @@ table td.driver span {
   letter-spacing: initial;
 }
 
-/* style the span nested in the last cell to have the gap in a rounded rectangle */
-table td.gap span {
+table td.points span {
   background: #38383f;
   border-radius: 30px;
   padding: 0.5rem 0.75rem;
@@ -71,7 +64,6 @@ table td.gap span {
   text-transform: uppercase;
 }
 
-/* on smaller viewports remove the third column from sight */
 @media (max-width: 500px) {
   table tr > *:nth-child(3) {
     display: none;
