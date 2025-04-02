@@ -3,13 +3,10 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 import DottedMap from "dotted-map";
 import Image from "next/image";
-// import { useTheme } from "next-themes";
 
 export function WorldMap({ dots = [], lineColor = "#fff" }) {
   const svgRef = useRef(null);
   const map = new DottedMap({ height: 100, grid: "diagonal" });
-
-  //   const { theme } = useTheme();
 
   const svgMap = map.getSVG({
     radius: 0.22,
