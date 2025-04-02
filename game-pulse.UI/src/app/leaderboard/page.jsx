@@ -3,6 +3,7 @@
 
 "use client";
 
+import React from "react";
 import { Container } from "../shared/container";
 import { WorldMap } from "../shared/world-map";
 import { motion } from "framer-motion";
@@ -111,10 +112,9 @@ export default function Leaderboard() {
               <tr key={index} className="driver">
                 <td className="position">{index + 1}</td>
                 <td className="driver px-4 py-2 text-left border-l-4" style={{ borderColor: colors[driver.team] }}>
-                  {driver.name
-                    .split(" ")
-                    .map((part, idx) => (idx > 0 ? <strong>{part}</strong> : part))
-                    .join(" ")}
+                  {driver.name.split(" ").map((part, idx) => (
+                    <React.Fragment key={idx}>{idx > 0 ? <strong>{part}</strong> : part} </React.Fragment>
+                  ))}
                   <span>{driver.team}</span>
                 </td>
                 <td className="gap">
