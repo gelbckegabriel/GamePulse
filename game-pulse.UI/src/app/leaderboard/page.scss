@@ -41,7 +41,6 @@ table td.position {
 
 table td.player {
   padding-left: 1rem;
-  font-size: 1.1rem;
   letter-spacing: 0.05rem;
 }
 table td.player strong {
@@ -51,16 +50,14 @@ table td.player strong {
 table td.player span {
   text-transform: capitalize;
   margin-left: 0.75rem;
-  font-size: 0.8rem;
   color: #999;
   letter-spacing: initial;
 }
 
-table td.points span {
+table td.score span {
   background: #38383f;
   border-radius: 30px;
   padding: 0.5rem 0.75rem;
-  font-size: 0.8rem;
   text-transform: uppercase;
 }
 
