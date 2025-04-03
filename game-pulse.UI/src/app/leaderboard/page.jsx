@@ -3,7 +3,7 @@
 
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Container } from "../shared/container";
 import { WorldMap } from "../shared/world-map";
 import { motion } from "framer-motion";
@@ -13,84 +13,82 @@ import { Card, CardCarousel } from "../shared/card-carousel/card-carousel";
 import "./page.scss";
 
 export default function Leaderboard() {
-  const [globalPlayers, setGlobalPlayers] = useState([]);
-  const [basketballPlayers, setBasketballPlayers] = useState([]);
-  const [footballPlayers, setFootballPlayers] = useState([]);
-  const [volleyballPlayers, setVolleyballPlayers] = useState([]);
-  const [tennisPlayers, setTennisPlayers] = useState([]);
+  // TODO: Will this be a good idea? Need to work on it.
+  // const [globalPlayers, setGlobalPlayers] = useState([]);
+  // const [basketballPlayers, setBasketballPlayers] = useState([]);
+  // const [footballPlayers, setFootballPlayers] = useState([]);
+  // const [volleyballPlayers, setVolleyballPlayers] = useState([]);
+  // const [tennisPlayers, setTennisPlayers] = useState([]);
 
-  // UPDATE LEADERBOARD DATA
-  useEffect(() => {
-    // GLOBAL PLAYERS LEADERBOARD
-    setGlobalPlayers([
-      { name: "Gabriel Gelbcke", sport: "basketball", awards: 17, points: "Leader" },
-      { name: "John Doe", sport: "football", awards: 13, points: 1.547 },
-      { name: "Rodolfo Malagueta", sport: "volleyball", awards: 15, points: 1.359 },
-      { name: "Peter Jaine", sport: "basketball", awards: 3, points: 1.299 },
-      { name: "Pedro Pedrado da Pedra Rochosa", sport: "volleyball", awards: 9, points: 1.099 },
-      { name: "Paula Tejando Torando", sport: "football", awards: 7, points: 873 },
-      { name: "Mary Doe", sport: "tennis", awards: 4, points: 674 },
-      { name: "Josefina Margherita", sport: "volleyball", awards: 11, points: 529 },
-      { name: "Dolores Analgésica", sport: "football", awards: 9, points: 468 },
-      { name: "Jacinto Lévis", sport: "football", awards: 1, points: 314 },
-    ]);
+  // GLOBAL PLAYERS LEADERBOARD
+  const globalPlayers = [
+    { name: "Gabriel Gelbcke", sport: "basketball", awards: 17, points: "Leader" },
+    { name: "John Doe", sport: "football", awards: 13, points: 1.547 },
+    { name: "Rodolfo Malagueta", sport: "volleyball", awards: 15, points: 1.359 },
+    { name: "Peter Jaine", sport: "basketball", awards: 3, points: 1.299 },
+    { name: "Pedro Pedrado da Pedra Rochosa", sport: "volleyball", awards: 9, points: 1.099 },
+    { name: "Paula Tejando Torando", sport: "football", awards: 7, points: 873 },
+    { name: "Mary Doe", sport: "tennis", awards: 4, points: 674 },
+    { name: "Josefina Margherita", sport: "volleyball", awards: 11, points: 529 },
+    { name: "Dolores Analgésica", sport: "football", awards: 9, points: 468 },
+    { name: "Jacinto Lévis", sport: "football", awards: 1, points: 314 },
+  ];
 
-    // BASKETBALL PLAYERS LEADERBOARD
-    setBasketballPlayers([
-      { name: "Gabriel Gelbcke", sport: "basketball", awards: 17, points: "Leader" },
-      { name: "Zé da Bola", sport: "basketball", awards: 2, points: 1.547 },
-      { name: "Chico Esperto", sport: "basketball", awards: 3, points: 1.359 },
-      { name: "Juca Pato", sport: "basketball", awards: 1, points: 1.299 },
-      { name: "Tonho do Pneu", sport: "basketball", awards: 4, points: 1.099 },
-      { name: "Tião da Quadra", sport: "basketball", awards: 2, points: 873 },
-      { name: "Dona Benta", sport: "basketball", awards: 1, points: 674 },
-      { name: "Seu Barriga", sport: "basketball", awards: 3, points: 529 },
-      { name: "Zeca Tatu", sport: "basketball", awards: 2, points: 468 },
-      { name: "Quinzinho", sport: "basketball", awards: 1, points: 314 },
-    ]);
+  // BASKETBALL PLAYERS LEADERBOARD
+  const basketballPlayers = [
+    { name: "Gabriel Gelbcke", sport: "basketball", awards: 17, points: "Leader" },
+    { name: "Zé da Bola", sport: "basketball", awards: 2, points: 1.547 },
+    { name: "Chico Esperto", sport: "basketball", awards: 3, points: 1.359 },
+    { name: "Juca Pato", sport: "basketball", awards: 1, points: 1.299 },
+    { name: "Tonho do Pneu", sport: "basketball", awards: 4, points: 1.099 },
+    { name: "Tião da Quadra", sport: "basketball", awards: 2, points: 873 },
+    { name: "Dona Benta", sport: "basketball", awards: 1, points: 674 },
+    { name: "Seu Barriga", sport: "basketball", awards: 3, points: 529 },
+    { name: "Zeca Tatu", sport: "basketball", awards: 2, points: 468 },
+    { name: "Quinzinho", sport: "basketball", awards: 1, points: 314 },
+  ];
 
-    // FOOTBALL PLAYERS LEADERBOARD
-    setFootballPlayers([
-      { name: "Gabriel Gelbcke", sport: "football", awards: 17, points: "Leader" },
-      { name: "Zé Carioca", sport: "football", awards: 2, points: 1.547 },
-      { name: "Chico Bento", sport: "football", awards: 3, points: 1.359 },
-      { name: "Juca Bala", sport: "football", awards: 1, points: 1.299 },
-      { name: "Tonho da Lua", sport: "football", awards: 4, points: 1.099 },
-      { name: "Tião Macalé", sport: "football", awards: 2, points: 873 },
-      { name: "Dona Florinda", sport: "football", awards: 1, points: 674 },
-      { name: "Seu Madruga", sport: "football", awards: 3, points: 529 },
-      { name: "Zeca Urubu", sport: "football", awards: 2, points: 468 },
-      { name: "Quinzinho", sport: "football", awards: 1, points: 314 },
-    ]);
+  // FOOTBALL PLAYERS LEADERBOARD
+  const footballPlayers = [
+    { name: "Gabriel Gelbcke", sport: "football", awards: 17, points: "Leader" },
+    { name: "Zé Carioca", sport: "football", awards: 2, points: 1.547 },
+    { name: "Chico Bento", sport: "football", awards: 3, points: 1.359 },
+    { name: "Juca Bala", sport: "football", awards: 1, points: 1.299 },
+    { name: "Tonho da Lua", sport: "football", awards: 4, points: 1.099 },
+    { name: "Tião Macalé", sport: "football", awards: 2, points: 873 },
+    { name: "Dona Florinda", sport: "football", awards: 1, points: 674 },
+    { name: "Seu Madruga", sport: "football", awards: 3, points: 529 },
+    { name: "Zeca Urubu", sport: "football", awards: 2, points: 468 },
+    { name: "Quinzinho", sport: "football", awards: 1, points: 314 },
+  ];
 
-    // VOLLEYBALL PLAYERS LEADERBOARD
-    setVolleyballPlayers([
-      { name: "Gabriel Gelbcke", sport: "volleyball", awards: 17, points: "Leader" },
-      { name: "Ziggy Stardust", sport: "volleyball", awards: 2, points: 1.547 },
-      { name: "Muffin Man", sport: "volleyball", awards: 3, points: 1.359 },
-      { name: "Noodle Nelly", sport: "volleyball", awards: 1, points: 1.299 },
-      { name: "Snickers Doodle", sport: "volleyball", awards: 4, points: 1.099 },
-      { name: "Tickles McGee", sport: "volleyball", awards: 2, points: 873 },
-      { name: "Wobble Wobble", sport: "volleyball", awards: 1, points: 674 },
-      { name: "Bingo Bongo", sport: "volleyball", awards: 3, points: 529 },
-      { name: "Jester Jest", sport: "volleyball", awards: 2, points: 468 },
-      { name: "Quibble Quack", sport: "volleyball", awards: 1, points: 314 },
-    ]);
+  // VOLLEYBALL PLAYERS LEADERBOARD
+  const volleyballPlayers = [
+    { name: "Gabriel Gelbcke", sport: "volleyball", awards: 17, points: "Leader" },
+    { name: "Ziggy Stardust", sport: "volleyball", awards: 2, points: 1.547 },
+    { name: "Muffin Man", sport: "volleyball", awards: 3, points: 1.359 },
+    { name: "Noodle Nelly", sport: "volleyball", awards: 1, points: 1.299 },
+    { name: "Snickers Doodle", sport: "volleyball", awards: 4, points: 1.099 },
+    { name: "Tickles McGee", sport: "volleyball", awards: 2, points: 873 },
+    { name: "Wobble Wobble", sport: "volleyball", awards: 1, points: 674 },
+    { name: "Bingo Bongo", sport: "volleyball", awards: 3, points: 529 },
+    { name: "Jester Jest", sport: "volleyball", awards: 2, points: 468 },
+    { name: "Quibble Quack", sport: "volleyball", awards: 1, points: 314 },
+  ];
 
-    // TENNIS PLAYERS LEADERBOARD
-    setTennisPlayers([
-      { name: "Gabriel Gelbcke", sport: "tennis", awards: 17, points: "Leader" },
-      { name: "Bubbles McGee", sport: "tennis", awards: 2, points: 1.547 },
-      { name: "Fuzzy Wuzzy", sport: "tennis", awards: 3, points: 1.359 },
-      { name: "Wacky Wanda", sport: "tennis", awards: 1, points: 1.299 },
-      { name: "Giggles Galore", sport: "tennis", awards: 4, points: 1.099 },
-      { name: "Chuckles McSnort", sport: "tennis", awards: 2, points: 873 },
-      { name: "Silly Sally", sport: "tennis", awards: 1, points: 674 },
-      { name: "Goofy Gus", sport: "tennis", awards: 3, points: 529 },
-      { name: "Jolly Jill", sport: "tennis", awards: 2, points: 468 },
-      { name: "Quirky Quinn", sport: "tennis", awards: 1, points: 314 },
-    ]);
-  });
+  // TENNIS PLAYERS LEADERBOARD
+  const tennisPlayers = [
+    { name: "Gabriel Gelbcke", sport: "tennis", awards: 17, points: "Leader" },
+    { name: "Bubbles McGee", sport: "tennis", awards: 2, points: 1.547 },
+    { name: "Fuzzy Wuzzy", sport: "tennis", awards: 3, points: 1.359 },
+    { name: "Wacky Wanda", sport: "tennis", awards: 1, points: 1.299 },
+    { name: "Giggles Galore", sport: "tennis", awards: 4, points: 1.099 },
+    { name: "Chuckles McSnort", sport: "tennis", awards: 2, points: 873 },
+    { name: "Silly Sally", sport: "tennis", awards: 1, points: 674 },
+    { name: "Goofy Gus", sport: "tennis", awards: 3, points: 529 },
+    { name: "Jolly Jill", sport: "tennis", awards: 2, points: 468 },
+    { name: "Quirky Quinn", sport: "tennis", awards: 1, points: 314 },
+  ];
 
   // FILTER CARDS
   const data = [
