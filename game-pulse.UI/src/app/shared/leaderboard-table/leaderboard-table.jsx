@@ -3,6 +3,11 @@ import React from "react";
 import "./leaderboard-table.scss";
 
 export const LeaderboardTable = ({ players }) => {
+  const capitalize = (str) => {
+    if (!str) return "";
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  };
+
   // COLORS
   const colors = {
     basketball: "#FF8700",
@@ -41,7 +46,7 @@ export const LeaderboardTable = ({ players }) => {
                       </>
                     );
                   })()}
-                  <span className="text-[0.65rem] md:text-[0.8rem]">{player.sport}</span>
+                  <span className="text-[0.65rem] md:text-[0.8rem]">{capitalize(player.sport)}</span>
                 </td>
                 <td className="score">
                   <span className="text-[0.65rem] md:text-[0.8rem]">{player.awards}</span>
