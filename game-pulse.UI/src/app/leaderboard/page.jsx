@@ -7,23 +7,14 @@ import React from "react";
 import { Container } from "../shared/container";
 import { WorldMap } from "../shared/world-map";
 import { motion } from "framer-motion";
+import { LeaderboardTable } from "../shared/leaderboard-table/leaderboard-table";
+import { Card, CardCarousel } from "../shared/card-carousel/card-carousel";
+
 import "./page.scss";
-import { Card, Carousel } from "../shared/card-carousel/card-carousel";
 
 export default function Leaderboard() {
-  // COLORS
-  const colors = {
-    basketball: "#FF8700",
-    football: "#9B0000",
-    volleyball: "#00D2BE",
-    tennis: "#FFF500",
-    ferrari: "#DC0000",
-    toroRosso: "#469BFF",
-    williams: "#FFFFFF",
-  };
-
   // PLAYERS
-  const leaderboard = [
+  const globalPlayers = [
     { name: "Gabriel Gelbcke", sport: "basketball", awards: 17, points: "Leader" },
     { name: "John Doe", sport: "football", awards: 13, points: 1.547 },
     { name: "Rodolfo Malagueta", sport: "volleyball", awards: 15, points: 1.359 },
@@ -36,37 +27,83 @@ export default function Leaderboard() {
     { name: "Jacinto Lévis", sport: "football", awards: 1, points: 314 },
   ];
 
+  const basketballPlayers = [
+    { name: "Gabriel Gelbcke", sport: "basketball", awards: 17, points: "Leader" },
+    { name: "John Doe", sport: "basketball", awards: 13, points: 1.547 },
+    { name: "Rodolfo Malagueta", sport: "basketball", awards: 15, points: 1.359 },
+    { name: "Peter Jaine", sport: "basketball", awards: 3, points: 1.299 },
+    { name: "Pedro Pedrado da Pedra Rochosa", sport: "basketball", awards: 9, points: 1.099 },
+    { name: "Paula Tejando Torando", sport: "basketball", awards: 7, points: 873 },
+    { name: "Mary Doe", sport: "basketball", awards: 4, points: 674 },
+    { name: "Josefina Margherita", sport: "basketball", awards: 11, points: 529 },
+    { name: "Dolores Analgésica", sport: "basketball", awards: 9, points: 468 },
+    { name: "Jacinto Lévis", sport: "basketball", awards: 1, points: 314 },
+  ];
+
+  const footballPlayers = [
+    { name: "Gabriel Gelbcke", sport: "football", awards: 17, points: "Leader" },
+    { name: "John Doe", sport: "football", awards: 13, points: 1.547 },
+    { name: "Rodolfo Malagueta", sport: "football", awards: 15, points: 1.359 },
+    { name: "Peter Jaine", sport: "football", awards: 3, points: 1.299 },
+    { name: "Pedro Pedrado da Pedra Rochosa", sport: "football", awards: 9, points: 1.099 },
+    { name: "Paula Tejando Torando", sport: "football", awards: 7, points: 873 },
+    { name: "Mary Doe", sport: "football", awards: 4, points: 674 },
+    { name: "Josefina Margherita", sport: "football", awards: 11, points: 529 },
+    { name: "Dolores Analgésica", sport: "football", awards: 9, points: 468 },
+    { name: "Jacinto Lévis", sport: "football", awards: 1, points: 314 },
+  ];
+
+  const volleyballPlayers = [
+    { name: "Gabriel Gelbcke", sport: "volleyball", awards: 17, points: "Leader" },
+    { name: "John Doe", sport: "volleyball", awards: 13, points: 1.547 },
+    { name: "Rodolfo Malagueta", sport: "volleyball", awards: 15, points: 1.359 },
+    { name: "Peter Jaine", sport: "volleyball", awards: 3, points: 1.299 },
+    { name: "Pedro Pedrado da Pedra Rochosa", sport: "volleyball", awards: 9, points: 1.099 },
+    { name: "Paula Tejando Torando", sport: "volleyball", awards: 7, points: 873 },
+    { name: "Mary Doe", sport: "volleyball", awards: 4, points: 674 },
+    { name: "Josefina Margherita", sport: "volleyball", awards: 11, points: 529 },
+    { name: "Dolores Analgésica", sport: "volleyball", awards: 9, points: 468 },
+    { name: "Jacinto Lévis", sport: "volleyball", awards: 1, points: 314 },
+  ];
+
+  const tennisPlayers = [
+    { name: "Gabriel Gelbcke", sport: "tennis", awards: 17, points: "Leader" },
+    { name: "John Doe", sport: "tennis", awards: 13, points: 1.547 },
+    { name: "Rodolfo Malagueta", sport: "tennis", awards: 15, points: 1.359 },
+    { name: "Peter Jaine", sport: "tennis", awards: 3, points: 1.299 },
+    { name: "Pedro Pedrado da Pedra Rochosa", sport: "tennis", awards: 9, points: 1.099 },
+    { name: "Paula Tejando Torando", sport: "tennis", awards: 7, points: 873 },
+    { name: "Mary Doe", sport: "tennis", awards: 4, points: 674 },
+    { name: "Josefina Margherita", sport: "tennis", awards: 11, points: 529 },
+    { name: "Dolores Analgésica", sport: "tennis", awards: 9, points: 468 },
+    { name: "Jacinto Lévis", sport: "tennis", awards: 1, points: 314 },
+  ];
+
   const data = [
     {
-      category: "Artificial Intelligence",
-      title: "You can do more with AI.",
-      src: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      content: <DummyContent />,
+      category: "Sport",
+      title: "Basketball",
+      src: "/leaderboard/basketball.jpg",
+      content: <LeaderboardTable players={basketballPlayers} />,
     },
     {
-      category: "Productivity",
-      title: "Enhance your productivity.",
-      src: "https://images.unsplash.com/photo-1531554694128-c4c6665f59c2?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      content: <DummyContent />,
+      category: "Sport",
+      title: "Football",
+      src: "/leaderboard/football.jpg",
+      content: <LeaderboardTable players={footballPlayers} />,
     },
     {
-      category: "Product",
-      title: "Launching the new Apple Vision Pro.",
-      src: "https://images.unsplash.com/photo-1713869791518-a770879e60dc?q=80&w=2333&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      content: <DummyContent />,
+      category: "Sport",
+      title: "Volleyball",
+      src: "/leaderboard/volleyball.jpg",
+      content: <LeaderboardTable players={volleyballPlayers} />,
     },
 
     {
-      category: "Product",
-      title: "Maps for your iPhone 15 Pro Max.",
-      src: "https://images.unsplash.com/photo-1599202860130-f600f4948364?q=80&w=2515&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      content: <DummyContent />,
-    },
-    {
-      category: "iOS",
-      title: "Photography just got better.",
-      src: "https://images.unsplash.com/photo-1602081957921-9137a5d6eaee?q=80&w=2793&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      content: <DummyContent />,
+      category: "Sport",
+      title: "Tennis",
+      src: "/leaderboard/tennis.jpg",
+      content: <LeaderboardTable players={tennisPlayers} />,
     },
   ];
 
@@ -140,51 +177,12 @@ export default function Leaderboard() {
 
       <Container className="">
         {/* Leaderboard */}
-        <table className="text-white w-full mx-auto">
-          <thead>
-            <tr>
-              <th>Pos</th>
-              <th>Player</th>
-              <th>Best Player Award</th>
-              <th>Points</th>
-            </tr>
-          </thead>
-          <tbody>
-            {leaderboard.map((player, index) => (
-              <React.Fragment key={index}>
-                <tr className="player">
-                  <td className="position">{index + 1}</td>
-                  <td
-                    className="player text-[0.875rem] md:text-[1.1rem] px-4 py-2 text-left border-l-4"
-                    style={{ borderColor: colors[player.sport] }}
-                  >
-                    {(() => {
-                      const nameParts = player.name.split(" ");
-                      const firstName = nameParts[0];
-                      const lastName = nameParts[nameParts.length - 1];
-                      return (
-                        <>
-                          {firstName} <strong>{lastName}</strong>
-                        </>
-                      );
-                    })()}
-                    <span className="text-[0.65rem] md:text-[0.8rem]">{player.sport}</span>
-                  </td>
-                  <td className="score">
-                    <span className="text-[0.65rem] md:text-[0.8rem]">{player.awards}</span>
-                  </td>
-                  <td className="score">
-                    <span className="text-[0.65rem] md:text-[0.8rem]">{player.points}</span>
-                  </td>
-                </tr>
-                {index < leaderboard.length - 1 ? <tr className="h-[20px]"></tr> : null}
-              </React.Fragment>
-            ))}
-          </tbody>
-        </table>
+        <LeaderboardTable players={globalPlayers} />
+
+        <br />
 
         {/* Filter Leaderboard */}
-        <Carousel items={cards} />
+        <CardCarousel items={cards} />
       </Container>
 
       <br />
