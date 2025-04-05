@@ -7,26 +7,10 @@ import { Menu, MenuHandler, MenuList, MenuItem, Button, Checkbox, Slider, Select
 import Paginator from "../shared/paginator";
 import { CourtDetails } from "../shared/court-details/court-details";
 import { Container } from "../shared/container";
+import { CourtsCard } from "../shared/courts-card";
 
 export default function Courts() {
-  const filterCards = [
-    {
-      backgroundImage: "/home/football2.webp",
-      name: "football",
-    },
-    {
-      backgroundImage: "/home/basketball6.webp",
-      name: "basketball",
-    },
-    {
-      backgroundImage: "/home/volleyball.webp",
-      name: "volleyball",
-    },
-    {
-      backgroundImage: "/home/volleyball3.webp",
-      name: "tennis",
-    },
-  ];
+  const [isLoading, setIsLoading] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const visibleCards = 3;
   const [sportFilter, setSportFilter] = useState([
@@ -45,9 +29,11 @@ export default function Courts() {
       address: "R. Pintor Ricardo Krieger, 550 - Atuba, Curitiba - PR, 82630-143",
       web_address: "https://www.curitiba.pr.gov.br/conteudo/parque-municipal-atuba/288",
       gps_assist: "http://localhost:3000/courts",
+      map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3604.80313691373!2d-49.2078254!3d-25.377913499999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce61cccc4aa8d%3A0xd94db68cd4cd4489!2sAtuba%20Park!5e0!3m2!1sfr!2sbr!4v1743891260643!5m2!1sfr!2sbr",
       sports: ["basketball", "football"],
       favorite: false,
-      redirect_link: "http://localhost:3000/courts",
+      redirect_link: "/",
+      src: "/courts/background.png",
     },
     {
       name: "Public Tennis Court",
@@ -56,9 +42,11 @@ export default function Courts() {
       address: "Av. Presidente Arthur da Silva Bernardes, 589 - Portão, Curitiba - PR, 80310-010",
       web_address: "https://g.co/kgs/yZTFnZi",
       gps_assist: "",
+      map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230503.43746694!2d-49.43401161685449!3d-25.48448775126223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20Paran%C3%A1!5e0!3m2!1sfr!2sbr!4v1743117337947!5m2!1sfr!2sbr",
       sports: ["tennis"],
       favorite: false,
-      redirect_link: "",
+      redirect_link: "/",
+      src: "/courts/background.png",
     },
     {
       name: "",
@@ -67,24 +55,13 @@ export default function Courts() {
       address: "",
       web_address: "",
       gps_assist: "",
-      sports: [],
+      map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230503.43746694!2d-49.43401161685449!3d-25.48448775126223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20Paran%C3%A1!5e0!3m2!1sfr!2sbr!4v1743117337947!5m2!1sfr!2sbr",
+      sports: ["basketball", "football", "football"],
       favorite: false,
-      redirect_link: "",
+      redirect_link: "/",
+      src: "/courts/background.png",
     },
   ]);
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % filterCards.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? filterCards.length - 1 : prev - 1));
-  };
-
-  const currentCards = [
-    ...filterCards.slice(currentIndex, currentIndex + visibleCards),
-    ...filterCards.slice(0, Math.max(0, currentIndex + visibleCards - filterCards.length)),
-  ];
 
   const handleFavoriteToggle = (index) => {
     const updatedCourts = [...courts];
@@ -94,160 +71,157 @@ export default function Courts() {
 
   return (
     <>
-      <Container>
-        <div>
-          {/* SPORTS FILTER */}
-          <div className="hidden lg:flex mt-10 mx-4 h-fit flex-row items-center justify-between gap-5">
-            <button onClick={handlePrev}>
-              <BiChevronLeft className="text-4xl" />
-            </button>
-            <div className="flex w-full relative justify-center gap-10">
-              {currentCards.map((card, index) => (
-                <SportCard name={card.name} backgroundImage={card.backgroundImage} key={index} />
+      <div className="bg-black">
+        <Container>
+          <div>
+            <br />
+            <br />
+
+            {/* FILTERS BAR */}
+            <div className="flex justify-center gap-6">
+              {/* SPORTS */}
+              <Menu
+                lockScroll={true}
+                dismiss={false}
+                animate={{
+                  mount: { y: 0 },
+                  unmount: { y: 25 },
+                }}
+              >
+                <MenuHandler>
+                  <Button className="bg-white text-black">
+                    <span>Sports</span>
+                  </Button>
+                </MenuHandler>
+                <MenuList>
+                  <MenuItem>
+                    <Checkbox
+                      checked={sportFilter.find((item) => item.name === "football")?.checked}
+                      id="football"
+                      label="Football"
+                      onChange={() => {
+                        const updatedSportFilter = [...sportFilter];
+                        const sportIndex = updatedSportFilter.findIndex((item) => item.name === "football");
+                        updatedSportFilter[sportIndex].checked = !updatedSportFilter[sportIndex].checked;
+                        setSportFilter(updatedSportFilter);
+                      }}
+                    />
+                  </MenuItem>
+                  <MenuItem>
+                    <Checkbox
+                      checked={sportFilter.find((item) => item.name === "basketball")?.checked}
+                      id="basketball"
+                      label="Basketball"
+                      onChange={() => {
+                        const updatedSportFilter = [...sportFilter];
+                        const sportIndex = updatedSportFilter.findIndex((item) => item.name === "basketball");
+                        updatedSportFilter[sportIndex].checked = !updatedSportFilter[sportIndex].checked;
+                        setSportFilter(updatedSportFilter);
+                      }}
+                    />
+                  </MenuItem>
+                  <MenuItem>
+                    <Checkbox
+                      checked={sportFilter.find((item) => item.name === "volleyball")?.checked}
+                      id="volleyball"
+                      label="Volleyball"
+                      onChange={() => {
+                        const updatedSportFilter = [...sportFilter];
+                        const sportIndex = updatedSportFilter.findIndex((item) => item.name === "volleyball");
+                        updatedSportFilter[sportIndex].checked = !updatedSportFilter[sportIndex].checked;
+                        setSportFilter(updatedSportFilter);
+                      }}
+                    />
+                  </MenuItem>
+                  <MenuItem>
+                    <Checkbox
+                      checked={sportFilter.find((item) => item.name === "tennis")?.checked}
+                      id="tennis"
+                      label="Tennis"
+                      onChange={() => {
+                        const updatedSportFilter = [...sportFilter];
+                        const sportIndex = updatedSportFilter.findIndex((item) => item.name === "tennis");
+                        updatedSportFilter[sportIndex].checked = !updatedSportFilter[sportIndex].checked;
+                        setSportFilter(updatedSportFilter);
+                      }}
+                    />
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+
+              {/* DISTANCE */}
+              <Menu
+                lockScroll={true}
+                dismiss={false}
+                animate={{
+                  mount: { y: 0 },
+                  unmount: { y: 25 },
+                }}
+              >
+                <MenuHandler>
+                  <Button className="bg-white text-black"> Distance </Button>
+                </MenuHandler>
+                <MenuList>
+                  <span className="flex justify-center mb-3">{distanceFilter} km</span>
+                  <Slider step={1} min={1} defaultValue={distanceFilter} onChange={(event) => setDistanceFilter(Number(event.target.value))} />
+                </MenuList>
+              </Menu>
+
+              {/* CITY */}
+              <Menu
+                lockScroll={true}
+                dismiss={false}
+                animate={{
+                  mount: { y: 0 },
+                  unmount: { y: 25 },
+                }}
+              >
+                <MenuHandler>
+                  <Button className="bg-white text-black"> City </Button>
+                </MenuHandler>
+                <MenuList className="!min-h-[25vh]">
+                  <Select value={cityFilter} onChange={(val) => setCityFilter(val)} label="Select City">
+                    <Option value="curitiba">Curitiba, PR</Option>
+                  </Select>
+                </MenuList>
+              </Menu>
+            </div>
+
+            <br />
+
+            {/* COURTS */}
+            <CourtsCard courts={courts} isLoading={isLoading} onFavoriteToggle={() => handleFavoriteToggle(index)} />
+
+            <br />
+            <br />
+
+            <div className="flex flex-wrap justify-center my-10">
+              {courts.map((court, index) => (
+                <CourtDetails
+                  key={index}
+                  name={court.name}
+                  city={court.city}
+                  distance={court.distance}
+                  address={court.address}
+                  web_address={court.web_address}
+                  gps_assist={court.gps_assist}
+                  sports={court.sports}
+                  redirect_link={court.redirect_link}
+                  favorite={court.favorite}
+                  onFavoriteToggle={() => handleFavoriteToggle(index)}
+                />
               ))}
             </div>
-            <button onClick={handleNext}>
-              <BiChevronRight className="text-4xl" />
-            </button>
+
+            <div className="flex justify-center my-5">
+              <Paginator index={1} />
+            </div>
+            <br />
+            <br />
+            <br />
           </div>
-
-          <br />
-          <br />
-
-          {/* FILTERS BAR */}
-          <div className="flex justify-center gap-6">
-            {/* SPORTS */}
-            <Menu
-              lockScroll={true}
-              dismiss={false}
-              animate={{
-                mount: { y: 0 },
-                unmount: { y: 25 },
-              }}
-            >
-              <MenuHandler>
-                <Button>
-                  <span>Sports</span>
-                </Button>
-              </MenuHandler>
-              <MenuList>
-                <MenuItem>
-                  <Checkbox
-                    checked={sportFilter.find((item) => item.name === "football")?.checked}
-                    id="football"
-                    label="Football"
-                    onChange={() => {
-                      const updatedSportFilter = [...sportFilter];
-                      const sportIndex = updatedSportFilter.findIndex((item) => item.name === "football");
-                      updatedSportFilter[sportIndex].checked = !updatedSportFilter[sportIndex].checked;
-                      setSportFilter(updatedSportFilter);
-                    }}
-                  />
-                </MenuItem>
-                <MenuItem>
-                  <Checkbox
-                    checked={sportFilter.find((item) => item.name === "basketball")?.checked}
-                    id="basketball"
-                    label="Basketball"
-                    onChange={() => {
-                      const updatedSportFilter = [...sportFilter];
-                      const sportIndex = updatedSportFilter.findIndex((item) => item.name === "basketball");
-                      updatedSportFilter[sportIndex].checked = !updatedSportFilter[sportIndex].checked;
-                      setSportFilter(updatedSportFilter);
-                    }}
-                  />
-                </MenuItem>
-                <MenuItem>
-                  <Checkbox
-                    checked={sportFilter.find((item) => item.name === "volleyball")?.checked}
-                    id="volleyball"
-                    label="Volleyball"
-                    onChange={() => {
-                      const updatedSportFilter = [...sportFilter];
-                      const sportIndex = updatedSportFilter.findIndex((item) => item.name === "volleyball");
-                      updatedSportFilter[sportIndex].checked = !updatedSportFilter[sportIndex].checked;
-                      setSportFilter(updatedSportFilter);
-                    }}
-                  />
-                </MenuItem>
-                <MenuItem>
-                  <Checkbox
-                    checked={sportFilter.find((item) => item.name === "tennis")?.checked}
-                    id="tennis"
-                    label="Tennis"
-                    onChange={() => {
-                      const updatedSportFilter = [...sportFilter];
-                      const sportIndex = updatedSportFilter.findIndex((item) => item.name === "tennis");
-                      updatedSportFilter[sportIndex].checked = !updatedSportFilter[sportIndex].checked;
-                      setSportFilter(updatedSportFilter);
-                    }}
-                  />
-                </MenuItem>
-              </MenuList>
-            </Menu>
-
-            {/* DISTANCE */}
-            <Menu
-              lockScroll={true}
-              dismiss={false}
-              animate={{
-                mount: { y: 0 },
-                unmount: { y: 25 },
-              }}
-            >
-              <MenuHandler>
-                <Button> Distance </Button>
-              </MenuHandler>
-              <MenuList>
-                <span className="flex justify-center mb-3">{distanceFilter} km</span>
-                <Slider step={1} min={1} defaultValue={distanceFilter} onChange={(event) => setDistanceFilter(Number(event.target.value))} />
-              </MenuList>
-            </Menu>
-
-            {/* CITY */}
-            <Menu
-              lockScroll={true}
-              dismiss={false}
-              animate={{
-                mount: { y: 0 },
-                unmount: { y: 25 },
-              }}
-            >
-              <MenuHandler>
-                <Button> City </Button>
-              </MenuHandler>
-              <MenuList className="!min-h-[25vh]">
-                <Select value={cityFilter} onChange={(val) => setCityFilter(val)} label="Select City">
-                  <Option value="curitiba">Curitiba, PR</Option>
-                </Select>
-              </MenuList>
-            </Menu>
-          </div>
-
-          {/* COURTS */}
-          <div className="flex flex-wrap justify-center my-10">
-            {courts.map((court, index) => (
-              <CourtDetails
-                key={index}
-                name={court.name}
-                city={court.city}
-                distance={court.distance}
-                address={court.address}
-                web_address={court.web_address}
-                gps_assist={court.gps_assist}
-                sports={court.sports}
-                redirect_link={court.redirect_link}
-                favorite={court.favorite}
-                onFavoriteToggle={() => handleFavoriteToggle(index)}
-              />
-            ))}
-          </div>
-
-          <div className="flex justify-center my-5">
-            <Paginator index={1} />
-          </div>
-        </div>
-      </Container>
+        </Container>
+      </div>
     </>
   );
 }

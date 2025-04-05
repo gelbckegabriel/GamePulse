@@ -680,7 +680,7 @@ export default function Profile() {
                   <section className="mapbox" data-mapbox>
                     {isLoading ? (
                       <>
-                        <div className="grid h-full max-h-[300px] min-h-[160px] w-full animate-pulse place-items-center rounded-lg bg-gray-700">
+                        <div className="grid h-full max-h-[300px] min-h-[160px] w-full animate-pulse-strong place-items-center rounded-lg bg-gray-700">
                           <GlobeAmericasIcon className="h-16 w-16 text-gray-500" />
                         </div>
                       </>

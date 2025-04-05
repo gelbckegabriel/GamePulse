@@ -8,7 +8,7 @@ import { Container } from "../shared/container";
 import { WorldMap } from "../shared/world-map";
 import { motion } from "framer-motion";
 import { LeaderboardTable } from "../shared/leaderboard-table/leaderboard-table";
-import { Card, CardCarousel } from "../shared/card-carousel/card-carousel";
+import { Card, CardCarousel } from "../shared/card-carousel";
 
 import "./page.scss";
 
