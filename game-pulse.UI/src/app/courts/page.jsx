@@ -195,24 +195,6 @@ export default function Courts() {
             <br />
             <br />
 
-            <div className="flex flex-wrap justify-center my-10">
-              {courts.map((court, index) => (
-                <CourtDetails
-                  key={index}
-                  name={court.name}
-                  city={court.city}
-                  distance={court.distance}
-                  address={court.address}
-                  web_address={court.web_address}
-                  gps_assist={court.gps_assist}
-                  sports={court.sports}
-                  redirect_link={court.redirect_link}
-                  favorite={court.favorite}
-                  onFavoriteToggle={() => handleFavoriteToggle(index)}
-                />
-              ))}
-            </div>
-
             <div className="flex justify-center my-5">
               <Paginator index={1} />
             </div>

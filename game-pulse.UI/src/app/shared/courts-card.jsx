@@ -152,23 +152,16 @@ export function CourtsCard({ courts, isLoading, onFavoriteToggle }) {
           </div>
         ) : null}
       </AnimatePresence>
-      <ul className="max-w-2xl mx-auto w-full gap-4">
+      <ul className="max-w-4xl mx-auto w-full gap-4">
         {courts.map((court, index) => (
           <motion.div
             layoutId={`court-${court.name}-${id}`}
             key={`court-${court.name}-${id}`}
             onClick={() => setActive(court)}
-            className="p-4 flex flex-col md:flex-row justify-between items-center hover:bg-gray-600 dark:hover:bg-neutral-800 rounded-xl cursor-pointer"
+            className="p-4 flex flex-col md:flex-row justify-between items-center hover:bg-gray-600 rounded-xl cursor-pointer"
           >
             <div className="flex gap-4 flex-col md:flex-row ">
               <motion.div layoutId={`image-${court.name}-${id}`}>
-                {/* <Image
-                  width={100}
-                  height={100}
-                  src={court.src}
-                  alt={court.name}
-                  className="h-40 w-40 md:h-14 md:w-14 rounded-lg object-cover object-top"
-                /> */}
                 {isLoading ? (
                   <>
                     <div className="grid h-[100px] w-[100px] animate-pulse-strong place-items-center rounded-lg bg-gray-700">
@@ -241,15 +234,3 @@ export const CloseIcon = () => {
     </motion.svg>
   );
 };
-
-// content: () => {
-//   return (
-//     <p>
-//       Lana Del Rey, an iconic American singer-songwriter, is celebrated for her melancholic and cinematic music style. Born Elizabeth Woolridge
-//       Grant in New York City, she has captivated audiences worldwide with her haunting voice and introspective lyrics. <br /> <br />
-//       Her songs often explore themes of tragic romance, glamour, and melancholia, drawing inspiration from both contemporary and vintage pop
-//       culture. With a career that has seen numerous critically acclaimed albums, Lana Del Rey has established herself as a unique and influential
-//       figure in the music industry, earning a dedicated fan base and numerous accolades.
-//     </p>
-//   );
-// },
