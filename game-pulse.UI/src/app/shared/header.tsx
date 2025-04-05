@@ -20,8 +20,7 @@ export default function Header() {
             <Link href="/about">About</Link>
             <Link href="/leaderboard">Leaderboard</Link>
             <Link href="/courts">Courts</Link>
-            <Link href="/contact">Contact</Link>
-            <Link href="/profile">Test</Link>
+            <Link href="/games">Games</Link>
             <Link href="/"></Link>
           </div>
         </Container>
@@ -31,9 +30,14 @@ export default function Header() {
           <Link href="/">
             <p className="text-xl font-semibold">GamePulse</p>
           </Link>
-          <Button size="small" onClick={() => setIsOpen(true)}>
-            Sign up
-          </Button>
+          <div>
+            <Link className="mr-6" href="/profile">
+              Test
+            </Link>
+            <Button size="small" onClick={() => setIsOpen(true)}>
+              Sign up
+            </Button>
+          </div>
         </Container>
       </div>
 
