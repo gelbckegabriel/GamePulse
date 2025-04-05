@@ -2,7 +2,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "../shared/container";
 import { Button, IconButton, Option, Select, Typography } from "@material-tailwind/react";
 import {
@@ -28,8 +28,14 @@ import {
 import "./page.scss";
 
 export default function Profile() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   // {isLoading ? (<></>) : (<></>)}
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  });
 
   const [userInfo, setUserInfo] = useState({
     name: "Gabriel Gelbcke",
@@ -308,7 +314,11 @@ export default function Profile() {
                                 <h4 className="headings text-sm2 timeline-item-title">Basketball</h4>
                                 {isLoading ? (
                                   <>
-                                    <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[30%] rounded-full bg-gray-700 animate-pulse-strong">
+                                    <Typography
+                                      as="div"
+                                      variant="paragraph"
+                                      className="mt-2 h-2 w-[30%] rounded-full bg-gray-700 animate-pulse-strong"
+                                    >
                                       &nbsp;
                                     </Typography>
                                   </>
@@ -361,7 +371,11 @@ export default function Profile() {
                                 <h4 className="headings text-sm2 timeline-item-title">Football</h4>
                                 {isLoading ? (
                                   <>
-                                    <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[30%] rounded-full bg-gray-700 animate-pulse-strong">
+                                    <Typography
+                                      as="div"
+                                      variant="paragraph"
+                                      className="mt-2 h-2 w-[30%] rounded-full bg-gray-700 animate-pulse-strong"
+                                    >
                                       &nbsp;
                                     </Typography>
                                   </>
@@ -414,7 +428,11 @@ export default function Profile() {
                                 <h4 className="headings text-sm2 timeline-item-title">Volleyball</h4>
                                 {isLoading ? (
                                   <>
-                                    <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[30%] rounded-full bg-gray-700 animate-pulse-strong">
+                                    <Typography
+                                      as="div"
+                                      variant="paragraph"
+                                      className="mt-2 h-2 w-[30%] rounded-full bg-gray-700 animate-pulse-strong"
+                                    >
                                       &nbsp;
                                     </Typography>
                                   </>

@@ -21,9 +21,11 @@ export default function Leaderboard() {
   // const [tennisPlayers, setTennisPlayers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // useEffect(() => {
-  //   setIsLoading(false);
-  // }, 5000);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  });
 
   // GLOBAL PLAYERS LEADERBOARD
   const globalPlayers = [
@@ -101,19 +103,19 @@ export default function Leaderboard() {
       category: "Sport",
       title: "Basketball",
       src: "/leaderboard/basketball.webp",
-      content: <LeaderboardTable players={basketballPlayers} />,
+      content: <LeaderboardTable players={basketballPlayers} isLoading={isLoading} />,
     },
     {
       category: "Sport",
       title: "Football",
       src: "/leaderboard/football.webp",
-      content: <LeaderboardTable players={footballPlayers} />,
+      content: <LeaderboardTable players={footballPlayers} isLoading={isLoading} />,
     },
     {
       category: "Sport",
       title: "Volleyball",
       src: "/leaderboard/volleyball.webp",
-      content: <LeaderboardTable players={volleyballPlayers} />,
+      content: <LeaderboardTable players={volleyballPlayers} isLoading={isLoading} />,
     },
 
     {

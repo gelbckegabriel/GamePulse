@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "./leaderboard-table.scss";
 import { Typography } from "@material-tailwind/react";
@@ -36,34 +36,87 @@ export const LeaderboardTable = ({ players, isLoading }) => {
             <React.Fragment key={index}>
               <tr className="player">
                 <td className="position">{index + 1}</td>
-                <td className="player text-[0.875rem] md:text-[1.1rem] px-4 py-2 text-left border-l-4" style={{ borderColor: colors[player.sport] }}>
-                  {(() => {
-                    const nameParts = player.name.split(" ");
-                    const firstName = nameParts[0];
-                    const lastName = nameParts[nameParts.length - 1];
-                    return (
+                <td
+                  className="player text-[0.875rem] md:text-[1.1rem] px-4 py-2 text-left border-l-4"
+                  style={isLoading ? { borderColor: "#616161" } : { borderColor: colors[player.sport] }}
+                >
+                  <div className="flex items-center">
+                    {(() => {
+                      const nameParts = player.name.split(" ");
+                      const firstName = nameParts[0];
+                      const lastName = nameParts[nameParts.length - 1];
+                      return (
+                        <>
+                          {isLoading ? (
+                            <>
+                              <Typography
+                                as="div"
+                                variant="paragraph"
+                                className="min-w-[7rem] md:min-w-[12rem] h-4 rounded-sm bg-gray-700 animate-pulse-strong"
+                              >
+                                &nbsp;
+                              </Typography>
+                            </>
+                          ) : (
+                            <>
+                              <p>
+                                {firstName} <strong>{lastName}</strong>
+                              </p>
+                            </>
+                          )}
+                        </>
+                      );
+                    })()}
+                    {isLoading ? (
                       <>
-                        {isLoading ? (
-                          <>
-                            <Typography as="div" variant="paragraph" className="title mt-2 h-2 rounded-full bg-gray-700 animate-pulse-strong">
-                              &nbsp;
-                            </Typography>
-                          </>
-                        ) : (
-                          <>
-                            {firstName} <strong>{lastName}</strong>
-                          </>
-                        )}
+                        <Typography
+                          as="div"
+                          variant="span"
+                          className="ml-3 min-w-[3rem] md:min-w-[4rem] h-2 rounded-sm bg-gray-700 animate-pulse-strong"
+                        >
+                          &nbsp;
+                        </Typography>
                       </>
-                    );
-                  })()}
-                  <span className="text-[0.65rem] md:text-[0.8rem]">{capitalize(player.sport)}</span>
+                    ) : (
+                      <>
+                        <span className="text-[0.65rem] md:text-[0.8rem]">{capitalize(player.sport)}</span>
+                      </>
+                    )}
+                  </div>
                 </td>
                 <td className="score">
-                  <span className="text-[0.65rem] md:text-[0.8rem]">{player.awards}</span>
+                  {isLoading ? (
+                    <>
+                      <Typography
+                        as="div"
+                        variant="span"
+                        className=" mx-auto w-[1.5rem] md:w-[1.5rem] h-[1.5rem] rounded-[100%] bg-gray-700 animate-pulse-strong"
+                      >
+                        &nbsp;
+                      </Typography>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-[0.65rem] md:text-[0.8rem]">{player.awards}</span>
+                    </>
+                  )}
                 </td>
                 <td className="score">
-                  <span className="text-[0.65rem] md:text-[0.8rem]">{player.points}</span>
+                  {isLoading ? (
+                    <>
+                      <Typography
+                        as="div"
+                        variant="span"
+                        className="mx-auto w-[1.5rem] md:w-[1.5rem] h-[1.5rem] rounded-[100%] bg-gray-700 animate-pulse-strong"
+                      >
+                        &nbsp;
+                      </Typography>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-[0.65rem] md:text-[0.8rem]">{player.points}</span>
+                    </>
+                  )}
                 </td>
               </tr>
               {index < players.length - 1 ? <tr className="h-[20px]"></tr> : null}
