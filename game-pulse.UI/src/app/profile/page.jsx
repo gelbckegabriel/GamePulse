@@ -73,13 +73,13 @@ export default function Profile() {
                   <img src="./home/basketball.webp" alt="avatar" width="80" className="rounded-[15%]" />
                 </figure>
 
-                <div className="info-content animate-pulse">
+                <div className="info-content">
                   {isLoading ? (
                     <>
-                      <Typography as="div" variant="h1" className="mb-4 h-3 w-[12rem] rounded-full bg-gray-700">
+                      <Typography as="div" variant="h1" className="mb-4 h-3 w-[12rem] rounded-full bg-gray-700 animate-pulse-strong">
                         &nbsp;
                       </Typography>
-                      <Typography as="div" variant="paragraph" className="title mb-2 h-2 !w-[6rem] rounded-full bg-gray-700">
+                      <Typography as="div" variant="paragraph" className="title mb-2 h-2 !w-[6rem] rounded-full bg-gray-700 animate-pulse-strong">
                         &nbsp;
                       </Typography>
                     </>
@@ -105,7 +105,7 @@ export default function Profile() {
                       <p className="contact-title">Email</p>
                       {isLoading ? (
                         <>
-                          <Typography as="div" variant="paragraph" className="title mt-2 h-2 rounded-full bg-gray-700">
+                          <Typography as="div" variant="paragraph" className="title mt-2 h-2 rounded-full bg-gray-700 animate-pulse-strong">
                             &nbsp;
                           </Typography>
                         </>
@@ -126,7 +126,7 @@ export default function Profile() {
                       <p className="contact-title">Phone</p>
                       {isLoading ? (
                         <>
-                          <Typography as="div" variant="paragraph" className="title mt-2 h-2 w-[70%] rounded-full bg-gray-700">
+                          <Typography as="div" variant="paragraph" className="title mt-2 h-2 w-[70%] rounded-full bg-gray-700 animate-pulse-strong">
                             &nbsp;
                           </Typography>
                         </>
@@ -147,7 +147,7 @@ export default function Profile() {
                       <p className="contact-title">Birthday</p>
                       {isLoading ? (
                         <>
-                          <Typography as="div" variant="paragraph" className="title mt-2 h-2 w-[50%] rounded-full bg-gray-700">
+                          <Typography as="div" variant="paragraph" className="title mt-2 h-2 w-[50%] rounded-full bg-gray-700 animate-pulse-strong">
                             &nbsp;
                           </Typography>
                         </>
@@ -168,7 +168,7 @@ export default function Profile() {
                       <p className="contact-title">Location</p>
                       {isLoading ? (
                         <>
-                          <Typography as="div" variant="paragraph" className="title mt-2 h-2 w-[40%] rounded-full bg-gray-700">
+                          <Typography as="div" variant="paragraph" className="title mt-2 h-2 w-[40%] rounded-full bg-gray-700 animate-pulse-strong">
                             &nbsp;
                           </Typography>
                         </>
@@ -190,7 +190,7 @@ export default function Profile() {
                   <h2 className="headings text-2xl article-title">About the player</h2>
                   {isLoading ? (
                     <>
-                      <Typography as="div" variant="button" className="mt-2 h-10 w-10 rounded-full bg-gray-700">
+                      <Typography as="div" variant="button" className="mt-2 h-10 w-10 rounded-full bg-gray-700 animate-pulse-strong">
                         &nbsp;
                       </Typography>
                     </>
@@ -244,7 +244,7 @@ export default function Profile() {
                             <h4 className="headings text-sm2 timeline-item-title">Sport</h4>
                             {isLoading ? (
                               <>
-                                <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[20%] rounded-full bg-gray-700">
+                                <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[20%] rounded-full bg-gray-700 animate-pulse-strong">
                                   &nbsp;
                                 </Typography>
                               </>
@@ -308,7 +308,7 @@ export default function Profile() {
                                 <h4 className="headings text-sm2 timeline-item-title">Basketball</h4>
                                 {isLoading ? (
                                   <>
-                                    <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[30%] rounded-full bg-gray-700">
+                                    <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[30%] rounded-full bg-gray-700 animate-pulse-strong">
                                       &nbsp;
                                     </Typography>
                                   </>
@@ -361,7 +361,7 @@ export default function Profile() {
                                 <h4 className="headings text-sm2 timeline-item-title">Football</h4>
                                 {isLoading ? (
                                   <>
-                                    <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[30%] rounded-full bg-gray-700">
+                                    <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[30%] rounded-full bg-gray-700 animate-pulse-strong">
                                       &nbsp;
                                     </Typography>
                                   </>
@@ -414,7 +414,7 @@ export default function Profile() {
                                 <h4 className="headings text-sm2 timeline-item-title">Volleyball</h4>
                                 {isLoading ? (
                                   <>
-                                    <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[30%] rounded-full bg-gray-700">
+                                    <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[30%] rounded-full bg-gray-700 animate-pulse-strong">
                                       &nbsp;
                                     </Typography>
                                   </>
@@ -507,7 +507,7 @@ export default function Profile() {
                             <h4 className="headings text-sm2 timeline-item-title">Basketball</h4>
                             {isLoading ? (
                               <>
-                                <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[10%] rounded-full bg-gray-700">
+                                <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[10%] rounded-full bg-gray-700 animate-pulse-strong">
                                   &nbsp;
                                 </Typography>
                               </>
@@ -528,7 +528,7 @@ export default function Profile() {
                             <h4 className="headings text-sm2 timeline-item-title">Football</h4>
                             {isLoading ? (
                               <>
-                                <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[10%] rounded-full bg-gray-700">
+                                <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[10%] rounded-full bg-gray-700 animate-pulse-strong">
                                   &nbsp;
                                 </Typography>
                               </>
@@ -549,7 +549,7 @@ export default function Profile() {
                             <h4 className="headings text-sm2 timeline-item-title">Tennis</h4>
                             {isLoading ? (
                               <>
-                                <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[10%] rounded-full bg-gray-700">
+                                <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[10%] rounded-full bg-gray-700 animate-pulse-strong">
                                   &nbsp;
                                 </Typography>
                               </>
@@ -570,7 +570,7 @@ export default function Profile() {
                             <h4 className="headings text-sm2 timeline-item-title">Volleyball</h4>
                             {isLoading ? (
                               <>
-                                <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[10%] rounded-full bg-gray-700">
+                                <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[10%] rounded-full bg-gray-700 animate-pulse-strong">
                                   &nbsp;
                                 </Typography>
                               </>
@@ -602,7 +602,7 @@ export default function Profile() {
                         <h4 className="headings text-sm2 timeline-item-title">Total Awards</h4>
                         {isLoading ? (
                           <>
-                            <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[10%] rounded-full bg-gray-700">
+                            <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[10%] rounded-full bg-gray-700 animate-pulse-strong">
                               &nbsp;
                             </Typography>
                           </>
@@ -643,7 +643,7 @@ export default function Profile() {
                         <h4 className="headings text-sm2 timeline-item-title">Address</h4>
                         {isLoading ? (
                           <>
-                            <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[80%] rounded-full bg-gray-700">
+                            <Typography as="div" variant="paragraph" className="mt-2 h-2 w-[80%] rounded-full bg-gray-700 animate-pulse-strong">
                               &nbsp;
                             </Typography>
                           </>

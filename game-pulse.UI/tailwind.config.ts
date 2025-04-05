@@ -48,7 +48,17 @@ module.exports = withMT({
     animation: {
       "carousel-move": "carousel-move var(--duration,80s) linear infinite",
     },
-    extend: {},
+    extend: {
+      animation: {
+        'pulse-strong': 'pulseStrong 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+      },
+      keyframes: {
+        pulseStrong: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.3' }
+        }
+      }
+    },
   },
   plugins: [],
 });

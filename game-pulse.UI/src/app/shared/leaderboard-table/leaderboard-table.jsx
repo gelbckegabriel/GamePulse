@@ -1,8 +1,9 @@
 import React from "react";
 
 import "./leaderboard-table.scss";
+import { Typography } from "@material-tailwind/react";
 
-export const LeaderboardTable = ({ players }) => {
+export const LeaderboardTable = ({ players, isLoading }) => {
   const capitalize = (str) => {
     if (!str) return "";
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -42,7 +43,17 @@ export const LeaderboardTable = ({ players }) => {
                     const lastName = nameParts[nameParts.length - 1];
                     return (
                       <>
-                        {firstName} <strong>{lastName}</strong>
+                        {isLoading ? (
+                          <>
+                            <Typography as="div" variant="paragraph" className="title mt-2 h-2 rounded-full bg-gray-700 animate-pulse-strong">
+                              &nbsp;
+                            </Typography>
+                          </>
+                        ) : (
+                          <>
+                            {firstName} <strong>{lastName}</strong>
+                          </>
+                        )}
                       </>
                     );
                   })()}

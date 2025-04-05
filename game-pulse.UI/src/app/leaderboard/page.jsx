@@ -3,7 +3,7 @@
 
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "../shared/container";
 import { WorldMap } from "../shared/world-map";
 import { motion } from "framer-motion";
@@ -19,6 +19,11 @@ export default function Leaderboard() {
   // const [footballPlayers, setFootballPlayers] = useState([]);
   // const [volleyballPlayers, setVolleyballPlayers] = useState([]);
   // const [tennisPlayers, setTennisPlayers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // useEffect(() => {
+  //   setIsLoading(false);
+  // }, 5000);
 
   // GLOBAL PLAYERS LEADERBOARD
   const globalPlayers = [
@@ -197,7 +202,7 @@ export default function Leaderboard() {
 
       <Container className="">
         {/* Leaderboard */}
-        <LeaderboardTable players={globalPlayers} />
+        <LeaderboardTable players={globalPlayers} isLoading={isLoading} />
 
         <br />
 
