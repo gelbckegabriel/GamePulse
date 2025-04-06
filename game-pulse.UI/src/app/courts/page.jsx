@@ -1,21 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, MenuHandler, MenuList, MenuItem, Button, Checkbox, Slider, Select, Option } from "@material-tailwind/react";
 import Paginator from "../shared/paginator";
 import { Container } from "../shared/container";
 import { CourtsCard } from "../shared/courts-card";
 
 export default function Courts() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [sportFilter, setSportFilter] = useState([
     { name: "football", checked: true },
     { name: "basketball", checked: true },
     { name: "volleyball", checked: true },
     { name: "tennis", checked: true },
   ]);
-  const [distanceFilter, setDistanceFilter] = useState(25);
+  const [distanceFilter, setDistanceFilter] = useState(50);
   const [cityFilter, setCityFilter] = useState("curitiba");
+  const [orderFilter, setOrderFilter] = useState("distance");
   const [courts, setCourts] = useState([
     {
       name: "Parque Atuba",
@@ -57,6 +58,12 @@ export default function Courts() {
       src: "/courts/background.png",
     },
   ]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  });
 
   const handleFavoriteToggle = (index) => {
     const updatedCourts = [...courts];
@@ -180,6 +187,26 @@ export default function Courts() {
                   </Select>
                 </MenuList>
               </Menu>
+
+              {/* ORDER BY */}
+              <Menu
+                lockScroll={true}
+                dismiss={false}
+                animate={{
+                  mount: { y: 0 },
+                  unmount: { y: 25 },
+                }}
+              >
+                <MenuHandler>
+                  <Button className="bg-white text-black"> Order By </Button>
+                </MenuHandler>
+                <MenuList className="!min-h-[25vh]">
+                  <Select value={orderFilter} onChange={(val) => setOrderFilter(val)} label="Order by...">
+                    <Option value="distance">Distance</Option>
+                    <Option value="favorite">Favorites</Option>
+                  </Select>
+                </MenuList>
+              </Menu>
             </div>
 
             <br />
@@ -190,9 +217,7 @@ export default function Courts() {
             <br />
             <br />
 
-            <div className="flex justify-center my-5">
-              <Paginator index={1} />
-            </div>
+            <div className="flex justify-center my-5">{/* <Paginator index={1} /> */}</div>
             <br />
             <br />
             <br />
