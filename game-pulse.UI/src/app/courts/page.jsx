@@ -1,18 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
-import { SportCard } from "../shared/sport-card/sport-card";
 import { Menu, MenuHandler, MenuList, MenuItem, Button, Checkbox, Slider, Select, Option } from "@material-tailwind/react";
 import Paginator from "../shared/paginator";
-import { CourtDetails } from "../shared/court-details/court-details";
 import { Container } from "../shared/container";
 import { CourtsCard } from "../shared/courts-card";
 
 export default function Courts() {
   const [isLoading, setIsLoading] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const visibleCards = 3;
   const [sportFilter, setSportFilter] = useState([
     { name: "football", checked: true },
     { name: "basketball", checked: true },
