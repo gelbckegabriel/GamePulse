@@ -27,6 +27,7 @@
     "react-use": "^17.6.0",
     "react-use-measure": "^2.1.7",
     "sass": "^1.85.0",
+    "simplex-noise": "^4.0.3",
     "tailwind-merge": "^3.0.1"
   },
   "devDependencies": {
