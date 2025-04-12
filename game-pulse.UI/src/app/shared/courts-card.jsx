@@ -96,7 +96,7 @@ export function CourtsCard({ courts, isLoading, onFavoriteToggle }) {
               </motion.div>
 
               <div>
-                {/* Court Info */}
+                {/* Court Header */}
                 <div className="flex justify-between items-start p-4">
                   <div>
                     {isLoading ? (
@@ -148,6 +148,8 @@ export function CourtsCard({ courts, isLoading, onFavoriteToggle }) {
                     )}
                   </div>
                 </div>
+
+                {/* Sports Info */}
                 <div className="relative px-4">
                   <motion.div
                     layout

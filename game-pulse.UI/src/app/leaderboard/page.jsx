@@ -3,7 +3,7 @@
 
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Container } from "../shared/container";
 import { WorldMap } from "../shared/world-map";
 import { motion } from "framer-motion";
@@ -13,22 +13,7 @@ import { Card, CardCarousel } from "../shared/card-carousel";
 import "./page.scss";
 
 export default function Leaderboard() {
-  // TODO: Will this be a good idea? Need to work on it.
-  // const [globalPlayers, setGlobalPlayers] = useState([]);
-  // const [basketballPlayers, setBasketballPlayers] = useState([]);
-  // const [footballPlayers, setFootballPlayers] = useState([]);
-  // const [volleyballPlayers, setVolleyballPlayers] = useState([]);
-  // const [tennisPlayers, setTennisPlayers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-  });
-
-  // GLOBAL PLAYERS LEADERBOARD
-  const globalPlayers = [
+  const [globalPlayers, setGlobalPlayers] = useState([
     { name: "Gabriel Gelbcke", sport: "basketball", awards: 17, points: "Leader" },
     { name: "John Doe", sport: "football", awards: 13, points: 1.547 },
     { name: "Rodolfo Malagueta", sport: "volleyball", awards: 15, points: 1.359 },
@@ -39,10 +24,8 @@ export default function Leaderboard() {
     { name: "Josefina Margherita", sport: "volleyball", awards: 11, points: 529 },
     { name: "Dolores Analgésica", sport: "football", awards: 9, points: 468 },
     { name: "Jacinto Lévis", sport: "football", awards: 1, points: 314 },
-  ];
-
-  // BASKETBALL PLAYERS LEADERBOARD
-  const basketballPlayers = [
+  ]);
+  const [basketballPlayers, setBasketballPlayers] = useState([
     { name: "Gabriel Gelbcke", sport: "basketball", awards: 17, points: "Leader" },
     { name: "Zé da Bola", sport: "basketball", awards: 2, points: 1.547 },
     { name: "Chico Esperto", sport: "basketball", awards: 3, points: 1.359 },
@@ -53,10 +36,8 @@ export default function Leaderboard() {
     { name: "Seu Barriga", sport: "basketball", awards: 3, points: 529 },
     { name: "Zeca Tatu", sport: "basketball", awards: 2, points: 468 },
     { name: "Quinzinho", sport: "basketball", awards: 1, points: 314 },
-  ];
-
-  // FOOTBALL PLAYERS LEADERBOARD
-  const footballPlayers = [
+  ]);
+  const [footballPlayers, setFootballPlayers] = useState([
     { name: "Gabriel Gelbcke", sport: "football", awards: 17, points: "Leader" },
     { name: "Zé Carioca", sport: "football", awards: 2, points: 1.547 },
     { name: "Chico Bento", sport: "football", awards: 3, points: 1.359 },
@@ -67,10 +48,8 @@ export default function Leaderboard() {
     { name: "Seu Madruga", sport: "football", awards: 3, points: 529 },
     { name: "Zeca Urubu", sport: "football", awards: 2, points: 468 },
     { name: "Quinzinho", sport: "football", awards: 1, points: 314 },
-  ];
-
-  // VOLLEYBALL PLAYERS LEADERBOARD
-  const volleyballPlayers = [
+  ]);
+  const [volleyballPlayers, setVolleyballPlayers] = useState([
     { name: "Gabriel Gelbcke", sport: "volleyball", awards: 17, points: "Leader" },
     { name: "Ziggy Stardust", sport: "volleyball", awards: 2, points: 1.547 },
     { name: "Muffin Man", sport: "volleyball", awards: 3, points: 1.359 },
@@ -81,10 +60,8 @@ export default function Leaderboard() {
     { name: "Bingo Bongo", sport: "volleyball", awards: 3, points: 529 },
     { name: "Jester Jest", sport: "volleyball", awards: 2, points: 468 },
     { name: "Quibble Quack", sport: "volleyball", awards: 1, points: 314 },
-  ];
-
-  // TENNIS PLAYERS LEADERBOARD
-  const tennisPlayers = [
+  ]);
+  const [tennisPlayers, setTennisPlayers] = useState([
     { name: "Gabriel Gelbcke", sport: "tennis", awards: 17, points: "Leader" },
     { name: "Bubbles McGee", sport: "tennis", awards: 2, points: 1.547 },
     { name: "Fuzzy Wuzzy", sport: "tennis", awards: 3, points: 1.359 },
@@ -95,7 +72,8 @@ export default function Leaderboard() {
     { name: "Goofy Gus", sport: "tennis", awards: 3, points: 529 },
     { name: "Jolly Jill", sport: "tennis", awards: 2, points: 468 },
     { name: "Quirky Quinn", sport: "tennis", awards: 1, points: 314 },
-  ];
+  ]);
+  const [isLoading, setIsLoading] = useState(false);
 
   // FILTER CARDS
   const data = [
