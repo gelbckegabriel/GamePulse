@@ -1,34 +1,21 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useRef } from "react";
 import { Container } from "../shared/container";
 import { Vortex } from "../shared/vortex";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
 
 export default function AboutPage() {
-  const controls = useAnimation();
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.45,
-  });
-
-  useEffect(() => {
-    if (inView) {
-      controls.start("visible");
-    } else {
-      controls.start("hidden");
-    }
-  }, [controls, inView]);
+  const scrollRef = useRef(null);
 
   const variantsLeft = {
-    hidden: { opacity: 0, x: -300, transition: { duration: 0.8 } },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.8 } },
+    offscreen: { opacity: 0, x: -300, transition: { duration: 0.8 } },
+    onscreen: { opacity: 1, x: 0, transition: { duration: 0.8 } },
   };
 
   const variantsRight = {
-    hidden: { opacity: 0, x: 300, transition: { duration: 0.8 } },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.8 } },
+    offscreen: { opacity: 0, x: 300, transition: { duration: 0.8 } },
+    onscreen: { opacity: 1, x: 0, transition: { duration: 0.8 } },
   };
 
   return (
@@ -43,29 +30,25 @@ export default function AboutPage() {
 
         <Container>
           {/* About the Developer */}
-          <div className="mt-14 md:mt-32 flex flex-row justify-center items-center gap-4">
-            <motion.div
-              ref={ref}
-              animate={controls}
-              initial="hidden"
-              variants={variantsLeft}
-              className="w-[50%] md:w-[60%] flex flex-col justify-center"
-            >
-              <h1 className="text-2xl md:text-4xl font-bold">Gabriel Gelbcke</h1>
+          <motion.div
+            ref={scrollRef}
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ amount: 0.3 }}
+            className="mt-14 md:mt-32 flex flex-row justify-center items-center gap-4"
+          >
+            <motion.div variants={variantsLeft} className="w-[50%] md:w-[60%] flex flex-col justify-center">
+              <h1 className="text-xl md:text-4xl font-bold">Gabriel Gelbcke</h1>
               <p className="pt-2 md:pt-5 text-gray-500 text-xs md:text-lg">
                 Gelbcke is the sole developer of this project, driven by his passion for sports, particularly Basketball. He enjoys playing at public
                 courts, competing against others, making new friends, and socializing. Inspired by these experiences, he developed an application to
                 encourage more people in his city to engage in similar activities.
               </p>
             </motion.div>
-            <motion.div ref={ref} animate={controls} initial="hidden" variants={variantsRight} className="w-[50%] md:w-[40%] flex justify-center">
-              <img
-                src="./about/gelbcke.webp"
-                alt="Gelbcke's Photo"
-                className="w-[600px] h-[280px] md:h-[400px] object-cover rounded-lg"
-              />
+            <motion.div variants={variantsRight} className="w-[50%] md:w-[40%] flex justify-center">
+              <img src="./about/gelbcke.webp" alt="Gelbcke's Photo" className="w-[600px] h-[280px] md:h-[400px] object-cover rounded-lg" />
             </motion.div>
-          </div>
+          </motion.div>
 
           {/* About the Project */}
           <div className="mt-32">
