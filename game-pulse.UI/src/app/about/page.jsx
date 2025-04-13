@@ -80,8 +80,6 @@ export default function AboutPage() {
           </div>
 
           <div className="h-[25rem]"></div>
-          <span>Evervault Card</span>
-          <span>Placeholders and Vanish Input</span>
         </Container>
       </div>
     </>
