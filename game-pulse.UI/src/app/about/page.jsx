@@ -86,6 +86,7 @@ export default function AboutPage() {
             </p>
           </div>
 
+          {/* TODO: MAKE THE CODE BLOCK BE SIDE BY SIDE WITH THE GITHUB REPO CARD ONLY ON MEDIUM/LARGER SCREENS, IF SMALL, JUST DON'T SHOW IT */}
           <div className="mt-20">
             {/* Code Block */}
             <div className="max-w-3xl mx-auto w-full">
