@@ -5,6 +5,7 @@ import { Container } from "../shared/container";
 import { Vortex } from "../shared/vortex";
 import { motion } from "framer-motion";
 import { EvervaultCard, Icon } from "../shared/evervault-card";
+import { CodeBlock } from "../shared/code-block";
 
 export default function AboutPage() {
   const ref = useRef(null);
@@ -18,6 +19,28 @@ export default function AboutPage() {
     offscreen: { opacity: 0, y: 300, transition: { duration: 0.8 } },
     onscreen: { opacity: 1, y: 0, transition: { duration: 0.8 } },
   };
+
+  const code = `const DummyComponent = () => {
+    const [count, setCount] = React.useState(0);
+   
+    const handleClick = () => {
+      setCount(prev => prev + 1);
+    };
+   
+    return (
+      <div className="p-4 border rounded-lg">
+        <h2 className="text-xl font-bold mb-4">Fights Counter</h2>
+        <p className="mb-2">Fight Club Fights Count: {count}</p>
+        <button 
+          onClick={handleClick}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Increment
+        </button>
+      </div>
+    );
+  };
+  `;
 
   return (
     <>
@@ -64,6 +87,12 @@ export default function AboutPage() {
           </div>
 
           <div className="mt-20">
+            {/* Code Block */}
+            <div className="max-w-3xl mx-auto w-full">
+              <CodeBlock language="jsx" filename="DummyComponent.jsx" highlightLines={[9, 13, 14, 18]} code={code} />
+            </div>
+
+            {/* GitHub Repo Card */}
             <div className="border border-white/[0.2] flex flex-col items-start max-w-sm mx-auto p-4 relative h-[30rem]">
               <Icon className="absolute h-6 w-6 -top-3 -left-3 text-white" />
               <Icon className="absolute h-6 w-6 -bottom-3 -left-3 text-white" />
