@@ -101,7 +101,7 @@ export default function AboutPage() {
           </div>
 
           {/* TODO: MAKE THE CODE BLOCK BE SIDE BY SIDE WITH THE GITHUB REPO CARD ONLY ON MEDIUM/LARGER SCREENS, IF SMALL, JUST DON'T SHOW IT */}
-          <div className="mt-20 flex items-center gap-4">
+          <div className="mt-20 pb-10 flex items-center gap-4">
             {/* GitHub Repo Card */}
             <div className="border border-white/[0.2] flex flex-col items-start max-w-sm mx-auto p-4 relative h-[30rem]">
               <Icon className="absolute h-6 w-6 -top-3 -left-3 text-white" />
@@ -126,8 +126,6 @@ export default function AboutPage() {
               </>
             ) : null}
           </div>
-
-          <div className="h-[25rem]"></div>
         </Container>
       </div>
     </>
