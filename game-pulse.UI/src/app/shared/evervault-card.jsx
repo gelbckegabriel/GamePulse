@@ -25,7 +25,7 @@ export const EvervaultCard = ({ text, className }) => {
   }
 
   return (
-    <div className={twMerge("p-0.5  bg-transparent aspect-square  flex items-center justify-center w-full h-full relative", className)}>
+    <div className={twMerge("p-0.5 bg-transparent aspect-square flex items-center justify-center w-full h-full relative", className)}>
       <div
         onMouseMove={onMouseMove}
         className="group/card rounded-3xl w-full relative overflow-hidden bg-transparent flex items-center justify-center h-full"
