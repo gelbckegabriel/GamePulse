@@ -9,6 +9,20 @@ import { CodeBlock } from "../shared/code-block";
 
 export default function AboutPage() {
   const ref = useRef(null);
+  const [screenWidth, setScreenWidth] = React.useState(0);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    handleResize(); // Set initial width
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  });
 
   const variantsLeft = {
     offscreen: { opacity: 0, y: -300, transition: { duration: 0.8 } },
@@ -20,7 +34,7 @@ export default function AboutPage() {
     onscreen: { opacity: 1, y: 0, transition: { duration: 0.8 } },
   };
 
-  const code = `const DummyComponent = () => {
+  const code = `const GamePulse = () => {
     const [count, setCount] = React.useState(0);
    
     const handleClick = () => {
@@ -29,13 +43,13 @@ export default function AboutPage() {
    
     return (
       <div className="p-4 border rounded-lg">
-        <h2 className="text-xl font-bold mb-4">Fights Counter</h2>
-        <p className="mb-2">Fight Club Fights Count: {count}</p>
+        <h2 className="text-xl font-bold mb-4">Game Pulse - Improve your game</h2>
+        <p className="mb-2">Games Played: {count}</p>
         <button 
           onClick={handleClick}
           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
-          Increment
+          Play
         </button>
       </div>
     );
@@ -87,12 +101,7 @@ export default function AboutPage() {
           </div>
 
           {/* TODO: MAKE THE CODE BLOCK BE SIDE BY SIDE WITH THE GITHUB REPO CARD ONLY ON MEDIUM/LARGER SCREENS, IF SMALL, JUST DON'T SHOW IT */}
-          <div className="mt-20">
-            {/* Code Block */}
-            <div className="max-w-3xl mx-auto w-full">
-              <CodeBlock language="jsx" filename="DummyComponent.jsx" highlightLines={[9, 13, 14, 18]} code={code} />
-            </div>
-
+          <div className="mt-20 flex items-center gap-4">
             {/* GitHub Repo Card */}
             <div className="border border-white/[0.2] flex flex-col items-start max-w-sm mx-auto p-4 relative h-[30rem]">
               <Icon className="absolute h-6 w-6 -top-3 -left-3 text-white" />
@@ -107,6 +116,15 @@ export default function AboutPage() {
                 <p className="text-sm border font-light border-white/[0.2] rounded-full mt-4 text-white px-2 py-0.5">View GitHub Repo</p>
               </a>
             </div>
+
+            {/* Code Block */}
+            {screenWidth >= 1130 ? (
+              <>
+                <div className="max-w-3xl mx-auto w-full">
+                  <CodeBlock language="jsx" filename="GamePulse.jsx" highlightLines={[9, 13, 14, 18]} code={code} />
+                </div>
+              </>
+            ) : null}
           </div>
 
           <div className="h-[25rem]"></div>
