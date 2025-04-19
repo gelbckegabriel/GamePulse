@@ -13,6 +13,7 @@ Table user_info {
 Table player_info {
   user_id integer
   favorite_sport integer
+  // TODO: Create a reference on the favorite position for a sport -> it can be one position to multiple sports
 }
 
 Table users {
@@ -25,6 +26,8 @@ Table users {
 }
 
 Table sports {
+  // TODO: Should I store positions in some type of array or create different rows for different positions -> 5 rows for basketball: PG, SG, PF...?
+  // TODO: Based on the last todo, rethink the favorite_sport on player_info table.
   id integer [primary key]
   name varchar(30)
   position varchar
@@ -32,11 +35,20 @@ Table sports {
 
 Table games {
   id integer
+  user_id integer
+  sport integer
+  game_time datetime
 }
 
 
+// USER INFORMATION RELATION
 Ref personal_info: users.id - user_info.user_id // one-to-one
 
+// PLAYER INFO RELATION
 Ref player_info: users.id - player_info.user_id // one-to-one
 
+// FAVORITE SPORT ON PLAYER INFO
 Ref: player_info.favorite_sport - sports.id // one-to-one
+
+// GAMES PLAYED BY USER RELATION
+Ref played_games: games.sport > users.id  // many-to-one
