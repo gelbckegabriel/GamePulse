@@ -1,5 +1,14 @@
 // Docs: https://dbml.dbdiagram.io/docs
 
+Table user {
+  id integer [primary key]
+  name varchar(80)
+  nickname varchar(15)
+  birthday date
+  xp integer
+  created_at timestamp
+}
+
 Table user_info {
   user_id integer
   email varchar(100)
@@ -14,15 +23,6 @@ Table player_info {
   user_id integer
   favorite_sport integer
   // TODO: Create a reference on the favorite position for a sport -> it can be one position to multiple sports
-}
-
-Table users {
-  id integer [primary key]
-  name varchar(80)
-  nickname varchar(15)
-  birthday date
-  xp integer
-  created_at timestamp
 }
 
 Table sports {
@@ -40,15 +40,24 @@ Table games {
   game_time datetime
 }
 
+Table best_game_player {
+  game_id integer
+  user_id integer
+}
+
 
 // USER INFORMATION RELATION
-Ref personal_info: users.id - user_info.user_id // one-to-one
+Ref personal_info: user.id - user_info.user_id // one-to-one
 
 // PLAYER INFO RELATION
-Ref player_info: users.id - player_info.user_id // one-to-one
+Ref player_info: user.id - player_info.user_id // one-to-one
 
 // FAVORITE SPORT ON PLAYER INFO
 Ref: player_info.favorite_sport - sports.id // one-to-one
 
 // GAMES PLAYED BY USER RELATION
-Ref played_games: games.sport > users.id  // many-to-one
+Ref played_games: games.sport > user.id  // many-to-one
+
+// BEST PLAYER OF THE GAME RELATION
+Ref game: best_game_player.game_id - games.id // one-to-one
+Ref best_player: best_game_player.user_id - user.id // one-to-one
