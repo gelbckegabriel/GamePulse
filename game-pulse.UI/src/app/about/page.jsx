@@ -112,7 +112,7 @@ export default function AboutPage() {
               <EvervaultCard text="hover" />
 
               <h2 className="text-white mt-4 text-sm font-light">Would you like to see the code behind this website and how everything was built?</h2>
-              <a href="http://github.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/gelbckegabriel/GamePulse" target="_blank" rel="noopener noreferrer">
                 <p className="text-sm border font-light border-white/[0.2] rounded-full mt-4 text-white px-2 py-0.5">View GitHub Repo</p>
               </a>
             </div>
