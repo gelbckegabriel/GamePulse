@@ -1,0 +1,42 @@
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table user_info {
+  user_id integer
+  email varchar(100)
+  phone integer(20)
+  city varchar(50)
+  state char(2)
+  country char(2)
+  address varchar(150)
+}
+
+Table player_info {
+  user_id integer
+  favorite_sport integer
+}
+
+Table users {
+  id integer [primary key]
+  name varchar(80)
+  nickname varchar(15)
+  birthday date
+  xp integer
+  created_at timestamp
+}
+
+Table sports {
+  id integer [primary key]
+  name varchar(30)
+  position varchar
+}
+
+Table games {
+  id integer
+}
+
+
+Ref personal_info: users.id - user_info.user_id // one-to-one
+
+Ref player_info: users.id - player_info.user_id // one-to-one
+
+Ref: player_info.favorite_sport - sports.id // one-to-one
