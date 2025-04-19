@@ -80,7 +80,7 @@ export default function Courts() {
             <br />
 
             {/* FILTERS BAR */}
-            <div className="flex justify-center gap-6">
+            <div className="mb-6 flex flex-wrap justify-center gap-6">
               {/* SPORTS */}
               <Menu
                 lockScroll={true}
@@ -91,9 +91,7 @@ export default function Courts() {
                 }}
               >
                 <MenuHandler>
-                  <Button className="bg-white text-black">
-                    <span>Sports</span>
-                  </Button>
+                  <Button className="bg-white text-black w-[105px] hover:scale-105 hover:bg-white/80"> Sports </Button>
                 </MenuHandler>
                 <MenuList>
                   <MenuItem>
@@ -161,7 +159,7 @@ export default function Courts() {
                 }}
               >
                 <MenuHandler>
-                  <Button className="bg-white text-black"> Distance </Button>
+                  <Button className="bg-white text-black w-[105px] hover:scale-105 hover:bg-white/80"> Distance </Button>
                 </MenuHandler>
                 <MenuList>
                   <span className="flex justify-center mb-3">{distanceFilter} km</span>
@@ -179,7 +177,7 @@ export default function Courts() {
                 }}
               >
                 <MenuHandler>
-                  <Button className="bg-white text-black"> City </Button>
+                  <Button className="bg-white text-black w-[105px] hover:scale-105 hover:bg-white/80"> City </Button>
                 </MenuHandler>
                 <MenuList className="!min-h-[25vh]">
                   <Select value={cityFilter} onChange={(val) => setCityFilter(val)} label="Select City">
@@ -198,7 +196,7 @@ export default function Courts() {
                 }}
               >
                 <MenuHandler>
-                  <Button className="bg-white text-black"> Order By </Button>
+                  <Button className="bg-white text-black w-[105px] duration-150 hover:scale-105 hover:bg-white/80"> Order By </Button>
                 </MenuHandler>
                 <MenuList className="!min-h-[25vh]">
                   <Select value={orderFilter} onChange={(val) => setOrderFilter(val)} label="Order by...">
