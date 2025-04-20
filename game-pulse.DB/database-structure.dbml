@@ -17,7 +17,7 @@ Table user {
 Table user_info {
   user_id integer [primary key]
   email varchar(100)
-  phone integer(20)
+  phone varchar(30)
   city varchar(50)
   state char(2)
   country char(2)
@@ -60,7 +60,7 @@ Table sports_positions {
 Table games {
   id integer [primary key]
   user_id integer
-  sport integer
+  sport_id integer
   game_time datetime
 
   indexes {
@@ -87,6 +87,9 @@ Ref: player_favorite_position.position_id - sports_positions.id
 
 // FAVORITE SPORT ON PLAYER INFO
 Ref: player_info.favorite_sport - sports.id
+
+// GAMES RELATION
+Ref: games.sport_id > sports.id
 
 // BEST PLAYER OF THE GAME RELATION
 Ref game: best_game_player.game_id - games.id
