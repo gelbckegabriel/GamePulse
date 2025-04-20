@@ -25,6 +25,13 @@ Table player_info {
   // TODO: Create a reference on the favorite position for a sport -> it can be one position to multiple sports
 }
 
+Table player_favorite_position {
+  user_id integer [primary key]
+  sport_id integer [primary key]
+  position_id integer
+  added_at timestamp
+}
+
 Table sports {
   id integer [primary key]
   name varchar(30)
@@ -57,6 +64,9 @@ Ref: user.id < games.user_id
 
 // SPORT POSITIONS RELATION
 Ref: sports.id < sports_positions.sport_id
+Ref: player_favorite_position.user_id < user.id
+Ref: player_favorite_position.sport_id - sports.id
+Ref: player_favorite_position.position_id - sports_positions.id
 
 // FAVORITE SPORT ON PLAYER INFO
 Ref: player_info.favorite_sport - sports.id
