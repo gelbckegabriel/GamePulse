@@ -70,6 +70,7 @@
   Table game_players {
     game_id integer [primary key]
     user_id integer [primary key]
+    presence boolean [note: "Did the player attend ?"]
   }
 
 
