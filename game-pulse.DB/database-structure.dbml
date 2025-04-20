@@ -2,7 +2,7 @@
 
   Table user {
     id integer [primary key]
-    name varchar(80)
+    name varchar(80) [not null]
     nickname varchar(15)
     birthday date
     xp integer
@@ -17,7 +17,7 @@
 
   Table user_info {
     user_id integer [primary key]
-    email varchar(100)
+    email varchar(100) [not null]
     phone varchar(30)
     city varchar(50)
     state char(2)
@@ -34,19 +34,19 @@
   Table player_favorite_position {
     user_id integer [primary key]
     sport_id integer [primary key]
-    position_id integer
+    position_id integer [not null]
     added_at date
   }
 
   Table sports {
     id integer [primary key]
-    name varchar(30)
+    name varchar(30) [not null]
   }
 
   Table sports_positions {
     id integer [primary key]
-    sport_id integer
-    name varchar(30)
+    sport_id integer [not null]
+    name varchar(30) [not null]
 
     indexes {
       (sport_id)
@@ -55,10 +55,10 @@
 
   Table games {
     id integer [primary key]
-    sport_id integer
+    sport_id integer [not null]
     location varchar(100)
     game_time datetime
-    best_player_id integer [note: "Nullable"]
+    best_player_id integer
 
     indexes {
       (location)
@@ -70,6 +70,22 @@
     game_id integer [primary key]
     user_id integer [primary key]
     presence boolean [note: "Did the player attend ?"]
+    player_grade integer
+  }
+
+  Table courts {
+    id integer [primary key]
+    sport integer [primary key]
+    name varchar(50)
+    city varchar(50)
+    country char(2)
+    address varchar(150)
+    g_maps varchar
+
+    indexes {
+      (name)
+      (city)
+    }
   }
 
 
@@ -88,3 +104,6 @@
   Ref best_player: games.best_player_id > user.id
   Ref game_sport: games.sport_id > sports.id
   Ref: games.id < game_players.game_id
+
+  // COURTS RELATION
+  Ref court_sports: courts.sport > sports.id
