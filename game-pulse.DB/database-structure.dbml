@@ -58,20 +58,17 @@
     sport_id integer
     location varchar(100)
     game_time datetime
+    best_player_id integer [note: "Nullable"]
 
     indexes {
       (location)
+      (best_player_id)
     }
   }
 
   Table game_players {
     game_id integer [primary key]
     user_id integer [primary key]
-  }
-
-  Table best_game_player {
-    game_id integer [primary key]
-    user_id integer
   }
 
 
@@ -87,9 +84,6 @@
   Ref: player_favorite_position.position_id - sports_positions.id
 
   // GAMES RELATION
-  Ref: games.sport_id > sports.id
+  Ref best_player: games.best_player_id > user.id
+  Ref game_sport: games.sport_id > sports.id
   Ref: games.id < game_players.game_id
-
-  // BEST PLAYER OF THE GAME RELATION
-  Ref game: best_game_player.game_id - games.id
-  Ref best_player: best_game_player.user_id > user.id
