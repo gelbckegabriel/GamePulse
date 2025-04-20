@@ -10,7 +10,7 @@ Table user {
 }
 
 Table user_info {
-  user_id integer
+  user_id integer [primary key]
   email varchar(100)
   phone integer(20)
   city varchar(50)
@@ -20,44 +20,47 @@ Table user_info {
 }
 
 Table player_info {
-  user_id integer
+  user_id integer [primary key]
   favorite_sport integer
   // TODO: Create a reference on the favorite position for a sport -> it can be one position to multiple sports
 }
 
 Table sports {
-  // TODO: Should I store positions in some type of array or create different rows for different positions -> 5 rows for basketball: PG, SG, PF...?
-  // TODO: Based on the last todo, rethink the favorite_sport on player_info table.
   id integer [primary key]
   name varchar(30)
   position varchar
 }
 
+Table sports_positions {
+  id integer [primary key]
+  sport_id integer
+  name varchar(30)
+}
+
 Table games {
-  id integer
+  id integer [primary key]
   user_id integer
   sport integer
   game_time datetime
 }
 
 Table best_game_player {
-  game_id integer
-  user_id integer
+  game_id integer [primary key]
+  user_id integer [primary key]
 }
 
 
 // USER INFORMATION RELATION
-Ref personal_info: user.id - user_info.user_id // one-to-one
+Ref: user.id - user_info.user_id
+Ref: user.id - player_info.user_id
+Ref: user.id < games.user_id
 
-// PLAYER INFO RELATION
-Ref player_info: user.id - player_info.user_id // one-to-one
+// SPORT POSITIONS RELATION
+Ref: sports.id < sports_positions.sport_id
 
 // FAVORITE SPORT ON PLAYER INFO
-Ref: player_info.favorite_sport - sports.id // one-to-one
-
-// GAMES PLAYED BY USER RELATION
-Ref played_games: games.sport > user.id  // many-to-one
+Ref: player_info.favorite_sport - sports.id
 
 // BEST PLAYER OF THE GAME RELATION
-Ref game: best_game_player.game_id - games.id // one-to-one
-Ref best_player: best_game_player.user_id - user.id // one-to-one
+Ref game: best_game_player.game_id - games.id
+Ref best_player: best_game_player.user_id - user.id
