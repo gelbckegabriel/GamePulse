@@ -66,6 +66,7 @@
     }
   }
 
+  // IS THIS TABLE REALLY NEEDED? (ONLY IF I WANT TO DISPLAY STATUS OF HOW MUCH GAMES THIS PLAYER HAS PLAYED)
   Table game_players {
     game_id integer [primary key]
     user_id integer [primary key]
