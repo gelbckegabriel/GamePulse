@@ -3,11 +3,11 @@
   Table user {
     id integer [primary key]
     name varchar(80) [not null]
-    nickname varchar(15)
+    nickname varchar(15) [not null]
     birthday date
-    xp integer
+    xp integer [not null]
     favorite_sport integer
-    created_at timestamp
+    created_at timestamp [not null]
 
     indexes {
       (birthday)
@@ -35,7 +35,7 @@
     user_id integer [primary key]
     sport_id integer [primary key]
     position_id integer [not null]
-    added_at date
+    added_at date [not null]
   }
 
   Table sports {
@@ -57,8 +57,8 @@
     id integer [primary key]
     sport_id integer [not null]
     location varchar(100)
-    game_time datetime
-    best_player_id integer
+    game_time datetime [not null]
+    best_player_id integer [not null]
 
     indexes {
       (location)
@@ -75,11 +75,11 @@
 
   Table courts {
     id integer [primary key]
-    name varchar(50)
-    city varchar(50)
-    country char(2)
-    address varchar(150)
-    g_maps varchar
+    name varchar(50) [not null]
+    city varchar(50) [not null]
+    country char(2) [not null]
+    address varchar(150) [not null]
+    g_maps varchar [not null]
 
     indexes {
       (name)
