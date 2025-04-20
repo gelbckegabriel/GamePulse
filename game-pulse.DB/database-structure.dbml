@@ -75,7 +75,6 @@
 
   Table courts {
     id integer [primary key]
-    sport integer [primary key]
     name varchar(50)
     city varchar(50)
     country char(2)
@@ -86,6 +85,11 @@
       (name)
       (city)
     }
+  }
+
+  Table court_sports {
+    court_id integer [primary key]
+    sport_id integer [primary key]
   }
 
 
@@ -106,4 +110,5 @@
   Ref: games.id < game_players.game_id
 
   // COURTS RELATION
-  Ref court_sports: courts.sport > sports.id
+  Ref court: court_sports.court_id > courts.id
+  Ref sport: court_sports.sport_id > sports.id
