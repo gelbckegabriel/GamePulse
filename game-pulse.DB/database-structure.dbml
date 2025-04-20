@@ -7,6 +7,11 @@ Table user {
   birthday date
   xp integer
   created_at timestamp
+
+  indexes {
+    (birthday)
+    (xp)
+  }
 }
 
 Table user_info {
@@ -17,12 +22,17 @@ Table user_info {
   state char(2)
   country char(2)
   address varchar(150)
+
+  indexes {
+    (city)
+    (state)
+    (country)
+  }
 }
 
 Table player_info {
   user_id integer [primary key]
   favorite_sport integer
-  // TODO: Create a reference on the favorite position for a sport -> it can be one position to multiple sports
 }
 
 Table player_favorite_position {
@@ -35,13 +45,16 @@ Table player_favorite_position {
 Table sports {
   id integer [primary key]
   name varchar(30)
-  position varchar
 }
 
 Table sports_positions {
   id integer [primary key]
   sport_id integer
   name varchar(30)
+
+  indexes {
+    (sport_id)
+  }
 }
 
 Table games {
@@ -49,6 +62,10 @@ Table games {
   user_id integer
   sport integer
   game_time datetime
+
+  indexes {
+    (user_id)
+  }
 }
 
 Table best_game_player {
