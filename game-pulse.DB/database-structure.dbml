@@ -1,96 +1,95 @@
-// Docs: https://dbml.dbdiagram.io/docs
+  // Docs: https://dbml.dbdiagram.io/docs
 
-Table user {
-  id integer [primary key]
-  name varchar(80)
-  nickname varchar(15)
-  birthday date
-  xp integer
-  created_at timestamp
+  Table user {
+    id integer [primary key]
+    name varchar(80)
+    nickname varchar(15)
+    birthday date
+    xp integer
+    favorite_sport integer
+    created_at timestamp
 
-  indexes {
-    (birthday)
-    (xp)
+    indexes {
+      (birthday)
+      (xp)
+    }
   }
-}
 
-Table user_info {
-  user_id integer [primary key]
-  email varchar(100)
-  phone varchar(30)
-  city varchar(50)
-  state char(2)
-  country char(2)
-  address varchar(150)
+  Table user_info {
+    user_id integer [primary key]
+    email varchar(100)
+    phone varchar(30)
+    city varchar(50)
+    state char(2)
+    country char(2)
+    address varchar(150)
 
-  indexes {
-    (city)
-    (state)
-    (country)
+    indexes {
+      (city)
+      (state)
+      (country)
+    }
   }
-}
 
-Table player_info {
-  user_id integer [primary key]
-  favorite_sport integer
-}
-
-Table player_favorite_position {
-  user_id integer [primary key]
-  sport_id integer [primary key]
-  position_id integer
-  added_at timestamp
-}
-
-Table sports {
-  id integer [primary key]
-  name varchar(30)
-}
-
-Table sports_positions {
-  id integer [primary key]
-  sport_id integer
-  name varchar(30)
-
-  indexes {
-    (sport_id)
+  Table player_favorite_position {
+    user_id integer [primary key]
+    sport_id integer [primary key]
+    position_id integer
+    added_at date
   }
-}
 
-Table games {
-  id integer [primary key]
-  user_id integer
-  sport_id integer
-  game_time datetime
-
-  indexes {
-    (user_id)
+  Table sports {
+    id integer [primary key]
+    name varchar(30)
   }
-}
 
-Table best_game_player {
-  game_id integer [primary key]
-  user_id integer [primary key]
-}
+  Table sports_positions {
+    id integer [primary key]
+    sport_id integer
+    name varchar(30)
+
+    indexes {
+      (sport_id)
+    }
+  }
+
+  Table games {
+    id integer [primary key]
+    sport_id integer
+    location varchar(100)
+    game_time datetime
+
+    indexes {
+      (location)
+    }
+  }
+
+  Table game_players {
+    game_id integer [primary key]
+    user_id integer [primary key]
+  }
+
+  Table best_game_player {
+    game_id integer [primary key]
+    user_id integer
+  }
 
 
-// USER INFORMATION RELATION
-Ref: user.id - user_info.user_id
-Ref: user.id - player_info.user_id
-Ref: user.id < games.user_id
+  // USER INFORMATION RELATION
+  Ref: user.id - user_info.user_id
+  Ref: user.favorite_sport - sports.id
+  Ref: game_players.user_id > user.id
 
-// SPORT POSITIONS RELATION
-Ref: sports.id < sports_positions.sport_id
-Ref: player_favorite_position.user_id < user.id
-Ref: player_favorite_position.sport_id - sports.id
-Ref: player_favorite_position.position_id - sports_positions.id
+  // SPORT POSITIONS RELATION
+  Ref: sports.id < sports_positions.sport_id
+  Ref: player_favorite_position.user_id > user.id
+  Ref: player_favorite_position.sport_id - sports.id
+  Ref: player_favorite_position.position_id - sports_positions.id
 
-// FAVORITE SPORT ON PLAYER INFO
-Ref: player_info.favorite_sport - sports.id
+  // GAMES RELATION
+  Ref: games.sport_id > sports.id
+  Ref: games.id < game_players.game_id
 
-// GAMES RELATION
-Ref: games.sport_id > sports.id
-
-// BEST PLAYER OF THE GAME RELATION
-Ref game: best_game_player.game_id - games.id
-Ref best_player: best_game_player.user_id - user.id
+  // BEST PLAYER OF THE GAME RELATION
+  Ref game: best_game_player.game_id - games.id
+  Ref best_player: best_game_player.user_id > user.id
