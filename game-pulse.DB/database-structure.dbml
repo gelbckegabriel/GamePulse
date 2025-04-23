@@ -4,13 +4,11 @@
     id integer [primary key]
     name varchar(80) [not null]
     nickname varchar(15) [not null]
-    birthday date
     xp integer [not null]
     favorite_sport integer
     created_at timestamp [not null]
 
     indexes {
-      (birthday)
       (xp)
     }
   }
@@ -19,23 +17,18 @@
     user_id integer [primary key]
     email varchar(100) [not null]
     phone varchar(30)
+    birthday date
     city varchar(50)
     state char(2)
     country char(2)
     address varchar(150)
 
     indexes {
+      (birthday)
       (city)
       (state)
       (country)
     }
-  }
-
-  Table player_favorite_position {
-    user_id integer [primary key]
-    sport_id integer [primary key]
-    position_id integer [not null]
-    added_at date [not null]
   }
 
   Table sports {
@@ -53,12 +46,19 @@
     }
   }
 
+  Table player_favorite_position {
+    user_id integer [primary key]
+    sport_id integer [primary key]
+    position_id integer [not null]
+    added_at date [not null]
+  }
+
   Table games {
     id integer [primary key]
     sport_id integer [not null]
-    location varchar(100)
+    location varchar(100) [not null]
     game_time datetime [not null]
-    best_player_id integer [not null]
+    best_player_id integer
 
     indexes {
       (location)
