@@ -2,10 +2,8 @@
 
 import { useState } from "react";
 import { useAnimate, useDragControls, useMotionValue, motion } from "framer-motion";
-import { FaFingerprint, FaRegEye, FaRegEyeSlash, FaRegUserCircle, FaRunning } from "react-icons/fa";
-import { FaPerson } from "react-icons/fa6";
+import { FaRegUserCircle, FaRunning } from "react-icons/fa";
 import { IoMdPerson, IoMdPin } from "react-icons/io";
-import { MdEmail } from "react-icons/md";
 import useMeasure from "react-use-measure";
 import { Button } from "./button";
 import { Option, Select, Tooltip } from "@material-tailwind/react";
@@ -168,7 +166,10 @@ export const ProviderAuth = ({ openAuth, setOpenAuth }) => {
                       <p className="text-sm2 mb-1">Location</p>
                       <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                         <IoMdPin />
-                        <Select disabled={newUser} className="!pl-1 !border-0 !border-transparent !w-full !outline-none !text-sm2 !bg-opacity-0 !text-white">
+                        <Select
+                          disabled={newUser}
+                          className="!pl-1 !border-0 !border-transparent !w-full !outline-none !text-sm2 !bg-opacity-0 !text-white"
+                        >
                           <Option value="curitiba">Curitiba, PR</Option>
                         </Select>
                       </div>
@@ -178,7 +179,10 @@ export const ProviderAuth = ({ openAuth, setOpenAuth }) => {
                       <p className="text-sm2 mb-1">Favorite Sport</p>
                       <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                         <FaRunning />
-                        <Select disabled={newUser} className="!pl-1 !border-0 !border-transparent !w-full !outline-none !text-sm2 !bg-opacity-0 !text-white">
+                        <Select
+                          disabled={newUser}
+                          className="!pl-1 !border-0 !border-transparent !w-full !outline-none !text-sm2 !bg-opacity-0 !text-white"
+                        >
                           <Option value="basketball">Basktetball</Option>
                         </Select>
                       </div>
