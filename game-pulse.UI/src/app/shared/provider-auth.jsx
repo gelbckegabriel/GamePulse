@@ -105,8 +105,8 @@ export const ProviderAuth = ({ openAuth, setOpenAuth }) => {
 
                 <div className="providers py-6">
                   {/* AUTHENTICATORS */}
-                  <div className="flex justify-center gap-20">
-                    <div className="w-[30%]">
+                  <div className="flex justify-center gap-10 md:gap-20">
+                    <div className="w-[50%] md:w-[30%]">
                       <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex justify-center items-center gap-2 p-2 rounded-xl cursor-pointer transition-all duration-300 hover:bg-opacity-25">
                         <span className="flex items-center">
                           <img src="auth/google.webp" alt="google logo" className="h-8 w-8" />
@@ -116,7 +116,7 @@ export const ProviderAuth = ({ openAuth, setOpenAuth }) => {
                     </div>
 
                     {/* TODO: Facebook might be implemented later on */}
-                    <div className="w-[30%]">
+                    <div className="w-[50%] md:w-[30%]">
                       <Tooltip content="Not available yet !">
                         <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex justify-center items-center gap-2 p-2 rounded-xl cursor-pointer transition-all duration-300 hover:bg-opacity-25">
                           <span className="flex items-center">
@@ -129,9 +129,9 @@ export const ProviderAuth = ({ openAuth, setOpenAuth }) => {
                 </div>
 
                 <div className="form">
-                  {/* NAME AND LASTNAME FIELDS */}
-                  <div className="flex justify-between">
-                    <div className="w-[55%] md:w-[45%]">
+                  {/* NAME AND USERNAME FIELDS */}
+                  <div className="flex justify-between gap-6">
+                    <div className="w-[50%] md:w-[45%]">
                       <p className="text-sm2 mb-1">Name</p>
                       <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                         <IoMdPerson />
@@ -145,7 +145,7 @@ export const ProviderAuth = ({ openAuth, setOpenAuth }) => {
                       </div>
                     </div>
 
-                    <div className="w-[40%]">
+                    <div className="w-[50%] md:w-[45%]">
                       <p className="text-sm2 mb-1">Nickname</p>
                       <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                         <FaRegUserCircle />
@@ -161,26 +161,32 @@ export const ProviderAuth = ({ openAuth, setOpenAuth }) => {
                   </div>
 
                   {/* LOCATION AND FAVORITE SPORT FIELDS */}
-                  <div className="flex justify-between mt-8">
-                    <div className="w-[55%] md:w-[45%]">
+                  <div className="flex justify-between gap-6 mt-8">
+                    <div className="w-[50%] md:w-[45%]">
                       <p className="text-sm2 mb-1">Location</p>
                       <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                         <IoMdPin />
                         <Select
                           disabled={newUser}
-                          className="!pl-1 !border-0 !border-transparent !w-full !outline-none !text-sm2 !bg-opacity-0 !text-white"
+                          containerProps={{
+                            className: "!min-w-0 w-full",
+                          }}
+                          className="!w-full !pl-1 !border-0 !border-transparent !outline-none !text-sm2 !bg-opacity-0 !text-white"
                         >
                           <Option value="curitiba">Curitiba, PR</Option>
                         </Select>
                       </div>
                     </div>
 
-                    <div className="w-[40%]">
+                    <div className="w-[50%] md:w-[45%]">
                       <p className="text-sm2 mb-1">Favorite Sport</p>
                       <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                         <FaRunning />
                         <Select
                           disabled={newUser}
+                          containerProps={{
+                            className: "!min-w-0 w-full",
+                          }}
                           className="!pl-1 !border-0 !border-transparent !w-full !outline-none !text-sm2 !bg-opacity-0 !text-white"
                         >
                           <Option value="basketball">Basktetball</Option>
