@@ -14,7 +14,7 @@ type Props = {
 
 export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
   // const [openAuth, setOpenAuth] = useState<boolean>(false);
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  // const [showPassword, setShowPassword] = useState<boolean>(false);
   // const togglePasswordView = () => setShowPassword(!showPassword);
 
   return (
