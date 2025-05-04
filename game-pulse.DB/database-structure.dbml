@@ -3,7 +3,7 @@
   Table user {
     id integer [primary key]
     name varchar(80) [not null]
-    nickname varchar(15) [not null]
+    nickname varchar(20) [not null]
     xp integer [not null]
     favorite_sport integer
     created_at timestamp [not null]

@@ -139,7 +139,7 @@ export const ProviderAuth = ({ openAuth, setOpenAuth }) => {
                         <IoMdPerson />
                         <input
                           type="text"
-                          maxLength={40}
+                          maxLength={60}
                           style={{ backgroundColor: "transparent" }}
                           className="pl-1 border-0 w-full outline-none text-sm2"
                           required
@@ -153,7 +153,7 @@ export const ProviderAuth = ({ openAuth, setOpenAuth }) => {
                         <FaRegUserCircle />
                         <input
                           type="text"
-                          maxLength={15}
+                          maxLength={20}
                           style={{ backgroundColor: "transparent" }}
                           className="pl-1 border-0 w-full outline-none text-sm2"
                           required
@@ -162,7 +162,7 @@ export const ProviderAuth = ({ openAuth, setOpenAuth }) => {
                     </div>
                   </div>
 
-                  {/* USERNAME AND FAVORITE SPORT FIELDS */}
+                  {/* LOCATION AND FAVORITE SPORT FIELDS */}
                   <div className="flex justify-between mt-8">
                     <div className="w-[55%] md:w-[45%]">
                       <p className="text-sm2 mb-1">Location</p>
