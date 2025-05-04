@@ -73,12 +73,12 @@
   Table games {
     id integer [primary key]
     sport_id integer [not null]
-    location varchar(100) [not null]
+    court_id integer [not null]
     game_time datetime [not null]
     best_player_id integer
 
     indexes {
-      (location)
+      (court_id)
       (best_player_id)
     }
   }
@@ -125,6 +125,7 @@
   // GAMES RELATION
   Ref best_player: games.best_player_id > user.id
   Ref game_sport: games.sport_id > sports.id
+  Ref court_played: games.court_id > courts.id
   Ref: games.id < game_players.game_id
 
   // COURTS RELATION
