@@ -128,80 +128,95 @@ export const ProviderAuth = ({ openAuth, setOpenAuth }) => {
                   </div>
                 </div>
 
-                <div className="form">
-                  {/* NAME AND USERNAME FIELDS */}
-                  <div className="flex justify-between gap-6">
-                    <div className="w-[50%] md:w-[45%]">
-                      <p className="text-sm2 mb-1">Name</p>
-                      <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
-                        <IoMdPerson />
-                        <input
-                          type="text"
-                          maxLength={60}
-                          style={{ backgroundColor: "transparent" }}
-                          className="pl-1 border-0 w-full outline-none text-sm2"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div className="w-[50%] md:w-[45%]">
-                      <p className="text-sm2 mb-1">Nickname</p>
-                      <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
-                        <FaRegUserCircle />
-                        <input
-                          type="text"
-                          maxLength={20}
-                          style={{ backgroundColor: "transparent" }}
-                          className="pl-1 border-0 w-full outline-none text-sm2"
-                          required
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* LOCATION AND FAVORITE SPORT FIELDS */}
-                  <div className="flex justify-between gap-6 mt-8">
-                    <div className="w-[50%] md:w-[45%]">
-                      <p className="text-sm2 mb-1">Location</p>
-                      <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
-                        <IoMdPin />
-                        <Select
-                          disabled={newUser}
-                          containerProps={{
-                            className: "!min-w-0 w-full",
-                          }}
-                          className="!w-full !pl-1 !border-0 !border-transparent !outline-none !text-sm2 !bg-opacity-0 !text-white"
-                        >
-                          <Option value="curitiba">Curitiba, PR</Option>
-                        </Select>
-                      </div>
-                    </div>
-
-                    <div className="w-[50%] md:w-[45%]">
-                      <p className="text-sm2 mb-1">Favorite Sport</p>
-                      <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
-                        <FaRunning />
-                        <Select
-                          disabled={newUser}
-                          containerProps={{
-                            className: "!min-w-0 w-full",
-                          }}
-                          className="!pl-1 !border-0 !border-transparent !w-full !outline-none !text-sm2 !bg-opacity-0 !text-white"
-                        >
-                          <Option value="basketball">Basktetball</Option>
-                        </Select>
-                      </div>
-                    </div>
-                  </div>
+                <div className="flex justify-center">
+                  <button className="border-2 border-white p-2 rounded-xl" onClick={() => setNewUser(true)}>
+                    test
+                  </button>
                 </div>
 
-                {/* UPDATE BUTTON */}
+                {/* DISPLAY UPDATE FORM IF NEW USER DETECTED */}
                 {newUser ? (
                   <>
-                    <div className="pt-6 flex justify-center">
-                      <Button onClick={() => handleSubmit}>Update Account Info</Button>
-                    </div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 500 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.4
+                      }}
+                    >
+                      <div className="form">
+                        {/* NAME AND USERNAME FIELDS */}
+                        <div className="flex justify-between gap-6">
+                          <div className="w-[50%] md:w-[45%]">
+                            <p className="text-sm2 mb-1">Name</p>
+                            <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
+                              <IoMdPerson />
+                              <input
+                                type="text"
+                                maxLength={60}
+                                style={{ backgroundColor: "transparent" }}
+                                className="pl-1 border-0 w-full outline-none text-sm2"
+                                required
+                              />
+                            </div>
+                          </div>
+
+                          <div className="w-[50%] md:w-[45%]">
+                            <p className="text-sm2 mb-1">Nickname</p>
+                            <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
+                              <FaRegUserCircle />
+                              <input
+                                type="text"
+                                maxLength={20}
+                                style={{ backgroundColor: "transparent" }}
+                                className="pl-1 border-0 w-full outline-none text-sm2"
+                                required
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* LOCATION AND FAVORITE SPORT FIELDS */}
+                        <div className="flex justify-between gap-6 mt-8">
+                          <div className="w-[50%] md:w-[45%]">
+                            <p className="text-sm2 mb-1">Location</p>
+                            <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
+                              <IoMdPin />
+                              <Select
+                                disabled={newUser}
+                                containerProps={{
+                                  className: "!min-w-0 w-full",
+                                }}
+                                className="!w-full !pl-1 !border-0 !border-transparent !outline-none !text-sm2 !bg-opacity-0 !text-white"
+                              >
+                                <Option value="curitiba">Curitiba, PR</Option>
+                              </Select>
+                            </div>
+                          </div>
+
+                          <div className="w-[50%] md:w-[45%]">
+                            <p className="text-sm2 mb-1">Favorite Sport</p>
+                            <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
+                              <FaRunning />
+                              <Select
+                                disabled={newUser}
+                                containerProps={{
+                                  className: "!min-w-0 w-full",
+                                }}
+                                className="!pl-1 !border-0 !border-transparent !w-full !outline-none !text-sm2 !bg-opacity-0 !text-white"
+                              >
+                                <Option value="basketball">Basktetball</Option>
+                              </Select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* UPDATE BUTTON */}
+                      <div className="pt-10 pb-6 flex justify-center">
+                        <Button onClick={() => handleSubmit}>Update Account Info</Button>
+                      </div>
+                    </motion.div>
                   </>
                 ) : (
                   <></>
