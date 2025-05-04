@@ -13,6 +13,23 @@
     }
   }
 
+  Table user_accounts {
+    id integer [primary key]
+    user_id integer [not null]
+    provider varchar(30) [not null]
+    provider_account_id varchar(100) [not null]
+    access_token text
+    refresh_token text
+    token_expires timestamp
+    created_at timestamp [default: 'now()']
+
+    indexes {
+      (user_id)
+      (provider, provider_account_id) [unique]
+    }
+  }
+
+
   Table user_info {
     user_id integer [primary key]
     email varchar(100) [not null]
@@ -94,6 +111,7 @@
 
 
   // USER INFORMATION RELATION
+  Ref: user_accounts.user_id > user.id
   Ref: user.id - user_info.user_id
   Ref: user.favorite_sport - sports.id
   Ref: game_players.user_id > user.id
