@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "6lH8txl5uF4=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ggelbck\\Documents\\Projects\\GamePulse\\game-pulse.API\\game-pulse.API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ggelbck\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.3\\microsoft.aspnetcore.openapi.9.0.3.nupkg.sha512",
+    "C:\\Users\\ggelbck\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
