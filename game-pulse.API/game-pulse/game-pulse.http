@@ -1,0 +1,6 @@
+@game_pulse_HostAddress = http://localhost:5121
+
+GET {{game_pulse_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

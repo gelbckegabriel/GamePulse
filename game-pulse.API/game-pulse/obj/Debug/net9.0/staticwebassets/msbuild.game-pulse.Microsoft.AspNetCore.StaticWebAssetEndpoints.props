@@ -1,0 +1,16 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAssetEndpoint Include="_content/game-pulse/SwaggerUI/SwaggerDark.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\SwaggerUI\SwaggerDark.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-BgA6vEUVsQRJ88vEqlK0xjsXyOf/fJ1oVtnfhtvXNn8="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"51126"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022BgA6vEUVsQRJ88vEqlK0xjsXyOf/fJ1oVtnfhtvXNn8=\u0022"},{"Name":"Last-Modified","Value":"Wed, 14 May 2025 17:06:49 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/game-pulse/SwaggerUI/SwaggerDark.qjgtj5eoww.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\SwaggerUI\SwaggerDark.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"qjgtj5eoww"},{"Name":"integrity","Value":"sha256-BgA6vEUVsQRJ88vEqlK0xjsXyOf/fJ1oVtnfhtvXNn8="},{"Name":"label","Value":"_content/game-pulse/SwaggerUI/SwaggerDark.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"51126"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022BgA6vEUVsQRJ88vEqlK0xjsXyOf/fJ1oVtnfhtvXNn8=\u0022"},{"Name":"Last-Modified","Value":"Wed, 14 May 2025 17:06:49 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+  </ItemGroup>
+</Project>

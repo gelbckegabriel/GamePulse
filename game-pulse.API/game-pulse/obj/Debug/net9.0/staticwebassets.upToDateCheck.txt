@@ -1,0 +1,2 @@
+C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.API\game-pulse\wwwroot\SwaggerUI\SwaggerDark.css
+wwwroot\SwaggerUI\SwaggerDark.css

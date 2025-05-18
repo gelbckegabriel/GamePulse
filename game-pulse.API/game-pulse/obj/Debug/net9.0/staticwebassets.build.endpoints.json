@@ -1,0 +1,304 @@
+{
+  "Version": 1,
+  "ManifestType": "Build",
+  "Endpoints": [
+    {
+      "Route": "SwaggerUI/SwaggerDark.css",
+      "AssetFile": "SwaggerUI/SwaggerDark.css.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000099730727"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "10026"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"r0WwTP8ivhdLh108l6rPyihHmHEtngaIBbJL7D37qKY=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"BgA6vEUVsQRJ88vEqlK0xjsXyOf/fJ1oVtnfhtvXNn8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 14 May 2025 17:06:49 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-BgA6vEUVsQRJ88vEqlK0xjsXyOf/fJ1oVtnfhtvXNn8="
+        }
+      ]
+    },
+    {
+      "Route": "SwaggerUI/SwaggerDark.css",
+      "AssetFile": "SwaggerUI/SwaggerDark.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "51126"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"BgA6vEUVsQRJ88vEqlK0xjsXyOf/fJ1oVtnfhtvXNn8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 14 May 2025 17:06:49 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-BgA6vEUVsQRJ88vEqlK0xjsXyOf/fJ1oVtnfhtvXNn8="
+        }
+      ]
+    },
+    {
+      "Route": "SwaggerUI/SwaggerDark.css.gz",
+      "AssetFile": "SwaggerUI/SwaggerDark.css.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "10026"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"r0WwTP8ivhdLh108l6rPyihHmHEtngaIBbJL7D37qKY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 14 May 2025 17:06:49 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-r0WwTP8ivhdLh108l6rPyihHmHEtngaIBbJL7D37qKY="
+        }
+      ]
+    },
+    {
+      "Route": "SwaggerUI/SwaggerDark.qjgtj5eoww.css",
+      "AssetFile": "SwaggerUI/SwaggerDark.css.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000099730727"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "10026"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"r0WwTP8ivhdLh108l6rPyihHmHEtngaIBbJL7D37qKY=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"BgA6vEUVsQRJ88vEqlK0xjsXyOf/fJ1oVtnfhtvXNn8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 14 May 2025 17:06:49 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qjgtj5eoww"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-BgA6vEUVsQRJ88vEqlK0xjsXyOf/fJ1oVtnfhtvXNn8="
+        },
+        {
+          "Name": "label",
+          "Value": "SwaggerUI/SwaggerDark.css"
+        }
+      ]
+    },
+    {
+      "Route": "SwaggerUI/SwaggerDark.qjgtj5eoww.css",
+      "AssetFile": "SwaggerUI/SwaggerDark.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "51126"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"BgA6vEUVsQRJ88vEqlK0xjsXyOf/fJ1oVtnfhtvXNn8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 14 May 2025 17:06:49 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qjgtj5eoww"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-BgA6vEUVsQRJ88vEqlK0xjsXyOf/fJ1oVtnfhtvXNn8="
+        },
+        {
+          "Name": "label",
+          "Value": "SwaggerUI/SwaggerDark.css"
+        }
+      ]
+    },
+    {
+      "Route": "SwaggerUI/SwaggerDark.qjgtj5eoww.css.gz",
+      "AssetFile": "SwaggerUI/SwaggerDark.css.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "10026"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"r0WwTP8ivhdLh108l6rPyihHmHEtngaIBbJL7D37qKY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 14 May 2025 17:06:49 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qjgtj5eoww"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-r0WwTP8ivhdLh108l6rPyihHmHEtngaIBbJL7D37qKY="
+        },
+        {
+          "Name": "label",
+          "Value": "SwaggerUI/SwaggerDark.css.gz"
+        }
+      ]
+    }
+  ]
+}
