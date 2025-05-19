@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\ggelbck\\Documents\\Projects\\GamePulse\\game-pulse.API\\wwwroot\\SwaggerUI\\SwaggerDark.css",
+      "PackagePath": "staticwebassets\\SwaggerUI\\SwaggerDark.css"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.game-pulse.API.props",
+      "PackagePath": "build\\game-pulse.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.game-pulse.API.props",
+      "PackagePath": "buildMultiTargeting\\game-pulse.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.game-pulse.API.props",
+      "PackagePath": "buildTransitive\\game-pulse.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.game-pulse.API.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.game-pulse.API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

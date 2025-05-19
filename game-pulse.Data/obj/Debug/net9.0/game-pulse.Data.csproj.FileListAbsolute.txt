@@ -1,0 +1,12 @@
+C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.Data\bin\Debug\net9.0\game-pulse.Data.deps.json
+C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.Data\bin\Debug\net9.0\game-pulse.Data.dll
+C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.Data\bin\Debug\net9.0\game-pulse.Data.pdb
+C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.Data\obj\Debug\net9.0\game-pulse.Data.csproj.AssemblyReference.cache
+C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.Data\obj\Debug\net9.0\game-pulse.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.Data\obj\Debug\net9.0\game-pulse.Data.AssemblyInfoInputs.cache
+C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.Data\obj\Debug\net9.0\game-pulse.Data.AssemblyInfo.cs
+C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.Data\obj\Debug\net9.0\game-pulse.Data.csproj.CoreCompileInputs.cache
+C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.Data\obj\Debug\net9.0\game-pulse.Data.dll
+C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.Data\obj\Debug\net9.0\refint\game-pulse.Data.dll
+C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.Data\obj\Debug\net9.0\game-pulse.Data.pdb
+C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.Data\obj\Debug\net9.0\ref\game-pulse.Data.dll

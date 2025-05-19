@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\game-pulse.API.props" />
+</Project>

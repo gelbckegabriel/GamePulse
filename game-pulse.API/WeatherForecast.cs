@@ -1,4 +1,4 @@
-namespace game_pulse.API
+namespace game_pulse
 {
     public class WeatherForecast
     {
