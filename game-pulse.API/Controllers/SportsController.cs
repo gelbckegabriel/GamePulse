@@ -18,5 +18,12 @@ namespace game_pulse.Controllers
             var sports = await _sportsService.GetAllSports();
             return Ok(sports);
         }
+
+        [HttpGet("sports/sports_position/{id}")]
+        public async Task<IActionResult> GetSportsPositions(int id)
+        {
+            var sports_positions = await _sportsService.GetSportsPositions(id);
+            return Ok(sports_positions);
+        }
     }
 }

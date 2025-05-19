@@ -10,6 +10,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "game_pulse.Controllers.SportsController",
+    "Method": "GetSportsPositions",
+    "RelativePath": "sports/sports_position/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "game_pulse.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",

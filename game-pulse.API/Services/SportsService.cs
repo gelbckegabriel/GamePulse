@@ -21,5 +21,13 @@ namespace game_pulse.Services
         {
             return await _context.Sports.ToListAsync();
         }
+
+        public async Task<List<string>> GetSportsPositions(int sports_id)
+        {
+            return await _context.SportsPositions
+                .Where(p => p.SportId == sports_id)
+                .Select(p => p.Name)
+                .ToListAsync();
+        }
     }
 }
