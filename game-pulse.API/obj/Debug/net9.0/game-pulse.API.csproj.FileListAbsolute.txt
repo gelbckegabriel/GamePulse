@@ -51,7 +51,6 @@ C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.API\game-pulse\bin\Debu
 C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.API\game-pulse\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
 C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.API\game-pulse\bin\Debug\net9.0\Npgsql.dll
 C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.API\game-pulse\bin\Debug\net9.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
-C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.API\bin\Debug\net9.0\appsettings.Development.json
 C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.API\bin\Debug\net9.0\appsettings.json
 C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.API\bin\Debug\net9.0\game-pulse.API.staticwebassets.endpoints.json
 C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.API\bin\Debug\net9.0\game-pulse.API.staticwebassets.runtime.json
@@ -188,4 +187,3 @@ C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.API\bin\Debug\net9.0\zh
 C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.API\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.API\bin\Debug\net9.0\game-pulse.Data.dll
 C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.API\bin\Debug\net9.0\game-pulse.Data.pdb
-C:\Users\ggelbck\Documents\Projects\GamePulse\game-pulse.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
