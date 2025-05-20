@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace game_pulse.Data.Models;
 
@@ -11,6 +12,7 @@ public partial class Court
 
     public string City { get; set; } = null!;
 
+    [Column("state")]
     public string State { get; set; } = null!;
 
     public string Country { get; set; } = null!;

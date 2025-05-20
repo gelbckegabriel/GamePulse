@@ -375,7 +375,6 @@ namespace game_pulse.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "__EFMigrationsHistory");
-
         }
     }
 }
