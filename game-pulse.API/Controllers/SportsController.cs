@@ -3,11 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace game_pulse.Controllers
 {
-    public class SportsController : Controller
+    public class SportsController : BaseController
     {
         private readonly ISportsService _sportsService;
 
-        public SportsController(ISportsService sportsService)
+        public SportsController(
+            ISportsService sportsService, 
+            ILogger<SportsController> logger
+            ) : base(logger)
         {
             _sportsService = sportsService;
         }

@@ -16,7 +16,6 @@ namespace game_pulse.Services
             _logger = logger;
         }
 
-        //public async string GetAllSports()
         public async Task<List<string>> GetAllSports()
         {
             return await _context.Sports.Select(s => s.Name).ToListAsync();

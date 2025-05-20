@@ -2,7 +2,7 @@
   {
     "ContainingType": "game_pulse.Controllers.SportsController",
     "Method": "GetSports",
-    "RelativePath": "sports/sports",
+    "RelativePath": "Sports/sports/sports",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -12,7 +12,7 @@
   {
     "ContainingType": "game_pulse.Controllers.SportsController",
     "Method": "GetSportsPositions",
-    "RelativePath": "sports/sports_position/{id}",
+    "RelativePath": "Sports/sports/sports_position/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
