@@ -23,6 +23,7 @@ game-pulse.UI/build
 # misc
 .DS_Store
 *.pem
+game-pulse.API/.vs
 
 # debug
 game-pulse.UI/npm-debug.log*
