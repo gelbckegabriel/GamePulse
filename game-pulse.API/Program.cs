@@ -13,6 +13,15 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Configure CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy => policy.WithOrigins("http://localhost:3000")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+});
+
 // Add dbContext
 builder.Services.AddDbContext<GamePulseDbContext>(options => 
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -33,6 +42,8 @@ if (app.Environment.IsDevelopment())
     });
     app.UseStaticFiles();
 }
+
+app.UseCors("AllowFrontend");
 
 app.UseHttpsRedirection();
 
