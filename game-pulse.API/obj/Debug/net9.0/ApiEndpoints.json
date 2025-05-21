@@ -10,6 +10,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "game_pulse.Controllers.CourtsController",
+    "Method": "GetLocations",
+    "RelativePath": "Courts/getLocations",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filter",
+        "Type": "game_pulse.Interfaces.Filters.LocationsFilterModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "game_pulse.Controllers.SportsController",
     "Method": "GetSports",
     "RelativePath": "Sports/getSports",
