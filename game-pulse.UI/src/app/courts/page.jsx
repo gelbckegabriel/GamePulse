@@ -6,7 +6,6 @@ import Paginator from "../shared/paginator";
 import { Container } from "../shared/container";
 import { CourtsCard } from "../shared/courts-card";
 import { apiClient } from "../services/apiClient";
-import { body } from "framer-motion/client";
 
 export default function Courts() {
   const [isLoading, setIsLoading] = useState(true);
@@ -85,7 +84,7 @@ export default function Courts() {
           address: element.address,
           web_address: element.gMaps,
           map: element.map,
-          redirect_link: "/",
+          redirect_link: `/court?name=${element.name}&city=${element.city}`,
           src: "/courts/background.png",
           sports: element.sportsAvailable,
           // TODO: distance: element.distance,
@@ -103,7 +102,6 @@ export default function Courts() {
       setCountryFilter(response.country);
       setStateFilter(response.state);
       setCityFilter(response.city);
-      console.log(locationFilter);
     });
   }, [locationFilter]);
 
@@ -156,24 +154,6 @@ export default function Courts() {
                 </MenuList>
               </Menu>
 
-              {/* DISTANCE */}
-              {/* <Menu
-                lockScroll={true}
-                dismiss={false}
-                animate={{
-                  mount: { y: 0 },
-                  unmount: { y: 25 },
-                }}
-              >
-                <MenuHandler>
-                  <Button className="bg-white text-black w-[105px] hover:scale-105 hover:bg-white/80"> Distance </Button>
-                </MenuHandler>
-                <MenuList>
-                  <span className="flex justify-center mb-3">{distanceFilter} km</span>
-                  <Slider step={1} min={1} defaultValue={distanceFilter} onChange={(event) => setDistanceFilter(Number(event.target.value))} />
-                </MenuList>
-              </Menu> */}
-
               {/* LOCATION */}
               <Menu
                 lockScroll={true}
@@ -186,8 +166,8 @@ export default function Courts() {
                 <MenuHandler>
                   <Button className="bg-white text-black w-[105px] hover:scale-105 hover:bg-white/80"> Location </Button>
                 </MenuHandler>
-                {/* Country Filter */}
-                <MenuList className="!min-h-[40vh]">
+                <MenuList className="!min-h-[40vh] flex flex-col items-center">
+                  {/* Country Filter */}
                   <Select
                     onChange={(val) => setLocationFilter(() => ({ country: val, state: "", city: "" }))}
                     label={locationFilter.country == "" ? "Select Country" : locationFilter.country}
@@ -235,8 +215,28 @@ export default function Courts() {
                       );
                     })}
                   </Select>
+
+                  <Button className="mt-10 rounded-full"> Apply </Button>
                 </MenuList>
               </Menu>
+
+              {/* DISTANCE */}
+              {/* <Menu
+                lockScroll={true}
+                dismiss={false}
+                animate={{
+                  mount: { y: 0 },
+                  unmount: { y: 25 },
+                }}
+              >
+                <MenuHandler>
+                  <Button className="bg-white text-black w-[105px] hover:scale-105 hover:bg-white/80"> Distance </Button>
+                </MenuHandler>
+                <MenuList>
+                  <span className="flex justify-center mb-3">{distanceFilter} km</span>
+                  <Slider step={1} min={1} defaultValue={distanceFilter} onChange={(event) => setDistanceFilter(Number(event.target.value))} />
+                </MenuList>
+              </Menu> */}
 
               {/* ORDER BY */}
               {/* <Menu

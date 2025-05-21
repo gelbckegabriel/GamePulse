@@ -183,7 +183,7 @@ export function CourtsCard({ courts = [], isLoading, onFavoriteToggle }) {
                       ) : (
                         <>
                           <a
-                            href="www.google.com"
+                            href={active.web_address}
                             target="_blank"
                             className="min-w-[4rem] md:min-w-[7rem] px-4 py-3 text-sm text-center rounded-full font-bold bg-gray-600 text-white"
                           >
