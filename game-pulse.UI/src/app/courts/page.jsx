@@ -5,70 +5,76 @@ import { Menu, MenuHandler, MenuList, MenuItem, Button, Checkbox, Slider, Select
 import Paginator from "../shared/paginator";
 import { Container } from "../shared/container";
 import { CourtsCard } from "../shared/courts-card";
-import { getCourts } from "../services/courtsService";
+import { apiClient } from "../services/apiClient";
+import { body } from "framer-motion/client";
 
 export default function Courts() {
   const [isLoading, setIsLoading] = useState(true);
-  const [sportFilter, setSportFilter] = useState([
-    { name: "football", checked: true },
-    { name: "basketball", checked: true },
-    { name: "volleyball", checked: true },
-    { name: "tennis", checked: true },
-  ]);
+  const [sportFilter, setSportFilter] = useState([]);
   const [distanceFilter, setDistanceFilter] = useState(50);
-  const [cityFilter, setCityFilter] = useState("curitiba");
+  const [locationFilter, setLocationFilter] = useState({
+    country: "",
+    state: "",
+    city: "",
+  });
   const [orderFilter, setOrderFilter] = useState("distance");
-  const [courts, setCourts] = useState([]);
-  // const [courts, setCourts] = useState([
-  //   {
-  //     name: "Parque Atuba",
-  //     city: "Curitiba, PR",
-  //     distance: 13,
-  //     address: "R. Pintor Ricardo Krieger, 550 - Atuba, Curitiba - PR, 82630-143",
-  //     web_address: "https://www.curitiba.pr.gov.br/conteudo/parque-municipal-atuba/288",
-  //     gps_assist: "http://localhost:3000/courts",
-  //     map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3604.80313691373!2d-49.2078254!3d-25.377913499999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce61cccc4aa8d%3A0xd94db68cd4cd4489!2sAtuba%20Park!5e0!3m2!1sfr!2sbr!4v1743891260643!5m2!1sfr!2sbr",
-  //     sports: ["basketball", "football"],
-  //     favorite: false,
-  //     redirect_link: "/",
-  //     src: "/courts/background.png",
-  //   },
-  //   {
-  //     name: "Public Tennis Court",
-  //     city: "Curitiba, PR",
-  //     distance: 17,
-  //     address: "Av. Presidente Arthur da Silva Bernardes, 589 - Portão, Curitiba - PR, 80310-010",
-  //     web_address: "https://g.co/kgs/yZTFnZi",
-  //     gps_assist: "",
-  //     map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230503.43746694!2d-49.43401161685449!3d-25.48448775126223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20Paran%C3%A1!5e0!3m2!1sfr!2sbr!4v1743117337947!5m2!1sfr!2sbr",
-  //     sports: ["tennis"],
-  //     favorite: false,
-  //     redirect_link: "/",
-  //     src: "/courts/background.png",
-  //   },
-  //   {
-  //     name: "",
-  //     city: "",
-  //     distance: 0,
-  //     address: "",
-  //     web_address: "",
-  //     gps_assist: "",
-  //     map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230503.43746694!2d-49.43401161685449!3d-25.48448775126223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20Paran%C3%A1!5e0!3m2!1sfr!2sbr!4v1743117337947!5m2!1sfr!2sbr",
-  //     sports: ["basketball", "football", "football"],
-  //     favorite: false,
-  //     redirect_link: "/",
-  //     src: "/courts/background.png",
-  //   },
-  // ]);
+  const [courts, setCourts] = useState([
+    {
+      name: "Fake1",
+      distance: 0,
+      city: "",
+      address: "",
+      web_address: "",
+      map: "",
+      redirect_link: "/",
+      src: "",
+      sports: "",
+    },
+    {
+      name: "Fake2",
+      distance: 0,
+      city: "",
+      address: "",
+      web_address: "",
+      map: "",
+      redirect_link: "/",
+      src: "",
+      sports: "",
+    },
+    {
+      name: "Fake3",
+      distance: 0,
+      city: "",
+      address: "",
+      web_address: "",
+      map: "",
+      redirect_link: "/",
+      src: "",
+      sports: "",
+    },
+  ]);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 2000);
-  // });
+  const [countryFilter, setCountryFilter] = useState([]);
+  const [stateFilter, setStateFilter] = useState([]);
+  const [cityFilter, setCityFilter] = useState([]);
 
+  // GET BASIC COURTS INFO
   useEffect(() => {
-    getCourts().then((response) => {
+    // Get Sports for Filter
+    apiClient("Sports/getSports").then((response) => {
+      const availableSports = [];
+
+      response.forEach((element) => {
+        availableSports.push({
+          name: element,
+          checked: true,
+        });
+      });
+      setSportFilter(availableSports);
+    });
+
+    // Get Available Courts
+    apiClient("Courts/getCourts").then((response) => {
       const courtsAvailable = [];
 
       response.forEach((element) => {
@@ -90,6 +96,16 @@ export default function Courts() {
       setIsLoading(false);
     });
   }, []);
+
+  // UPDATE LOCATIONS FILTER
+  useEffect(() => {
+    apiClient("Courts/getLocations", "POST", locationFilter).then((response) => {
+      setCountryFilter(response.country);
+      setStateFilter(response.state);
+      setCityFilter(response.city);
+      console.log(locationFilter);
+    });
+  }, [locationFilter]);
 
   const handleFavoriteToggle = (index) => {
     const updatedCourts = [...courts];
@@ -120,63 +136,28 @@ export default function Courts() {
                   <Button className="bg-white text-black w-[105px] hover:scale-105 hover:bg-white/80"> Sports </Button>
                 </MenuHandler>
                 <MenuList>
-                  <MenuItem>
-                    <Checkbox
-                      checked={sportFilter.find((item) => item.name === "football")?.checked}
-                      id="football"
-                      label="Football"
-                      onChange={() => {
-                        const updatedSportFilter = [...sportFilter];
-                        const sportIndex = updatedSportFilter.findIndex((item) => item.name === "football");
-                        updatedSportFilter[sportIndex].checked = !updatedSportFilter[sportIndex].checked;
-                        setSportFilter(updatedSportFilter);
-                      }}
-                    />
-                  </MenuItem>
-                  <MenuItem>
-                    <Checkbox
-                      checked={sportFilter.find((item) => item.name === "basketball")?.checked}
-                      id="basketball"
-                      label="Basketball"
-                      onChange={() => {
-                        const updatedSportFilter = [...sportFilter];
-                        const sportIndex = updatedSportFilter.findIndex((item) => item.name === "basketball");
-                        updatedSportFilter[sportIndex].checked = !updatedSportFilter[sportIndex].checked;
-                        setSportFilter(updatedSportFilter);
-                      }}
-                    />
-                  </MenuItem>
-                  <MenuItem>
-                    <Checkbox
-                      checked={sportFilter.find((item) => item.name === "volleyball")?.checked}
-                      id="volleyball"
-                      label="Volleyball"
-                      onChange={() => {
-                        const updatedSportFilter = [...sportFilter];
-                        const sportIndex = updatedSportFilter.findIndex((item) => item.name === "volleyball");
-                        updatedSportFilter[sportIndex].checked = !updatedSportFilter[sportIndex].checked;
-                        setSportFilter(updatedSportFilter);
-                      }}
-                    />
-                  </MenuItem>
-                  <MenuItem>
-                    <Checkbox
-                      checked={sportFilter.find((item) => item.name === "tennis")?.checked}
-                      id="tennis"
-                      label="Tennis"
-                      onChange={() => {
-                        const updatedSportFilter = [...sportFilter];
-                        const sportIndex = updatedSportFilter.findIndex((item) => item.name === "tennis");
-                        updatedSportFilter[sportIndex].checked = !updatedSportFilter[sportIndex].checked;
-                        setSportFilter(updatedSportFilter);
-                      }}
-                    />
-                  </MenuItem>
+                  {sportFilter.map((sport, index) => {
+                    return (
+                      <MenuItem key={index}>
+                        <Checkbox
+                          id={sport.name}
+                          label={sport.name}
+                          checked={sportFilter.find((item) => item.name === sport.name)?.checked}
+                          onChange={() => {
+                            const updatedSportFilter = [...sportFilter];
+                            const sportIndex = updatedSportFilter.findIndex((item) => item.name === sport.name);
+                            updatedSportFilter[sportIndex].checked = !updatedSportFilter[sportIndex].checked;
+                            setSportFilter(updatedSportFilter);
+                          }}
+                        />
+                      </MenuItem>
+                    );
+                  })}
                 </MenuList>
               </Menu>
 
               {/* DISTANCE */}
-              <Menu
+              {/* <Menu
                 lockScroll={true}
                 dismiss={false}
                 animate={{
@@ -191,9 +172,9 @@ export default function Courts() {
                   <span className="flex justify-center mb-3">{distanceFilter} km</span>
                   <Slider step={1} min={1} defaultValue={distanceFilter} onChange={(event) => setDistanceFilter(Number(event.target.value))} />
                 </MenuList>
-              </Menu>
+              </Menu> */}
 
-              {/* CITY */}
+              {/* LOCATION */}
               <Menu
                 lockScroll={true}
                 dismiss={false}
@@ -203,17 +184,62 @@ export default function Courts() {
                 }}
               >
                 <MenuHandler>
-                  <Button className="bg-white text-black w-[105px] hover:scale-105 hover:bg-white/80"> City </Button>
+                  <Button className="bg-white text-black w-[105px] hover:scale-105 hover:bg-white/80"> Location </Button>
                 </MenuHandler>
-                <MenuList className="!min-h-[25vh]">
-                  <Select value={cityFilter} onChange={(val) => setCityFilter(val)} label="Select City">
-                    <Option value="curitiba">Curitiba, PR</Option>
+                {/* Country Filter */}
+                <MenuList className="!min-h-[40vh]">
+                  <Select
+                    onChange={(val) => setLocationFilter(() => ({ country: val, state: "", city: "" }))}
+                    label={locationFilter.country == "" ? "Select Country" : locationFilter.country}
+                  >
+                    <Option value="">-</Option>
+                    {countryFilter.map((country, index) => {
+                      return (
+                        <Option key={index} value={country}>
+                          {country}
+                        </Option>
+                      );
+                    })}
+                  </Select>
+
+                  <br />
+
+                  {/* State Filter */}
+                  <Select
+                    onChange={(val) => setLocationFilter((prev) => ({ ...prev, state: val, city: "" }))}
+                    label={locationFilter.state == "" ? "Select State" : locationFilter.state}
+                  >
+                    <Option value="">-</Option>
+                    {stateFilter.map((state, index) => {
+                      return (
+                        <Option key={index} value={state}>
+                          {state}
+                        </Option>
+                      );
+                    })}
+                  </Select>
+
+                  <br />
+
+                  {/* City Filter */}
+                  <Select
+                    onChange={(val) => setLocationFilter((prev) => ({ ...prev, city: val }))}
+                    label={locationFilter.city == "" ? "Select City" : locationFilter.city}
+                  >
+                    <Option value="">-</Option>
+                    {cityFilter.map((city, index) => {
+                      return (
+                        <Option key={index} value={city}>
+                          {city}
+                        </Option>
+                      );
+                    })}
                   </Select>
                 </MenuList>
               </Menu>
 
               {/* ORDER BY */}
-              <Menu
+              {/* <Menu
                 lockScroll={true}
                 dismiss={false}
                 animate={{
@@ -230,7 +256,7 @@ export default function Courts() {
                     <Option value="favorite">Favorites</Option>
                   </Select>
                 </MenuList>
-              </Menu>
+              </Menu> */}
             </div>
 
             <br />
