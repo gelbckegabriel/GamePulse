@@ -21,7 +21,13 @@ public partial class Court
 
     public string GMaps { get; set; } = null!;
 
+    [Column("map")]
+    public string Map { get; set; } = null!;
+
     public virtual ICollection<Game> Games { get; set; } = new List<Game>();
 
     public virtual ICollection<Sport> Sports { get; set; } = new List<Sport>();
+
+    [NotMapped]
+    public List<string>? SportsAvailable { get; set; }
 }

@@ -8,7 +8,7 @@ import { GlobeAmericasIcon } from "@heroicons/react/24/outline";
 import { IconButton, Typography } from "@material-tailwind/react";
 import { FaHeart, FaHeartBroken } from "react-icons/fa";
 
-export function CourtsCard({ courts, isLoading, onFavoriteToggle }) {
+export function CourtsCard({ courts = [], isLoading, onFavoriteToggle }) {
   const [active, setActive] = useState(null);
   const ref = useRef(null);
   const id = useId();
@@ -120,20 +120,20 @@ export function CourtsCard({ courts, isLoading, onFavoriteToggle }) {
                   <div className="flex items-center">
                     {isLoading ? (
                       <>
-                        <IconButton className="mr-5" variant="text" onClick={onFavoriteToggle}>
+                        {/* <IconButton className="mr-5" variant="text" onClick={onFavoriteToggle}>
                           <FaHeart className="text-[30px] text-darkGray animate-pulse-strong" />
-                        </IconButton>
+                        </IconButton> */}
                         <Typography className="h-8 w-[4rem] rounded-full bg-darkGray animate-pulse-strong">&nbsp;</Typography>
                       </>
                     ) : (
                       <>
-                        <IconButton className="mr-5" variant="text" onClick={onFavoriteToggle}>
+                        {/* <IconButton className="mr-5" variant="text" onClick={onFavoriteToggle}>
                           {active.favorite ? (
                             <FaHeart className="text-[30px] text-red-900" />
                           ) : (
                             <FaHeartBroken className="text-[30px] text-darkGray" />
                           )}
-                        </IconButton>
+                        </IconButton> */}
                         <div>
                           <Link href={active.redirect_link}>
                             <motion.button

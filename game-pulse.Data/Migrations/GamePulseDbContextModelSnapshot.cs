@@ -73,6 +73,11 @@ namespace game_pulse.Data.Migrations
                         .HasColumnType("character varying")
                         .HasColumnName("g_maps");
 
+                    b.Property<string>("Map")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("map");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)

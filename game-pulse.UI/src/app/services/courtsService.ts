@@ -1,8 +1,8 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export async function getAllSports() {
+export async function getCourts() {
     try {
-        const response = await fetch(`${API_URL}/Sports/getSports`, {
+        const response = await fetch(`${API_URL}/Courts/getCourts`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

@@ -12,7 +12,7 @@ using game_pulse.Data.Contexts;
 namespace game_pulse.Data.Migrations
 {
     [DbContext(typeof(GamePulseDbContext))]
-    [Migration("20250520003808_InsertSomeCourts")]
+    [Migration("20250521010932_InsertSomeCourts")]
     partial class InsertSomeCourts
     {
         /// <inheritdoc />
@@ -75,6 +75,11 @@ namespace game_pulse.Data.Migrations
                         .IsRequired()
                         .HasColumnType("character varying")
                         .HasColumnName("g_maps");
+
+                    b.Property<string>("Map")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("map");
 
                     b.Property<string>("Name")
                         .IsRequired()

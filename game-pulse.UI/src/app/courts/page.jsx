@@ -5,6 +5,7 @@ import { Menu, MenuHandler, MenuList, MenuItem, Button, Checkbox, Slider, Select
 import Paginator from "../shared/paginator";
 import { Container } from "../shared/container";
 import { CourtsCard } from "../shared/courts-card";
+import { getCourts } from "../services/courtsService";
 
 export default function Courts() {
   const [isLoading, setIsLoading] = useState(true);
@@ -17,53 +18,78 @@ export default function Courts() {
   const [distanceFilter, setDistanceFilter] = useState(50);
   const [cityFilter, setCityFilter] = useState("curitiba");
   const [orderFilter, setOrderFilter] = useState("distance");
-  const [courts, setCourts] = useState([
-    {
-      name: "Parque Atuba",
-      city: "Curitiba, PR",
-      distance: 13,
-      address: "R. Pintor Ricardo Krieger, 550 - Atuba, Curitiba - PR, 82630-143",
-      web_address: "https://www.curitiba.pr.gov.br/conteudo/parque-municipal-atuba/288",
-      gps_assist: "http://localhost:3000/courts",
-      map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3604.80313691373!2d-49.2078254!3d-25.377913499999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce61cccc4aa8d%3A0xd94db68cd4cd4489!2sAtuba%20Park!5e0!3m2!1sfr!2sbr!4v1743891260643!5m2!1sfr!2sbr",
-      sports: ["basketball", "football"],
-      favorite: false,
-      redirect_link: "/",
-      src: "/courts/background.png",
-    },
-    {
-      name: "Public Tennis Court",
-      city: "Curitiba, PR",
-      distance: 17,
-      address: "Av. Presidente Arthur da Silva Bernardes, 589 - Portão, Curitiba - PR, 80310-010",
-      web_address: "https://g.co/kgs/yZTFnZi",
-      gps_assist: "",
-      map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230503.43746694!2d-49.43401161685449!3d-25.48448775126223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20Paran%C3%A1!5e0!3m2!1sfr!2sbr!4v1743117337947!5m2!1sfr!2sbr",
-      sports: ["tennis"],
-      favorite: false,
-      redirect_link: "/",
-      src: "/courts/background.png",
-    },
-    {
-      name: "",
-      city: "",
-      distance: 0,
-      address: "",
-      web_address: "",
-      gps_assist: "",
-      map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230503.43746694!2d-49.43401161685449!3d-25.48448775126223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20Paran%C3%A1!5e0!3m2!1sfr!2sbr!4v1743117337947!5m2!1sfr!2sbr",
-      sports: ["basketball", "football", "football"],
-      favorite: false,
-      redirect_link: "/",
-      src: "/courts/background.png",
-    },
-  ]);
+  const [courts, setCourts] = useState([]);
+  // const [courts, setCourts] = useState([
+  //   {
+  //     name: "Parque Atuba",
+  //     city: "Curitiba, PR",
+  //     distance: 13,
+  //     address: "R. Pintor Ricardo Krieger, 550 - Atuba, Curitiba - PR, 82630-143",
+  //     web_address: "https://www.curitiba.pr.gov.br/conteudo/parque-municipal-atuba/288",
+  //     gps_assist: "http://localhost:3000/courts",
+  //     map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3604.80313691373!2d-49.2078254!3d-25.377913499999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce61cccc4aa8d%3A0xd94db68cd4cd4489!2sAtuba%20Park!5e0!3m2!1sfr!2sbr!4v1743891260643!5m2!1sfr!2sbr",
+  //     sports: ["basketball", "football"],
+  //     favorite: false,
+  //     redirect_link: "/",
+  //     src: "/courts/background.png",
+  //   },
+  //   {
+  //     name: "Public Tennis Court",
+  //     city: "Curitiba, PR",
+  //     distance: 17,
+  //     address: "Av. Presidente Arthur da Silva Bernardes, 589 - Portão, Curitiba - PR, 80310-010",
+  //     web_address: "https://g.co/kgs/yZTFnZi",
+  //     gps_assist: "",
+  //     map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230503.43746694!2d-49.43401161685449!3d-25.48448775126223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20Paran%C3%A1!5e0!3m2!1sfr!2sbr!4v1743117337947!5m2!1sfr!2sbr",
+  //     sports: ["tennis"],
+  //     favorite: false,
+  //     redirect_link: "/",
+  //     src: "/courts/background.png",
+  //   },
+  //   {
+  //     name: "",
+  //     city: "",
+  //     distance: 0,
+  //     address: "",
+  //     web_address: "",
+  //     gps_assist: "",
+  //     map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230503.43746694!2d-49.43401161685449!3d-25.48448775126223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3dd%3A0x6d2f6ba5bacbe809!2sCuritiba%2C%20Paran%C3%A1!5e0!3m2!1sfr!2sbr!4v1743117337947!5m2!1sfr!2sbr",
+  //     sports: ["basketball", "football", "football"],
+  //     favorite: false,
+  //     redirect_link: "/",
+  //     src: "/courts/background.png",
+  //   },
+  // ]);
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 2000);
+  // });
 
   useEffect(() => {
-    setTimeout(() => {
+    getCourts().then((response) => {
+      const courtsAvailable = [];
+
+      response.forEach((element) => {
+        courtsAvailable.push({
+          name: element.name,
+          distance: 0,
+          city: `${element.city}, ${element.state}`,
+          address: element.address,
+          web_address: element.gMaps,
+          map: element.map,
+          redirect_link: "/",
+          src: "/courts/background.png",
+          sports: element.sportsAvailable,
+          // TODO: distance: element.distance,
+          // TODO: favorite: false,
+        });
+      });
+      setCourts(courtsAvailable);
       setIsLoading(false);
-    }, 2000);
-  });
+    });
+  }, []);
 
   const handleFavoriteToggle = (index) => {
     const updatedCourts = [...courts];
@@ -210,6 +236,7 @@ export default function Courts() {
             <br />
 
             {/* COURTS */}
+            {/* {courts.length > 0 && ()} */}
             <CourtsCard courts={courts} isLoading={isLoading} onFavoriteToggle={() => handleFavoriteToggle(index)} />
 
             <br />

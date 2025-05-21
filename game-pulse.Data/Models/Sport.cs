@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace game_pulse.Data.Models;
 
@@ -17,5 +18,6 @@ public partial class Sport
 
     public virtual ICollection<User> Users { get; set; } = new List<User>();
 
+    [JsonIgnore]
     public virtual ICollection<Court> Courts { get; set; } = new List<Court>();
 }
