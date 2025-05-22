@@ -1,19 +1,24 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { apiClient } from "../services/apiClient";
 
 export default function CourtPage() {
-  const [courtName, setCourtName] = useState("");
-  const [courtCity, setCourtCity] = useState("");
+  const [court, setCourt] = useState({});
 
+  // GET COURT DETAILS
   useEffect(() => {
     // SET QUERY PARAMETERS
     const urlString = window.location.href;
     const url = new URL(urlString);
     const params = new URLSearchParams(url.search);
 
-    setCourtName(params.get("name"));
-    setCourtCity(params.get("city"));
+    apiClient("Courts/getFilteredCourt", "POST", {
+      name: params.get("name"),
+      city: params.get("city"),
+    }).then((response) => {
+      setCourt(response);
+    });
   }, []);
 
   return (

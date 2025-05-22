@@ -72,5 +72,43 @@ namespace game_pulse.Services
 
             return courts;
         }
+
+        public async Task<List<Court>> GetFilteredCourtsAsync(CourtsFilterModel filter)
+        {
+            var query = _context.Courts.AsQueryable();
+
+            if (!string.IsNullOrEmpty(filter.Name))
+                query = query.Where(c => c.Name == filter.Name);
+
+            if (!string.IsNullOrEmpty(filter.City))
+                query = query.Where(c => c.City == filter.City);
+
+            if (!string.IsNullOrEmpty(filter.State))
+                query = query.Where(c => c.State == filter.State);
+
+            if (!string.IsNullOrEmpty(filter.Country))
+                query = query.Where(c => c.Country == filter.Country);
+
+            return await query.ToListAsync();
+        }
+
+        public async Task<Court?> GetFilteredCourtAsync(CourtsFilterModel filter)
+        {
+            var query = _context.Courts.AsQueryable();
+
+            if (!string.IsNullOrEmpty(filter.Name))
+                query = query.Where(c => c.Name == filter.Name);
+
+            if (!string.IsNullOrEmpty(filter.City))
+                query = query.Where(c => c.City == filter.City);
+
+            if (!string.IsNullOrEmpty(filter.State))
+                query = query.Where(c => c.State == filter.State);
+
+            if (!string.IsNullOrEmpty(filter.Country))
+                query = query.Where(c => c.Country == filter.Country);
+
+            return await query.FirstOrDefaultAsync();
+        }
     }
 }

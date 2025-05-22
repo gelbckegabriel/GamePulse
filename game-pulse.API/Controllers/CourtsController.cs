@@ -29,5 +29,19 @@ namespace game_pulse.Controllers
             var courts = await _courtsService.GetCourtsAsync();
             return Ok(courts);
         }
+
+        [HttpPost("getFilteredCourts")]
+        public async Task<IActionResult> GetFilteredCourts(CourtsFilterModel filter)
+        {
+            var courts = await _courtsService.GetFilteredCourtsAsync(filter);
+            return Ok(courts);
+        }
+
+        [HttpPost("getFilteredCourt")]
+        public async Task<IActionResult> GetFilteredCourt(CourtsFilterModel filter)
+        {
+            var courts = await _courtsService.GetFilteredCourtAsync(filter);
+            return Ok(courts);
+        }
     }
 }

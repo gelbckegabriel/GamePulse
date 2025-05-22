@@ -11,6 +11,38 @@
   },
   {
     "ContainingType": "game_pulse.Controllers.CourtsController",
+    "Method": "GetFilteredCourt",
+    "RelativePath": "Courts/getFilteredCourt",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filter",
+        "Type": "game_pulse.Interfaces.Filters.CourtsFilterModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "game_pulse.Controllers.CourtsController",
+    "Method": "GetFilteredCourts",
+    "RelativePath": "Courts/getFilteredCourts",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filter",
+        "Type": "game_pulse.Interfaces.Filters.CourtsFilterModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "game_pulse.Controllers.CourtsController",
     "Method": "GetLocations",
     "RelativePath": "Courts/getLocations",
     "HttpMethod": "POST",
