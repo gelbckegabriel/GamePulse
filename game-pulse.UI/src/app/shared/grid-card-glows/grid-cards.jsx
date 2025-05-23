@@ -41,6 +41,7 @@ export function GridCardsGlows({ court, sports, isLoading }) {
         hover={!isLoading}
         isLoading={isLoading}
       />
+      {/* TODO: ADD A CARD OF NEXT RESERVATION?? */}
     </ul>
   );
 }
