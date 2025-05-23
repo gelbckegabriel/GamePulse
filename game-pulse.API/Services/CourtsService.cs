@@ -75,7 +75,7 @@ namespace game_pulse.Services
 
         public async Task<List<Court>> GetFilteredCourtsAsync(CourtsFilterModel filter)
         {
-            var query = _context.Courts.AsQueryable();
+            var query = _context.Courts.Include(c => c.Sports).AsQueryable();
 
             if (!string.IsNullOrEmpty(filter.Name))
                 query = query.Where(c => c.Name == filter.Name);
@@ -89,12 +89,21 @@ namespace game_pulse.Services
             if (!string.IsNullOrEmpty(filter.Country))
                 query = query.Where(c => c.Country == filter.Country);
 
-            return await query.ToListAsync();
+            // QUERY THE COURT
+            var courts = await query.ToListAsync();
+
+            // GET THE COURT SPORTS
+            foreach (var court in courts)
+            {
+                court.SportsAvailable = court.Sports.Select(s => s.Name).ToList();
+            }
+
+            return courts;
         }
 
         public async Task<Court?> GetFilteredCourtAsync(CourtsFilterModel filter)
         {
-            var query = _context.Courts.AsQueryable();
+            var query = _context.Courts.Include(c => c.Sports).AsQueryable();
 
             if (!string.IsNullOrEmpty(filter.Name))
                 query = query.Where(c => c.Name == filter.Name);
@@ -108,7 +117,14 @@ namespace game_pulse.Services
             if (!string.IsNullOrEmpty(filter.Country))
                 query = query.Where(c => c.Country == filter.Country);
 
-            return await query.FirstOrDefaultAsync();
+            // QUERY THE COURT
+            var court = await query.FirstOrDefaultAsync();
+
+            // GET THE COURT SPORTS
+            if (court != null)
+                court.SportsAvailable = court.Sports.Select(s => s.Name).ToList();
+
+            return court;
         }
     }
 }
