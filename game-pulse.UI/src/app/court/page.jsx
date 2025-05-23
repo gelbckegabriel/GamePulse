@@ -6,6 +6,7 @@ import { Container } from "../shared/container";
 import { GridCardsGlows } from "../shared/grid-card-glows/grid-cards";
 
 export default function CourtPage() {
+  const [isLoading, setIsLoading] = useState(true);
   const [court, setCourt] = useState({});
 
   // GET COURT DETAILS
@@ -20,7 +21,7 @@ export default function CourtPage() {
       city: params.get("city"),
     }).then((response) => {
       setCourt(response);
-      console.log(response);
+      setIsLoading(false);
     });
   }, []);
 
@@ -29,7 +30,7 @@ export default function CourtPage() {
       <div className="bg-black">
         <Container>
           <div className="pt-24">
-            <GridCardsGlows court={court} sports={court.sportsAvailable} />
+            <GridCardsGlows court={court} sports={court.sportsAvailable} isLoading={isLoading} />
           </div>
           <br />
           <br />
