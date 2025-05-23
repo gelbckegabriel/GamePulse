@@ -35,6 +35,7 @@ builder.Services.AddDbContext<GamePulseDbContext>(options =>
 builder.Services.AddScoped<ISportsService, SportsService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICourtsService, CourtsService>();
+builder.Services.AddScoped<IGamesService, GamesService>();
 
 var app = builder.Build();
 
