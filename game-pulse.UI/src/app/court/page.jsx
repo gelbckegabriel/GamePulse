@@ -6,6 +6,15 @@ import { Container } from "../shared/container";
 import { GridCardsGlows } from "../shared/grid-card-glows/grid-cards";
 
 export default function CourtPage() {
+  // TODO: CREATE THE GENERIC TABLE FOR TEST
+  const [test, setTest] = useState([
+    { name: "Gabriel Gelbcke", color: "gold", grade: 9.3 },
+    { name: "John Doe", color: "silver", grade: 8.7 },
+    { name: "Rodolfo Malagueta", color: "bronze", grade: 7.7 },
+    { name: "Peter Jaine", color: "red", grade: 7.5 },
+    { name: "Pedro Pedrado da Pedra Rochosa", color: "red", grade: 7 },
+  ]);
+
   const [isLoading, setIsLoading] = useState(true);
   const [court, setCourt] = useState({});
 

@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { Container } from "../shared/container";
 import { WorldMap } from "../shared/world-map";
 import { motion } from "framer-motion";
-import { LeaderboardTable } from "../shared/leaderboard-table/leaderboard-table";
+import { GenericTable } from "../shared/generic-table/generic-table";
 import { Card, CardCarousel } from "../shared/card-carousel";
 
 import "./page.scss";
@@ -76,35 +76,57 @@ export default function Leaderboard() {
   const [isLoading, setIsLoading] = useState(false);
 
   // FILTER CARDS
-  const data = [
+  const cardsData = [
     {
       category: "Sport",
       title: "Basketball",
       src: "/leaderboard/basketball.webp",
-      content: <LeaderboardTable players={basketballPlayers} isLoading={isLoading} />,
+      content: (
+        <GenericTable
+          tableType="leaderboard"
+          columns={["Pos", "Player", "Best Player Award", "Points"]}
+          data={basketballPlayers}
+          isLoading={isLoading}
+        />
+      ),
     },
     {
       category: "Sport",
       title: "Football",
       src: "/leaderboard/football.webp",
-      content: <LeaderboardTable players={footballPlayers} isLoading={isLoading} />,
+      content: (
+        <GenericTable
+          tableType="leaderboard"
+          columns={["Pos", "Player", "Best Player Award", "Points"]}
+          data={footballPlayers}
+          isLoading={isLoading}
+        />
+      ),
     },
     {
       category: "Sport",
       title: "Volleyball",
       src: "/leaderboard/volleyball.webp",
-      content: <LeaderboardTable players={volleyballPlayers} isLoading={isLoading} />,
+      content: (
+        <GenericTable
+          tableType="leaderboard"
+          columns={["Pos", "Player", "Best Player Award", "Points"]}
+          data={volleyballPlayers}
+          isLoading={isLoading}
+        />
+      ),
     },
-
     {
       category: "Sport",
       title: "Tennis",
       src: "/leaderboard/tennis.webp",
-      content: <LeaderboardTable players={tennisPlayers} />,
+      content: (
+        <GenericTable tableType="leaderboard" columns={["Pos", "Player", "Best Player Award", "Points"]} data={tennisPlayers} isLoading={isLoading} />
+      ),
     },
   ];
 
-  const cards = data.map((card, index) => <Card key={card.src} card={card} index={index} />);
+  const cards = cardsData.map((card, index) => <Card key={card.src} card={card} index={index} />);
 
   return (
     <div className="bg-black">
@@ -180,9 +202,9 @@ export default function Leaderboard() {
 
       <br />
 
-      <Container className="">
+      <Container>
         {/* Leaderboard */}
-        <LeaderboardTable players={globalPlayers} isLoading={isLoading} />
+        <GenericTable tableType="leaderboard" columns={["Pos", "Player", "Best Player Award", "Points"]} data={globalPlayers} isLoading={isLoading} />
 
         <br />
 
