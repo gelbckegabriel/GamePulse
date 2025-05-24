@@ -19,15 +19,13 @@ export const GenericTable = ({ tableType, columns, data, isLoading }) => {
       <table className="text-white w-full mx-auto">
         <thead>
           <tr>
-            {columns.map((column, index) => {
-              <React.Fragment key={index}>
-                <th>{{ column }}</th>
-              </React.Fragment>;
-            })}
-            <th>Pos</th>
+            {columns.map((column, index) => (
+              <th key={index}>{column}</th>
+            ))}
+            {/* <th>Pos</th>
             <th>Player</th>
             <th>Best Player Award</th>
-            <th>Points</th>
+            <th>Points</th> */}
           </tr>
         </thead>
         <tbody>{renderTableBody()}</tbody>

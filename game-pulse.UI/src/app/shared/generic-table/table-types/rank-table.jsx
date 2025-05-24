@@ -1,3 +1,4 @@
+import { Typography } from "@material-tailwind/react";
 import React from "react";
 
 export const RankBodyTable = ({ data, isLoading }) => {
@@ -26,7 +27,7 @@ export const RankBodyTable = ({ data, isLoading }) => {
             <td className="position">{index + 1}</td>
             <td
               className="row text-[0.875rem] md:text-[1.1rem] px-4 py-2 text-left border-l-4"
-              style={isLoading ? { borderColor: "#616161" } : { borderColor: sportColors[row.sport] }}
+              style={isLoading ? { borderColor: "#616161" } : { borderColor: colors[row.color] }}
             >
               <div className="flex items-center">
                 {(() => {
@@ -63,7 +64,7 @@ export const RankBodyTable = ({ data, isLoading }) => {
                   </>
                 ) : (
                   <>
-                    <span className="text-[0.65rem] md:text-[0.8rem]">{capitalize(row.sport)}</span>
+                    <span className="text-[0.65rem] md:text-[0.8rem]">{capitalize(row.nickname)}</span>
                   </>
                 )}
               </div>
@@ -81,7 +82,7 @@ export const RankBodyTable = ({ data, isLoading }) => {
                 </>
               ) : (
                 <>
-                  <span className="text-[0.65rem] md:text-[0.8rem]">{row.awards}</span>
+                  <span className="text-[0.65rem] md:text-[0.8rem]">{row.sport}</span>
                 </>
               )}
             </td>
@@ -98,7 +99,7 @@ export const RankBodyTable = ({ data, isLoading }) => {
                 </>
               ) : (
                 <>
-                  <span className="text-[0.65rem] md:text-[0.8rem]">{row.points}</span>
+                  <span className="text-[0.65rem] md:text-[0.8rem]">{row.grade}</span>
                 </>
               )}
             </td>
