@@ -22,10 +22,6 @@ export const GenericTable = ({ tableType, columns, data, isLoading }) => {
             {columns.map((column, index) => (
               <th key={index}>{column}</th>
             ))}
-            {/* <th>Pos</th>
-            <th>Player</th>
-            <th>Best Player Award</th>
-            <th>Points</th> */}
           </tr>
         </thead>
         <tbody>{renderTableBody()}</tbody>
