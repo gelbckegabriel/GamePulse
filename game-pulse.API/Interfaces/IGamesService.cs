@@ -6,7 +6,7 @@ namespace game_pulse.Interfaces
 {
     public interface IGamesService
     {
-        public Task<List<CourtTopPlayersDto>> GetCourtTopPlayersAsync(GamesFilterModel filter);
+        public Task<List<CourtTopPlayerDto>> GetCourtTopPlayersAsync(GamesFilterModel filter);
 
         public Task<List<UserNextGamesDto>> GetUserFilteredNextGamesAsync(GamesFilterModel filter);
     }

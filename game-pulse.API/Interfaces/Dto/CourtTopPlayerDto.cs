@@ -1,6 +1,6 @@
 ﻿namespace game_pulse.Interfaces.Dto
 {
-    public class CourtTopPlayersDto
+    public class CourtTopPlayerDto
     {
         public int UserId { get; set; }
 

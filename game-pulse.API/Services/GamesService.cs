@@ -19,12 +19,12 @@ namespace game_pulse.Services
             _logger = logger;
         }
 
-        public async Task<List<CourtTopPlayersDto>> GetCourtTopPlayersAsync(GamesFilterModel filter)
+        public async Task<List<CourtTopPlayerDto>> GetCourtTopPlayersAsync(GamesFilterModel filter)
         {
             var data = await _context.GamePlayers
                 .Where(gp => gp.Game.CourtId == filter.court_id)
                 .GroupBy(gp => gp.UserId)
-                .Select(grp => new CourtTopPlayersDto
+                .Select(grp => new CourtTopPlayerDto
                 {
                     UserId = grp.Key,
                     AverageGrade = grp.Average(x => x.PlayerGrade)
