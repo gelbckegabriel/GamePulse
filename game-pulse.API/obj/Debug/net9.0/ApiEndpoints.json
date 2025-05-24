@@ -58,6 +58,38 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "game_pulse.Controllers.GamesController",
+    "Method": "GetCourtTopPlayers",
+    "RelativePath": "Games/getCourtTopPlayers",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filter",
+        "Type": "game_pulse.Interfaces.Filters.GamesFilterModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "game_pulse.Controllers.GamesController",
+    "Method": "GetUserFilteredNextGames",
+    "RelativePath": "Games/getUserFilteredNextGames",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filter",
+        "Type": "game_pulse.Interfaces.Filters.GamesFilterModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "game_pulse.Controllers.SportsController",
     "Method": "GetSports",
     "RelativePath": "Sports/getSports",

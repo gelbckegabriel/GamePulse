@@ -1,4 +1,5 @@
 ﻿using game_pulse.Interfaces;
+using game_pulse.Interfaces.Filters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace game_pulse.Controllers
@@ -16,17 +17,17 @@ namespace game_pulse.Controllers
         }
 
         [HttpPost("getCourtTopPlayers")]
-        public async Task<IActionResult> GetCourtTopPlayers()
+        public async Task<IActionResult> GetCourtTopPlayers(GamesFilterModel filter)
         {
-            // TODO
-            return Ok();
+            var data = await _gamesService.GetCourtTopPlayersAsync(filter);
+            return Ok(data);
         }
 
         [HttpPost("getUserFilteredNextGames")]
-        public async Task<IActionResult> GetUserFilteredNextGames()
+        public async Task<IActionResult> GetUserFilteredNextGames(GamesFilterModel filter)
         {
-            // TODO
-            return Ok();
+            var data = await _gamesService.GetUserFilteredNextGamesAsync(filter);
+            return Ok(data);
         }
     }
 }
