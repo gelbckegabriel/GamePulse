@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Button } from "./button";
-import { Container } from "./container";
-import { UserAuth } from "./auth";
+import { Button } from "./utilities/button";
+import { Container } from "./utilities/container";
+import { UserAuth } from "./auth/auth";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);

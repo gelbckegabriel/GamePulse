@@ -1,8 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import { Button } from "../button";
-import { Container } from "../container";
+import { Button } from "../utilities/button";
+import { Container } from "../utilities/container";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 

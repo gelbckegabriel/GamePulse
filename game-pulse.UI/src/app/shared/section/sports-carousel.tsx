@@ -14,7 +14,7 @@ import {
 } from "./sports-images";
 import { useMemo, useRef, useState } from "react";
 import { useWindowSize } from "react-use";
-import { Button } from "../button";
+import { Button } from "../utilities/button";
 import Image from "next/image";
 
 export const SportsCarousel = () => {

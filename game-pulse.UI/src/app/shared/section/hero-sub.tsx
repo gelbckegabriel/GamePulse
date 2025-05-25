@@ -1,7 +1,7 @@
 "use client";
 
-import { Container } from "../container";
-import { FadeIn } from "../fade-in";
+import { Container } from "../utilities/container";
+import { FadeIn } from "../utilities/fade-in";
 
 export const HeroSub = () => {
   return (

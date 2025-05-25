@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { apiClient } from "../services/apiClient";
-import { Container } from "../shared/container";
+import { Container } from "../shared/utilities/container";
 import { GridCardsGlows } from "../shared/grid-card-glows/grid-cards";
-import { SparklesCore } from "../shared/sparkles";
+import { SparklesCore } from "../shared/utilities/sparkles";
 import { GenericTable } from "../shared/generic-table/generic-table";
 
 export default function CourtPage() {

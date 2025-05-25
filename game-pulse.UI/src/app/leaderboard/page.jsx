@@ -4,11 +4,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { Container } from "../shared/container";
-import { WorldMap } from "../shared/world-map";
+import { Container } from "../shared/utilities/container";
+import { WorldMap } from "../shared/utilities/world-map";
 import { motion } from "framer-motion";
 import { GenericTable } from "../shared/generic-table/generic-table";
-import { Card, CardCarousel } from "../shared/card-carousel";
+import { Card, CardCarousel } from "../shared/utilities/card-carousel";
 
 import "./page.scss";
 

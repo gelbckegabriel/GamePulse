@@ -3,7 +3,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Container } from "../shared/container";
+import { Container } from "../shared/utilities/container";
 import { Button, IconButton, Option, Select, Typography } from "@material-tailwind/react";
 import {
   PiBasketballDuotone,

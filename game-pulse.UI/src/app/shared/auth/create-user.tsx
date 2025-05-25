@@ -7,7 +7,7 @@ import { FaPerson } from "react-icons/fa6";
 import { IoMdPerson } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import useMeasure from "react-use-measure";
-import { Button } from "./button";
+import { Button } from "../utilities/button";
 
 type Props = {
   openCreate: boolean;

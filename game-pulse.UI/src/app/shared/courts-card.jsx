@@ -3,7 +3,7 @@
 import React, { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { useOutsideClick } from "./use-outside-click";
+import { useOutsideClick } from "./utilities/use-outside-click";
 import { GlobeAmericasIcon } from "@heroicons/react/24/outline";
 import { Typography } from "@material-tailwind/react";
 

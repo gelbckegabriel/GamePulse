@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { Menu, MenuHandler, MenuList, MenuItem, Button, Checkbox, Slider, Select, Option } from "@material-tailwind/react";
-import Paginator from "../shared/paginator";
-import { Container } from "../shared/container";
+import Paginator from "../shared/utilities/paginator";
+import { Container } from "../shared/utilities/container";
 import { CourtsCard } from "../shared/courts-card";
 import { apiClient } from "../services/apiClient";
 

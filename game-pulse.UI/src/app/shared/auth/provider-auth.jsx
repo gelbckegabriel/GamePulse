@@ -5,7 +5,7 @@ import { useAnimate, useDragControls, useMotionValue, motion } from "framer-moti
 import { FaRegUserCircle, FaRunning } from "react-icons/fa";
 import { IoMdPerson, IoMdPin } from "react-icons/io";
 import useMeasure from "react-use-measure";
-import { Button } from "./button";
+import { Button } from "../utilities/button";
 import { Option, Select, Tooltip } from "@material-tailwind/react";
 
 export const ProviderAuth = ({ openAuth, setOpenAuth }) => {
@@ -110,7 +110,6 @@ export const ProviderAuth = ({ openAuth, setOpenAuth }) => {
                       <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex justify-center items-center gap-2 p-2 rounded-xl cursor-pointer transition-all duration-300 hover:bg-opacity-25">
                         <span className="flex items-center">
                           <img src="auth/google.webp" alt="google logo" className="h-8 w-8" />
-                          {/* <span className="pl-1 text-xl font-medium tracking-wider">oogle</span> */}
                         </span>
                       </div>
                     </div>
