@@ -8,13 +8,12 @@ import { SparklesCore } from "../shared/sparkles";
 import { GenericTable } from "../shared/generic-table/generic-table";
 
 export default function CourtPage() {
-  // TODO: CREATE THE GENERIC TABLE FOR TEST
-  const [test, setTest] = useState([
-    { name: "Gabriel Gelbcke", nickname: "Gelbcke", sport: "basketball", color: "gold", grade: 9.3 },
-    { name: "John Doe", nickname: "Wick", sport: "football", color: "silver", grade: 8.7 },
-    { name: "Rodolfo Malagueta", nickname: "Porquito", sport: "basketball", color: "bronze", grade: 7.7 },
-    { name: "Peter Jaine", nickname: "Omiranha", sport: "basketball", color: "red", grade: 7.5 },
-    { name: "Pedro Pedrado da Pedra Rochosa", nickname: "", sport: "volley", color: "red", grade: 7 },
+  const [topPlayers, setTopPlayers] = useState([
+    { name: "Best Player", nickname: "1st", sport: "SPORT", color: "gold", grade: 0 },
+    { name: "Best Player", nickname: "2nd", sport: "SPORT", color: "silver", grade: 0 },
+    { name: "Best Player", nickname: "3rd", sport: "SPORT", color: "bronze", grade: 0 },
+    { name: "Best Player", nickname: "4th", sport: "SPORT", color: "red", grade: 0 },
+    { name: "No Player", nickname: "5th", sport: "SPORT", color: "red", grade: 0 },
   ]);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -22,6 +21,9 @@ export default function CourtPage() {
 
   // GET COURT DETAILS
   useEffect(() => {
+    // SET SCROLL TO ACTIVE AGAIN
+    document.body.style.overflow = "auto";
+
     // SET QUERY PARAMETERS
     const urlString = window.location.href;
     const url = new URL(urlString);
@@ -33,6 +35,25 @@ export default function CourtPage() {
     }).then((response) => {
       setCourt(response);
       setIsLoading(false);
+    });
+
+    apiClient("Games/getCourtTopPlayers", "POST", {
+      court_id: params.get("court_id"),
+    }).then((response) => {
+      setTopPlayers((prevPlayers) =>
+        prevPlayers.map((player, index) => {
+          const updated = response[index];
+          return updated
+            ? {
+                ...player,
+                name: updated.name,
+                nickname: updated.nickname,
+                sport: updated.sport,
+                grade: updated.grade,
+              }
+            : player;
+        })
+      );
     });
   }, []);
 
@@ -49,7 +70,7 @@ export default function CourtPage() {
           {/* TOP COURT PLAYERS */}
           <div>
             {/* TITLE */}
-            <div className="mt-16 h-[15rem] w-full bg-black flex flex-col items-center justify-center overflow-hidden rounded-md">
+            <div className="mt-16 h-[15rem] w-full bg-black flex flex-col items-center justify-center rounded-md">
               <h1 className="md:text-3xl text-3xl lg:text-4xl font-bold text-center text-white relative z-20">Dominators of the Court</h1>
               <div className="w-[40rem] h-40 relative">
                 {/* Gradients */}
@@ -74,7 +95,7 @@ export default function CourtPage() {
 
             {/* TABLE */}
             <div className="-mt-28 mb-20">
-              <GenericTable tableType="rank" columns={["pos", "name", "sport", "grade"]} data={test} isLoading={isLoading} />
+              <GenericTable tableType="rank" columns={["pos", "name", "sport", "grade"]} data={topPlayers} isLoading={isLoading} />
             </div>
           </div>
 

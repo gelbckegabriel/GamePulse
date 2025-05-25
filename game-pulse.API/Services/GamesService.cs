@@ -19,21 +19,25 @@ namespace game_pulse.Services
             _logger = logger;
         }
 
-        public async Task<List<CourtTopPlayerDto>> GetCourtTopPlayersAsync(GamesFilterModel filter)
+        public async Task<List<PlayersLeaderboardTableDto>> GetCourtTopPlayersAsync(GamesFilterModel filter)
         {
             var data = await _context.GamePlayers
                 .Where(gp => gp.Game.CourtId == filter.court_id)
+                .Include(gp => gp.User)
+                .ThenInclude(u => u.FavoriteSportNavigation)
                 .GroupBy(gp => gp.UserId)
-                .Select(grp => new CourtTopPlayerDto
+                .Select(grp => new PlayersLeaderboardTableDto
                 {
-                    UserId = grp.Key,
-                    AverageGrade = grp.Average(x => x.PlayerGrade)
+                    Name = grp.First().User.Name,
+                    Nickname = grp.First().User.Nickname,
+                    Sport = grp.First().User.FavoriteSportNavigation.Name,
+                    Grade = grp.Average(x => x.PlayerGrade)
                 })
-                .OrderByDescending(x => x.AverageGrade)
+                .OrderByDescending(x => x.Grade)
                 .Take(5)
                 .ToListAsync();
 
-            data.ForEach(x => x.AverageGrade = Math.Round((double)x.AverageGrade, 1));
+            data.ForEach(x => x.Grade = Math.Round((double)x.Grade, 1));
 
             return (data);
         }

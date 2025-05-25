@@ -5,8 +5,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "./use-outside-click";
 import { GlobeAmericasIcon } from "@heroicons/react/24/outline";
-import { IconButton, Typography } from "@material-tailwind/react";
-import { FaHeart, FaHeartBroken } from "react-icons/fa";
+import { Typography } from "@material-tailwind/react";
 
 export function CourtsCard({ courts = [], isLoading, onFavoriteToggle }) {
   const [active, setActive] = useState(null);

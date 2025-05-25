@@ -19,6 +19,7 @@ export default function Courts() {
   const [orderFilter, setOrderFilter] = useState("distance");
   const [courts, setCourts] = useState([
     {
+      id: 0,
       name: "Fake1",
       distance: 0,
       city: "",
@@ -30,6 +31,7 @@ export default function Courts() {
       sports: "",
     },
     {
+      id: 0,
       name: "Fake2",
       distance: 0,
       city: "",
@@ -41,6 +43,7 @@ export default function Courts() {
       sports: "",
     },
     {
+      id: 0,
       name: "Fake3",
       distance: 0,
       city: "",
@@ -78,13 +81,14 @@ export default function Courts() {
 
       response.forEach((element) => {
         courtsAvailable.push({
+          id: element.id,
           name: element.name,
           distance: 0,
           city: `${element.city}, ${element.state}`,
           address: element.address,
           web_address: element.gMaps,
           map: element.map,
-          redirect_link: `/court?name=${element.name}&city=${element.city}`,
+          redirect_link: `/court?court_id=${element.id}&name=${element.name}&city=${element.city}`,
           src: "/courts/background.png",
           sports: element.sportsAvailable,
           // TODO: distance: element.distance,
