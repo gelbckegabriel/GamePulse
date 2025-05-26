@@ -140,7 +140,7 @@ export const ProviderAuth = ({ openAuth, setOpenAuth }) => {
                       initial={{ opacity: 0, y: 500 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{
-                        duration: 0.4
+                        duration: 0.4,
                       }}
                     >
                       <div className="form">
@@ -182,7 +182,6 @@ export const ProviderAuth = ({ openAuth, setOpenAuth }) => {
                             <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                               <IoMdPin />
                               <Select
-                                disabled={newUser}
                                 containerProps={{
                                   className: "!min-w-0 w-full",
                                 }}

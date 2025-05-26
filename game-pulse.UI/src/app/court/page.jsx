@@ -3,9 +3,11 @@
 import { useEffect, useState } from "react";
 import { apiClient } from "../services/apiClient";
 import { Container } from "../shared/utilities/container";
-import { GridCardsGlows } from "../shared/grid-card-glows/grid-cards";
+import { GridItem, GridItemColored } from "../shared/grid-card-glows/grid-cards";
 import { SparklesCore } from "../shared/utilities/sparkles";
 import { GenericTable } from "../shared/generic-table/generic-table";
+import { GameRegistration } from "../shared/court/game-registry";
+import { FaCalendarCheck, FaInfo, FaLocationArrow, FaRunning } from "react-icons/fa";
 
 export default function CourtPage() {
   const [topPlayers, setTopPlayers] = useState([
@@ -16,6 +18,7 @@ export default function CourtPage() {
     { name: "No Player", nickname: "5th", sport: "SPORT", color: "red", grade: 0 },
   ]);
 
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [court, setCourt] = useState({});
 
@@ -62,7 +65,47 @@ export default function CourtPage() {
       <div className="bg-black">
         <Container>
           <div className="pt-24">
-            <GridCardsGlows court={court} sports={court.sportsAvailable} isLoading={isLoading} />
+            <ul className="grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:max-h-[34rem] xl:grid-rows-2">
+              <GridItem
+                area="md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]"
+                icon={<FaLocationArrow className="h-4 w-4 text-gray-700" />}
+                title={court.city + ", " + court.state}
+                description={court.name + "."}
+                hover={false}
+                isLoading={isLoading}
+              />
+              <GridItem
+                area="md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]"
+                icon={<FaRunning className="h-4 w-4 text-gray-700" />}
+                title="What you can play"
+                description={court.sportsAvailable != undefined ? court.sportsAvailable.join(", ") : "Loading, loading, loading..."}
+                hover={false}
+                isLoading={isLoading}
+              />
+              <GridItemColored
+                area="md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]"
+                icon={<FaInfo className="h-4 w-4 text-gray-700" />}
+                title="Find your way"
+                description="Click here and use Google Maps to point out the best route for you!"
+                hover={!isLoading}
+                link={court.gMaps}
+                isLoading={isLoading}
+              />
+              <GridItemColored
+                onClick={() => {
+                  if (!isLoading) {
+                    setIsDrawerOpen(true);
+                  }
+                }}
+                area="md:[grid-area:2/7/3/13] xl:[grid-area:1/8/3/13]"
+                icon={<FaCalendarCheck className="h-4 w-4 text-gray-700" />}
+                title="Get in the game!"
+                description="Your crew's waiting. Pick a time, hit the court."
+                hover={!isLoading}
+                isLoading={isLoading}
+              />
+              {/* TODO: ADD A CARD OF NEXT RESERVATION?? */}
+            </ul>
           </div>
 
           <br />
@@ -101,8 +144,8 @@ export default function CourtPage() {
 
           <br />
 
-          {/* TODO: The 'GetInTheGameCard' could open that DrawerModal for the user to pick his game time */}
           {/* TODO: Will I need 'User's next games' on the court? Or just on the 'Games' page? */}
+          <GameRegistration isOpen={isDrawerOpen} setIsOpen={setIsDrawerOpen} />
         </Container>
       </div>
     </>

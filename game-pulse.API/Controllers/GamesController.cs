@@ -1,5 +1,6 @@
 ﻿using game_pulse.Interfaces;
 using game_pulse.Interfaces.Filters;
+using game_pulse.Interfaces.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace game_pulse.Controllers
@@ -28,6 +29,20 @@ namespace game_pulse.Controllers
         {
             var data = await _gamesService.GetUserFilteredNextGamesAsync(filter);
             return Ok(data);
+        }
+
+        [HttpPost("createGame")]
+        public async Task<IActionResult> CreateGame(GameDetails details)
+        {
+            // TODO
+            return Ok();
+        }
+
+        [HttpPost("getGames")]
+        public async Task<IActionResult> GetGames(GameDetails details)
+        {
+            // TODO
+            return Ok();
         }
     }
 }

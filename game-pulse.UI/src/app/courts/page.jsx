@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Menu, MenuHandler, MenuList, MenuItem, Button, Checkbox, Slider, Select, Option } from "@material-tailwind/react";
 import Paginator from "../shared/utilities/paginator";
 import { Container } from "../shared/utilities/container";
-import { CourtsCard } from "../shared/courts-card";
+import { CourtsCard } from "../shared/court/courts-card";
 import { apiClient } from "../services/apiClient";
 
 export default function Courts() {

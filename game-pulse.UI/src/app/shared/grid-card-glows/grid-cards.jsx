@@ -2,51 +2,9 @@
 
 import { Typography } from "@material-tailwind/react";
 import { GlowingEffect } from "./glowing-effect";
-import { FaCalendarCheck, FaInfo, FaLocationArrow, FaRunning } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-export function GridCardsGlows({ court, sports, isLoading }) {
-  return (
-    <ul className="grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:max-h-[34rem] xl:grid-rows-2">
-      <GridItem
-        area="md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]"
-        icon={<FaLocationArrow className="h-4 w-4 text-gray-700" />}
-        title={court.city + ", " + court.state}
-        description={court.name + "."}
-        hover={false}
-        isLoading={isLoading}
-      />
-      <GridItem
-        area="md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]"
-        icon={<FaRunning className="h-4 w-4 text-gray-700" />}
-        title="What you can play"
-        description={sports != undefined ? sports.join(", ") : "Loading, loading, loading..."}
-        hover={false}
-        isLoading={isLoading}
-      />
-      <GridItemColored
-        area="md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]"
-        icon={<FaInfo className="h-4 w-4 text-gray-700" />}
-        title="Find your way"
-        description="Click here and use Google Maps to point out the best route for you!"
-        hover={!isLoading}
-        link={court.gMaps}
-        isLoading={isLoading}
-      />
-      <GridItemColored
-        area="md:[grid-area:2/7/3/13] xl:[grid-area:1/8/3/13]"
-        icon={<FaCalendarCheck className="h-4 w-4 text-gray-700" />}
-        title="Get in the game!"
-        description="Your crew's waiting. Pick a time, hit the court."
-        hover={!isLoading}
-        isLoading={isLoading}
-      />
-      {/* TODO: ADD A CARD OF NEXT RESERVATION?? */}
-    </ul>
-  );
-}
-
-const GridItem = ({ area, icon, title, description, isLoading }) => {
+export function GridItem({ area, icon, title, description, isLoading }) {
   return (
     <>
       <li className={`min-h-[14rem] list-none ${area}`}>
@@ -82,9 +40,9 @@ const GridItem = ({ area, icon, title, description, isLoading }) => {
       </li>
     </>
   );
-};
+}
 
-const GridItemColored = ({ area, icon, title, description, hover, link, isLoading }) => {
+export function GridItemColored({ onClick, area, icon, title, description, hover, link, isLoading }) {
   const variants = {
     initial: {
       backgroundPosition: "0 50%",
@@ -99,6 +57,7 @@ const GridItemColored = ({ area, icon, title, description, hover, link, isLoadin
       <li className={`min-h-[14rem] list-none ${area}`}>
         <a href={link != "" ? link : undefined} target="_blank">
           <div
+            onClick={onClick}
             className={`relative h-full rounded-2xl border p-2 md:rounded-3xl md:p-3 ${
               hover ? "cursor-pointer transition-all ease-in-out duration-300 hover:scale-105" : ""
             }`}
@@ -150,4 +109,4 @@ const GridItemColored = ({ area, icon, title, description, hover, link, isLoadin
       </li>
     </>
   );
-};
+}
