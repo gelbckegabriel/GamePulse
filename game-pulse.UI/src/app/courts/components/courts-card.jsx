@@ -3,7 +3,7 @@
 import React, { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { useOutsideClick } from "../utilities/use-outside-click";
+import { useOutsideClick } from "../../shared/utilities/use-outside-click";
 import { GlobeAmericasIcon } from "@heroicons/react/24/outline";
 import { Typography } from "@material-tailwind/react";
 
@@ -39,7 +39,7 @@ export function CourtsCard({ courts = [], isLoading, onFavoriteToggle }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/20 h-full w-full z-10"
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm h-full w-full z-20 transition-all ease duration-300"
           />
         )}
       </AnimatePresence>

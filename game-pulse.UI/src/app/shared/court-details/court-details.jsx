@@ -11,7 +11,7 @@ export const CourtDetails = ({ name, city, distance, address, web_address, gps_a
     <>
       <div className="court-card h-[200px] my-[20px]">
         <div className="court-preview bg-backgroundContrast flex flex-col justify-between text-white p-[10px] md:p-[30px] w-[30%] max-w-[30%]">
-          <h6 className="">Court</h6>
+          <h6>Court</h6>
           <div className="flex flex-row flex-wrap gap-4 py-4">
             {sports.map((sport, index) => (
               <img key={index} src={`/logos/${sport}.webp`} alt={sport} className="w-[20px] md:w-[40px]" />

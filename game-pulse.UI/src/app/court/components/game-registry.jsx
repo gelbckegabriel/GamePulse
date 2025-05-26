@@ -5,7 +5,7 @@ import { useAnimate, useDragControls, useMotionValue, motion } from "framer-moti
 import { FaRegUserCircle, FaRunning } from "react-icons/fa";
 import { IoIosTime, IoIosTimer, IoMdPerson, IoMdPin } from "react-icons/io";
 import useMeasure from "react-use-measure";
-import { Button } from "../utilities/button";
+import { Button } from "../../shared/utilities/button";
 import { Option, Select, Tooltip } from "@material-tailwind/react";
 
 export const GameRegistration = ({ isOpen, setIsOpen }) => {

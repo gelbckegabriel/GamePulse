@@ -129,7 +129,7 @@ export default function Leaderboard() {
   const cards = cardsData.map((card, index) => <Card key={card.src} card={card} index={index} />);
 
   return (
-    <div className="bg-black">
+    <>
       {/* Introduction */}
       <Container>
         <div className="mx-auto text-center pt-10">
@@ -206,15 +206,11 @@ export default function Leaderboard() {
         {/* Leaderboard */}
         <GenericTable tableType="leaderboard" columns={["Pos", "Player", "Best Player Award", "Points"]} data={globalPlayers} isLoading={isLoading} />
 
-        <br />
-
         {/* Filter Leaderboard */}
-        <CardCarousel items={cards} />
+        <div className="!mt-6 !mb-16">
+          <CardCarousel items={cards} />
+        </div>
       </Container>
-
-      <br />
-      <br />
-      <br />
-    </div>
+    </>
   );
 }

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Menu, MenuHandler, MenuList, MenuItem, Button, Checkbox, Slider, Select, Option } from "@material-tailwind/react";
 import Paginator from "../shared/utilities/paginator";
 import { Container } from "../shared/utilities/container";
-import { CourtsCard } from "../shared/court/courts-card";
+import { CourtsCard } from "./components/courts-card";
 import { apiClient } from "../services/apiClient";
 
 export default function Courts() {
@@ -117,115 +117,114 @@ export default function Courts() {
 
   return (
     <>
-      <div className="bg-black">
-        <Container>
-          <div>
-            <br />
-            <br />
+      <Container>
+        <div>
+          <br />
+          <br />
 
-            {/* FILTERS BAR */}
-            <div className="mb-6 flex flex-wrap justify-center gap-6">
-              {/* SPORTS */}
-              <Menu
-                lockScroll={true}
-                dismiss={false}
-                animate={{
-                  mount: { y: 0 },
-                  unmount: { y: 25 },
-                }}
-              >
-                <MenuHandler>
-                  <Button className="bg-white text-black w-[105px] hover:scale-105 hover:bg-white/80"> Sports </Button>
-                </MenuHandler>
-                <MenuList>
-                  {sportFilter.map((sport, index) => {
+          {/* FILTERS BAR */}
+          <div className="mb-6 flex flex-wrap justify-center gap-6">
+            {/* SPORTS */}
+            <Menu
+              lockScroll={true}
+              dismiss={false}
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <MenuHandler>
+                <Button className="bg-white text-black w-[105px] hover:scale-105 hover:bg-white/80"> Sports </Button>
+              </MenuHandler>
+              <MenuList>
+                {sportFilter.map((sport, index) => {
+                  return (
+                    <MenuItem key={index}>
+                      <Checkbox
+                        id={sport.name}
+                        label={sport.name}
+                        checked={sportFilter.find((item) => item.name === sport.name)?.checked}
+                        onChange={() => {
+                          const updatedSportFilter = [...sportFilter];
+                          const sportIndex = updatedSportFilter.findIndex((item) => item.name === sport.name);
+                          updatedSportFilter[sportIndex].checked = !updatedSportFilter[sportIndex].checked;
+                          setSportFilter(updatedSportFilter);
+                        }}
+                      />
+                    </MenuItem>
+                  );
+                })}
+              </MenuList>
+            </Menu>
+
+            {/* LOCATION */}
+            <Menu
+              lockScroll={true}
+              dismiss={false}
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <MenuHandler>
+                <Button className="bg-white text-black w-[105px] hover:scale-105 hover:bg-white/80"> Location </Button>
+              </MenuHandler>
+              <MenuList className="!min-h-[40vh] flex flex-col items-center">
+                {/* Country Filter */}
+                <Select
+                  onChange={(val) => setLocationFilter(() => ({ country: val, state: "", city: "" }))}
+                  label={locationFilter.country == "" ? "Select Country" : locationFilter.country}
+                >
+                  <Option value="">-</Option>
+                  {countryFilter.map((country, index) => {
                     return (
-                      <MenuItem key={index}>
-                        <Checkbox
-                          id={sport.name}
-                          label={sport.name}
-                          checked={sportFilter.find((item) => item.name === sport.name)?.checked}
-                          onChange={() => {
-                            const updatedSportFilter = [...sportFilter];
-                            const sportIndex = updatedSportFilter.findIndex((item) => item.name === sport.name);
-                            updatedSportFilter[sportIndex].checked = !updatedSportFilter[sportIndex].checked;
-                            setSportFilter(updatedSportFilter);
-                          }}
-                        />
-                      </MenuItem>
+                      <Option key={index} value={country}>
+                        {country}
+                      </Option>
                     );
                   })}
-                </MenuList>
-              </Menu>
+                </Select>
 
-              {/* LOCATION */}
-              <Menu
-                lockScroll={true}
-                dismiss={false}
-                animate={{
-                  mount: { y: 0 },
-                  unmount: { y: 25 },
-                }}
-              >
-                <MenuHandler>
-                  <Button className="bg-white text-black w-[105px] hover:scale-105 hover:bg-white/80"> Location </Button>
-                </MenuHandler>
-                <MenuList className="!min-h-[40vh] flex flex-col items-center">
-                  {/* Country Filter */}
-                  <Select
-                    onChange={(val) => setLocationFilter(() => ({ country: val, state: "", city: "" }))}
-                    label={locationFilter.country == "" ? "Select Country" : locationFilter.country}
-                  >
-                    <Option value="">-</Option>
-                    {countryFilter.map((country, index) => {
-                      return (
-                        <Option key={index} value={country}>
-                          {country}
-                        </Option>
-                      );
-                    })}
-                  </Select>
+                <br />
 
-                  <br />
+                {/* State Filter */}
+                <Select
+                  onChange={(val) => setLocationFilter((prev) => ({ ...prev, state: val, city: "" }))}
+                  label={locationFilter.state == "" ? "Select State" : locationFilter.state}
+                >
+                  <Option value="">-</Option>
+                  {stateFilter.map((state, index) => {
+                    return (
+                      <Option key={index} value={state}>
+                        {state}
+                      </Option>
+                    );
+                  })}
+                </Select>
 
-                  {/* State Filter */}
-                  <Select
-                    onChange={(val) => setLocationFilter((prev) => ({ ...prev, state: val, city: "" }))}
-                    label={locationFilter.state == "" ? "Select State" : locationFilter.state}
-                  >
-                    <Option value="">-</Option>
-                    {stateFilter.map((state, index) => {
-                      return (
-                        <Option key={index} value={state}>
-                          {state}
-                        </Option>
-                      );
-                    })}
-                  </Select>
+                <br />
 
-                  <br />
+                {/* City Filter */}
+                <Select
+                  onChange={(val) => setLocationFilter((prev) => ({ ...prev, city: val }))}
+                  label={locationFilter.city == "" ? "Select City" : locationFilter.city}
+                >
+                  <Option value="">-</Option>
+                  {cityFilter.map((city, index) => {
+                    return (
+                      <Option key={index} value={city}>
+                        {city}
+                      </Option>
+                    );
+                  })}
+                </Select>
 
-                  {/* City Filter */}
-                  <Select
-                    onChange={(val) => setLocationFilter((prev) => ({ ...prev, city: val }))}
-                    label={locationFilter.city == "" ? "Select City" : locationFilter.city}
-                  >
-                    <Option value="">-</Option>
-                    {cityFilter.map((city, index) => {
-                      return (
-                        <Option key={index} value={city}>
-                          {city}
-                        </Option>
-                      );
-                    })}
-                  </Select>
+                <Button className="mt-10 rounded-full"> Apply </Button>
+              </MenuList>
+            </Menu>
 
-                  <Button className="mt-10 rounded-full"> Apply </Button>
-                </MenuList>
-              </Menu>
-
-              {/* DISTANCE */}
-              {/* <Menu
+            {/* DISTANCE */}
+            {/* <Menu
                 lockScroll={true}
                 dismiss={false}
                 animate={{
@@ -242,8 +241,8 @@ export default function Courts() {
                 </MenuList>
               </Menu> */}
 
-              {/* ORDER BY */}
-              {/* <Menu
+            {/* ORDER BY */}
+            {/* <Menu
                 lockScroll={true}
                 dismiss={false}
                 animate={{
@@ -261,24 +260,23 @@ export default function Courts() {
                   </Select>
                 </MenuList>
               </Menu> */}
-            </div>
-
-            <br />
-
-            {/* COURTS */}
-            {/* {courts.length > 0 && ()} */}
-            <CourtsCard courts={courts} isLoading={isLoading} onFavoriteToggle={() => handleFavoriteToggle(index)} />
-
-            <br />
-            <br />
-
-            <div className="flex justify-center my-5">{/* <Paginator index={1} /> */}</div>
-            <br />
-            <br />
-            <br />
           </div>
-        </Container>
-      </div>
+
+          <br />
+
+          {/* COURTS */}
+          {/* {courts.length > 0 && ()} */}
+          <CourtsCard courts={courts} isLoading={isLoading} onFavoriteToggle={() => handleFavoriteToggle(index)} />
+
+          <br />
+          <br />
+
+          <div className="flex justify-center my-5">{/* <Paginator index={1} /> */}</div>
+          <br />
+          <br />
+          <br />
+        </div>
+      </Container>
     </>
   );
 }

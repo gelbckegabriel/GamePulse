@@ -33,7 +33,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
   //           animate={{ opacity: 1, transition: { duration: 0.2 } }}
   //           exit={{ opacity: 0, transition: { duration: 0.2 } }}
   //           onClick={() => setIsOpen(false)}
-  //           className="bg-black/90  backdrop-blur p-8 fixed inset-0 z-50 grid place-items-center overflow-y-scroll"
+  //           className="bg-black/90 backdrop-blur p-8 fixed inset-0 z-50 grid place-items-center overflow-y-scroll"
   //         >
   //           <motion.div
   //             initial={{

@@ -35,7 +35,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" type="icon" />
       </head>
-      <body className={`${roboto.variable} ${inter.variable} ${notoSans.variable} antialiased bg-gray-200`}>
+      <body className={`${roboto.variable} ${inter.variable} ${notoSans.variable} antialiased bg-black`}>
         <Header />
         {children}
         <Footer />
