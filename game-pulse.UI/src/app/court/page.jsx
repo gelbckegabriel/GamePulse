@@ -32,7 +32,7 @@ export default function CourtPage() {
     const url = new URL(urlString);
     const params = new URLSearchParams(url.search);
 
-    apiClient("Courts/getFilteredCourt", "POST", {
+    apiClient("Courts/GetFilteredCourt", "POST", {
       name: params.get("name"),
       city: params.get("city"),
     }).then((response) => {
@@ -40,7 +40,7 @@ export default function CourtPage() {
       setIsLoading(false);
     });
 
-    apiClient("Games/getCourtTopPlayers", "POST", {
+    apiClient("Games/GetCourtTopPlayers", "POST", {
       court_id: params.get("court_id"),
     }).then((response) => {
       setTopPlayers((prevPlayers) =>

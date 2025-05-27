@@ -63,7 +63,7 @@ export default function Courts() {
   // GET BASIC COURTS INFO
   useEffect(() => {
     // Get Sports for Filter
-    apiClient("Sports/getSports").then((response) => {
+    apiClient("Sports/GetSports").then((response) => {
       const availableSports = [];
 
       response.forEach((element) => {
@@ -76,7 +76,7 @@ export default function Courts() {
     });
 
     // Get Available Courts
-    apiClient("Courts/getCourts").then((response) => {
+    apiClient("Courts/GetCourts").then((response) => {
       const courtsAvailable = [];
 
       response.forEach((element) => {
@@ -102,7 +102,7 @@ export default function Courts() {
 
   // UPDATE LOCATIONS FILTER
   useEffect(() => {
-    apiClient("Courts/getLocations", "POST", locationFilter).then((response) => {
+    apiClient("Courts/GetLocations", "POST", locationFilter).then((response) => {
       setCountryFilter(response.country);
       setStateFilter(response.state);
       setCityFilter(response.city);
