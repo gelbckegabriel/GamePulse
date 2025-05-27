@@ -1,23 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAnimate, useDragControls, useMotionValue, motion } from "framer-motion";
-import { FaRegUserCircle, FaRunning } from "react-icons/fa";
-import { IoIosTime, IoIosTimer, IoMdPerson, IoMdPin } from "react-icons/io";
+import { FaCheck } from "react-icons/fa";
+import { IoIosTime, IoIosTimer } from "react-icons/io";
 import useMeasure from "react-use-measure";
 import { Button } from "../../shared/utilities/button";
-import { Option, Select, Tooltip } from "@material-tailwind/react";
+import { Option, Select } from "@material-tailwind/react";
 import { apiClient } from "@/app/services/apiClient";
+import { GridGamesColored } from "@/app/shared/grid-card-glows/grid-cards";
 
 export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
+  const [userFilter, setUserFilter] = useState({
+    date: "2025-05-25",
+    startTime: null,
+    endTime: null,
+  });
   const [courtGames, setCourtGames] = useState([]);
 
   const handleSubmit = () => {
     apiClient("Games/GetCourtGames", "POST", {
       CourtId: court.id,
       GameDate: "2025-05-25",
-      GameTimeStart: "14:00:00",
-      GameTimeEnd: "19:00:00",
+      GameTimeStart: userFilter.startTime,
+      GameTimeEnd: userFilter.endTime,
     }).then((response) => {
       console.log("courtGames: ", response);
       setCourtGames(response);
@@ -95,12 +101,12 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
               ></button>
             </div>
 
+            {/* TODO: FIX RESPONSIVINESS */}
             <div className="relative z-0 h-full overflow-y-auto p-4 pt-12">
               <div className="mx-auto max-w-2xl space-y-4 text-neutral-400 text-white">
                 <h2 className="pt-2 text-3xl md:text-4xl lg:text-4xl font-bold text-center">When are you going to play?</h2>
-
                 {/* DATE PICK */}
-                <div className="!mt-20 flex justify-between">
+                <div className="!relative !z-20 !mt-20 flex justify-between">
                   {/* DATE */}
                   <div className="w-[40%]">
                     <span>DATE PICKER SELECTOR</span>
@@ -112,6 +118,7 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                     <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                       <IoIosTime />
                       <Select
+                        onChange={(value) => setUserFilter({ ...userFilter, startTime: value })}
                         containerProps={{
                           className: "!min-w-0 w-full",
                         }}
@@ -143,6 +150,7 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                     <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                       <IoIosTimer />
                       <Select
+                        onChange={(value) => setUserFilter({ ...userFilter, endTime: value })}
                         containerProps={{
                           className: "!min-w-0 w-full",
                         }}
@@ -169,17 +177,29 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                   </div>
                 </div>
 
-                {/* TODO: After selecting your time, execute a quick query on the DB, to visualize if there are games available. */}
-                {/* TODO: Display the games available in that date frame in some kind of card with details, date, time and players. */}
-                {/* TODO: Ask if the players wants to join one of those games or create his own. */}
-                {/* IDEA: Maybe use the same card you have behind the drawer? The Colored ones... */}
-                {/* GAMES AVAILABLE */}
-                <div></div>
-
-                {/* SUBMIT GAME */}
-                <div className="!mt-20 pt-10 pb-6 flex justify-center">
+                {/* TODO: Block the button if the user did not fill any of the fields above. */}
+                {/* SUBMIT PICK */}
+                <div className="!mt-10 pt-10 pb-6 flex justify-center">
                   <Button onClick={() => handleSubmit()}>Submit</Button>
                 </div>
+
+                {/* TODO: Ask if the players wants to join one of those games or create his own. */}
+                {/* GAMES AVAILABLE */}
+                {Object.keys(courtGames).length > 0 && (
+                  <div className="!relative !z-10 !mt-16">
+                    {courtGames.map((game, index) => (
+                      <React.Fragment key={index}>
+                        <GridGamesColored
+                          area="md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]"
+                          icon={<FaCheck className="h-4 w-4 text-gray-700" />}
+                          date={game.gameTime.split("T")[0].split("-").reverse().join("/")}
+                          time={game.gameTime.split("T")[1].slice(0, 5)}
+                          players={game.players}
+                        />
+                      </React.Fragment>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>

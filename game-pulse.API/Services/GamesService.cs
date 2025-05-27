@@ -53,6 +53,7 @@ namespace game_pulse.Services
                     TimeOnly.FromDateTime(g.GameTime) >= filter.GameTimeStart &&
                     TimeOnly.FromDateTime(g.GameTime) <= filter.GameTimeEnd
                 )
+                .OrderBy(g => g.GameTime)
                 .AsQueryable();
 
             if (filter.CourtId.HasValue)

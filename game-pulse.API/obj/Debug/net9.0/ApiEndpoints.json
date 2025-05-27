@@ -2,7 +2,7 @@
   {
     "ContainingType": "game_pulse.Controllers.CourtsController",
     "Method": "GetCourts",
-    "RelativePath": "Courts/getCourts",
+    "RelativePath": "Courts/GetCourts",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -12,7 +12,7 @@
   {
     "ContainingType": "game_pulse.Controllers.CourtsController",
     "Method": "GetFilteredCourt",
-    "RelativePath": "Courts/getFilteredCourt",
+    "RelativePath": "Courts/GetFilteredCourt",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -28,7 +28,7 @@
   {
     "ContainingType": "game_pulse.Controllers.CourtsController",
     "Method": "GetFilteredCourts",
-    "RelativePath": "Courts/getFilteredCourts",
+    "RelativePath": "Courts/GetFilteredCourts",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -44,7 +44,7 @@
   {
     "ContainingType": "game_pulse.Controllers.CourtsController",
     "Method": "GetLocations",
-    "RelativePath": "Courts/getLocations",
+    "RelativePath": "Courts/GetLocations",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -124,7 +124,7 @@
   {
     "ContainingType": "game_pulse.Controllers.SportsController",
     "Method": "GetSports",
-    "RelativePath": "Sports/getSports",
+    "RelativePath": "Sports/GetSports",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -134,7 +134,7 @@
   {
     "ContainingType": "game_pulse.Controllers.SportsController",
     "Method": "GetSportsPositions",
-    "RelativePath": "Sports/sports_position/{id}",
+    "RelativePath": "Sports/GetSportsPositions/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
