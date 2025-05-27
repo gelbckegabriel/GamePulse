@@ -144,7 +144,8 @@ export default function CourtPage() {
         <br />
 
         {/* TODO: Will I need 'User's next games' on the court? Or just on the 'Games' page? */}
-        <GameRegistration isOpen={isDrawerOpen} setIsOpen={setIsDrawerOpen} />
+
+        {Object.keys(court).length > 0 && <GameRegistration court={court} isOpen={isDrawerOpen} setIsOpen={setIsDrawerOpen} />}
       </Container>
     </>
   );

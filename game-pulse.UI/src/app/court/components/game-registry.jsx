@@ -1,14 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAnimate, useDragControls, useMotionValue, motion } from "framer-motion";
 import { FaRegUserCircle, FaRunning } from "react-icons/fa";
 import { IoIosTime, IoIosTimer, IoMdPerson, IoMdPin } from "react-icons/io";
 import useMeasure from "react-use-measure";
 import { Button } from "../../shared/utilities/button";
 import { Option, Select, Tooltip } from "@material-tailwind/react";
+import { apiClient } from "@/app/services/apiClient";
 
-export const GameRegistration = ({ isOpen, setIsOpen }) => {
+export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
+  const [courtGames, setCourtGames] = useState([]);
+
+  const handleSubmit = () => {
+    apiClient("Games/GetCourtGames", "POST", {
+      CourtId: court.id,
+      GameDate: "2025-05-25",
+      GameTimeStart: "14:00:00",
+      GameTimeEnd: "19:00:00",
+    }).then((response) => {
+      console.log("courtGames: ", response);
+      setCourtGames(response);
+    });
+  };
+
   // ANIMATION
   const [scope, animate] = useAnimate();
   const [drawerRef, { height }] = useMeasure();
@@ -29,10 +44,6 @@ export const GameRegistration = ({ isOpen, setIsOpen }) => {
 
     setIsOpen(false);
   };
-
-  function handleSubmit() {
-    console.log("TODO: Submit Method");
-  }
 
   return (
     <>
@@ -167,7 +178,7 @@ export const GameRegistration = ({ isOpen, setIsOpen }) => {
 
                 {/* SUBMIT GAME */}
                 <div className="!mt-20 pt-10 pb-6 flex justify-center">
-                  <Button onClick={() => handleSubmit}>Submit</Button>
+                  <Button onClick={() => handleSubmit()}>Submit</Button>
                 </div>
               </div>
             </div>
