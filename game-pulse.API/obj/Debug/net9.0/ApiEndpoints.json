@@ -59,8 +59,24 @@
   },
   {
     "ContainingType": "game_pulse.Controllers.GamesController",
-    "Method": "GetCourtTopPlayers",
-    "RelativePath": "Games/getCourtTopPlayers",
+    "Method": "CreateGame",
+    "RelativePath": "Games/CreateGame",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "details",
+        "Type": "game_pulse.Interfaces.Filters.GamesFilterModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "game_pulse.Controllers.GamesController",
+    "Method": "GetCourtGames",
+    "RelativePath": "Games/GetCourtGames",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -75,8 +91,24 @@
   },
   {
     "ContainingType": "game_pulse.Controllers.GamesController",
-    "Method": "GetUserFilteredNextGames",
-    "RelativePath": "Games/getUserFilteredNextGames",
+    "Method": "GetCourtTopPlayers",
+    "RelativePath": "Games/GetCourtTopPlayers",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filter",
+        "Type": "game_pulse.Interfaces.Filters.GamesFilterModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "game_pulse.Controllers.GamesController",
+    "Method": "GetUserNextGames",
+    "RelativePath": "Games/GetUserNextGames",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

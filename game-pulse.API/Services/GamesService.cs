@@ -22,7 +22,7 @@ namespace game_pulse.Services
         public async Task<List<PlayersLeaderboardTableDto>> GetCourtTopPlayersAsync(GamesFilterModel filter)
         {
             var data = await _context.GamePlayers
-                .Where(gp => gp.Game.CourtId == filter.court_id)
+                .Where(gp => gp.Game.CourtId == filter.CourtId)
                 .Include(gp => gp.User)
                 .ThenInclude(u => u.FavoriteSportNavigation)
                 .GroupBy(gp => gp.UserId)
@@ -42,24 +42,58 @@ namespace game_pulse.Services
             return (data);
         }
 
-        public async Task<List<UserNextGamesDto>> GetUserFilteredNextGamesAsync(GamesFilterModel filter)
+        public async Task<List<CourtGamesDto>> GetCourtGamesFilteredAsync(GamesFilterModel filter)
+        {
+            var query = _context.Games
+                .Include(g => g.Court)
+                .ThenInclude(g => g.Sports)
+                .Where(g => g.CourtId == filter.CourtId)
+                .Where(g => DateOnly.FromDateTime(g.GameTime) == filter.GameDate)
+                .Where(g => 
+                    TimeOnly.FromDateTime(g.GameTime) >= filter.GameTimeStart &&
+                    TimeOnly.FromDateTime(g.GameTime) <= filter.GameTimeEnd
+                )
+                .AsQueryable();
+
+            if (filter.CourtId.HasValue)
+                query = query.Where(g => g.CourtId == filter.CourtId);
+
+            var games = await query
+                .Select(g => new CourtGamesDto
+                {
+                    CourtName = g.Court.Name,
+                    Sport = g.Sport.Name,
+                    GameTime = g.GameTime,
+                    Players = g.GamePlayers.Select(gp => new GamePlayerDto
+                    {
+                        Name = gp.User.Name,
+                        Nickname = gp.User.Nickname,
+                        Xp = gp.User.Xp
+                    }).ToList()
+                })
+                .ToListAsync();
+
+            return games; 
+        }
+
+        public async Task<List<UserNextGamesDto>> GetUserNextGamesAsync(GamesFilterModel filter)
         {
             var query = _context.GamePlayers
-                .Where(gp => gp.UserId == filter.user_id)
+                .Where(gp => gp.UserId == filter.UserId)
                 .Where(gp => gp.Game.GameTime > DateTime.Now)
                 .AsQueryable();
 
-            if (filter.court_id.HasValue)
-                query = query.Where(gp => gp.Game.CourtId == filter.court_id);
+            if (filter.CourtId.HasValue)
+                query = query.Where(gp => gp.Game.CourtId == filter.CourtId);
 
             var data = await query
                 .Select(gp => new UserNextGamesDto
                 {
-                    court_id = gp.Game.CourtId,
-                    sport = gp.Game.Sport.Name,
-                    game_time = gp.Game.GameTime,
-                    user_id = gp.UserId,
-                    presence = gp.Presence
+                    CourtId = gp.Game.CourtId,
+                    Sport = gp.Game.Sport.Name,
+                    GameTime = gp.Game.GameTime,
+                    UserId = gp.UserId,
+                    Presence = gp.Presence
                 })
                 .ToListAsync();
 

@@ -2,16 +2,20 @@
 {
     public class GamesFilterModel
     {
-        public int? court_id { get; set; }
+        public int? CourtId { get; set; }
 
-        public int? sport_id { get; set; }
+        public int? SportId { get; set; }
 
-        public int? best_player_id { get; set; }
+        public int? BestPlayerId { get; set; }
 
-        public int? game_id { get; set; }
+        public int? GameId { get; set; }
 
-        public int? user_id { get; set; }
+        public int? UserId { get; set; }
 
-        public DateTime? game_time { get; set; }
+        public DateOnly? GameDate { get; set; }
+
+        public TimeOnly? GameTimeStart { get; set; }
+
+        public TimeOnly? GameTimeEnd { get; set; }
     }
 }

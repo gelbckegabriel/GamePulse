@@ -2,14 +2,14 @@
 {
     public class UserNextGamesDto
     {
-        public int court_id { get; set; }
+        public int CourtId { get; set; }
 
-        public string sport { get; set; } = null!;
+        public string Sport { get; set; } = null!;
 
-        public DateTime game_time { get; set; }
+        public DateTime GameTime { get; set; }
 
-        public int user_id { get; set; }
+        public int UserId { get; set; }
 
-        public bool? presence { get; set; }
+        public bool? Presence { get; set; }
     }
 }

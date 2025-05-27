@@ -1,6 +1,5 @@
 ﻿using game_pulse.Interfaces;
 using game_pulse.Interfaces.Filters;
-using game_pulse.Interfaces.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace game_pulse.Controllers
@@ -17,32 +16,32 @@ namespace game_pulse.Controllers
             _gamesService = gamesService;
         }
 
-        [HttpPost("getCourtTopPlayers")]
+        [HttpPost("GetCourtTopPlayers")]
         public async Task<IActionResult> GetCourtTopPlayers(GamesFilterModel filter)
         {
             var data = await _gamesService.GetCourtTopPlayersAsync(filter);
             return Ok(data);
         }
 
-        [HttpPost("getUserFilteredNextGames")]
-        public async Task<IActionResult> GetUserFilteredNextGames(GamesFilterModel filter)
+        [HttpPost("GetUserNextGames")]
+        public async Task<IActionResult> GetUserNextGames(GamesFilterModel filter)
         {
-            var data = await _gamesService.GetUserFilteredNextGamesAsync(filter);
+            var data = await _gamesService.GetUserNextGamesAsync(filter);
             return Ok(data);
         }
 
-        [HttpPost("createGame")]
-        public async Task<IActionResult> CreateGame(GameDetails details)
+        [HttpPost("CreateGame")]
+        public async Task<IActionResult> CreateGame(GamesFilterModel details)
         {
             // TODO
             return Ok();
         }
 
-        [HttpPost("getGames")]
-        public async Task<IActionResult> GetGames(GameDetails details)
+        [HttpPost("GetCourtGames")]
+        public async Task<IActionResult> GetCourtGames(GamesFilterModel filter)
         {
-            // TODO
-            return Ok();
+            var data = await _gamesService.GetCourtGamesFilteredAsync(filter);
+            return Ok(data);
         }
     }
 }

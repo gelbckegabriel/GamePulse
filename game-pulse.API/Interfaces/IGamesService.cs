@@ -8,6 +8,8 @@ namespace game_pulse.Interfaces
     {
         public Task<List<PlayersLeaderboardTableDto>> GetCourtTopPlayersAsync(GamesFilterModel filter);
 
-        public Task<List<UserNextGamesDto>> GetUserFilteredNextGamesAsync(GamesFilterModel filter);
+        public Task<List<CourtGamesDto>> GetCourtGamesFilteredAsync(GamesFilterModel filter);
+
+        public Task<List<UserNextGamesDto>> GetUserNextGamesAsync(GamesFilterModel filter);
     }
 }
