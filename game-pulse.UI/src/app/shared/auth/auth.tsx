@@ -1,5 +1,5 @@
 // import { AnimatePresence, motion } from "framer-motion";
-// import { useState } from "react";
+import { useState } from "react";
 // import { FaFingerprint, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 // import { FaFacebook, FaGoogle } from "react-icons/fa6";
 // import { IoIosCloseCircleOutline } from "react-icons/io";
@@ -13,6 +13,7 @@ type Props = {
 };
 
 export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
+  const [user, setUser] = useState({});
   // const [openAuth, setOpenAuth] = useState<boolean>(false);
   // const [showPassword, setShowPassword] = useState<boolean>(false);
   // const togglePasswordView = () => setShowPassword(!showPassword);

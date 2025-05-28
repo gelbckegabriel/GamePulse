@@ -124,7 +124,7 @@ export function GridGamesColored({ onClick, area, icon, date, time, players }) {
 
   return (
     <>
-      <li className={`min-h-[14rem] list-none ${area}`}>
+      <li className={`pb-[2rem] list-none ${area}`}>
         <div
           onClick={onClick}
           className="relative h-full rounded-2xl border p-2 md:rounded-3xl md:p-3 cursor-pointer transition-all ease-in-out duration-300 hover:scale-105"
@@ -141,7 +141,7 @@ export function GridGamesColored({ onClick, area, icon, date, time, players }) {
               ease: [0.75, 0, 0.25, 1],
             }}
             style={{
-              background: "linear-gradient(-45deg, #85090943, #79123b3c, #2047c649, #11677f51)",
+              background: "linear-gradient(-45deg, #85090943, #79123b3c, #2047c649, #14117f51)",
               backgroundSize: "400% 400%",
             }}
             className="border-0.75 relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl p-6 md:p-6 shadow-[0px_0px_27px_0px_#2D2D2D]"
