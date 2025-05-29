@@ -14,6 +14,7 @@ type Props = {
 
 export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
   const [user, setUser] = useState({});
+  // TODO: Implement Redux logic here to pass the user values like ID, Names and etc throughout the application.
   // const [openAuth, setOpenAuth] = useState<boolean>(false);
   // const [showPassword, setShowPassword] = useState<boolean>(false);
   // const togglePasswordView = () => setShowPassword(!showPassword);

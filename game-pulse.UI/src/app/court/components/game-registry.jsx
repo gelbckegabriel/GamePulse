@@ -30,6 +30,10 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
     });
   };
 
+  const subscribeToGame = (userId, gameId) => {
+    console.log(`userId: ${userId} & gameId: ${gameId}`);
+  };
+
   // ANIMATION
   const [scope, animate] = useAnimate();
   const [drawerRef, { height }] = useMeasure();
@@ -195,6 +199,7 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                           date={game.gameTime.split("T")[0].split("-").reverse().join("/")}
                           time={game.gameTime.split("T")[1].slice(0, 5)}
                           players={game.players}
+                          onClick={() => subscribeToGame(1, game.gameId) /* TODO: Replace 1 with actual userId */}
                         />
                       </React.Fragment>
                     ))}

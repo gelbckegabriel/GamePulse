@@ -4,6 +4,8 @@ namespace game_pulse.Interfaces.Dto
 {
     public class CourtGamesDto
     {
+        public int GameId { get; set; }
+
         public string CourtName { get; set; } = null!;
 
         public string Sport { get; set; } = null!;
