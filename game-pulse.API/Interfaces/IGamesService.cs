@@ -1,6 +1,7 @@
 ﻿using game_pulse.Data.Models;
 using game_pulse.Interfaces.Dto;
 using game_pulse.Interfaces.Filters;
+using game_pulse.Interfaces.Models;
 
 namespace game_pulse.Interfaces
 {
@@ -8,8 +9,10 @@ namespace game_pulse.Interfaces
     {
         public Task<List<PlayersLeaderboardTableDto>> GetCourtTopPlayersAsync(GamesFilterModel filter);
 
-        public Task<List<CourtGamesDto>> GetCourtGamesFilteredAsync(GamesFilterModel filter);
+        public Task<List<CourtGameDto>> GetCourtGamesFilteredAsync(GamesFilterModel filter);
 
         public Task<List<UserNextGamesDto>> GetUserNextGamesAsync(GamesFilterModel filter);
+
+        public Task<Game> CreateGame(GameCreateModel details);
     }
 }

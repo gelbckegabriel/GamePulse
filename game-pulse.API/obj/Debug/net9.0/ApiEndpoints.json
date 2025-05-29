@@ -67,7 +67,7 @@
     "Parameters": [
       {
         "Name": "details",
-        "Type": "game_pulse.Interfaces.Filters.GamesFilterModel",
+        "Type": "game_pulse.Interfaces.Models.GameCreateModel",
         "IsRequired": true
       }
     ],

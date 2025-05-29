@@ -3,6 +3,8 @@ using game_pulse.Data.Models;
 using game_pulse.Interfaces;
 using game_pulse.Interfaces.Dto;
 using game_pulse.Interfaces.Filters;
+using game_pulse.Interfaces.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace game_pulse.Services
@@ -42,7 +44,7 @@ namespace game_pulse.Services
             return (data);
         }
 
-        public async Task<List<CourtGamesDto>> GetCourtGamesFilteredAsync(GamesFilterModel filter)
+        public async Task<List<CourtGameDto>> GetCourtGamesFilteredAsync(GamesFilterModel filter)
         {
             var query = _context.Games
                 .Include(g => g.Court)
@@ -60,7 +62,7 @@ namespace game_pulse.Services
                 query = query.Where(g => g.CourtId == filter.CourtId);
 
             var games = await query
-                .Select(g => new CourtGamesDto
+                .Select(g => new CourtGameDto
                 {
                     GameId = g.Id,
                     CourtName = g.Court.Name,
@@ -100,6 +102,24 @@ namespace game_pulse.Services
                 .ToListAsync();
 
             return (data);
+        }
+
+        public async Task<Game> CreateGame(GameCreateModel details)
+        {
+            var gameDateTime = details.GameDate.ToDateTime(details.GameTimeStart);
+
+            var courtGame = new Game
+            {
+                CourtId = details.CourtId,
+                SportId = details.SportId,
+                GameTime = gameDateTime,
+                BestPlayerId = null
+            };
+
+            _context.Games.Add(courtGame);
+            await _context.SaveChangesAsync();
+
+            return courtGame;
         }
     }
 }

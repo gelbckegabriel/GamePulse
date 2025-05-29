@@ -2,7 +2,7 @@
 
 namespace game_pulse.Interfaces.Dto
 {
-    public class CourtGamesDto
+    public class CourtGameDto
     {
         public int GameId { get; set; }
 
