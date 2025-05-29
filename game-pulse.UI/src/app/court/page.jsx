@@ -11,10 +11,10 @@ import { FaCalendarCheck, FaInfo, FaLocationArrow, FaRunning } from "react-icons
 
 export default function CourtPage() {
   const [topPlayers, setTopPlayers] = useState([
-    { name: "Best Player", nickname: "1st", sport: "SPORT", color: "gold", grade: 0 },
-    { name: "Best Player", nickname: "2nd", sport: "SPORT", color: "silver", grade: 0 },
-    { name: "Best Player", nickname: "3rd", sport: "SPORT", color: "bronze", grade: 0 },
-    { name: "Best Player", nickname: "4th", sport: "SPORT", color: "red", grade: 0 },
+    { name: "No Player", nickname: "1st", sport: "SPORT", color: "gold", grade: 0 },
+    { name: "No Player", nickname: "2nd", sport: "SPORT", color: "silver", grade: 0 },
+    { name: "No Player", nickname: "3rd", sport: "SPORT", color: "bronze", grade: 0 },
+    { name: "No Player", nickname: "4th", sport: "SPORT", color: "red", grade: 0 },
     { name: "No Player", nickname: "5th", sport: "SPORT", color: "red", grade: 0 },
   ]);
 

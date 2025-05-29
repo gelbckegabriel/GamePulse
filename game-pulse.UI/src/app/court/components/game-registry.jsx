@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { useAnimate, useDragControls, useMotionValue, motion } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import { useAnimate, useDragControls, useMotionValue, motion, useAnimation } from "framer-motion";
 import { FaCheck } from "react-icons/fa";
-import { IoIosTime, IoIosTimer } from "react-icons/io";
+import { IoIosCalendar, IoIosTime, IoIosTimer } from "react-icons/io";
 import useMeasure from "react-use-measure";
 import { Button } from "../../shared/utilities/button";
 import { Option, Select } from "@material-tailwind/react";
@@ -11,27 +11,43 @@ import { apiClient } from "@/app/services/apiClient";
 import { GridGamesColored } from "@/app/shared/grid-card-glows/grid-cards";
 
 export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
+  const dateInputRef = useRef(null);
+  const [isSearched, setIsSearched] = useState(false);
   const [userFilter, setUserFilter] = useState({
-    date: "2025-05-25",
+    date: null,
     startTime: null,
     endTime: null,
   });
   const [courtGames, setCourtGames] = useState([]);
 
   const handleSubmit = () => {
-    apiClient("Games/GetCourtGames", "POST", {
-      CourtId: court.id,
-      GameDate: "2025-05-25",
-      GameTimeStart: userFilter.startTime,
-      GameTimeEnd: userFilter.endTime,
-    }).then((response) => {
-      console.log("courtGames: ", response);
-      setCourtGames(response);
-    });
+    if (userFilter.date && userFilter.startTime && userFilter.endTime) {
+      apiClient("Games/GetCourtGames", "POST", {
+        CourtId: court.id,
+        GameDate: userFilter.date,
+        GameTimeStart: userFilter.startTime,
+        GameTimeEnd: userFilter.endTime,
+      }).then((response) => {
+        console.log("courtGames: ", response);
+        setCourtGames(response);
+        setIsSearched(true);
+      });
+    } else {
+      window.alert("Please fill all fields before submitting.");
+    }
+  };
+
+  const showDatePicker = () => {
+    dateInputRef.current?.showPicker();
   };
 
   const subscribeToGame = (userId, gameId) => {
     console.log(`userId: ${userId} & gameId: ${gameId}`);
+  };
+
+  const createGame = () => {
+    // TODO: Need to create something for the user to select the sport.
+    console.log(`courtId: ${court.id} | sportId: ${court.sportId} | gameTime: ${userFilter.date} ${userFilter.startTime} | bestPlayerId: ${null}`); // TODO: Replace with actual game creation logic
   };
 
   // ANIMATION
@@ -40,6 +56,15 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
 
   const y = useMotionValue(0);
   const controls = useDragControls();
+  const searchControls = useAnimation();
+  const createControls = useAnimation();
+
+  useEffect(() => {
+    if (isSearched) {
+      searchControls.start({ x: "25%" });
+      createControls.start({ display: "block", x: "50%", opacity: 1 });
+    }
+  }, [isSearched, searchControls]);
 
   const handleClose = async () => {
     animate(scope.current, {
@@ -74,7 +99,7 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
             transition={{
               ease: "easeInOut",
             }}
-            className="absolute bottom-0 h-[70vh] md:h-[55vh] lg:h-[75vh] w-full overflow-hidden rounded-t-3xl bg-backgroundModal"
+            className="absolute bottom-0 h-[70vh] md:h-[75vh] lg:h-[75vh] w-full overflow-hidden rounded-t-3xl bg-backgroundModal"
             style={{ y }}
             drag="y"
             dragControls={controls}
@@ -112,8 +137,17 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                 {/* DATE PICK */}
                 <div className="!relative !z-20 !mt-20 flex justify-between">
                   {/* DATE */}
-                  <div className="w-[40%]">
-                    <span>DATE PICKER SELECTOR</span>
+                  <div className="w-[40%] cursor-pointer" onClick={() => showDatePicker()}>
+                    <p className="text-sm2 mb-1">Date</p>
+                    <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
+                      <IoIosCalendar />
+                      <input
+                        ref={dateInputRef}
+                        type="date"
+                        onChange={(e) => setUserFilter({ date: e.target.value })}
+                        className="bg-transparent h-10 w-full cursor-pointer"
+                      />
+                    </div>
                   </div>
 
                   {/* START TIME */}
@@ -181,29 +215,82 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                   </div>
                 </div>
 
-                {/* TODO: Block the button if the user did not fill any of the fields above. */}
                 {/* SUBMIT PICK */}
-                <div className="!mt-10 pt-10 pb-6 flex justify-center">
-                  <Button onClick={() => handleSubmit()}>Submit</Button>
+                <div className="!mt-8 pt-8 pb-6 flex justify-center">
+                  {/* SEARCH GAMES BUTTON */}
+                  <motion.div
+                    initial={{ x: "40%" }}
+                    animate={searchControls}
+                    transition={{
+                      duration: 0.4,
+                      // scale: { type: "tween", visualDuration: 0.4, bounce: 0.5 },
+                    }}
+                    className="!w-full"
+                  >
+                    <Button
+                      className={`z-10 ${userFilter.date && userFilter.startTime && userFilter.endTime ? "" : "bg-gray-500 cursor-not-allowed"}`}
+                      onClick={() => handleSubmit()}
+                    >
+                      Search Games
+                    </Button>
+                  </motion.div>
+
+                  {/* CREATE GAMES BUTTON */}
+                  <motion.div
+                    initial={{ display: "none", opacity: 0 }}
+                    animate={createControls}
+                    transition={{
+                      duration: 0.4,
+                      scale: { type: "tween", visualDuration: 0.4, bounce: 0.5 },
+                    }}
+                    className="absolute !max-w-[100vh]"
+                  >
+                    <Button className="z-0 bg-[#18631565] text-white" onClick={() => createGame()}>
+                      Create your Own Game
+                    </Button>
+                  </motion.div>
                 </div>
 
-                {/* TODO: Ask if the players wants to join one of those games or create his own. */}
                 {/* GAMES AVAILABLE */}
-                {Object.keys(courtGames).length > 0 && (
-                  <div className="!relative !z-10 !mt-16">
-                    {courtGames.map((game, index) => (
-                      <React.Fragment key={index}>
-                        <GridGamesColored
-                          area="md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]"
-                          icon={<FaCheck className="h-4 w-4 text-gray-700" />}
-                          date={game.gameTime.split("T")[0].split("-").reverse().join("/")}
-                          time={game.gameTime.split("T")[1].slice(0, 5)}
-                          players={game.players}
-                          onClick={() => subscribeToGame(1, game.gameId) /* TODO: Replace 1 with actual userId */}
-                        />
-                      </React.Fragment>
-                    ))}
-                  </div>
+                {isSearched && (
+                  <>
+                    {courtGames.length > 0 ? (
+                      <>
+                        {Object.keys(courtGames).length > 0 && (
+                          <div className="!relative !z-10 !mt-16">
+                            {courtGames.map((game, index) => (
+                              <React.Fragment key={index}>
+                                <GridGamesColored
+                                  area="md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]"
+                                  icon={<FaCheck className="h-4 w-4 text-gray-700" />}
+                                  date={game.gameTime.split("T")[0].split("-").reverse().join("/")}
+                                  time={game.gameTime.split("T")[1].slice(0, 5)}
+                                  players={game.players}
+                                  onClick={() => subscribeToGame(1, game.gameId) /* TODO: Replace 1 with actual userId */}
+                                />
+                              </React.Fragment>
+                            ))}
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        <motion.div initial={{ y: "-100%", opacity: 0 }} animate={{ y: "0", opacity: 1 }} transition={{ duration: 0.6 }}>
+                          {/* TITLE */}
+                          <div className="mt-14 h-[1rem] w-full bg-transparent flex flex-col items-center justify-center rounded-md">
+                            <h1 className="md:text-xl text-xl lg:text-2xl font-bold text-center text-white relative z-20">No Games Available</h1>
+                            <div className="w-[40rem] h-40 relative">
+                              {/* Gradients */}
+                              <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-[4px] w-3/4 blur-sm" />
+                              <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-px w-3/4" />
+                              <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[5px] w-1/4 blur-sm" />
+                              <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px w-1/4" />
+                            </div>
+                          </div>
+                        </motion.div>
+                      </>
+                    )}
+                  </>
                 )}
               </div>
             </div>

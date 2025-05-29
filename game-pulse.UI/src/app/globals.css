@@ -11,35 +11,35 @@
 }
 
 /* SCROLLBAR */
-.has-scrollbar::-webkit-scrollbar {
+body::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
 
-.has-scrollbar::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track {
   background: var(--onyx);
   border-radius: 5px;
 }
 
-.has-scrollbar::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb {
   background: var(--orange-yellow-crayola);
   border-radius: 5px;
 }
 
-.has-scrollbar::-webkit-scrollbar-button {
+body::-webkit-scrollbar-button {
   width: 20px;
 }
 
 /* RESPONSIVENESS */
 @media (min-width: 720px) {
-  .has-scrollbar::-webkit-scrollbar-button {
+  body::-webkit-scrollbar-button {
     width: 100px;
   }
 }
 
 @media (min-width: 1250px) {
   body::-webkit-scrollbar {
-    width: 20px;
+    width: 15px;
   }
   body::-webkit-scrollbar-track {
     background: var(--smoky-black);
