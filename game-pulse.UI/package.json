@@ -30,9 +30,11 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
+    "react-redux": "^9.2.0",
     "react-syntax-highlighter": "^15.6.1",
     "react-use": "^17.6.0",
     "react-use-measure": "^2.1.7",
+    "redux": "^5.0.1",
     "sass": "^1.85.0",
     "simplex-noise": "^4.0.3",
     "tailwind-merge": "^3.0.1"
