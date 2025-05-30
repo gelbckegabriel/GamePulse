@@ -1,25 +1,45 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAnimate, useDragControls, useMotionValue, motion } from "framer-motion";
-import { FaFingerprint, FaRegEye, FaRegEyeSlash, FaRegUserCircle } from "react-icons/fa";
+import { FaFingerprint, FaRegEye, FaRegEyeSlash, FaRegUserCircle, FaRunning } from "react-icons/fa";
 import { FaPerson } from "react-icons/fa6";
-import { IoMdPerson } from "react-icons/io";
+import { IoMdPerson, IoMdPin } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import useMeasure from "react-use-measure";
 import { Button } from "../utilities/button";
+import { Option, Select } from "@material-tailwind/react";
+import { apiClient } from "@/app/services/apiClient";
 
-type Props = {
-  openCreate: boolean;
-  setOpenCreate: (isOpen: boolean) => void;
-};
-
-export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
+export const CreateUser = ({ openCreate, setOpenCreate }) => {
   // FORM
-  const [password, setPassword] = useState<string>("");
-  const [isPasswordInvalid, setIsPasswordInvalid] = useState<boolean>(false);
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [sports, setSports] = useState([]);
+  const [password, setPassword] = useState("");
+  const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const togglePasswordView = () => setShowPassword(!showPassword);
+
+  useEffect(() => {
+    apiClient("Sports/GetSports", "GET").then((response) => {
+      setSports(response);
+    });
+  }, []);
+
+  const validatePassword = (password) => {
+    return password.length >= 8;
+  };
+
+  const handlePasswordChange = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+    setIsPasswordInvalid(!validatePassword(value));
+  };
+
+  const handleSubmit = () => {
+    if (validatePassword(password)) {
+      // Handle form submission
+    }
+  };
 
   // ANIMATION
   const [scope, animate] = useAnimate();
@@ -42,22 +62,6 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
     setOpenCreate(false);
   };
 
-  const validatePassword = (password: string) => {
-    return password.length >= 8;
-  };
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setPassword(value);
-    setIsPasswordInvalid(!validatePassword(value));
-  };
-
-  const handleSubmit = () => {
-    if (validatePassword(password)) {
-      // Handle form submission
-    }
-  };
-
   return (
     <>
       {openCreate && (
@@ -77,7 +81,7 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
             transition={{
               ease: "easeInOut",
             }}
-            className="absolute bottom-0 h-[70vh] md:h-[55vh] lg:h-[75vh] w-full overflow-hidden rounded-t-3xl bg-backgroundModal"
+            className="absolute bottom-0 h-[70vh] md:h-[75vh] lg:h-[90vh] w-full overflow-hidden rounded-t-3xl bg-backgroundModal"
             style={{ y }}
             drag="y"
             dragControls={controls}
@@ -112,7 +116,7 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
               <div className="mx-auto max-w-2xl space-y-4 text-neutral-400 text-white">
                 <h2 className="text-3xl md:text-4xl lg:text-4xl font-bold text-center">Create a new account</h2>
 
-                <div className="form">
+                <div className="form !mt-8">
                   {/* NAME AND LASTNAME CONTAINER */}
                   <div className="flex justify-between">
                     <div className="w-[40%] md:w-[35%] lg:w-[35%]">
@@ -144,9 +148,9 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
                     </div>
                   </div>
 
-                  {/* USERNAME FIELD */}
+                  {/* NICKNAME FIELD */}
                   <div>
-                    <p className="mt-6 text-sm2 mb-1">Username</p>
+                    <p className="mt-6 text-sm2 mb-1">Nickname</p>
                     <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                       <FaRegUserCircle />
                       <input
@@ -156,6 +160,43 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
                         className="pl-1 border-0 w-full outline-none text-sm2"
                         required
                       />
+                    </div>
+                  </div>
+
+                  {/* LOCATION AND FAVORITE SPORT FIELDS */}
+                  <div className="flex justify-between gap-6 mt-6">
+                    <div className="!z-50 w-[50%] md:w-[45%]">
+                      <p className="text-sm2 mb-1">Location</p>
+                      <div className="max-h-10 bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
+                        <IoMdPin />
+                        <Select
+                          containerProps={{
+                            className: "!min-w-0 w-full",
+                          }}
+                          className="!w-full !pl-1 !border-0 !border-transparent !outline-none !text-sm2 !bg-opacity-0 !text-white"
+                        >
+                          <Option value="curitiba">Curitiba, PR</Option>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="!z-50 w-[50%] md:w-[45%]">
+                      <p className="text-sm2 mb-1">Favorite Sport</p>
+                      <div className="max-h-10 bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
+                        <FaRunning />
+                        <Select
+                          containerProps={{
+                            className: "!min-w-0 w-full",
+                          }}
+                          className="!pl-1 !border-0 !border-transparent !w-full !outline-none !text-sm2 !bg-opacity-0 !text-white"
+                        >
+                          {sports.map((sport, index) => (
+                            <Option key={index} value={index + 1}>
+                              {sport}
+                            </Option>
+                          ))}
+                        </Select>
+                      </div>
                     </div>
                   </div>
 
@@ -214,7 +255,7 @@ export const CreateUser = ({ openCreate, setOpenCreate }: Props) => {
                 </div>
 
                 {/* CREATE BUTTON */}
-                <div className="mt-6 flex justify-center">
+                <div className="!mt-10 flex justify-center">
                   <Button onClick={() => handleSubmit}>Create Account</Button>
                 </div>
 

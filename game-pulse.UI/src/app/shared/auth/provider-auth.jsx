@@ -1,16 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAnimate, useDragControls, useMotionValue, motion } from "framer-motion";
 import { FaRegUserCircle, FaRunning } from "react-icons/fa";
 import { IoMdPerson, IoMdPin } from "react-icons/io";
 import useMeasure from "react-use-measure";
 import { Button } from "../utilities/button";
-import { Option, Select, Tooltip } from "@material-tailwind/react";
+import { Option, Select } from "@material-tailwind/react";
+import { apiClient } from "@/app/services/apiClient";
 
-export const ProviderAuth = ({ openAuth, setOpenAuth }) => {
+export const ProviderAuth = ({ openProvider, setOpenProvider }) => {
   // FORM
-  const [newUser, setNewUser] = useState(false);
+  const [sports, setSports] = useState([]);
+
+  useEffect(() => {
+    apiClient("Sports/GetSports", "GET").then((response) => {
+      setSports(response);
+    });
+  }, []);
 
   // ANIMATION
   const [scope, animate] = useAnimate();
@@ -51,7 +58,7 @@ export const ProviderAuth = ({ openAuth, setOpenAuth }) => {
 
   return (
     <>
-      {openAuth && (
+      {openProvider && (
         <motion.div
           ref={scope}
           initial={{ opacity: 0 }}
@@ -101,124 +108,93 @@ export const ProviderAuth = ({ openAuth, setOpenAuth }) => {
 
             <div className="relative z-0 h-full overflow-y-auto p-4 pt-12">
               <div className="mx-auto max-w-2xl space-y-4 text-neutral-400 text-white">
-                <h2 className="pt-2 text-3xl md:text-4xl lg:text-4xl font-bold text-center">Authenticate</h2>
-
-                <div className="providers py-6">
-                  {/* AUTHENTICATORS */}
-                  <div className="flex justify-center gap-10 md:gap-20">
-                    <div className="w-[50%] md:w-[30%]">
-                      <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex justify-center items-center gap-2 p-2 rounded-xl cursor-pointer transition-all duration-300 hover:bg-opacity-25">
-                        <span className="flex items-center">
-                          <img src="auth/google.webp" alt="google logo" className="h-8 w-8" />
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* TODO: Facebook might be implemented later on */}
-                    <div className="w-[50%] md:w-[30%]">
-                      <Tooltip content="Not available yet !">
-                        <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex justify-center items-center gap-2 p-2 rounded-xl cursor-pointer transition-all duration-300 hover:bg-opacity-25">
-                          <span className="flex items-center">
-                            <img src="auth/facebook.webp" alt="facebook logo" className="h-8 w-8" />
-                          </span>
-                        </div>
-                      </Tooltip>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex justify-center">
-                  <button className="border-2 border-white p-2 rounded-xl" onClick={() => setNewUser(true)}>
-                    test
-                  </button>
-                </div>
+                <h2 className="pt-2 text-3xl md:text-4xl lg:text-4xl font-bold text-center">Finish Account Setup</h2>
 
                 {/* DISPLAY UPDATE FORM IF NEW USER DETECTED */}
-                {newUser ? (
-                  <>
-                    <motion.div
-                      initial={{ opacity: 0, y: 500 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{
-                        duration: 0.4,
-                      }}
-                    >
-                      <div className="form">
-                        {/* NAME AND USERNAME FIELDS */}
-                        <div className="flex justify-between gap-6">
-                          <div className="w-[50%] md:w-[45%]">
-                            <p className="text-sm2 mb-1">Name</p>
-                            <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
-                              <IoMdPerson />
-                              <input
-                                type="text"
-                                maxLength={60}
-                                style={{ backgroundColor: "transparent" }}
-                                className="pl-1 border-0 w-full outline-none text-sm2"
-                                required
-                              />
-                            </div>
-                          </div>
-
-                          <div className="w-[50%] md:w-[45%]">
-                            <p className="text-sm2 mb-1">Nickname</p>
-                            <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
-                              <FaRegUserCircle />
-                              <input
-                                type="text"
-                                maxLength={20}
-                                style={{ backgroundColor: "transparent" }}
-                                className="pl-1 border-0 w-full outline-none text-sm2"
-                                required
-                              />
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* LOCATION AND FAVORITE SPORT FIELDS */}
-                        <div className="flex justify-between gap-6 mt-8">
-                          <div className="w-[50%] md:w-[45%]">
-                            <p className="text-sm2 mb-1">Location</p>
-                            <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
-                              <IoMdPin />
-                              <Select
-                                containerProps={{
-                                  className: "!min-w-0 w-full",
-                                }}
-                                className="!w-full !pl-1 !border-0 !border-transparent !outline-none !text-sm2 !bg-opacity-0 !text-white"
-                              >
-                                <Option value="curitiba">Curitiba, PR</Option>
-                              </Select>
-                            </div>
-                          </div>
-
-                          <div className="w-[50%] md:w-[45%]">
-                            <p className="text-sm2 mb-1">Favorite Sport</p>
-                            <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
-                              <FaRunning />
-                              <Select
-                                disabled={newUser}
-                                containerProps={{
-                                  className: "!min-w-0 w-full",
-                                }}
-                                className="!pl-1 !border-0 !border-transparent !w-full !outline-none !text-sm2 !bg-opacity-0 !text-white"
-                              >
-                                <Option value="basketball">Basktetball</Option>
-                              </Select>
-                            </div>
-                          </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 500 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.4,
+                  }}
+                >
+                  <div className="form mt-8">
+                    {/* NAME AND USERNAME FIELDS */}
+                    <div className="flex justify-between gap-6">
+                      <div className="w-[50%] md:w-[45%]">
+                        <p className="text-sm2 mb-1">Name</p>
+                        <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
+                          <IoMdPerson />
+                          <input
+                            type="text"
+                            maxLength={60}
+                            style={{ backgroundColor: "transparent" }}
+                            className="pl-1 border-0 w-full outline-none text-sm2"
+                            required
+                          />
                         </div>
                       </div>
 
-                      {/* UPDATE BUTTON */}
-                      <div className="pt-10 pb-6 flex justify-center">
-                        <Button onClick={() => handleSubmit}>Update Account Info</Button>
+                      <div className="w-[50%] md:w-[45%]">
+                        <p className="text-sm2 mb-1">Nickname</p>
+                        <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
+                          <FaRegUserCircle />
+                          <input
+                            type="text"
+                            maxLength={20}
+                            style={{ backgroundColor: "transparent" }}
+                            className="pl-1 border-0 w-full outline-none text-sm2"
+                            required
+                          />
+                        </div>
                       </div>
-                    </motion.div>
-                  </>
-                ) : (
-                  <></>
-                )}
+                    </div>
+
+                    {/* LOCATION AND FAVORITE SPORT FIELDS */}
+                    <div className="flex justify-between gap-6 mt-8">
+                      <div className="!z-50 w-[50%] md:w-[45%]">
+                        <p className="text-sm2 mb-1">Location</p>
+                        <div className="max-h-10 bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
+                          <IoMdPin />
+                          <Select
+                            containerProps={{
+                              className: "!min-w-0 w-full",
+                            }}
+                            className="!w-full !pl-1 !border-0 !border-transparent !outline-none !text-sm2 !bg-opacity-0 !text-white"
+                          >
+                            <Option value="curitiba">Curitiba, PR</Option>
+                          </Select>
+                        </div>
+                      </div>
+
+                      <div className="!z-50 w-[50%] md:w-[45%]">
+                        <p className="text-sm2 mb-1">Favorite Sport</p>
+                        <div className="max-h-10 bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
+                          <FaRunning />
+                          <Select
+                            containerProps={{
+                              className: "!min-w-0 w-full",
+                            }}
+                            className="!pl-1 !border-0 !border-transparent !w-full !outline-none !text-sm2 !bg-opacity-0 !text-white"
+                          >
+                            {sports.map((sport, index) => (
+                              <Option key={index} value={index + 1}>
+                                {sport}
+                              </Option>
+                            ))}
+                          </Select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* UPDATE BUTTON */}
+                  <div className="!mt-14 pb-6 flex justify-center">
+                    <Button className="w-[30%]" onClick={() => handleSubmit}>
+                      Submit
+                    </Button>
+                  </div>
+                </motion.div>
 
                 {/* TERMS OF ACCEPTANCE */}
                 {/* <div className="terms"></div> */}

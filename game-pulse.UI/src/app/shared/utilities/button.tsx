@@ -17,7 +17,7 @@ export const Button = ({ children, className, size = "medium", onClick }: Props)
   return (
     <button
       className={twMerge(
-        "bg-white text-textBlack rounded-full",
+        "bg-white text-textBlack rounded-full transition-all ease",
         className,
         sizeClassNames[size]
       )}

@@ -11,48 +11,48 @@
 }
 
 /* SCROLLBAR */
-body::-webkit-scrollbar {
+*::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
 
-body::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
   background: var(--onyx);
   border-radius: 5px;
 }
 
-body::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
   background: var(--orange-yellow-crayola);
   border-radius: 5px;
 }
 
-body::-webkit-scrollbar-button {
+*::-webkit-scrollbar-button {
   width: 20px;
 }
 
 /* RESPONSIVENESS */
 @media (min-width: 720px) {
-  body::-webkit-scrollbar-button {
+  *::-webkit-scrollbar-button {
     width: 100px;
   }
 }
 
 @media (min-width: 1250px) {
-  body::-webkit-scrollbar {
+  *::-webkit-scrollbar {
     width: 15px;
   }
-  body::-webkit-scrollbar-track {
+  *::-webkit-scrollbar-track {
     background: var(--smoky-black);
   }
 
-  body::-webkit-scrollbar-thumb {
+  *::-webkit-scrollbar-thumb {
     border: 5px solid var(--smoky-black);
     background: hsla(0, 0%, 100%, 0.1);
     border-radius: 20px;
     box-shadow: inset 1px 1px 0 hsla(0, 0%, 100%, 0.11), inset -1px -1px 0 hsla(0, 0%, 100%, 0.11);
   }
 
-  body::-webkit-scrollbar-thumb:hover {
+  *::-webkit-scrollbar-thumb:hover {
     background: hsla(0, 0%, 100%, 0.15);
   }
 }
