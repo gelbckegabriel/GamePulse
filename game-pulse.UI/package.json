@@ -23,6 +23,7 @@
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.8.1",
     "@types/react-syntax-highlighter": "^15.5.13",
+    "animate.css": "^4.1.1",
     "clsx": "^2.1.1",
     "dotted-map": "^2.2.3",
     "firebase": "^11.8.1",
@@ -39,6 +40,7 @@
     "redux": "^5.0.1",
     "sass": "^1.85.0",
     "simplex-noise": "^4.0.3",
+    "sweetalert2": "^11.22.0",
     "tailwind-merge": "^3.0.1"
   },
   "devDependencies": {
