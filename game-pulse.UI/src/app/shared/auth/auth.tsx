@@ -7,6 +7,8 @@ import { CreateUser } from "./create-user";
 import { Tooltip } from "@material-tailwind/react";
 import { Button } from "../utilities/button";
 import { ProviderAuth } from "./provider-auth";
+import { firebaseAuth } from "@/app/services/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 type Props = {
   isOpen: boolean;
@@ -16,7 +18,8 @@ type Props = {
 export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
   // TODO: Implement Redux logic here to pass the user values like ID, Names and etc throughout the application.
   const [user, setUser] = useState({});
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [openProvider, setOpenProvider] = useState(false);
   const [openCreate, setOpenCreate] = useState(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -33,6 +36,20 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
       document.body.style.overflow = "";
     };
   }, [isOpen]);
+
+  const handleSignIn = () => {
+    signInWithEmailAndPassword(firebaseAuth, email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        console.log(user);
+      })
+      .catch((e) => {
+        const errorCode = e.code;
+        const errorMessage = e.message;
+
+        console.error(errorCode, errorMessage);
+      });
+  };
 
   return (
     <>
@@ -98,11 +115,15 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
               </div>
 
               {/* FORM */}
-              <div className="login_form">
+              <form className="login_form">
                 <p className="text-sm2 mb-1">Username or email</p>
                 <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                   <MdEmail />
-                  <input type="email" style={{ backgroundColor: "transparent" }} className="pl-1 border-0 w-full outline-none text-sm2" />
+                  <input
+                    type="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="bg-transparent pl-1 border-0 w-full outline-none text-sm2"
+                  />
                 </div>
                 <div className="mt-6 flex justify-between">
                   <p className="text-sm2 mb-1">Password</p>
@@ -112,8 +133,8 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                   <FaFingerprint />
                   <input
                     type={showPassword ? "text" : "password"}
-                    style={{ backgroundColor: "transparent" }}
-                    className="pl-1 border-0 w-full outline-none text-sm2"
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="bg-transparent pl-1 border-0 w-full outline-none text-sm2"
                   />
                   {showPassword ? (
                     <FaRegEye className="cursor-pointer mr-1" onClick={togglePasswordView} />
@@ -123,9 +144,11 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                 </div>
 
                 <div className="mt-8 flex justify-center">
-                  <Button className="w-[50%] hover:scale-110">Login</Button>
+                  <Button className="w-[50%] hover:scale-110" onClick={() => handleSignIn()}>
+                    Login
+                  </Button>
                 </div>
-              </div>
+              </form>
 
               {/* FOOTER */}
               <div className="mt-8 flex justify-center text-sm">
@@ -144,7 +167,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
         )}
       </AnimatePresence>
 
-      <CreateUser openCreate={openCreate} setOpenCreate={setOpenCreate} />
+      <CreateUser openCreate={openCreate} setOpenCreate={setOpenCreate} setAuthOpen={setIsOpen} />
       {/* TODO: CREATE A LOGIC TO OPEN ONLY WHEN IT IS A NEW USER AUTHENTICATING WITH THE PROVIDER. */}
       <ProviderAuth openProvider={openProvider} setOpenProvider={setOpenProvider} />
     </>

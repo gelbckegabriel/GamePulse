@@ -10,10 +10,13 @@ import useMeasure from "react-use-measure";
 import { Button } from "../utilities/button";
 import { Option, Select } from "@material-tailwind/react";
 import { apiClient } from "@/app/services/apiClient";
+import { firebaseAuth } from "@/app/services/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
-export const CreateUser = ({ openCreate, setOpenCreate }) => {
+export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
   // FORM
   const [sports, setSports] = useState([]);
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -37,7 +40,21 @@ export const CreateUser = ({ openCreate, setOpenCreate }) => {
 
   const handleSubmit = () => {
     if (validatePassword(password)) {
-      // Handle form submission
+      createUserWithEmailAndPassword(firebaseAuth, email, password)
+        .then((userCredentials) => {
+          const user = userCredentials.user;
+          // const userId = user.uid;
+          // const createdTime = user.metadata.createdAt;
+          console.log(user);
+          setOpenCreate(false);
+          setAuthOpen(false);
+        })
+        .catch((e) => {
+          const errorCode = e.code;
+          const errorMessage = e.message;
+
+          console.error(errorCode, errorMessage);
+        });
     }
   };
 
@@ -116,7 +133,7 @@ export const CreateUser = ({ openCreate, setOpenCreate }) => {
               <div className="mx-auto max-w-2xl space-y-4 text-neutral-400 text-white">
                 <h2 className="text-3xl md:text-4xl lg:text-4xl font-bold text-center">Create a new account</h2>
 
-                <div className="form !mt-8">
+                <form className="form !mt-8">
                   {/* NAME AND LASTNAME CONTAINER */}
                   <div className="flex justify-between">
                     <div className="w-[40%] md:w-[35%] lg:w-[35%]">
@@ -209,6 +226,7 @@ export const CreateUser = ({ openCreate, setOpenCreate }) => {
                         type="email"
                         maxLength={50}
                         style={{ backgroundColor: "transparent" }}
+                        onChange={(e) => setEmail(e.target.value)}
                         className="pl-1 border-0 w-full outline-none text-sm2"
                         required
                       />
@@ -252,11 +270,11 @@ export const CreateUser = ({ openCreate, setOpenCreate }) => {
                       Minimum length is 8 characters.
                     </p>
                   </div>
-                </div>
+                </form>
 
                 {/* CREATE BUTTON */}
                 <div className="!mt-10 flex justify-center">
-                  <Button onClick={() => handleSubmit}>Create Account</Button>
+                  <Button onClick={() => handleSubmit()}>Create Account</Button>
                 </div>
 
                 {/* TERMS OF ACCEPTANCE */}

@@ -8,6 +8,7 @@ import useMeasure from "react-use-measure";
 import { Button } from "../utilities/button";
 import { Option, Select } from "@material-tailwind/react";
 import { apiClient } from "@/app/services/apiClient";
+import { firebaseAuth } from "@/app/services/firebase";
 
 export const ProviderAuth = ({ openProvider, setOpenProvider }) => {
   // FORM
@@ -118,7 +119,7 @@ export const ProviderAuth = ({ openProvider, setOpenProvider }) => {
                     duration: 0.4,
                   }}
                 >
-                  <div className="form mt-8">
+                  <form className="form mt-8">
                     {/* NAME AND USERNAME FIELDS */}
                     <div className="flex justify-between gap-6">
                       <div className="w-[50%] md:w-[45%]">
@@ -186,7 +187,7 @@ export const ProviderAuth = ({ openProvider, setOpenProvider }) => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </form>
 
                   {/* UPDATE BUTTON */}
                   <div className="!mt-14 pb-6 flex justify-center">
