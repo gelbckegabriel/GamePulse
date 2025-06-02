@@ -5,7 +5,7 @@
 namespace game_pulse.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InsertSportsData : Migration
+    public partial class AddSports : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

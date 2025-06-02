@@ -5,25 +5,11 @@
 namespace game_pulse.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InsertSomeCourts : Migration
+    public partial class AddCourts : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "map",
-                table: "courts",
-                type: "varchar",
-                nullable: false,
-                defaultValue: "");
-
-            migrationBuilder.AddColumn<string>(
-                name: "state",
-                table: "courts",
-                type: "varchar(2)",
-                nullable: false,
-                defaultValue: "");
-
             migrationBuilder.InsertData(
                 table: "courts",
                 columns: ["id", "name", "city", "state", "country", "address", "g_maps", "map"],
@@ -89,14 +75,6 @@ namespace game_pulse.Data.Migrations
                 "courts",
                 "id",
                 [1, 2, 3, 4, 5, 6]);
-
-            migrationBuilder.DropColumn(
-                name: "state",
-                table: "courts");
-
-            migrationBuilder.DropColumn(
-                name: "map",
-                table: "courts");
         }
     }
 }

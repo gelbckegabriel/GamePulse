@@ -5,7 +5,7 @@ namespace game_pulse.Data.Models;
 
 public partial class UserInfo
 {
-    public int UserId { get; set; }
+    public string UserId { get; set; } = null!;
 
     public string Email { get; set; } = null!;
 

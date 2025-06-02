@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace game_pulse.Data.Models;
 
 public partial class User
 {
-    public int Id { get; set; }
+    [Key]
+    public string Id { get; set; } = null!;
 
     public string Name { get; set; } = null!;
 

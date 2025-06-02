@@ -1,8 +1,12 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Roboto, Inter, Noto_Sans } from "next/font/google";
-import "./globals.css";
 import Header from "./shared/header";
 import Footer from "./shared/footer";
+import { Provider } from "react-redux";
+import { store } from "../store";
+
+import "./globals.css";
 
 const roboto = Roboto({
   weight: ["400", "500", "700"],
@@ -20,11 +24,6 @@ const notoSans = Noto_Sans({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "GamePulse",
-  description: "Improve your Game",
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -36,9 +35,11 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" type="icon" />
       </head>
       <body className={`${roboto.variable} ${inter.variable} ${notoSans.variable} antialiased bg-black`}>
-        <Header />
-        {children}
-        <Footer />
+        <Provider store={store}>
+          <Header />
+          {children}
+          <Footer />
+        </Provider>
       </body>
     </html>
   );

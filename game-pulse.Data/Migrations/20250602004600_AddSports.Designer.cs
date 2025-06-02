@@ -12,8 +12,8 @@ using game_pulse.Data.Contexts;
 namespace game_pulse.Data.Migrations
 {
     [DbContext(typeof(GamePulseDbContext))]
-    [Migration("20250524020221_InsertTestData")]
-    partial class InsertTestData
+    [Migration("20250602004600_AddSports")]
+    partial class AddSports
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -111,8 +111,8 @@ namespace game_pulse.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("BestPlayerId")
-                        .HasColumnType("integer")
+                    b.Property<string>("BestPlayerId")
+                        .HasColumnType("text")
                         .HasColumnName("best_player_id");
 
                     b.Property<int>("CourtId")
@@ -145,8 +145,8 @@ namespace game_pulse.Data.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("game_id");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer")
+                    b.Property<string>("UserId")
+                        .HasColumnType("text")
                         .HasColumnName("user_id");
 
                     b.Property<int?>("PlayerGrade")
@@ -167,8 +167,8 @@ namespace game_pulse.Data.Migrations
 
             modelBuilder.Entity("game_pulse.Data.Models.PlayerFavoritePosition", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer")
+                    b.Property<string>("UserId")
+                        .HasColumnType("text")
                         .HasColumnName("user_id");
 
                     b.Property<int>("SportId")
@@ -243,12 +243,9 @@ namespace game_pulse.Data.Migrations
 
             modelBuilder.Entity("game_pulse.Data.Models.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                    b.Property<string>("Id")
+                        .HasColumnType("text")
                         .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone")
@@ -323,8 +320,9 @@ namespace game_pulse.Data.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("token_expires");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer")
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text")
                         .HasColumnName("user_id");
 
                     b.HasKey("Id")
@@ -340,8 +338,8 @@ namespace game_pulse.Data.Migrations
 
             modelBuilder.Entity("game_pulse.Data.Models.UserInfo", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer")
+                    b.Property<string>("UserId")
+                        .HasColumnType("text")
                         .HasColumnName("user_id");
 
                     b.Property<string>("Address")

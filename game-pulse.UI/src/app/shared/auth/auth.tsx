@@ -7,8 +7,9 @@ import { CreateUser } from "./create-user";
 import { Tooltip } from "@material-tailwind/react";
 import { Button } from "../utilities/button";
 import { ProviderAuth } from "./provider-auth";
-import { firebaseAuth } from "@/app/services/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { firebaseAuth, googleProvider } from "@/app/services/firebase";
+import { signInWithEmailAndPassword, signInWithPopup, signInWithRedirect } from "firebase/auth";
+import { useSelector } from "react-redux";
 
 type Props = {
   isOpen: boolean;
@@ -17,7 +18,7 @@ type Props = {
 
 export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
   // TODO: Implement Redux logic here to pass the user values like ID, Names and etc throughout the application.
-  const [user, setUser] = useState({});
+  const user = useSelector((state: any) => state.user.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [openProvider, setOpenProvider] = useState(false);
@@ -37,7 +38,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
     };
   }, [isOpen]);
 
-  const handleSignIn = () => {
+  const handlePasswordSignIn = () => {
     signInWithEmailAndPassword(firebaseAuth, email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
@@ -49,6 +50,19 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
 
         console.error(errorCode, errorMessage);
       });
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(firebaseAuth, googleProvider);
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const viewUser = () => {
+    console.log(user);
   };
 
   return (
@@ -87,7 +101,10 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                 <p className="text-sm2">Register with:</p>
                 <div className="w-full mt-4 flex justify-center gap-10 md:gap-20">
                   <div className="w-[50%] md:w-[30%]">
-                    <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex justify-center items-center gap-2 p-2 rounded-xl cursor-pointer transition-all duration-300 hover:bg-opacity-25">
+                    <div
+                      onClick={() => handleGoogleSignIn()}
+                      className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex justify-center items-center gap-2 p-2 rounded-xl cursor-pointer transition-all duration-300 hover:bg-opacity-25"
+                    >
                       <span className="flex items-center">
                         <img src="auth/google.webp" alt="google logo" className="h-8 w-8" />
                       </span>
@@ -144,11 +161,13 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                 </div>
 
                 <div className="mt-8 flex justify-center">
-                  <Button className="w-[50%] hover:scale-110" onClick={() => handleSignIn()}>
+                  <Button className="w-[50%] hover:scale-110" onClick={() => handlePasswordSignIn()}>
                     Login
                   </Button>
                 </div>
               </form>
+
+              <button onClick={() => viewUser()}>test</button>
 
               {/* FOOTER */}
               <div className="mt-8 flex justify-center text-sm">

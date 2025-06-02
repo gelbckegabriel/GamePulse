@@ -12,9 +12,12 @@ import { Option, Select } from "@material-tailwind/react";
 import { apiClient } from "@/app/services/apiClient";
 import { firebaseAuth } from "@/app/services/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { signInUser } from "@/userSlice";
+import { useDispatch } from "react-redux";
 
 export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
   // FORM
+  const dispatch = useDispatch();
   const [sports, setSports] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -48,6 +51,11 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
           console.log(user);
           setOpenCreate(false);
           setAuthOpen(false);
+
+          // TODO: SET THE USER AT THE STORE
+          // dispatch(signInUser({
+          //   id: user.uid,
+          // }));
         })
         .catch((e) => {
           const errorCode = e.code;

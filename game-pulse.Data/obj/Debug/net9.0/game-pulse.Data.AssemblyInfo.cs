@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("game-pulse.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d9db4992e21618af9112f1171f70d6ffcb2334d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2fe2753b80e772360f4a4b7230fd0a113e3b7228")]
 [assembly: System.Reflection.AssemblyProductAttribute("game-pulse.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("game-pulse.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

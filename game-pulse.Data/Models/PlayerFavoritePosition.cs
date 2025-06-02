@@ -5,7 +5,7 @@ namespace game_pulse.Data.Models;
 
 public partial class PlayerFavoritePosition
 {
-    public int UserId { get; set; }
+    public string UserId { get; set; } = null!;
 
     public int SportId { get; set; }
 

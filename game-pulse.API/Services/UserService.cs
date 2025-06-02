@@ -1,5 +1,7 @@
 ﻿using game_pulse.Data.Contexts;
 using game_pulse.Interfaces;
+using game_pulse.Interfaces.Dto;
+using Microsoft.EntityFrameworkCore;
 
 namespace game_pulse.Services
 {
@@ -12,6 +14,28 @@ namespace game_pulse.Services
         {
             _context = context;
             _logger = logger;
+        }
+
+        public async Task<UserDto> GetUser(string id)
+        {
+            var user = await _context.Users
+                .Include(u => u.UserInfo)
+                .Where(u => u.Id == id)
+                .Select(u => new UserDto
+                {
+                    Id = u.Id,
+                    Name = u.Name,
+                    Nickname = u.Nickname,
+                    Xp = u.Xp,
+                    FavoriteSport = u.FavoriteSportNavigation.Name,
+                    Email = u.UserInfo.Email,
+                    City = u.UserInfo.City,
+                    State = u.UserInfo.State,
+                    Address = u.UserInfo.Address
+                })
+                .FirstOrDefaultAsync();
+
+            return user;
         }
     }
 }

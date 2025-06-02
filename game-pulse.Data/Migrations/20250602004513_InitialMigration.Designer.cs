@@ -12,7 +12,7 @@ using game_pulse.Data.Contexts;
 namespace game_pulse.Data.Migrations
 {
     [DbContext(typeof(GamePulseDbContext))]
-    [Migration("20250519005523_InitialMigration")]
+    [Migration("20250602004513_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -76,11 +76,21 @@ namespace game_pulse.Data.Migrations
                         .HasColumnType("character varying")
                         .HasColumnName("g_maps");
 
+                    b.Property<string>("Map")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("map");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
                         .HasColumnName("name");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("state");
 
                     b.HasKey("Id")
                         .HasName("courts_pkey");
@@ -101,8 +111,8 @@ namespace game_pulse.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("BestPlayerId")
-                        .HasColumnType("integer")
+                    b.Property<string>("BestPlayerId")
+                        .HasColumnType("text")
                         .HasColumnName("best_player_id");
 
                     b.Property<int>("CourtId")
@@ -135,8 +145,8 @@ namespace game_pulse.Data.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("game_id");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer")
+                    b.Property<string>("UserId")
+                        .HasColumnType("text")
                         .HasColumnName("user_id");
 
                     b.Property<int?>("PlayerGrade")
@@ -157,8 +167,8 @@ namespace game_pulse.Data.Migrations
 
             modelBuilder.Entity("game_pulse.Data.Models.PlayerFavoritePosition", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer")
+                    b.Property<string>("UserId")
+                        .HasColumnType("text")
                         .HasColumnName("user_id");
 
                     b.Property<int>("SportId")
@@ -233,12 +243,9 @@ namespace game_pulse.Data.Migrations
 
             modelBuilder.Entity("game_pulse.Data.Models.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                    b.Property<string>("Id")
+                        .HasColumnType("text")
                         .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone")
@@ -313,8 +320,9 @@ namespace game_pulse.Data.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("token_expires");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer")
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text")
                         .HasColumnName("user_id");
 
                     b.HasKey("Id")
@@ -330,8 +338,8 @@ namespace game_pulse.Data.Migrations
 
             modelBuilder.Entity("game_pulse.Data.Models.UserInfo", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer")
+                    b.Property<string>("UserId")
+                        .HasColumnType("text")
                         .HasColumnName("user_id");
 
                     b.Property<string>("Address")

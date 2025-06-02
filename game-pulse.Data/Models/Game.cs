@@ -13,7 +13,7 @@ public partial class Game
 
     public DateTime GameTime { get; set; }
 
-    public int? BestPlayerId { get; set; }
+    public string? BestPlayerId { get; set; }
 
     public virtual User? BestPlayer { get; set; }
 

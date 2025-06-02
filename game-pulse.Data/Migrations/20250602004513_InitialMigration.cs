@@ -13,18 +13,6 @@ namespace game_pulse.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "__EFMigrationsHistory",
-                columns: table => new
-                {
-                    MigrationId = table.Column<string>(type: "text", nullable: false),
-                    ProductVersion = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK___EFMigrationsHistory", x => x.MigrationId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "courts",
                 columns: table => new
                 {
@@ -32,9 +20,11 @@ namespace game_pulse.Data.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     city = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    state = table.Column<string>(type: "text", nullable: false),
                     country = table.Column<string>(type: "character(2)", fixedLength: true, maxLength: 2, nullable: false),
                     address = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
-                    g_maps = table.Column<string>(type: "character varying", nullable: false)
+                    g_maps = table.Column<string>(type: "character varying", nullable: false),
+                    map = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -99,8 +89,7 @@ namespace game_pulse.Data.Migrations
                 name: "user",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id = table.Column<string>(type: "text", nullable: false),
                     name = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     nickname = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     xp = table.Column<int>(type: "integer", nullable: false),
@@ -126,7 +115,7 @@ namespace game_pulse.Data.Migrations
                     sport_id = table.Column<int>(type: "integer", nullable: false),
                     court_id = table.Column<int>(type: "integer", nullable: false),
                     game_time = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    best_player_id = table.Column<int>(type: "integer", nullable: true)
+                    best_player_id = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -152,7 +141,7 @@ namespace game_pulse.Data.Migrations
                 name: "player_favorite_position",
                 columns: table => new
                 {
-                    user_id = table.Column<int>(type: "integer", nullable: false),
+                    user_id = table.Column<string>(type: "text", nullable: false),
                     sport_id = table.Column<int>(type: "integer", nullable: false),
                     position_id = table.Column<int>(type: "integer", nullable: false),
                     added_at = table.Column<DateOnly>(type: "date", nullable: false)
@@ -183,7 +172,7 @@ namespace game_pulse.Data.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    user_id = table.Column<int>(type: "integer", nullable: false),
+                    user_id = table.Column<string>(type: "text", nullable: false),
                     provider = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     provider_account_id = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     access_token = table.Column<string>(type: "text", nullable: true),
@@ -205,7 +194,7 @@ namespace game_pulse.Data.Migrations
                 name: "user_info",
                 columns: table => new
                 {
-                    user_id = table.Column<int>(type: "integer", nullable: false),
+                    user_id = table.Column<string>(type: "text", nullable: false),
                     email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     phone = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: true),
                     birthday = table.Column<DateOnly>(type: "date", nullable: true),
@@ -229,7 +218,7 @@ namespace game_pulse.Data.Migrations
                 columns: table => new
                 {
                     game_id = table.Column<int>(type: "integer", nullable: false),
-                    user_id = table.Column<int>(type: "integer", nullable: false),
+                    user_id = table.Column<string>(type: "text", nullable: false),
                     presence = table.Column<bool>(type: "boolean", nullable: true),
                     player_grade = table.Column<int>(type: "integer", nullable: true)
                 },
@@ -372,9 +361,6 @@ namespace game_pulse.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "sports");
-
-            migrationBuilder.DropTable(
-                name: "__EFMigrationsHistory");
         }
     }
 }
