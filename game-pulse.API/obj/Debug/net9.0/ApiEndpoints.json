@@ -149,6 +149,22 @@
   },
   {
     "ContainingType": "game_pulse.Controllers.UserController",
+    "Method": "CreateUser",
+    "RelativePath": "User/CreateUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userDetails",
+        "Type": "game_pulse.Interfaces.Models.UserCreateModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "game_pulse.Controllers.UserController",
     "Method": "GetUser",
     "RelativePath": "User/GetUser/{id}",
     "HttpMethod": "GET",

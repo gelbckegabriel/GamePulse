@@ -18,7 +18,10 @@ namespace game_pulse.Services
 
         public async Task<List<string>> GetAllSports()
         {
-            return await _context.Sports.Select(s => s.Name).ToListAsync();
+            return await _context.Sports
+                .OrderBy(s => s.Id)
+                .Select(s => s.Name)
+                .ToListAsync();
         }
 
         public async Task<List<string>> GetSportsPositions(int sports_id)

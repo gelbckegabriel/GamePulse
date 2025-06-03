@@ -7,6 +7,6 @@ namespace game_pulse.Interfaces
     {
         public Task<UserDto> GetUser(string id);
 
-        //public Task<bool> CreateUser(UserCreateModel userDetails);
+        public Task<bool> CreateUser(UserCreateModel userDetails);
     }
 }

@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { FaFingerprint, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
@@ -8,8 +8,11 @@ import { Tooltip } from "@material-tailwind/react";
 import { Button } from "../utilities/button";
 import { ProviderAuth } from "./provider-auth";
 import { firebaseAuth, googleProvider } from "@/app/services/firebase";
-import { signInWithEmailAndPassword, signInWithPopup, signInWithRedirect } from "firebase/auth";
-import { useSelector } from "react-redux";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { signInUser } from "@/userSlice";
+import { apiClient } from "@/app/services/apiClient";
+import Swal from "sweetalert2";
 
 type Props = {
   isOpen: boolean;
@@ -19,6 +22,8 @@ type Props = {
 export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
   // TODO: Implement Redux logic here to pass the user values like ID, Names and etc throughout the application.
   const user = useSelector((state: any) => state.user.user);
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [openProvider, setOpenProvider] = useState(false);
@@ -54,15 +59,61 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
 
   const handleGoogleSignIn = async () => {
     try {
+      setIsLoading(true);
+
+      // Sign In with PopUp
       const result = await signInWithPopup(firebaseAuth, googleProvider);
-      console.log(result);
+
+      dispatch(
+        signInUser({
+          id: result.user.uid,
+          name: result.user.displayName || "Unknown User",
+          nickname: result.user.displayName?.split(" ")[result.user.displayName?.split(" ").length - 1],
+          email: result.user.email,
+        })
+      );
+
+      verifyUserExists(result.user.uid);
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Authentication Error",
+        text: "An error occurred while trying to sign in with Popup. Please try again later.",
+        footer: `${error}`,
+        confirmButtonColor: "#f27474",
+        confirmButtonText: "Close",
+        background: "#555",
+        color: "#EEE",
+      });
     }
   };
 
-  const viewUser = () => {
-    console.log(user);
+  const verifyUserExists = async (userId: string) => {
+    // Verify if user exists on the DB
+    apiClient("User/GetUser/" + userId, "GET")
+      .then((response) => {
+        if (!response) {
+          setOpenProvider(true);
+        } else {
+          setIsLoading(false);
+          setIsOpen(false);
+        }
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Authentication Error",
+          text: "An error occurred while trying to verify your user. Please try again later.",
+          footer: `${error}`,
+          confirmButtonColor: "#f27474",
+          confirmButtonText: "Close",
+          background: "#555",
+          color: "#EEE",
+        }).then(() => {
+          setIsLoading(false);
+        });
+      });
   };
 
   return (
@@ -89,7 +140,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
               }}
               exit={{ scale: 0, rotate: "0deg", transition: { duration: 0.2 } }}
               onClick={(e) => e.stopPropagation()}
-              className="m-auto w-full md:w-[70%] lg:w-[35%] h-fit p-4 md:p-8 lg:p-12 text-white bg-backgroundModal bg-opacity-90 backdrop-blur-md border border-transparent border-opacity-70 rounded-lg shadow-lg"
+              className="m-auto w-full md:w-[70%] lg:w-[55%] xl:w-[35%] h-fit p-4 md:p-8 lg:p-12 text-white bg-backgroundModal bg-opacity-90 backdrop-blur-md border border-transparent border-opacity-70 rounded-lg shadow-lg"
             >
               {/* CLOSE BUTTON */}
               <div className="absolute right-2 top-2 md:right-3 md:top-3 lg:right-3 lg:top-3 w-8 h-8" onClick={() => setIsOpen(false)}>
@@ -161,13 +212,11 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                 </div>
 
                 <div className="mt-8 flex justify-center">
-                  <Button className="w-[50%] hover:scale-110" onClick={() => handlePasswordSignIn()}>
+                  <Button className={`w-[50%] hover:scale-110 ${isLoading ? "animate-pulse-strong" : ""} `} onClick={() => handlePasswordSignIn()}>
                     Login
                   </Button>
                 </div>
               </form>
-
-              <button onClick={() => viewUser()}>test</button>
 
               {/* FOOTER */}
               <div className="mt-8 flex justify-center text-sm">
@@ -188,7 +237,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
 
       <CreateUser openCreate={openCreate} setOpenCreate={setOpenCreate} setAuthOpen={setIsOpen} />
       {/* TODO: CREATE A LOGIC TO OPEN ONLY WHEN IT IS A NEW USER AUTHENTICATING WITH THE PROVIDER. */}
-      <ProviderAuth openProvider={openProvider} setOpenProvider={setOpenProvider} />
+      <ProviderAuth openProvider={openProvider} setOpenProvider={setOpenProvider} setAuthOpen={setIsOpen} />
     </>
   );
 };

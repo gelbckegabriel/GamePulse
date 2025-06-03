@@ -5,9 +5,36 @@ import Link from "next/link";
 import { Button } from "./utilities/button";
 import { Container } from "./utilities/container";
 import { UserAuth } from "./auth/auth";
+import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 export default function Header() {
+  const user = useSelector((state: any) => state.user.user);
   const [isOpen, setIsOpen] = useState(false);
+
+  const authModal = () => {
+    if (user.id != "") {
+      Swal.fire({
+        icon: "warning",
+        title: "Sign out ?",
+        text: "Are you sure you want to sign out?",
+        showCancelButton: true,
+        reverseButtons: true,
+        cancelButtonColor: "#977070",
+        cancelButtonText: "Cancel",
+        confirmButtonColor: "#cf7f42",
+        confirmButtonText: "Sign Out",
+        background: "#555",
+        color: "#EEE",
+      }).then((response) => {
+        if (response.isConfirmed) {
+          // TODO: Execute the proper sign out.
+        }
+      });
+    } else {
+      setIsOpen(true);
+    }
+  };
 
   return (
     <>
@@ -31,11 +58,12 @@ export default function Header() {
             <p className="text-xl font-semibold">GamePulse</p>
           </Link>
           <div>
+            <button onClick={() => console.log(user)}>anothertest</button>
             <Link className="mr-6" href="/profile">
-              Test
+              Profile
             </Link>
-            <Button size="small" onClick={() => setIsOpen(true)}>
-              Sign up
+            <Button size="small" onClick={() => authModal()}>
+              {user.name != "" ? `Hello, ${user.nickname}` : "Login"}
             </Button>
           </div>
         </Container>

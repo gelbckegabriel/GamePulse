@@ -1,4 +1,5 @@
 ﻿using game_pulse.Interfaces;
+using game_pulse.Interfaces.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace game_pulse.Controllers
@@ -19,14 +20,18 @@ namespace game_pulse.Controllers
         public async Task<IActionResult> GetUser(string id)
         {
             var user = await _userService.GetUser(id);
+
+            if (user == null)
+                return Ok(false);
+
             return Ok(user);
         }
 
-        //[HttpPost("CreateUser")]
-        //public async Task<IActionResult> CreateUser(UserCreateModel userDetails)
-        //{
-        //    var data = await _userService.;
-        //    return Ok(data);
-        //}
+        [HttpPost("CreateUser")]
+        public async Task<IActionResult> CreateUser(UserCreateModel userDetails)
+        {
+            var data = await _userService.CreateUser(userDetails);
+            return Ok(data);
+        }
     }
 }

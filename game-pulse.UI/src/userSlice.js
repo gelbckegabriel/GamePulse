@@ -8,8 +8,9 @@ const initialState = {
     xp: "",
     favoriteSport: "",
     email: "",
-    city: "",
-    state: "",
+    city: "Curitiba",
+    state: "PR",
+    country: "BR",
     address: "",
   },
 };

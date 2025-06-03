@@ -8,10 +8,18 @@ import useMeasure from "react-use-measure";
 import { Button } from "../utilities/button";
 import { Option, Select } from "@material-tailwind/react";
 import { apiClient } from "@/app/services/apiClient";
-import { firebaseAuth } from "@/app/services/firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { signInUser } from "@/userSlice";
+import Swal from "sweetalert2";
 
-export const ProviderAuth = ({ openProvider, setOpenProvider }) => {
+export const ProviderAuth = ({ openProvider, setOpenProvider, setAuthOpen }) => {
   // FORM
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
+  const [name, setName] = useState(user.name);
+  const [nickname, setNickname] = useState(user.nickname);
+  const [isLoading, setIsLoading] = useState(false);
+  const [favoriteSport, setFavoriteSport] = useState();
   const [sports, setSports] = useState([]);
 
   useEffect(() => {
@@ -19,6 +27,53 @@ export const ProviderAuth = ({ openProvider, setOpenProvider }) => {
       setSports(response);
     });
   }, []);
+
+  const handleSubmit = () => {
+    setIsLoading(true);
+
+    dispatch(
+      signInUser({
+        name: name,
+        nickname: nickname,
+        favoriteSport: favoriteSport,
+      })
+    );
+
+    apiClient("User/CreateUser", "POST", {
+      id: user.id,
+      name: name,
+      nickname: nickname,
+      xp: 0,
+      favoriteSport: favoriteSport,
+      email: user.email,
+      city: user.city,
+      state: user.state,
+      country: user.country,
+    })
+      .then((response) => {
+        if (response) {
+          setIsLoading(false);
+          setOpenProvider(false);
+          setAuthOpen(false);
+        }
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Creation Error",
+          text: "An error occurred while trying to create your user. Please try again later.",
+          footer: `${error}`,
+          confirmButtonColor: "#f27474",
+          confirmButtonText: "Close",
+          background: "#555",
+          color: "#EEE",
+        }).then(() => {
+          setIsLoading(false);
+          setOpenProvider(false);
+          setAuthOpen(false);
+        });
+      });
+  };
 
   // ANIMATION
   const [scope, animate] = useAnimate();
@@ -39,22 +94,6 @@ export const ProviderAuth = ({ openProvider, setOpenProvider }) => {
     });
 
     setOpenAuth(false);
-  };
-
-  const validatePassword = (password) => {
-    return password.length >= 8;
-  };
-
-  const handlePasswordChange = (e) => {
-    const value = e.target.value;
-    setPassword(value);
-    setIsPasswordInvalid(!validatePassword(value));
-  };
-
-  const handleSubmit = () => {
-    if (validatePassword(password)) {
-      // Handle form submission
-    }
   };
 
   return (
@@ -120,18 +159,20 @@ export const ProviderAuth = ({ openProvider, setOpenProvider }) => {
                   }}
                 >
                   <form className="form mt-8">
-                    {/* NAME AND USERNAME FIELDS */}
+                    {/* NAME AND NICKNAME FIELDS */}
                     <div className="flex justify-between gap-6">
                       <div className="w-[50%] md:w-[45%]">
                         <p className="text-sm2 mb-1">Name</p>
                         <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                           <IoMdPerson />
                           <input
+                            required
                             type="text"
+                            value={name}
                             maxLength={60}
                             style={{ backgroundColor: "transparent" }}
                             className="pl-1 border-0 w-full outline-none text-sm2"
-                            required
+                            onChange={(e) => setName(e.target.value)}
                           />
                         </div>
                       </div>
@@ -141,11 +182,13 @@ export const ProviderAuth = ({ openProvider, setOpenProvider }) => {
                         <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                           <FaRegUserCircle />
                           <input
+                            required
                             type="text"
+                            value={nickname}
                             maxLength={20}
                             style={{ backgroundColor: "transparent" }}
                             className="pl-1 border-0 w-full outline-none text-sm2"
-                            required
+                            onChange={(e) => setNickname(e.target.value)}
                           />
                         </div>
                       </div>
@@ -173,6 +216,7 @@ export const ProviderAuth = ({ openProvider, setOpenProvider }) => {
                         <div className="max-h-10 bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                           <FaRunning />
                           <Select
+                            onChange={(val) => setFavoriteSport(val)}
                             containerProps={{
                               className: "!min-w-0 w-full",
                             }}
@@ -189,9 +233,9 @@ export const ProviderAuth = ({ openProvider, setOpenProvider }) => {
                     </div>
                   </form>
 
-                  {/* UPDATE BUTTON */}
+                  {/* SUBMIT BUTTON */}
                   <div className="!mt-14 pb-6 flex justify-center">
-                    <Button className="w-[30%]" onClick={() => handleSubmit}>
+                    <Button className={`w-[30%] ${isLoading ? "!animate-pulse-strong" : ""}`} onClick={() => handleSubmit()}>
                       Submit
                     </Button>
                   </div>
