@@ -48,7 +48,7 @@ namespace game_pulse.Services
                 Name = userDetails.Name,
                 Nickname = userDetails.Nickname,
                 Xp = userDetails.Xp,
-                FavoriteSport = userDetails.FavoriteSport,
+                FavoriteSport = userDetails.FavoriteSport != 0 ? userDetails.FavoriteSport : 1,
                 CreatedAt = DateTime.Now
             };
 

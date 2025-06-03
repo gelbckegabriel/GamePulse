@@ -20,7 +20,6 @@ type Props = {
 };
 
 export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
-  // TODO: Implement Redux logic here to pass the user values like ID, Names and etc throughout the application.
   const user = useSelector((state: any) => state.user.user);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
@@ -44,16 +43,27 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
   }, [isOpen]);
 
   const handlePasswordSignIn = () => {
+    // TODO: Verify how to store login data on cache.
     signInWithEmailAndPassword(firebaseAuth, email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
-        console.log(user);
+        verifyUserExists(user.uid);
       })
-      .catch((e) => {
-        const errorCode = e.code;
-        const errorMessage = e.message;
+      .catch((error) => {
+        console.error(error);
 
-        console.error(errorCode, errorMessage);
+        Swal.fire({
+          icon: "error",
+          title: "Authentication Error",
+          text: "An error occurred while trying to sign you in. Please try again later.",
+          footer: `${error}`,
+          confirmButtonColor: "#f27474",
+          confirmButtonText: "Close",
+          background: "#555",
+          color: "#EEE",
+        }).then(() => {
+          setIsLoading(false);
+        });
       });
   };
 
@@ -64,6 +74,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
       // Sign In with PopUp
       const result = await signInWithPopup(firebaseAuth, googleProvider);
 
+      // Assign user details to the redux store.
       dispatch(
         signInUser({
           id: result.user.uid,
@@ -92,10 +103,23 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
   const verifyUserExists = async (userId: string) => {
     // Verify if user exists on the DB
     apiClient("User/GetUser/" + userId, "GET")
-      .then((response) => {
+      .then((response: any) => {
         if (!response) {
           setOpenProvider(true);
         } else {
+          // Assign user details to the redux store.
+          dispatch(
+            signInUser({
+              id: response.id,
+              name: response.name,
+              nickname: response.nickname,
+              email: response.email,
+              favoriteSport: response.favoriteSport,
+              city: "Curitiba",
+              state: "PR",
+              country: "BR",
+            })
+          );
           setIsLoading(false);
           setIsOpen(false);
         }

@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useAnimate, useDragControls, useMotionValue, motion } from "framer-motion";
 import { FaFingerprint, FaRegEye, FaRegEyeSlash, FaRegUserCircle, FaRunning } from "react-icons/fa";
-import { FaPerson } from "react-icons/fa6";
 import { IoMdPerson, IoMdPin } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import useMeasure from "react-use-measure";
@@ -12,18 +11,25 @@ import { Option, Select } from "@material-tailwind/react";
 import { apiClient } from "@/app/services/apiClient";
 import { firebaseAuth } from "@/app/services/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
 import { signInUser } from "@/userSlice";
-import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 
 export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
-  // FORM
+  const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const [sports, setSports] = useState([]);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordView = () => setShowPassword(!showPassword);
+
+  // FORM
+  const [name, setName] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [favoriteSport, setFavoriteSport] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     apiClient("Sports/GetSports", "GET").then((response) => {
@@ -42,28 +48,129 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
   };
 
   const handleSubmit = () => {
+    setIsLoading(true);
+
     if (validatePassword(password)) {
       createUserWithEmailAndPassword(firebaseAuth, email, password)
         .then((userCredentials) => {
           const user = userCredentials.user;
-          // const userId = user.uid;
-          // const createdTime = user.metadata.createdAt;
-          console.log(user);
-          setOpenCreate(false);
-          setAuthOpen(false);
 
-          // TODO: SET THE USER AT THE STORE
-          // dispatch(signInUser({
-          //   id: user.uid,
-          // }));
+          dispatch(
+            signInUser({
+              id: user.uid,
+              name: name,
+              nickname: nickname,
+              xp: 0,
+              favoriteSport: favoriteSport,
+              email: email,
+              city: "Curitiba",
+              state: "PR",
+              country: "BR",
+            })
+          );
+
+          verifyUserExists(user.uid);
         })
-        .catch((e) => {
-          const errorCode = e.code;
-          const errorMessage = e.message;
+        .catch((error) => {
+          console.error(error);
 
-          console.error(errorCode, errorMessage);
+          switch (error.message) {
+            case "Firebase: Error (auth/email-already-in-use).":
+              Swal.fire({
+                icon: "error",
+                title: "Authentication Error",
+                text: "Looks like this email is already in use. Try signing in or use another email to create a new account.",
+                footer: `${error.message}`,
+                confirmButtonColor: "#f27474",
+                confirmButtonText: "Close",
+                background: "#555",
+                color: "#EEE",
+              }).then(() => {
+                setIsLoading(false);
+              });
+              break;
+            default:
+              Swal.fire({
+                icon: "error",
+                title: "Authentication Error",
+                text: "An error occurred while trying to create your user. Please try again later.",
+                footer: `${error}`,
+                confirmButtonColor: "#f27474",
+                confirmButtonText: "Close",
+                background: "#555",
+                color: "#EEE",
+              }).then(() => {
+                setIsLoading(false);
+              });
+              break;
+          }
         });
     }
+  };
+
+  const verifyUserExists = async (userId) => {
+    // Verify if user exists on the DB
+    apiClient("User/GetUser/" + userId, "GET")
+      .then((response) => {
+        if (!response) {
+          createUser(userId);
+        } else {
+          setIsLoading(false);
+          setOpenCreate(false);
+          setAuthOpen(false);
+        }
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Authentication Error",
+          text: "An error occurred while trying to verify your user. Please try again later.",
+          footer: `${error}`,
+          confirmButtonColor: "#f27474",
+          confirmButtonText: "Close",
+          background: "#555",
+          color: "#EEE",
+        }).then(() => {
+          setIsLoading(false);
+        });
+      });
+  };
+
+  const createUser = async (userId) => {
+    apiClient("User/CreateUser", "POST", {
+      id: userId,
+      name: name,
+      nickname: nickname,
+      xp: 0,
+      favoriteSport: favoriteSport,
+      email: email,
+      city: user.city,
+      state: user.state,
+      country: user.country,
+    })
+      .then((response) => {
+        if (response) {
+          setIsLoading(false);
+          setOpenCreate(false);
+          setAuthOpen(false);
+        }
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Creation Error",
+          text: "An error occurred while trying to create your user. Please try again later.",
+          footer: `${error}`,
+          confirmButtonColor: "#f27474",
+          confirmButtonText: "Close",
+          background: "#555",
+          color: "#EEE",
+        }).then(() => {
+          setIsLoading(false);
+          setOpenProvider(false);
+          setAuthOpen(false);
+        });
+      });
   };
 
   // ANIMATION
@@ -142,34 +249,19 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
                 <h2 className="text-3xl md:text-4xl lg:text-4xl font-bold text-center">Create a new account</h2>
 
                 <form className="form !mt-8">
-                  {/* NAME AND LASTNAME CONTAINER */}
-                  <div className="flex justify-between">
-                    <div className="w-[40%] md:w-[35%] lg:w-[35%]">
-                      <p className="text-sm2 mb-1">First Name</p>
-                      <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
-                        <IoMdPerson />
-                        <input
-                          type="text"
-                          maxLength={20}
-                          style={{ backgroundColor: "transparent" }}
-                          className="pl-1 border-0 w-full outline-none text-sm2"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div className="w-[55%]">
-                      <p className="text-sm2 mb-1">Last Name</p>
-                      <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
-                        <FaPerson />
-                        <input
-                          type="text"
-                          maxLength={30}
-                          style={{ backgroundColor: "transparent" }}
-                          className="pl-1 border-0 w-full outline-none text-sm2"
-                          required
-                        />
-                      </div>
+                  {/* NAME FIELD */}
+                  <div>
+                    <p className="text-sm2 mb-1">Full Name</p>
+                    <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
+                      <IoMdPerson />
+                      <input
+                        required
+                        type="text"
+                        maxLength={80}
+                        style={{ backgroundColor: "transparent" }}
+                        className="pl-1 border-0 w-full outline-none text-sm2"
+                        onChange={(e) => setName(e.target.value)}
+                      />
                     </div>
                   </div>
 
@@ -179,11 +271,12 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
                     <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                       <FaRegUserCircle />
                       <input
+                        required
                         type="text"
                         maxLength={15}
                         style={{ backgroundColor: "transparent" }}
                         className="pl-1 border-0 w-full outline-none text-sm2"
-                        required
+                        onChange={(e) => setNickname(e.target.value)}
                       />
                     </div>
                   </div>
@@ -214,6 +307,7 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
                             className: "!min-w-0 w-full",
                           }}
                           className="!pl-1 !border-0 !border-transparent !w-full !outline-none !text-sm2 !bg-opacity-0 !text-white"
+                          onChange={(val) => setFavoriteSport(val)}
                         >
                           {sports.map((sport, index) => (
                             <Option key={index} value={index + 1}>
@@ -231,12 +325,11 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
                     <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                       <MdEmail />
                       <input
+                        required
                         type="email"
                         maxLength={50}
-                        style={{ backgroundColor: "transparent" }}
+                        className="bg-transparent pl-1 border-0 w-full outline-none text-sm2"
                         onChange={(e) => setEmail(e.target.value)}
-                        className="pl-1 border-0 w-full outline-none text-sm2"
-                        required
                       />
                     </div>
                   </div>
@@ -251,12 +344,11 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
                     >
                       <FaFingerprint className={`transition-all duration-300 ease-in-out ${isPasswordInvalid ? "text-issueRed" : ""}`} />
                       <input
+                        required
                         type={showPassword ? "text" : "password"}
                         maxLength={20}
-                        style={{ backgroundColor: "transparent" }}
+                        className="bg-transparent pl-1 border-0 w-full outline-none text-sm2"
                         onChange={handlePasswordChange}
-                        className="pl-1 border-0 w-full outline-none text-sm2"
-                        required
                       />
                       {showPassword ? (
                         <FaRegEye
@@ -282,7 +374,9 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
 
                 {/* CREATE BUTTON */}
                 <div className="!mt-10 flex justify-center">
-                  <Button onClick={() => handleSubmit()}>Create Account</Button>
+                  <Button className={`${isLoading ? "animate-pulse-strong" : ""}`} onClick={() => handleSubmit()}>
+                    Create Account
+                  </Button>
                 </div>
 
                 {/* TERMS OF ACCEPTANCE */}
