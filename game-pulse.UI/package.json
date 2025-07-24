@@ -38,6 +38,7 @@
     "react-use": "^17.6.0",
     "react-use-measure": "^2.1.7",
     "redux": "^5.0.1",
+    "rxjs": "^7.8.2",
     "sass": "^1.85.0",
     "simplex-noise": "^4.0.3",
     "sweetalert2": "^11.22.0",
