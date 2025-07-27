@@ -12,3 +12,4 @@ DaisyUI -> https://daisyui.com/
 
 TODO: N'oublies pas de créer UseReducer pour les actions de l'état global - Sauvergarder l'ID e détails de l'utilisateur.
 TODO: Ajouter SWAL Alerts ou quelque chose de mieux.
+TODO: Remplacer useReducer par rxjs (Subject Behaviour)
