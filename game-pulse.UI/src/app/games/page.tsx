@@ -5,9 +5,9 @@ import { GenericTable } from "../shared/generic-table/generic-table";
 import { Container } from "../shared/utilities/container";
 
 export default function GamesPage() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
 
-  const [games, setGames] = useState([
+  const [games] = useState([
     { court_name: "Parque Atuba", sport: "Basketball", date: "2023-10-01", time: "10:00", players: 10 },
     { court_name: "Parque Milharel", sport: "Volleyball", date: "2024-17-03", time: "14:00", players: 7 },
     { court_name: "Parque dos Santos", sport: "Basketball", date: "2025-11-07", time: "09:00", players: 4 },

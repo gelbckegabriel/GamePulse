@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaFingerprint, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
@@ -8,7 +8,7 @@ import { Tooltip } from "@material-tailwind/react";
 import { Button } from "../utilities/button";
 import { ProviderAuth } from "./provider-auth";
 import { firebaseAuth, googleProvider } from "@/app/services/firebase";
-import { getAuth, getRedirectResult, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect } from "firebase/auth";
+import { getRedirectResult, signInWithEmailAndPassword, signInWithRedirect } from "firebase/auth";
 import { apiClient } from "@/app/services/apiClient";
 import Swal, { SweetAlertResult } from "sweetalert2";
 import { User, userService } from "@/app/services/cache/user-info";
@@ -20,7 +20,7 @@ type Props = {
 
 export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
   const auth = firebaseAuth;
-  const [user, setUser] = useState<User>(userService.getCurrentUser());
+  // const [user, setUser] = useState<User>(userService.getCurrentUser());
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,12 +29,12 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const togglePasswordView = () => setShowPassword(!showPassword);
 
-  useEffect(() => {
-    const subscription = userService.user$.subscribe((result) => {
-      setUser(result);
-    });
-    return () => subscription.unsubscribe(); // Clean up on unmount
-  }, []);
+  // useEffect(() => {
+  //   const subscription = userService.user$.subscribe((result) => {
+  //     setUser(result);
+  //   });
+  //   return () => subscription.unsubscribe(); // Clean up on unmount
+  // }, []);
 
   useEffect(() => {
     if (isOpen) {

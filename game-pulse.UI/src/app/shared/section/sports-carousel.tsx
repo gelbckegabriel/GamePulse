@@ -1,7 +1,8 @@
 "use client";
 
 import { useScroll, useTransform, motion, useMotionValueEvent } from "framer-motion";
-import { mainSports, randomSportsSet1, randomSportsSet2, SportImages } from "./sports-images";
+// import { mainSports, randomSportsSet1, randomSportsSet2, SportImages } from "./sports-images"; // TODO
+import { mainSports, SportImages } from "./sports-images";
 import { useMemo, useRef, useState } from "react";
 import { useWindowSize } from "react-use";
 import { Button } from "../utilities/button";
@@ -101,16 +102,16 @@ export const SportsCarousel = () => {
   );
 };
 
-const SmallVideoCarousel = ({ sports }: { sports: SportImages[] }) => {
-  return (
-    <div className="overflow-clip">
-      <div className="flex gap-3 animate-carousel-move relative left-[var(--carousel-offset,0px)]">
-        {sports.map((sport, index) => (
-          <div className="w-[15vh] md:w-[23vh] aspect-video shrink-0" key={`${sport.title}-${index}`}>
-            <Image className="w-full h-full object-cover rounded-xl" src={sport.image} alt={sport.title} width={150} height={84} />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+// const SmallVideoCarousel = ({ sports }: { sports: SportImages[] }) => {
+//   return (
+//     <div className="overflow-clip">
+//       <div className="flex gap-3 animate-carousel-move relative left-[var(--carousel-offset,0px)]">
+//         {sports.map((sport, index) => (
+//           <div className="w-[15vh] md:w-[23vh] aspect-video shrink-0" key={`${sport.title}-${index}`}>
+//             <Image className="w-full h-full object-cover rounded-xl" src={sport.image} alt={sport.title} width={150} height={84} />
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
