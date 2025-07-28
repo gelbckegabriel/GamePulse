@@ -51,8 +51,9 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
   useEffect(() => {
     const handleRedirectResult = async () => {
       try {
-        console.log("handleRedirectResult", auth);
         const result = await getRedirectResult(auth);
+        console.log('result', result);
+        console.log('auth', auth);
 
         if (result?.user) {
           // This block runs only once after redirect
@@ -103,15 +104,6 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
 
       // Sign In with PopUp
       await signInWithRedirect(firebaseAuth, googleProvider);
-
-      // TODO: Work on it, may need to add a useEffect.
-      // userService.signInUser({
-      //   id: result.user.uid,
-      //   name: result.user.displayName || "Unknown User",
-      //   nickname: result.user.displayName?.split(" ")[result.user.displayName?.split(" ").length - 1],
-      //   email: result.user.email || undefined,
-      // });
-      // verifyUserExists(result.user.uid);
     } catch (error) {
       console.error(error);
       triggerSwallError("Authentication Error", "An error occurred while trying to sign in with Popup. Please try again later.", error);

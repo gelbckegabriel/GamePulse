@@ -3,7 +3,8 @@ import { GoogleAuthProvider, getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBVZGfdckkDUDdsT4iMi8VQbJ0Zh8-E3BI",
-  authDomain: "gamepulse-a9dd2.firebaseapp.com",
+  // authDomain: "gamepulse-a9dd2.firebaseapp.com", // TODO: Update this to your actual domain in production
+  authDomain: "localhost",
   projectId: "gamepulse-a9dd2",
   storageBucket: "gamepulse-a9dd2.firebasestorage.app",
   messagingSenderId: "43841193037",

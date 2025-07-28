@@ -7,6 +7,8 @@ import { Container } from "./utilities/container";
 import { UserAuth } from "./auth/auth";
 import Swal from "sweetalert2";
 import { User, userService } from "../services/cache/user-info";
+import { signOut } from "firebase/auth";
+import { firebaseAuth } from "../services/firebase";
 
 export default function Header() {
   const [user, setUser] = useState<User>(userService.getCurrentUser());
@@ -36,6 +38,9 @@ export default function Header() {
       }).then((response) => {
         if (response.isConfirmed) {
           // TODO: Execute the proper sign out.
+          signOut(firebaseAuth).then(() => {
+            userService.signOutUser();
+          });
         }
       });
     } else {
