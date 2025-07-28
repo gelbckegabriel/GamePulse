@@ -3,8 +3,6 @@
 import { Roboto, Inter, Noto_Sans } from "next/font/google";
 import Header from "./shared/header";
 import Footer from "./shared/footer";
-import { Provider } from "react-redux";
-import { store } from "../store";
 
 import "./globals.css";
 
@@ -35,11 +33,9 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" type="icon" />
       </head>
       <body className={`${roboto.variable} ${inter.variable} ${notoSans.variable} antialiased bg-black`}>
-        <Provider store={store}>
-          <Header />
-          {children}
-          <Footer />
-        </Provider>
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   );

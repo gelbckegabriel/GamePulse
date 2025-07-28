@@ -9,10 +9,9 @@ import { Button } from "../utilities/button";
 import { ProviderAuth } from "./provider-auth";
 import { firebaseAuth, googleProvider } from "@/app/services/firebase";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { useDispatch, useSelector } from "react-redux";
-import { signInUser } from "@/userSlice";
 import { apiClient } from "@/app/services/apiClient";
-import Swal from "sweetalert2";
+import Swal, { SweetAlertResult } from "sweetalert2";
+import { User, userService } from "@/app/services/cache/user-info";
 
 type Props = {
   isOpen: boolean;
@@ -20,8 +19,7 @@ type Props = {
 };
 
 export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
-  const user = useSelector((state: any) => state.user.user);
-  const dispatch = useDispatch();
+  const [user, setUser] = useState<User>(userService.getCurrentUser());
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -51,19 +49,9 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
       })
       .catch((error) => {
         console.error(error);
-
-        Swal.fire({
-          icon: "error",
-          title: "Authentication Error",
-          text: "An error occurred while trying to sign you in. Please try again later.",
-          footer: `${error}`,
-          confirmButtonColor: "#f27474",
-          confirmButtonText: "Close",
-          background: "#555",
-          color: "#EEE",
-        }).then(() => {
-          setIsLoading(false);
-        });
+        triggerSwallError("Authentication Error", "An error occurred while trying to sign you in. Please try again later.", error).then(() =>
+          setIsLoading(false)
+        );
       });
   };
 
@@ -72,31 +60,18 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
       setIsLoading(true);
 
       // Sign In with PopUp
-      const result = await signInWithPopup(firebaseAuth, googleProvider);
-
-      // Assign user details to the redux store.
-      dispatch(
-        signInUser({
+      await signInWithPopup(firebaseAuth, googleProvider).then((result) => {
+        userService.signInUser({
           id: result.user.uid,
           name: result.user.displayName || "Unknown User",
           nickname: result.user.displayName?.split(" ")[result.user.displayName?.split(" ").length - 1],
-          email: result.user.email,
-        })
-      );
-
-      verifyUserExists(result.user.uid);
+          email: result.user.email || undefined,
+        });
+        verifyUserExists(result.user.uid);
+      });
     } catch (error) {
       console.error(error);
-      Swal.fire({
-        icon: "error",
-        title: "Authentication Error",
-        text: "An error occurred while trying to sign in with Popup. Please try again later.",
-        footer: `${error}`,
-        confirmButtonColor: "#f27474",
-        confirmButtonText: "Close",
-        background: "#555",
-        color: "#EEE",
-      });
+      triggerSwallError("Authentication Error", "An error occurred while trying to sign in with Popup. Please try again later.", error);
     }
   };
 
@@ -107,38 +82,39 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
         if (!response) {
           setOpenProvider(true);
         } else {
-          // Assign user details to the redux store.
-          dispatch(
-            signInUser({
-              id: response.id,
-              name: response.name,
-              nickname: response.nickname,
-              email: response.email,
-              favoriteSport: response.favoriteSport,
-              city: "Curitiba",
-              state: "PR",
-              country: "BR",
-            })
-          );
+          userService.signInUser({
+            id: response.id,
+            name: response.name,
+            nickname: response.nickname,
+            email: response.email,
+            favoriteSport: response.favoriteSport,
+            city: "Curitiba",
+            state: "PR",
+            country: "BR",
+          });
           setIsLoading(false);
           setIsOpen(false);
         }
       })
       .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Authentication Error",
-          text: "An error occurred while trying to verify your user. Please try again later.",
-          footer: `${error}`,
-          confirmButtonColor: "#f27474",
-          confirmButtonText: "Close",
-          background: "#555",
-          color: "#EEE",
-        }).then(() => {
+        triggerSwallError("Authentication Error", "An error occurred while trying to verify your user. Please try again later.", error).then(() => {
           setIsLoading(false);
         });
       });
   };
+
+  function triggerSwallError(title: string, description: string, error?: any): Promise<SweetAlertResult> {
+    return Swal.fire({
+      icon: "error",
+      title: title,
+      text: description,
+      footer: `${error}`,
+      confirmButtonColor: "#f27474",
+      confirmButtonText: "Close",
+      background: "#555",
+      color: "#EEE",
+    });
+  }
 
   return (
     <>

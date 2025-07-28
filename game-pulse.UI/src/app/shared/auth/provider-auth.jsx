@@ -8,14 +8,12 @@ import useMeasure from "react-use-measure";
 import { Button } from "../utilities/button";
 import { Option, Select } from "@material-tailwind/react";
 import { apiClient } from "@/app/services/apiClient";
-import { useDispatch, useSelector } from "react-redux";
-import { signInUser } from "@/userSlice";
 import Swal from "sweetalert2";
+import { userService } from "@/app/services/cache/user-info";
 
 export const ProviderAuth = ({ openProvider, setOpenProvider, setAuthOpen }) => {
   // FORM
-  const user = useSelector((state) => state.user.user);
-  const dispatch = useDispatch();
+  const [user, setUser] = useState(userService.getCurrentUser());
   const [name, setName] = useState(user.name);
   const [nickname, setNickname] = useState(user.nickname);
   const [isLoading, setIsLoading] = useState(false);
@@ -31,13 +29,11 @@ export const ProviderAuth = ({ openProvider, setOpenProvider, setAuthOpen }) => 
   const handleSubmit = () => {
     setIsLoading(true);
 
-    dispatch(
-      signInUser({
-        name: name,
-        nickname: nickname,
-        favoriteSport: favoriteSport,
-      })
-    );
+    userService.signInUser({
+      name: name,
+      nickname: nickname,
+      favoriteSport: favoriteSport,
+    });
 
     apiClient("User/CreateUser", "POST", {
       id: user.id,

@@ -11,13 +11,11 @@ import { Option, Select } from "@material-tailwind/react";
 import { apiClient } from "@/app/services/apiClient";
 import { firebaseAuth } from "@/app/services/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useDispatch, useSelector } from "react-redux";
-import { signInUser } from "@/userSlice";
 import Swal from "sweetalert2";
+import { userService } from "@/app/services/cache/user-info";
 
 export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
-  const user = useSelector((state) => state.user.user);
-  const dispatch = useDispatch();
+  const [user, setUser] = useState(userService.getCurrentUser());
   const [isLoading, setIsLoading] = useState(false);
   const [sports, setSports] = useState([]);
   const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
@@ -55,19 +53,17 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
         .then((userCredentials) => {
           const user = userCredentials.user;
 
-          dispatch(
-            signInUser({
-              id: user.uid,
-              name: name,
-              nickname: nickname,
-              xp: 0,
-              favoriteSport: favoriteSport,
-              email: email,
-              city: "Curitiba",
-              state: "PR",
-              country: "BR",
-            })
-          );
+          userService.signInUser({
+            id: user.uid,
+            name: name,
+            nickname: nickname,
+            xp: 0,
+            favoriteSport: favoriteSport,
+            email: email,
+            city: "Curitiba",
+            state: "PR",
+            country: "BR",
+          });
 
           verifyUserExists(user.uid);
         })
@@ -76,32 +72,18 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
 
           switch (error.message) {
             case "Firebase: Error (auth/email-already-in-use).":
-              Swal.fire({
-                icon: "error",
-                title: "Authentication Error",
-                text: "Looks like this email is already in use. Try signing in or use another email to create a new account.",
-                footer: `${error.message}`,
-                confirmButtonColor: "#f27474",
-                confirmButtonText: "Close",
-                background: "#555",
-                color: "#EEE",
-              }).then(() => {
-                setIsLoading(false);
-              });
+              triggerSwalError(
+                "Authentication Error",
+                "Looks like this email is already in use. Try signing in or use another email to create a new account.",
+                error
+              ).then(() => setIsLoading(false));
               break;
             default:
-              Swal.fire({
-                icon: "error",
-                title: "Authentication Error",
-                text: "An error occurred while trying to create your user. Please try again later.",
-                footer: `${error}`,
-                confirmButtonColor: "#f27474",
-                confirmButtonText: "Close",
-                background: "#555",
-                color: "#EEE",
-              }).then(() => {
-                setIsLoading(false);
-              });
+              triggerSwalError("Authentication Error", "An error occurred while trying to create your user. Please try again later.", error).then(
+                () => {
+                  setIsLoading(false);
+                }
+              );
               break;
           }
         });
@@ -121,16 +103,7 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
         }
       })
       .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Authentication Error",
-          text: "An error occurred while trying to verify your user. Please try again later.",
-          footer: `${error}`,
-          confirmButtonColor: "#f27474",
-          confirmButtonText: "Close",
-          background: "#555",
-          color: "#EEE",
-        }).then(() => {
+        triggerSwalError("Authentication Error", "An error occurred while trying to verify your user. Please try again later.", error).then(() => {
           setIsLoading(false);
         });
       });
@@ -156,22 +129,26 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
         }
       })
       .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Creation Error",
-          text: "An error occurred while trying to create your user. Please try again later.",
-          footer: `${error}`,
-          confirmButtonColor: "#f27474",
-          confirmButtonText: "Close",
-          background: "#555",
-          color: "#EEE",
-        }).then(() => {
+        triggerSwalError("Creation Error", "An error occurred while trying to create your user. Please try again later.", error).then(() => {
           setIsLoading(false);
           setOpenProvider(false);
           setAuthOpen(false);
         });
       });
   };
+
+  function triggerSwalError(title, description, error) {
+    return Swal.fire({
+      icon: "error",
+      title: title,
+      text: description,
+      footer: `${error}`,
+      confirmButtonColor: "#f27474",
+      confirmButtonText: "Close",
+      background: "#555",
+      color: "#EEE",
+    });
+  }
 
   // ANIMATION
   const [scope, animate] = useAnimate();

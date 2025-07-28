@@ -5,11 +5,11 @@ import Link from "next/link";
 import { Button } from "./utilities/button";
 import { Container } from "./utilities/container";
 import { UserAuth } from "./auth/auth";
-import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { User, userService } from "../services/cache/user-info";
 
 export default function Header() {
-  const user = useSelector((state: any) => state.user.user);
+  const [user, setUser] = useState<User>(userService.getCurrentUser());
   const [isOpen, setIsOpen] = useState(false);
 
   const authModal = () => {
