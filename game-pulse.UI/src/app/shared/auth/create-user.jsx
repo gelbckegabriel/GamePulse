@@ -30,6 +30,13 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
   const [password, setPassword] = useState("");
 
   useEffect(() => {
+    const subscription = userService.user$.subscribe((result) => {
+      setUser(result);
+    });
+    return () => subscription.unsubscribe(); // Clean up on unmount
+  }, []);
+
+  useEffect(() => {
     apiClient("Sports/GetSports", "GET").then((response) => {
       setSports(response);
     });

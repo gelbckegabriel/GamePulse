@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "./utilities/button";
 import { Container } from "./utilities/container";
@@ -11,6 +11,13 @@ import { User, userService } from "../services/cache/user-info";
 export default function Header() {
   const [user, setUser] = useState<User>(userService.getCurrentUser());
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const subscription = userService.user$.subscribe((result) => {
+      setUser(result);
+    });
+    return () => subscription.unsubscribe(); // Clean up on unmount
+  }, []);
 
   const authModal = () => {
     if (user.id != "") {

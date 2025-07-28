@@ -21,6 +21,13 @@ export const ProviderAuth = ({ openProvider, setOpenProvider, setAuthOpen }) => 
   const [sports, setSports] = useState([]);
 
   useEffect(() => {
+    const subscription = userService.user$.subscribe((result) => {
+      setUser(result);
+    });
+    return () => subscription.unsubscribe(); // Clean up on unmount
+  }, []);
+
+  useEffect(() => {
     apiClient("Sports/GetSports", "GET").then((response) => {
       setSports(response);
     });

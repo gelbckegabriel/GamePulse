@@ -8,7 +8,7 @@ import { Tooltip } from "@material-tailwind/react";
 import { Button } from "../utilities/button";
 import { ProviderAuth } from "./provider-auth";
 import { firebaseAuth, googleProvider } from "@/app/services/firebase";
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { getAuth, getRedirectResult, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect } from "firebase/auth";
 import { apiClient } from "@/app/services/apiClient";
 import Swal, { SweetAlertResult } from "sweetalert2";
 import { User, userService } from "@/app/services/cache/user-info";
@@ -19,6 +19,7 @@ type Props = {
 };
 
 export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
+  const auth = firebaseAuth;
   const [user, setUser] = useState<User>(userService.getCurrentUser());
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
@@ -27,6 +28,13 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
   const [openCreate, setOpenCreate] = useState(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const togglePasswordView = () => setShowPassword(!showPassword);
+
+  useEffect(() => {
+    const subscription = userService.user$.subscribe((result) => {
+      setUser(result);
+    });
+    return () => subscription.unsubscribe(); // Clean up on unmount
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -39,6 +47,40 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
       document.body.style.overflow = "";
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    const handleRedirectResult = async () => {
+      try {
+        console.log("handleRedirectResult", auth);
+        const result = await getRedirectResult(auth);
+
+        if (result?.user) {
+          // This block runs only once after redirect
+          userService.signInUser({
+            id: result.user.uid,
+            name: result.user.displayName || "Unknown User",
+            nickname: result.user.displayName?.split(" ").slice(-1)[0],
+            email: result.user.email || undefined,
+          });
+          verifyUserExists(result.user.uid);
+        } else if (auth.currentUser) {
+          // Fallback: user is already signed in
+          const firebaseUser = auth.currentUser;
+          userService.signInUser({
+            id: firebaseUser.uid,
+            name: firebaseUser.displayName || "Unknown User",
+            nickname: firebaseUser.displayName?.split(" ").slice(-1)[0],
+            email: firebaseUser.email || undefined,
+          });
+          verifyUserExists(firebaseUser.uid);
+        }
+      } catch (error) {
+        console.error("Error getting redirect result:", error);
+      }
+    };
+
+    handleRedirectResult();
+  }, [auth]); // Dependency array ensures it runs when auth changes
 
   const handlePasswordSignIn = () => {
     // TODO: Verify how to store login data on cache.
@@ -60,15 +102,16 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
       setIsLoading(true);
 
       // Sign In with PopUp
-      await signInWithPopup(firebaseAuth, googleProvider).then((result) => {
-        userService.signInUser({
-          id: result.user.uid,
-          name: result.user.displayName || "Unknown User",
-          nickname: result.user.displayName?.split(" ")[result.user.displayName?.split(" ").length - 1],
-          email: result.user.email || undefined,
-        });
-        verifyUserExists(result.user.uid);
-      });
+      await signInWithRedirect(firebaseAuth, googleProvider);
+
+      // TODO: Work on it, may need to add a useEffect.
+      // userService.signInUser({
+      //   id: result.user.uid,
+      //   name: result.user.displayName || "Unknown User",
+      //   nickname: result.user.displayName?.split(" ")[result.user.displayName?.split(" ").length - 1],
+      //   email: result.user.email || undefined,
+      // });
+      // verifyUserExists(result.user.uid);
     } catch (error) {
       console.error(error);
       triggerSwallError("Authentication Error", "An error occurred while trying to sign in with Popup. Please try again later.", error);
