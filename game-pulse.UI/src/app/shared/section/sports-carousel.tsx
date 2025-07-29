@@ -2,11 +2,10 @@
 
 import { useScroll, useTransform, motion, useMotionValueEvent } from "framer-motion";
 // import { mainSports, randomSportsSet1, randomSportsSet2, SportImages } from "./sports-images"; // TODO
-import { mainSports, SportImages } from "./sports-images";
+import { mainSports } from "./sports-images";
 import { useMemo, useRef, useState } from "react";
 import { useWindowSize } from "react-use";
 import { Button } from "../utilities/button";
-import Image from "next/image";
 
 export const SportsCarousel = () => {
   const { width, height } = useWindowSize();

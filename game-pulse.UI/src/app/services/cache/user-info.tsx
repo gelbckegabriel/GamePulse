@@ -1,20 +1,8 @@
 // Create the RXJS BehaviorSubject here.
 // Look the UserSlice + Store for reference - to be replaced.
 
+import { User } from "@/app/shared/interfaces/db-entities";
 import { BehaviorSubject } from "rxjs";
-
-export interface User {
-  id: string;
-  name: string;
-  nickname: string;
-  xp: string;
-  favoriteSport: string;
-  email: string;
-  city: string;
-  state: string;
-  country: string;
-  address: string;
-}
 
 const initialUser: User = {
   id: "",

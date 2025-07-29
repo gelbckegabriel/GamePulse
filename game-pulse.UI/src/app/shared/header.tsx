@@ -6,9 +6,10 @@ import { Button } from "./utilities/button";
 import { Container } from "./utilities/container";
 import { UserAuth } from "./auth/auth";
 import Swal from "sweetalert2";
-import { User, userService } from "../services/cache/user-info";
+import { userService } from "../services/cache/user-info";
 import { signOut } from "firebase/auth";
 import { firebaseAuth } from "../services/firebase";
+import { User } from "./interfaces/db-entities";
 
 export default function Header() {
   const [user, setUser] = useState<User>(userService.getCurrentUser());

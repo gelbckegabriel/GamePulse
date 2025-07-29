@@ -8,10 +8,11 @@ import { Tooltip } from "@material-tailwind/react";
 import { Button } from "../utilities/button";
 import { ProviderAuth } from "./provider-auth";
 import { firebaseAuth, googleProvider } from "@/app/services/firebase";
-import { getRedirectResult, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect } from "firebase/auth";
+import { getRedirectResult, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { apiClient } from "@/app/services/apiClient";
 import Swal, { SweetAlertResult } from "sweetalert2";
-import { User, userService } from "@/app/services/cache/user-info";
+import { userService } from "@/app/services/cache/user-info";
+import { User } from "../interfaces/db-entities";
 
 type Props = {
   isOpen: boolean;
@@ -116,8 +117,8 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
 
   const verifyUserExists = async (userId: string) => {
     // Verify if user exists on the DB
-    apiClient("User/GetUser/" + userId, "GET")
-      .then((response: any) => {
+    apiClient<User>("User/GetUser/" + userId, "GET")
+      .then((response) => {
         if (!response) {
           setOpenProvider(true);
         } else {
@@ -142,7 +143,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
       });
   };
 
-  function triggerSwallError(title: string, description: string, error?: any): Promise<SweetAlertResult> {
+  function triggerSwallError(title: string, description: string, error?: unknown): Promise<SweetAlertResult> {
     return Swal.fire({
       icon: "error",
       title: title,
