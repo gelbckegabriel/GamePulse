@@ -25,22 +25,26 @@ export default function Header() {
     if (user.id != "") {
       Swal.fire({
         icon: "warning",
-        title: "Sign out ?",
-        text: "Are you sure you want to sign out?",
+        title: `Hello, ${user.nickname}!`,
+        text: "What would you like to do ?",
         showCancelButton: true,
+        showDenyButton: true,
         reverseButtons: true,
-        cancelButtonColor: "#977070",
-        cancelButtonText: "Cancel",
-        confirmButtonColor: "#cf7f42",
-        confirmButtonText: "Sign Out",
+        cancelButtonText: "Close",
+        denyButtonText: "Sign Out",
+        confirmButtonColor: "#1b741b",
+        confirmButtonText: "View Profile",
         background: "#555",
         color: "#EEE",
       }).then((response) => {
         if (response.isConfirmed) {
-          // TODO: Execute the proper sign out.
+          // Redirect to profile page
+          window.location.href = "/profile";
+        } else if (response.isDenied) {
           signOut(firebaseAuth).then(() => {
             userService.signOutUser();
           });
+          window.location.href = "/";
         }
       });
     } else {
@@ -52,9 +56,9 @@ export default function Header() {
     <>
       <header className="bg-backgroundContrast text-white">
         <Container className="flex items-center min-h-[--header-row-height]">
-          <Link href="/" className="text-xl -ml-6 flex h-[--header-row-height] items-center px-6">
+          {/* <Link href="/" className="text-xl -ml-6 flex h-[--header-row-height] items-center px-6">
             🍏 <span className="sr-only">Back to homepage</span>
-          </Link>
+          </Link> */}
           <div className="flex mx-auto text-xs gap-8">
             <Link href="/about">About</Link>
             <Link href="/leaderboard">Leaderboard</Link>
@@ -70,10 +74,6 @@ export default function Header() {
             <p className="text-xl font-semibold">GamePulse</p>
           </Link>
           <div>
-            <button onClick={() => console.log(user)}>anothertest</button>
-            <Link className="mr-6" href="/profile">
-              Profile
-            </Link>
             <Button size="small" onClick={() => authModal()}>
               {user.name != "" ? `Hello, ${user.nickname}` : "Login"}
             </Button>
