@@ -34,8 +34,8 @@ export default function RootLayout({
         <link rel="icon" type="image/png" href="/logos/GP_Icon-192.png" />
         <link rel="apple-touch-icon" type="image/png" href="/logos/GP_Icon-192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <title>Game Pulse</title>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <title>GamePulse</title>
       </head>
       <body className={`${roboto.variable} ${inter.variable} ${notoSans.variable} antialiased bg-black`}>
         <Header />

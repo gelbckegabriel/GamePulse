@@ -6,6 +6,7 @@ import { Vortex } from "../shared/utilities/vortex";
 import { motion } from "framer-motion";
 import { EvervaultCard, Icon } from "../shared/utilities/evervault-card";
 import { CodeBlock } from "../shared/utilities/code-block";
+import InstallButton from "../shared/install-button/install-button";
 
 export default function AboutPage() {
   const ref = useRef(null);
@@ -100,7 +101,13 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* TODO: MAKE THE CODE BLOCK BE SIDE BY SIDE WITH THE GITHUB REPO CARD ONLY ON MEDIUM/LARGER SCREENS, IF SMALL, JUST DON'T SHOW IT */}
+          {/* TODO: Install GamePulse */}
+          <div className="mt-32">
+
+            <InstallButton />
+          </div>
+
+          {/* GitHub Repo */}
           <div className="mt-20 pb-10 flex items-center gap-4">
             {/* GitHub Repo Card */}
             <div className="border border-white/[0.2] flex flex-col items-start max-w-[100%] md:max-w-sm mx-auto p-4 relative h-[30rem]">
@@ -126,6 +133,8 @@ export default function AboutPage() {
               </>
             ) : null}
           </div>
+
+          {/* TODO: Contact Information */}
         </Container>
       </div>
     </>
