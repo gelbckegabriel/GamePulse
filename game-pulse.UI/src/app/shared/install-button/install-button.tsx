@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { Button } from "../utilities/button";
 import { SwalAlertTrigger } from "../utilities/swal-trigger";
@@ -6,7 +8,7 @@ import { Icon } from "../utilities/evervault-card";
 export default function InstallGamePulse() {
   const [defferedPrompt, setDefferedPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isInstallable, setIsInstallable] = useState(false);
-  const isStandalone = window.matchMedia("(display-mode: standalone)").matches;
+  const [isStandalone, setIsStandalone] = useState(false);
 
   interface BeforeInstallPromptEvent extends Event {
     readonly platforms: string[];
@@ -18,6 +20,8 @@ export default function InstallGamePulse() {
   }
 
   useEffect(() => {
+    setIsStandalone(window.matchMedia("(display-mode: standalone)").matches);
+
     const handler = (e: Event) => {
       const promptEvent = e as BeforeInstallPromptEvent;
       e.preventDefault();

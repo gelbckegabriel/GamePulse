@@ -1,13 +1,17 @@
-import { useState } from "react";
+"use client";
+
+import { useEffect, useState } from "react";
 import { FaChevronUp } from "react-icons/fa";
 
 export const ScrollToTopButton = () => {
   const [showButton, setShowButton] = useState(false);
 
   // When the user scrolls down 20px from the top of the document, show the button
-  window.onscroll = function () {
-    scrollFunction();
-  };
+  useEffect(() => {
+    window.onscroll = function () {
+      scrollFunction();
+    };
+  }, []);
 
   function scrollFunction() {
     if (document.body.scrollTop > 350 || document.documentElement.scrollTop > 350) {
