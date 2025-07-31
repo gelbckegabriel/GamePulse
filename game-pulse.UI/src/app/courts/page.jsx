@@ -6,6 +6,7 @@ import Paginator from "../shared/utilities/paginator";
 import { Container } from "../shared/utilities/container";
 import { CourtsCard } from "./components/courts-card";
 import { apiClient } from "../services/apiClient";
+import InstallGamePulse from "../shared/install-button/install-button";
 
 export default function Courts() {
   const [isLoading, setIsLoading] = useState(true);
@@ -119,7 +120,11 @@ export default function Courts() {
     <>
       <Container>
         <div>
-          <br />
+          {/* INSTALL GAMEPULSE */}
+          <div className="mt-12 mb-6">
+            <InstallGamePulse />
+          </div>
+
           <br />
 
           {/* FILTERS BAR */}

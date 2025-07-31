@@ -13,6 +13,7 @@ import { apiClient } from "@/app/services/apiClient";
 import Swal, { SweetAlertResult } from "sweetalert2";
 import { userService } from "@/app/services/cache/user-info";
 import { User } from "../interfaces/db-entities";
+import { triggerSwallError } from "../utilities/swal-trigger";
 
 type Props = {
   isOpen: boolean;
@@ -142,19 +143,6 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
         });
       });
   };
-
-  function triggerSwallError(title: string, description: string, error?: unknown): Promise<SweetAlertResult> {
-    return Swal.fire({
-      icon: "error",
-      title: title,
-      text: description,
-      footer: `${error}`,
-      confirmButtonColor: "#f27474",
-      confirmButtonText: "Close",
-      background: "#555",
-      color: "#EEE",
-    });
-  }
 
   return (
     <>

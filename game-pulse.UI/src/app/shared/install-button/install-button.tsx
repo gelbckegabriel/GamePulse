@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Button } from "../utilities/button";
-import SwalAlertTrigger from "../utilities/swal-trigger";
+import { SwalAlertTrigger } from "../utilities/swal-trigger";
+import { Icon } from "../utilities/evervault-card";
 
-export default function InstallButton() {
+export default function InstallGamePulse() {
   const [defferedPrompt, setDefferedPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isInstallable, setIsInstallable] = useState(false);
   const isStandalone = window.matchMedia("(display-mode: standalone)").matches;
@@ -52,28 +53,35 @@ export default function InstallButton() {
   return (
     <>
       {!isStandalone && (
-        <div>
-          <h1 className="font-bold text-center text-3xl md:text-4xl">Install GamePulse</h1>
+        <div className="border border-white/[0.2] flex flex-col max-w-[100%] mx-auto p-8 relative">
+          <Icon className="absolute h-6 w-6 -top-3 -left-3 text-white" />
+          <Icon className="absolute h-6 w-6 -bottom-3 -left-3 text-white" />
+          <Icon className="absolute h-6 w-6 -top-3 -right-3 text-white" />
+          <Icon className="absolute h-6 w-6 -bottom-3 -right-3 text-white" />
+          <h1 className="font-bold text-white text-center text-3xl md:text-4xl">Install GamePulse</h1>
 
-          <div className="mt-8 flex flex-row gap-10">
+          <div className="mt-8 flex flex-col md:flex-row md:items-stretch">
             {/* Install on Chrome or Edge */}
-            <div className="flex flex-col items-center">
-              <h3>Test Title</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatem necessitatibus quidem expedita nemo exercitationem enim nulla
-                aperiam eos consequuntur temporibus non eligendi iste blanditiis, mollitia laudantium aliquid adipisci beatae?
+            <div className="md:w-1/2 flex flex-col items-center">
+              <h3 className="text-base md:text-2xl font-bold text-gray-500">Edge or Chrome</h3>
+              <p className="mt-2 text-gray-300 text-center">
+                Simply click the button below to install GamePulse on your device. This will allow you to access GamePulse directly from your home
+                screen, just like a native app.
               </p>
+              <br />
               <Button onClick={handleInstall}>Install GamePulse</Button>
             </div>
 
+            {/* Divider */}
+            <div className="my-6 h-px bg-gray-300 md:mx-6 md:my-0 md:h-auto md:w-px md:bg-gray-400" />
+
             {/* Install on Safari */}
-            <div className="flex flex-col items-center">
-              <h3>Test Title</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatem necessitatibus quidem expedita nemo exercitationem enim nulla
-                aperiam eos consequuntur temporibus non eligendi iste blanditiis, mollitia laudantium aliquid adipisci beatae?
+            <div className="md:w-1/2 flex flex-col items-center">
+              <h3 className="text-base md:text-2xl font-bold text-gray-500">Safari</h3>
+              <p className="mt-2 text-gray-300 text-center">
+                To install GamePulse from Safari, tap the <strong>Share</strong> icon in the browser toolbar, then select{" "}
+                <strong>“Add to Home Screen”</strong> from the menu. This will let you launch GamePulse just like a native app.
               </p>
-              <Button>Install on Safari</Button>
             </div>
           </div>
         </div>

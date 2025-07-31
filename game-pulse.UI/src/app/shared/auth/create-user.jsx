@@ -13,6 +13,7 @@ import { firebaseAuth } from "@/app/services/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import Swal from "sweetalert2";
 import { userService } from "@/app/services/cache/user-info";
+import { triggerSwallError } from "../utilities/swal-trigger";
 
 export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
   const [user, setUser] = useState(userService.getCurrentUser());
@@ -79,7 +80,7 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
 
           switch (error.message) {
             case "Firebase: Error (auth/email-already-in-use).":
-              triggerSwalError(
+              triggerSwallError(
                 "Authentication Error",
                 "Looks like this email is already in use. Try signing in or use another email to create a new account.",
                 error
@@ -143,19 +144,6 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
         });
       });
   };
-
-  function triggerSwalError(title, description, error) {
-    return Swal.fire({
-      icon: "error",
-      title: title,
-      text: description,
-      footer: `${error}`,
-      confirmButtonColor: "#f27474",
-      confirmButtonText: "Close",
-      background: "#555",
-      color: "#EEE",
-    });
-  }
 
   // ANIMATION
   const [scope, animate] = useAnimate();

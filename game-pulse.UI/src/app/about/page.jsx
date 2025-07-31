@@ -6,7 +6,7 @@ import { Vortex } from "../shared/utilities/vortex";
 import { motion } from "framer-motion";
 import { EvervaultCard, Icon } from "../shared/utilities/evervault-card";
 import { CodeBlock } from "../shared/utilities/code-block";
-import InstallButton from "../shared/install-button/install-button";
+import InstallGamePulse from "../shared/install-button/install-button";
 
 export default function AboutPage() {
   const ref = useRef(null);
@@ -103,8 +103,7 @@ export default function AboutPage() {
 
           {/* TODO: Install GamePulse */}
           <div className="mt-32">
-
-            <InstallButton />
+            <InstallGamePulse />
           </div>
 
           {/* GitHub Repo */}
