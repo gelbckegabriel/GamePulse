@@ -1,15 +1,26 @@
 import { useEffect, useState } from "react";
 import { Button } from "../utilities/button";
+import SwalAlertTrigger from "../utilities/swal-trigger";
 
 export default function InstallButton() {
-  const [defferedPrompt, setDefferedPrompt] = useState<any>(null);
+  const [defferedPrompt, setDefferedPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isInstallable, setIsInstallable] = useState(false);
-//   const isStandalone = window.matchMedia("(display-mode: standalone)").matches;
+  const isStandalone = window.matchMedia("(display-mode: standalone)").matches;
+
+  interface BeforeInstallPromptEvent extends Event {
+    readonly platforms: string[];
+    prompt: () => Promise<void>;
+    userChoice: Promise<{
+      outcome: "accepted" | "dismissed";
+      platform: string;
+    }>;
+  }
 
   useEffect(() => {
-    const handler = (e: any) => {
+    const handler = (e: Event) => {
+      const promptEvent = e as BeforeInstallPromptEvent;
       e.preventDefault();
-      setDefferedPrompt(e);
+      setDefferedPrompt(promptEvent);
       setIsInstallable(true);
     };
 
@@ -21,6 +32,14 @@ export default function InstallButton() {
   }, []);
 
   const handleInstall = async () => {
+    if (!isInstallable) {
+      SwalAlertTrigger(
+        "GamePulse Already Installed",
+        "It looks like GamePulse is already installed on your system. Please verify before proceeding."
+      );
+      return;
+    }
+
     if (!defferedPrompt) return;
 
     defferedPrompt.prompt();
@@ -30,11 +49,9 @@ export default function InstallButton() {
     setDefferedPrompt(null);
   };
 
-  if (!isInstallable) return null;
-
   return (
     <>
-      {/* {!isStandalone && ( */}
+      {!isStandalone && (
         <div>
           <h1 className="font-bold text-center text-3xl md:text-4xl">Install GamePulse</h1>
 
@@ -60,7 +77,7 @@ export default function InstallButton() {
             </div>
           </div>
         </div>
-      {/* )} */}
+      )}
     </>
   );
 }
