@@ -10,7 +10,6 @@ import { ProviderAuth } from "./provider-auth";
 import { firebaseAuth, googleProvider } from "@/app/services/firebase";
 import { getRedirectResult, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { apiClient } from "@/app/services/apiClient";
-import Swal, { SweetAlertResult } from "sweetalert2";
 import { userService } from "@/app/services/cache/user-info";
 import { User } from "../interfaces/db-entities";
 import { triggerSwallError } from "../utilities/swal-trigger";

@@ -11,7 +11,6 @@ import { Option, Select } from "@material-tailwind/react";
 import { apiClient } from "@/app/services/apiClient";
 import { firebaseAuth } from "@/app/services/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import Swal from "sweetalert2";
 import { userService } from "@/app/services/cache/user-info";
 import { triggerSwallError } from "../utilities/swal-trigger";
 

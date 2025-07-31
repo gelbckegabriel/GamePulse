@@ -101,7 +101,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* TODO: Install GamePulse */}
+          {/* Install GamePulse */}
           <div className="mt-32">
             <InstallGamePulse />
           </div>
