@@ -10,3 +10,4 @@ DaisyUI -> https://daisyui.com/
 
 ## TODOS
 
+SOLVE API CALL ON DEPLOYED -> https://gamepulse-omega.vercel.app/undefined/User/GetUser/usGjy4N0LthkDoWRtIGjArERPUg1

@@ -1,0 +1,22 @@
+{
+  "name": "GamePulse",
+  "short_name": "GamePulse",
+  "description": "Your favorite sport platform.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/logos/GP_Icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logos/GP_Icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
