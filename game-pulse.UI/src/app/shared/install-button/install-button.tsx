@@ -80,28 +80,30 @@ export default function InstallGamePulse() {
             <div className="md:w-1/2 flex flex-col items-center">
               {/* <h3 className="text-base md:text-2xl font-bold text-gray-500">Edge or Chrome</h3> */}
               <div className="flex gap-6">
-                <img src="/logos/windows.png" alt="Windows" className="h-10 w-10" />
-                <img src="/logos/linux.png" alt="Linux" className="h-10 w-10" />
-                <img src="/logos/android.png" alt="Android" className="h-10 w-10" />
+                <img src="/logos/windows.webp" alt="Windows" className="h-10 w-10" />
+                <img src="/logos/linux.webp" alt="Linux" className="h-10 w-10" />
+                <img src="/logos/android.webp" alt="Android" className="h-10 w-10" />
               </div>
-              <p className="mt-4 text-gray-300 text-center">
+              <p className="mt-6 text-gray-300 text-center">
                 Simply click the button below to install GamePulse on your device. This will allow you to access GamePulse directly from your home
                 screen, just like a native app.
               </p>
               <br />
-              <Button onClick={handleInstall}>Install GamePulse</Button>
+              <Button className="mt-2" onClick={handleInstall}>
+                Install GamePulse
+              </Button>
             </div>
 
             {/* Divider */}
-            <div className="my-6 h-px bg-gray-300 md:mx-6 md:my-0 md:h-auto md:w-px md:bg-gray-400" />
+            <div className="my-10 h-px bg-gray-300 md:mx-6 md:my-0 md:h-auto md:w-px md:bg-gray-400" />
 
             {/* Install on Safari */}
             <div className="md:w-1/2 flex flex-col items-center">
               {/* <h3 className="text-base md:text-2xl font-bold text-gray-500">Safari</h3> */}
               <div className="flex gap-6">
-                <img src="/logos/apple.png" alt="Apple" className="h-10 w-10" />
+                <img src="/logos/apple.webp" alt="Apple" className="h-10 w-10" />
               </div>
-              <p className="mt-4 text-gray-300 text-center">
+              <p className="mt-6 text-gray-300 text-center">
                 To install GamePulse from Safari, tap the <strong>Share</strong> icon in the browser toolbar, then select{" "}
                 <strong>“Add to Home Screen”</strong> from the menu. This will let you launch GamePulse just like a native app.
               </p>
