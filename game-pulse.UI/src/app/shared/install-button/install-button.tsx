@@ -9,6 +9,9 @@ export default function InstallGamePulse() {
   const [defferedPrompt, setDefferedPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isInstallable, setIsInstallable] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
+  const isAppleDevice = () => {
+    return /Mac|Iphone|Ipad|Ipod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  };
 
   interface BeforeInstallPromptEvent extends Event {
     readonly platforms: string[];
@@ -38,18 +41,20 @@ export default function InstallGamePulse() {
 
   const handleInstall = async () => {
     if (!defferedPrompt) {
-      if (!isInstallable) {
-        SwalAlertTrigger(
-          "GamePulse Already Installed",
-          "It looks like GamePulse is already installed on your system. Please verify before proceeding."
-        );
-        return;
-      } else {
+      if (isAppleDevice()) {
         SwalAlertTrigger(
           "Installation Not Available",
           "Unfortunately, your browser doesn't support automatic installation of this app.<br><br>For the best experience, try using <strong>Chrome</strong> or <strong>Edge</strong>. If you're on an <strong>iPhone</strong> or <strong>Mac</strong>, the installation process is a bit different."
         );
       }
+
+      if (!isInstallable) {
+        SwalAlertTrigger(
+          "GamePulse Already Installed",
+          "It looks like GamePulse is already installed on your system. Please verify before proceeding."
+        );
+      }
+
       return;
     }
 
