@@ -38,34 +38,30 @@ export default function InstallGamePulse() {
 
   const handleInstall = async () => {
     if (!defferedPrompt) {
-      SwalAlertTrigger(
-        "Installation Not Available",
-        "It seems like your browser doesn't support installing this app automatically. Try using Chrome or Edge."
-      );
-      return;
-    }
-
-    if (!isInstallable) {
-      SwalAlertTrigger(
-        "GamePulse Already Installed",
-        "It looks like GamePulse is already installed on your system. Please verify before proceeding."
-      );
+      if (!isInstallable) {
+        SwalAlertTrigger(
+          "GamePulse Already Installed",
+          "It looks like GamePulse is already installed on your system. Please verify before proceeding."
+        );
+        return;
+      } else {
+        SwalAlertTrigger(
+          "Installation Not Available",
+          "It seems like your browser doesn't support installing this app automatically. Try using Chrome or Edge."
+        );
+      }
       return;
     }
 
     try {
       defferedPrompt.prompt();
-    const { outcome } = await defferedPrompt.userChoice;
-    console.log(`User response to the install prompt: ${outcome}`);
-    setIsInstallable(false);
-    setDefferedPrompt(null);
+      const { outcome } = await defferedPrompt.userChoice;
+      console.log(`User response to the install prompt: ${outcome}`);
+      setIsInstallable(false);
+      setDefferedPrompt(null);
     } catch (error) {
       console.error("Installation failed:", error);
-      SwalErrorTrigger(
-        "Installation Failed",
-        "An error occurred while trying to install GamePulse. Please try again later.",
-        error
-      );
+      SwalErrorTrigger("Installation Failed", "An error occurred while trying to install GamePulse. Please try again later.", error);
     }
   };
 
