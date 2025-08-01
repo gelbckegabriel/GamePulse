@@ -10,7 +10,7 @@ export default function InstallGamePulse() {
   const [isInstallable, setIsInstallable] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
   const isAppleDevice = () => {
-    return /Mac|Iphone|Ipad|Ipod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    return /Mac|Iphone|Ipad|Ipod/i.test(navigator.userAgent) || (navigator.userAgent.includes("Mac") && "ontouchend" in document);
   };
 
   interface BeforeInstallPromptEvent extends Event {
