@@ -7,11 +7,8 @@ import { Icon } from "../utilities/evervault-card";
 
 export default function InstallGamePulse() {
   const [defferedPrompt, setDefferedPrompt] = useState<BeforeInstallPromptEvent | null>(null);
-  const [isInstallable, setIsInstallable] = useState(false);
+  // const [isInstallable, setIsInstallable] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
-  const isAppleDevice = () => {
-    return /Mac|Iphone|Ipad|Ipod/i.test(navigator.userAgent) || (navigator.userAgent.includes("Mac") && "ontouchend" in document);
-  };
 
   interface BeforeInstallPromptEvent extends Event {
     readonly platforms: string[];
@@ -29,7 +26,7 @@ export default function InstallGamePulse() {
       const promptEvent = e as BeforeInstallPromptEvent;
       e.preventDefault();
       setDefferedPrompt(promptEvent);
-      setIsInstallable(true);
+      // setIsInstallable(true);
     };
 
     window.addEventListener("beforeinstallprompt", handler);
@@ -41,28 +38,26 @@ export default function InstallGamePulse() {
 
   const handleInstall = async () => {
     if (!defferedPrompt) {
-      if (isAppleDevice()) {
-        SwalAlertTrigger(
-          "Installation Not Available",
-          "Unfortunately, your browser doesn't support automatic installation of this app.<br><br>For the best experience, try using <strong>Chrome</strong> or <strong>Edge</strong>. If you're on an <strong>iPhone</strong> or <strong>Mac</strong>, the installation process is a bit different."
-        );
-      }
-
-      if (!isInstallable) {
-        SwalAlertTrigger(
-          "GamePulse Already Installed",
-          "It looks like GamePulse is already installed on your system. Please verify before proceeding."
-        );
-      }
-
+      SwalAlertTrigger(
+        "Installation Not Available",
+        "Unfortunately, your browser doesn't support automatic installation of this app, or <strong>it may already be installed</strong>.<br><br>If it's not installed, try using <strong>Chrome</strong> or <strong>Edge</strong>. If you're using an <strong>iPhone</strong> or <strong>Mac</strong>, the installation process is slightly different."
+      );
       return;
     }
+
+    // TODO: Need to be worked.
+    // if (!isInstallable) {
+    //   SwalAlertTrigger(
+    //     "GamePulse Already Installed",
+    //     "It looks like GamePulse is already installed on your system. Please verify before proceeding."
+    //   );
+    // }
 
     try {
       defferedPrompt.prompt();
       const { outcome } = await defferedPrompt.userChoice;
       console.log(`User response to the install prompt: ${outcome}`);
-      setIsInstallable(false);
+      // setIsInstallable(false);
       setDefferedPrompt(null);
     } catch (error) {
       console.error("Installation failed:", error);
@@ -90,8 +85,8 @@ export default function InstallGamePulse() {
                 <img src="/logos/android.webp" alt="Android" className="h-10 w-10" />
               </div>
               <p className="mt-6 text-gray-300 text-center">
-                Simply click the button below to install GamePulse on your device. This will allow you to access GamePulse directly from your home
-                screen, just like a native app.
+                Simply click the button below to install GamePulse on your device while using Chrome or Edge. This will allow you to access GamePulse
+                directly from your home screen, just like a native app.
               </p>
               <br />
               <Button className="mt-2" onClick={handleInstall}>
