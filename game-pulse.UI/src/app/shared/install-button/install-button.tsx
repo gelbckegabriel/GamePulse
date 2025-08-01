@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "../utilities/button";
-import { SwalAlertTrigger } from "../utilities/swal-trigger";
+import { SwalAlertTrigger, SwalErrorTrigger } from "../utilities/swal-trigger";
 import { Icon } from "../utilities/evervault-card";
 
 export default function InstallGamePulse() {
@@ -37,6 +37,14 @@ export default function InstallGamePulse() {
   }, []);
 
   const handleInstall = async () => {
+    if (!defferedPrompt) {
+      SwalAlertTrigger(
+        "Installation Not Available",
+        "It seems like your browser doesn't support installing this app automatically. Try using Chrome or Edge."
+      );
+      return;
+    }
+
     if (!isInstallable) {
       SwalAlertTrigger(
         "GamePulse Already Installed",
@@ -45,13 +53,20 @@ export default function InstallGamePulse() {
       return;
     }
 
-    if (!defferedPrompt) return;
-
-    defferedPrompt.prompt();
+    try {
+      defferedPrompt.prompt();
     const { outcome } = await defferedPrompt.userChoice;
     console.log(`User response to the install prompt: ${outcome}`);
     setIsInstallable(false);
     setDefferedPrompt(null);
+    } catch (error) {
+      console.error("Installation failed:", error);
+      SwalErrorTrigger(
+        "Installation Failed",
+        "An error occurred while trying to install GamePulse. Please try again later.",
+        error
+      );
+    }
   };
 
   return (

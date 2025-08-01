@@ -12,7 +12,7 @@ export function SwalAlertTrigger(title: string, description: string) {
   });
 }
 
-export function triggerSwallError(title: string, description: string, error?: unknown): Promise<SweetAlertResult> {
+export function SwalErrorTrigger(title: string, description: string, error?: unknown): Promise<SweetAlertResult> {
   return Swal.fire({
     icon: "error",
     title: title,

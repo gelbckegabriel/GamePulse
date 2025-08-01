@@ -12,7 +12,7 @@ import { getRedirectResult, signInWithEmailAndPassword, signInWithPopup } from "
 import { apiClient } from "@/app/services/apiClient";
 import { userService } from "@/app/services/cache/user-info";
 import { User } from "../interfaces/db-entities";
-import { triggerSwallError } from "../utilities/swal-trigger";
+import { SwalErrorTrigger } from "../utilities/swal-trigger";
 
 type Props = {
   isOpen: boolean;
@@ -89,7 +89,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
       })
       .catch((error) => {
         console.error(error);
-        triggerSwallError("Authentication Error", "An error occurred while trying to sign you in. Please try again later.", error).then(() =>
+        SwalErrorTrigger("Authentication Error", "An error occurred while trying to sign you in. Please try again later.", error).then(() =>
           setIsLoading(false)
         );
       });
@@ -111,7 +111,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
       })
       .catch((error) => {
         console.error(error);
-        triggerSwallError("Authentication Error", "An error occurred while trying to sign in with Popup. Please try again later.", error);
+        SwalErrorTrigger("Authentication Error", "An error occurred while trying to sign in with Popup. Please try again later.", error);
       });
   };
 
@@ -137,7 +137,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
         }
       })
       .catch((error) => {
-        triggerSwallError("Authentication Error", "An error occurred while trying to verify your user. Please try again later.", error).then(() => {
+        SwalErrorTrigger("Authentication Error", "An error occurred while trying to verify your user. Please try again later.", error).then(() => {
           setIsLoading(false);
         });
       });
