@@ -4,7 +4,7 @@ export function SwalAlertTrigger(title: string, description: string) {
   return Swal.fire({
     icon: "warning",
     title: title,
-    text: description,
+    html: `${description}`,
     confirmButtonColor: "#f27474",
     confirmButtonText: "Close",
     background: "#555",
@@ -16,7 +16,7 @@ export function SwalErrorTrigger(title: string, description: string, error?: unk
   return Swal.fire({
     icon: "error",
     title: title,
-    text: description,
+    text: `${description}`,
     footer: `${error}`,
     confirmButtonColor: "#f27474",
     confirmButtonText: "Close",
