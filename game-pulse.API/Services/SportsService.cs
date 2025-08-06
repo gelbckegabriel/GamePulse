@@ -1,6 +1,7 @@
 ﻿using game_pulse.Data.Contexts;
 using game_pulse.Data.Models;
 using game_pulse.Interfaces;
+using game_pulse.Interfaces.Dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace game_pulse.Services
@@ -16,12 +17,16 @@ namespace game_pulse.Services
             _logger = logger;
         }
 
-        public async Task<List<string>> GetAllSports()
+        public async Task<List<SportsDto>> GetAllSports()
         {
             return await _context.Sports
-                .OrderBy(s => s.Id)
-                .Select(s => s.Name)
-                .ToListAsync();
+               .OrderBy(s => s.Id)
+               .Select(s => new SportsDto
+               {
+                   Id = s.Id,
+                   SportName = s.Name
+               }
+               ).ToListAsync();
         }
 
         public async Task<List<string>> GetSportsPositions(int sports_id)

@@ -23,3 +23,5 @@ C:\Users\Temp\Documents\Projects\GamePulse\game-pulse.Data\obj\Debug\net9.0\game
 C:\Users\Temp\Documents\Projects\GamePulse\game-pulse.Data\obj\Debug\net9.0\refint\game-pulse.Data.dll
 C:\Users\Temp\Documents\Projects\GamePulse\game-pulse.Data\obj\Debug\net9.0\game-pulse.Data.pdb
 C:\Users\Temp\Documents\Projects\GamePulse\game-pulse.Data\obj\Debug\net9.0\ref\game-pulse.Data.dll
+C:\Users\Temp\Documents\Projects\GamePulse\game-pulse.Data\bin\Debug\net9.0\game-pulse.Data.runtimeconfig.json
+C:\Users\Temp\Documents\Projects\GamePulse\game-pulse.Data\obj\Debug\net9.0\game-pulse.Data.genruntimeconfig.cache
