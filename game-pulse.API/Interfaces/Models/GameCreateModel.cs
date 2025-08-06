@@ -2,6 +2,8 @@
 {
     public class GameCreateModel
     {
+        public string UserId { get; set; } = null!;
+
         public int CourtId { get; set; }
 
         public int SportId { get; set; }

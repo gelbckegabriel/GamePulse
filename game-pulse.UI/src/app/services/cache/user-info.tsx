@@ -39,6 +39,10 @@ class UserService {
     });
   }
 
+  getUserId(): string {
+    return this.userSubject.getValue().id;
+  }
+
   getCurrentUser(): User {
     return this.userSubject.getValue();
   }

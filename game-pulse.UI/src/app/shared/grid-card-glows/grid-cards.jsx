@@ -112,7 +112,7 @@ export function GridItemColored({ onClick, area, icon, title, description, hover
   );
 }
 
-export function GridGamesColored({ onClick, area, icon, date, time, players }) {
+export function GridGamesColored({ onClick, area, icon, date, time, sport, players }) {
   const variants = {
     initial: {
       backgroundPosition: "0 50%",
@@ -150,7 +150,7 @@ export function GridGamesColored({ onClick, area, icon, date, time, players }) {
               <div className="w-fit rounded-lg border border-gray-600 p-2">{icon}</div>
               <div className="space-y-3">
                 <h3 className="-tracking-4 pt-0.5 font-sans text-xl/[1.375rem] font-semibold text-balance md:text-2xl/[1.875rem] text-white">
-                  {date} at {time}
+                  {date} at {time} | {sport}
                 </h3>
                 <h2 className="font-sans text-sm/[1.125rem] md:text-base/[1.375rem] text-gray-700 [&_b]:md:font-semibold [&_strong]:md:font-semibold">
                   {players.map((player, index) => (

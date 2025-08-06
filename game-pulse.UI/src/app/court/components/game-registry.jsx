@@ -8,23 +8,38 @@ import {
   motion,
   useAnimation,
 } from "framer-motion";
-import { FaCheck } from "react-icons/fa";
+import { FaCheck, FaRunning } from "react-icons/fa";
 import { IoIosCalendar, IoIosTime, IoIosTimer } from "react-icons/io";
 import useMeasure from "react-use-measure";
 import { Button } from "../../shared/utilities/button";
 import { Option, Select } from "@material-tailwind/react";
 import { apiClient } from "@/app/services/apiClient";
 import { GridGamesColored } from "@/app/shared/grid-card-glows/grid-cards";
+import { sportsService } from "@/app/services/cache/sports-info";
+import {
+  SwalAlertTrigger,
+  SwalSuccessTrigger,
+} from "@/app/shared/utilities/swal-trigger";
+import { userService } from "@/app/services/cache/user-info";
 
 export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
   const dateInputRef = useRef(null);
+  const [isCreatingGame, setIsCreatingGame] = useState(false);
+  const [sports, setSports] = useState(sportsService.getSports());
   const [isSearched, setIsSearched] = useState(false);
   const [userFilter, setUserFilter] = useState({
     date: null,
     startTime: null,
     endTime: null,
+    sportId: null,
   });
   const [courtGames, setCourtGames] = useState([]);
+
+  useEffect(() => {
+    sportsService.sports$.subscribe((result) => {
+      setSports(result);
+    });
+  }, [isOpen]);
 
   const handleSubmit = () => {
     if (userFilter.date && userFilter.startTime && userFilter.endTime) {
@@ -34,7 +49,6 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
         GameTimeStart: userFilter.startTime,
         GameTimeEnd: userFilter.endTime,
       }).then((response) => {
-        // console.log("courtGames: ", response);
         setCourtGames(response);
         setIsSearched(true);
       });
@@ -52,12 +66,43 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
   };
 
   const createGame = () => {
-    // TODO: Need to create something for the user to select the sport.
-    console.log(
-      `courtId: ${court.id} | sportId: ${court.sportId} | gameTime: ${
-        userFilter.date
-      } ${userFilter.startTime} | bestPlayerId: ${null}`
-    ); // TODO: Replace with actual game creation logic
+    if (
+      !userFilter.date ||
+      !userFilter.startTime ||
+      !userFilter.endTime ||
+      !userFilter.sportId
+    ) {
+      SwalAlertTrigger(
+        "Form Incomplete",
+        "Please fill all fields before creating a game."
+      );
+      return;
+    }
+
+    setIsCreatingGame(true);
+
+    if (userService.getUserId() === "") {
+      SwalAlertTrigger("Something went wrong...", "You must be logged in to create a game.");
+      setIsCreatingGame(false);
+      return;
+    }
+
+    // TODO: Check if it is creating ok
+    // TODO: Create an error handler
+    apiClient("Games/CreateGame", "POST", {
+      userId: userService.getUserId(),
+      courtId: court.id,
+      sportId: userFilter.sportId,
+      gameDate: userFilter.date,
+      gameTimeStart: userFilter.startTime,
+    }).then(() => {
+      setIsCreatingGame(false);
+      setIsOpen(false);
+      SwalSuccessTrigger(
+        "Game Created",
+        "Your game has been successfully created."
+      );
+    });
   };
 
   // ANIMATION
@@ -144,7 +189,7 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
             <div className="relative z-0 h-full overflow-y-auto p-4 pt-12">
               <div className="mx-auto max-w-[100dvh] md:max-w-4xl space-y-4 text-neutral-400 text-white">
                 <h2 className="pt-2 text-xl md:text-4xl lg:text-4xl font-bold text-center">
-                  When are you going to play?
+                  When would you like to play?
                 </h2>
                 {/* DATE PICK */}
                 <div className="!relative !z-20 !mt-20 flex justify-between">
@@ -234,6 +279,29 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                       </Select>
                     </div>
                   </div>
+
+                  {/* SPORT */}
+                  <div className="w-[20%]">
+                    <p className="text-sm2 mb-1">Sport</p>
+                    <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
+                      <FaRunning />
+                      <Select
+                        onChange={(value) =>
+                          setUserFilter({ ...userFilter, sportId: value })
+                        }
+                        containerProps={{
+                          className: "!min-w-0 w-full",
+                        }}
+                        className="!w-full !pl-1 !border-transparent !text-sm2 !bg-opacity-0 !text-white"
+                      >
+                        {sports.map((sport) => (
+                          <Option key={sport.id} value={sport.id}>
+                            {sport.sportName}
+                          </Option>
+                        ))}
+                      </Select>
+                    </div>
+                  </div>
                 </div>
 
                 {/* SUBMIT PICK */}
@@ -277,7 +345,9 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                     className="absolute !max-w-[100vh]"
                   >
                     <Button
-                      className="z-0 bg-[#18631565] text-white"
+                      className={`z-0 bg-[#18631565] text-white" ${
+                        isCreatingGame ? "!animate-pulse-strong" : ""
+                      }`}
                       onClick={() => createGame()}
                     >
                       Create your Own Game
@@ -305,6 +375,7 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                                     .reverse()
                                     .join("/")}
                                   time={game.gameTime.split("T")[1].slice(0, 5)}
+                                  sport={game.sport}
                                   players={game.players}
                                   onClick={
                                     () =>

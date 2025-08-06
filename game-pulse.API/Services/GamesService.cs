@@ -119,7 +119,25 @@ namespace game_pulse.Services
             _context.Games.Add(courtGame);
             await _context.SaveChangesAsync();
 
+            await SubscribePlayerToGame(courtGame.Id, details.UserId);
+
             return courtGame;
+        }
+
+        public async Task<GamePlayer> SubscribePlayerToGame(int gameId, string userId)
+        {
+            var gamePlayer = new GamePlayer
+            {
+                GameId = gameId,
+                UserId = userId,
+                Presence = true,
+                PlayerGrade = null
+            };
+
+            _context.GamePlayers.Add(gamePlayer);
+            await _context.SaveChangesAsync();
+
+            return gamePlayer;
         }
     }
 }
