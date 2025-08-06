@@ -100,15 +100,25 @@ export function CourtsCard({ courts = [], isLoading, onFavoriteToggle }) {
                   <div>
                     {isLoading ? (
                       <>
-                        <Typography className="h-4 w-[12rem] rounded-sm bg-gray-700 animate-pulse-strong">&nbsp;</Typography>
-                        <Typography className="mt-2 h-3 w-[8rem] rounded-sm bg-gray-700 animate-pulse-strong">&nbsp;</Typography>
+                        <Typography className="h-4 w-[12rem] rounded-sm bg-gray-700 animate-pulse-strong">
+                          &nbsp;
+                        </Typography>
+                        <Typography className="mt-2 h-3 w-[8rem] rounded-sm bg-gray-700 animate-pulse-strong">
+                          &nbsp;
+                        </Typography>
                       </>
                     ) : (
                       <>
-                        <motion.h3 layoutId={`title-${active.name}-${id}`} className="font-bold text-white">
+                        <motion.h3
+                          layoutId={`title-${active.name}-${id}`}
+                          className="font-bold text-white"
+                        >
                           {active.name} (~{active.distance} km)
                         </motion.h3>
-                        <motion.p layoutId={`description-${active.name}-${id}`} className="text-gray-700">
+                        <motion.p
+                          layoutId={`description-${active.name}-${id}`}
+                          className="text-gray-700"
+                        >
                           {active.city}, {active.state}
                         </motion.p>
                       </>
@@ -122,7 +132,9 @@ export function CourtsCard({ courts = [], isLoading, onFavoriteToggle }) {
                         {/* <IconButton className="mr-5" variant="text" onClick={onFavoriteToggle}>
                           <FaHeart className="text-[30px] text-darkGray animate-pulse-strong" />
                         </IconButton> */}
-                        <Typography className="h-8 w-[4rem] rounded-full bg-darkGray animate-pulse-strong">&nbsp;</Typography>
+                        <Typography className="h-8 w-[4rem] rounded-full bg-darkGray animate-pulse-strong">
+                          &nbsp;
+                        </Typography>
                       </>
                     ) : (
                       <>
@@ -161,12 +173,19 @@ export function CourtsCard({ courts = [], isLoading, onFavoriteToggle }) {
                     <div className="mx-auto flex flex-row flex-wrap gap-4 py-4">
                       {isLoading ? (
                         <>
-                          <Typography className="mt-6 md:mt-4 h-10 w-[15rem] rounded-md bg-gray-700 animate-pulse-strong">&nbsp;</Typography>
+                          <Typography className="mt-6 md:mt-4 h-10 w-[15rem] rounded-md bg-gray-700 animate-pulse-strong">
+                            &nbsp;
+                          </Typography>
                         </>
                       ) : (
                         <>
                           {active.sports.map((sport, index) => (
-                            <img key={index} src={`/logos/${sport}.webp`} alt={sport} className="w-[40px]" />
+                            <img
+                              key={index}
+                              src={`/logos/${sport}.webp`}
+                              alt={sport}
+                              className="w-[40px]"
+                            />
                           ))}
                         </>
                       )}
@@ -176,8 +195,12 @@ export function CourtsCard({ courts = [], isLoading, onFavoriteToggle }) {
                     <div className="flex gap-4 items-center justify-center">
                       {isLoading ? (
                         <>
-                          <Typography className="mt-2 mr-3 h-8 w-[4rem] md:w-[7rem] rounded-full bg-gray-700 animate-pulse-strong">&nbsp;</Typography>
-                          <Typography className="mt-2 h-3 w-[20rem] rounded-full bg-gray-700 animate-pulse-strong">&nbsp;</Typography>
+                          <Typography className="mt-2 mr-3 h-8 w-[4rem] md:w-[7rem] rounded-full bg-gray-700 animate-pulse-strong">
+                            &nbsp;
+                          </Typography>
+                          <Typography className="mt-2 h-3 w-[20rem] rounded-full bg-gray-700 animate-pulse-strong">
+                            &nbsp;
+                          </Typography>
                         </>
                       ) : (
                         <>
@@ -188,7 +211,9 @@ export function CourtsCard({ courts = [], isLoading, onFavoriteToggle }) {
                           >
                             How to get there?
                           </a>
-                          <span className="text-center text-sm">{active.address}</span>
+                          <span className="text-center text-sm">
+                            {active.address}
+                          </span>
                         </>
                       )}
                     </div>
@@ -220,7 +245,12 @@ export function CourtsCard({ courts = [], isLoading, onFavoriteToggle }) {
                     <div className="mx-auto h-40 w-40 md:h-[8rem] md:w-[8rem] bg-gray-900/40 flex items-center justify-center">
                       <div className="flex flex-row flex-wrap gap-4 justify-center">
                         {court.sports.map((sport, index) => (
-                          <img key={index} src={`/logos/${sport}.webp`} alt={sport} className="w-[40px]" />
+                          <img
+                            key={index}
+                            src={`/logos/${sport}.webp`}
+                            alt={sport}
+                            className="w-[40px]"
+                          />
                         ))}
                       </div>
                     </div>
@@ -230,33 +260,39 @@ export function CourtsCard({ courts = [], isLoading, onFavoriteToggle }) {
               <div className="">
                 {isLoading ? (
                   <>
-                    <Typography className="mt-2 h-4 w-[12rem] rounded-sm bg-gray-700 animate-pulse-strong">&nbsp;</Typography>
+                    <Typography className="mt-2 h-4 w-[12rem] rounded-sm bg-gray-700 animate-pulse-strong">
+                      &nbsp;
+                    </Typography>
                   </>
                 ) : (
                   <>
-                    <motion.h3 layoutId={`title-${court.name}-${id}`} className="font-medium text-white text-center md:text-left">
+                    <motion.h3
+                      layoutId={`title-${court.name}-${id}`}
+                      className="font-medium text-white text-center md:text-left"
+                    >
                       {court.name} (~{court.distance} km)
                     </motion.h3>
                   </>
                 )}
                 {isLoading ? (
                   <>
-                    <Typography className="mt-2 h-2 w-[5rem] rounded-sm bg-gray-700 animate-pulse-strong">&nbsp;</Typography>
+                    <Typography className="mt-2 h-2 w-[5rem] rounded-sm bg-gray-700 animate-pulse-strong">
+                      &nbsp;
+                    </Typography>
                   </>
                 ) : (
                   <>
-                    <motion.p layoutId={`description-${court.name}-${id}`} className="text-gray-700 text-center md:text-left">
+                    <motion.p
+                      layoutId={`description-${court.name}-${id}`}
+                      className="text-gray-700 text-center md:text-left"
+                    >
                       {court.city}, {court.state}
                     </motion.p>
                   </>
                 )}
               </div>
             </div>
-            {isLoading ? (
-              <>
-                <Typography className="h-7 w-[4rem] rounded-full bg-gray-700 animate-pulse-strong">&nbsp;</Typography>
-              </>
-            ) : (
+            {!isLoading && (
               <>
                 <motion.button
                   layoutId={`button-${court.name}-${id}`}

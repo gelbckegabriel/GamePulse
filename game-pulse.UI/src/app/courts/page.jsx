@@ -21,44 +21,7 @@ import { FaSearch } from "react-icons/fa";
 export default function Courts() {
   const [isLoading, setIsLoading] = useState(true);
   const [sports, setSports] = useState(sportsService.getSports() || []);
-  const [courts, setCourts] = useState([
-    {
-      id: 0,
-      name: "Fake1",
-      distance: 0,
-      city: "",
-      address: "",
-      web_address: "",
-      map: "",
-      redirect_link: "/",
-      src: "",
-      sports: [],
-    },
-    {
-      id: 0,
-      name: "Fake2",
-      distance: 0,
-      city: "",
-      address: "",
-      web_address: "",
-      map: "",
-      redirect_link: "/",
-      src: "",
-      sports: [],
-    },
-    {
-      id: 0,
-      name: "Fake3",
-      distance: 0,
-      city: "",
-      address: "",
-      web_address: "",
-      map: "",
-      redirect_link: "/",
-      src: "",
-      sports: [],
-    },
-  ]);
+  const [courts, setCourts] = useState([]);
   const [courtNameFilter, setCourtNameFilter] = useState("");
   const [sportFilter, setSportFilter] = useState([]);
   const [distanceFilter, setDistanceFilter] = useState(50);
