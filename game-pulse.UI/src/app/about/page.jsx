@@ -101,11 +101,6 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* Install GamePulse */}
-          <div className="mt-32">
-            <InstallGamePulse />
-          </div>
-
           {/* GitHub Repo */}
           <div className="mt-20 pb-10 flex items-center gap-4">
             {/* GitHub Repo Card */}
