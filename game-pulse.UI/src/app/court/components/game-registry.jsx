@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { useAnimate, useDragControls, useMotionValue, motion, useAnimation } from "framer-motion";
+import {
+  useAnimate,
+  useDragControls,
+  useMotionValue,
+  motion,
+  useAnimation,
+} from "framer-motion";
 import { FaCheck } from "react-icons/fa";
 import { IoIosCalendar, IoIosTime, IoIosTimer } from "react-icons/io";
 import useMeasure from "react-use-measure";
@@ -28,7 +34,7 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
         GameTimeStart: userFilter.startTime,
         GameTimeEnd: userFilter.endTime,
       }).then((response) => {
-        console.log("courtGames: ", response);
+        // console.log("courtGames: ", response);
         setCourtGames(response);
         setIsSearched(true);
       });
@@ -47,7 +53,11 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
 
   const createGame = () => {
     // TODO: Need to create something for the user to select the sport.
-    console.log(`courtId: ${court.id} | sportId: ${court.sportId} | gameTime: ${userFilter.date} ${userFilter.startTime} | bestPlayerId: ${null}`); // TODO: Replace with actual game creation logic
+    console.log(
+      `courtId: ${court.id} | sportId: ${court.sportId} | gameTime: ${
+        userFilter.date
+      } ${userFilter.startTime} | bestPlayerId: ${null}`
+    ); // TODO: Replace with actual game creation logic
   };
 
   // ANIMATION
@@ -132,35 +142,44 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
 
             {/* TODO: FIX RESPONSIVINESS */}
             <div className="relative z-0 h-full overflow-y-auto p-4 pt-12">
-              <div className="mx-auto max-w-2xl space-y-4 text-neutral-400 text-white">
-                <h2 className="pt-2 text-3xl md:text-4xl lg:text-4xl font-bold text-center">When are you going to play?</h2>
+              <div className="mx-auto max-w-[100dvh] md:max-w-4xl space-y-4 text-neutral-400 text-white">
+                <h2 className="pt-2 text-xl md:text-4xl lg:text-4xl font-bold text-center">
+                  When are you going to play?
+                </h2>
                 {/* DATE PICK */}
                 <div className="!relative !z-20 !mt-20 flex justify-between">
                   {/* DATE */}
-                  <div className="w-[40%] cursor-pointer" onClick={() => showDatePicker()}>
+                  <div
+                    className="w-[30%] cursor-pointer"
+                    onClick={() => showDatePicker()}
+                  >
                     <p className="text-sm2 mb-1">Date</p>
                     <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                       <IoIosCalendar />
                       <input
                         ref={dateInputRef}
                         type="date"
-                        onChange={(e) => setUserFilter({ date: e.target.value })}
+                        onChange={(e) =>
+                          setUserFilter({ date: e.target.value })
+                        }
                         className="bg-transparent h-10 w-full cursor-pointer"
                       />
                     </div>
                   </div>
 
                   {/* START TIME */}
-                  <div className="w-[25%]">
+                  <div className="w-[20%]">
                     <p className="text-sm2 mb-1">Start Time</p>
                     <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                       <IoIosTime />
                       <Select
-                        onChange={(value) => setUserFilter({ ...userFilter, startTime: value })}
+                        onChange={(value) =>
+                          setUserFilter({ ...userFilter, startTime: value })
+                        }
                         containerProps={{
                           className: "!min-w-0 w-full",
                         }}
-                        className="!w-full !pl-1 !border-0 !border-transparent !outline-none !text-sm2 !bg-opacity-0 !text-white"
+                        className="!w-full !pl-1 !border-transparent !text-sm2 !bg-opacity-0 !text-white"
                       >
                         <Option value="07:00">07:00</Option>
                         <Option value="08:00">08:00</Option>
@@ -183,16 +202,18 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                   </div>
 
                   {/* END TIME */}
-                  <div className="w-[25%]">
+                  <div className="w-[20%]">
                     <p className="text-sm2 mb-1">End Time</p>
                     <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                       <IoIosTimer />
                       <Select
-                        onChange={(value) => setUserFilter({ ...userFilter, endTime: value })}
+                        onChange={(value) =>
+                          setUserFilter({ ...userFilter, endTime: value })
+                        }
                         containerProps={{
                           className: "!min-w-0 w-full",
                         }}
-                        className="!w-full !pl-1 !border-0 !border-transparent !outline-none !text-sm2 !bg-opacity-0 !text-white"
+                        className="!w-full !pl-1 !border-transparent !text-sm2 !bg-opacity-0 !text-white"
                       >
                         <Option value="07:00">07:00</Option>
                         <Option value="08:00">08:00</Option>
@@ -228,7 +249,13 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                     className="!w-full"
                   >
                     <Button
-                      className={`z-10 ${userFilter.date && userFilter.startTime && userFilter.endTime ? "" : "bg-gray-500 cursor-not-allowed"}`}
+                      className={`z-10 ${
+                        userFilter.date &&
+                        userFilter.startTime &&
+                        userFilter.endTime
+                          ? ""
+                          : "bg-gray-500 cursor-not-allowed"
+                      }`}
                       onClick={() => handleSubmit()}
                     >
                       Search Games
@@ -241,11 +268,18 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                     animate={createControls}
                     transition={{
                       duration: 0.4,
-                      scale: { type: "tween", visualDuration: 0.4, bounce: 0.5 },
+                      scale: {
+                        type: "tween",
+                        visualDuration: 0.4,
+                        bounce: 0.5,
+                      },
                     }}
                     className="absolute !max-w-[100vh]"
                   >
-                    <Button className="z-0 bg-[#18631565] text-white" onClick={() => createGame()}>
+                    <Button
+                      className="z-0 bg-[#18631565] text-white"
+                      onClick={() => createGame()}
+                    >
                       Create your Own Game
                     </Button>
                   </motion.div>
@@ -262,11 +296,23 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                               <React.Fragment key={index}>
                                 <GridGamesColored
                                   area="md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]"
-                                  icon={<FaCheck className="h-4 w-4 text-gray-700" />}
-                                  date={game.gameTime.split("T")[0].split("-").reverse().join("/")}
+                                  icon={
+                                    <FaCheck className="h-4 w-4 text-gray-700" />
+                                  }
+                                  date={game.gameTime
+                                    .split("T")[0]
+                                    .split("-")
+                                    .reverse()
+                                    .join("/")}
                                   time={game.gameTime.split("T")[1].slice(0, 5)}
                                   players={game.players}
-                                  onClick={() => subscribeToGame(1, game.gameId) /* TODO: Replace 1 with actual userId */}
+                                  onClick={
+                                    () =>
+                                      subscribeToGame(
+                                        1,
+                                        game.gameId
+                                      ) /* TODO: Replace 1 with actual userId */
+                                  }
                                 />
                               </React.Fragment>
                             ))}
@@ -275,10 +321,16 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                       </>
                     ) : (
                       <>
-                        <motion.div initial={{ y: "-100%", opacity: 0 }} animate={{ y: "0", opacity: 1 }} transition={{ duration: 0.6 }}>
+                        <motion.div
+                          initial={{ y: "-100%", opacity: 0 }}
+                          animate={{ y: "0", opacity: 1 }}
+                          transition={{ duration: 0.6 }}
+                        >
                           {/* TITLE */}
                           <div className="mt-14 h-[1rem] w-full bg-transparent flex flex-col items-center justify-center rounded-md">
-                            <h1 className="md:text-xl text-xl lg:text-2xl font-bold text-center text-white relative z-20">No Games Available</h1>
+                            <h1 className="md:text-xl text-xl lg:text-2xl font-bold text-center text-white relative z-20">
+                              No Games Available
+                            </h1>
                             <div className="w-[40rem] h-40 relative">
                               {/* Gradients */}
                               <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-[4px] w-3/4 blur-sm" />

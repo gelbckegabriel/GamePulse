@@ -1,8 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useAnimate, useDragControls, useMotionValue, motion } from "framer-motion";
-import { FaFingerprint, FaRegEye, FaRegEyeSlash, FaRegUserCircle, FaRunning } from "react-icons/fa";
+import {
+  useAnimate,
+  useDragControls,
+  useMotionValue,
+  motion,
+} from "framer-motion";
+import {
+  FaFingerprint,
+  FaRegEye,
+  FaRegEyeSlash,
+  FaRegUserCircle,
+  FaRunning,
+} from "react-icons/fa";
 import { IoMdPerson, IoMdPin } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import useMeasure from "react-use-measure";
@@ -13,11 +24,12 @@ import { firebaseAuth } from "@/app/services/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { userService } from "@/app/services/cache/user-info";
 import { SwalErrorTrigger } from "../utilities/swal-trigger";
+import { sportsService } from "@/app/services/cache/sports-info";
 
 export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
-  const [user, setUser] = useState(userService.getCurrentUser());
   const [isLoading, setIsLoading] = useState(false);
-  const [sports, setSports] = useState([]);
+  const [user, setUser] = useState(userService.getCurrentUser());
+  const [sports, setSports] = useState(sportsService.getSports());
   const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordView = () => setShowPassword(!showPassword);
@@ -30,17 +42,20 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    const subscription = userService.user$.subscribe((result) => {
+    const userSubscription = userService.user$.subscribe((result) => {
       setUser(result);
     });
-    return () => subscription.unsubscribe(); // Clean up on unmount
-  }, []);
 
-  useEffect(() => {
-    apiClient("Sports/GetSports", "GET").then((response) => {
-      setSports(response);
+    const sportsSubscription = sportsService.sports$.subscribe((result) => {
+      setSports(result);
     });
-  }, []);
+
+    // Clean up on unmount
+    return () => {
+      userSubscription.unsubscribe();
+      sportsSubscription.unsubscribe();
+    };
+  }, [openCreate]);
 
   const validatePassword = (password) => {
     return password.length >= 8;
@@ -86,11 +101,13 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
               ).then(() => setIsLoading(false));
               break;
             default:
-              triggerSwalError("Authentication Error", "An error occurred while trying to create your user. Please try again later.", error).then(
-                () => {
-                  setIsLoading(false);
-                }
-              );
+              triggerSwalError(
+                "Authentication Error",
+                "An error occurred while trying to create your user. Please try again later.",
+                error
+              ).then(() => {
+                setIsLoading(false);
+              });
               break;
           }
         });
@@ -110,7 +127,11 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
         }
       })
       .catch((error) => {
-        triggerSwalError("Authentication Error", "An error occurred while trying to verify your user. Please try again later.", error).then(() => {
+        triggerSwalError(
+          "Authentication Error",
+          "An error occurred while trying to verify your user. Please try again later.",
+          error
+        ).then(() => {
           setIsLoading(false);
         });
       });
@@ -136,7 +157,11 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
         }
       })
       .catch((error) => {
-        triggerSwalError("Creation Error", "An error occurred while trying to create your user. Please try again later.", error).then(() => {
+        triggerSwalError(
+          "Creation Error",
+          "An error occurred while trying to create your user. Please try again later.",
+          error
+        ).then(() => {
           setIsLoading(false);
           setOpenProvider(false);
           setAuthOpen(false);
@@ -217,7 +242,9 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
 
             <div className="relative z-0 h-full overflow-y-scroll p-4 pt-12">
               <div className="mx-auto max-w-2xl space-y-4 text-neutral-400 text-white">
-                <h2 className="text-3xl md:text-4xl lg:text-4xl font-bold text-center">Create a new account</h2>
+                <h2 className="text-3xl md:text-4xl lg:text-4xl font-bold text-center">
+                  Create a new account
+                </h2>
 
                 <form className="form !mt-8">
                   {/* NAME FIELD */}
@@ -280,9 +307,9 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
                           className="!pl-1 !border-0 !border-transparent !w-full !outline-none !text-sm2 !bg-opacity-0 !text-white"
                           onChange={(val) => setFavoriteSport(val)}
                         >
-                          {sports.map((sport, index) => (
-                            <Option key={index} value={index + 1}>
-                              {sport}
+                          {sports.map((sport) => (
+                            <Option key={sport.id} value={sport.id}>
+                              {sport.sportName}
                             </Option>
                           ))}
                         </Select>
@@ -313,7 +340,11 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
                         isPasswordInvalid ? "border-issueRed border-2" : ""
                       }`}
                     >
-                      <FaFingerprint className={`transition-all duration-300 ease-in-out ${isPasswordInvalid ? "text-issueRed" : ""}`} />
+                      <FaFingerprint
+                        className={`transition-all duration-300 ease-in-out ${
+                          isPasswordInvalid ? "text-issueRed" : ""
+                        }`}
+                      />
                       <input
                         required
                         type={showPassword ? "text" : "password"}
@@ -323,12 +354,16 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
                       />
                       {showPassword ? (
                         <FaRegEye
-                          className={`transition-all duration-300 ease-in-out cursor-pointer mr-1 ${isPasswordInvalid ? "text-issueRed" : ""}`}
+                          className={`transition-all duration-300 ease-in-out cursor-pointer mr-1 ${
+                            isPasswordInvalid ? "text-issueRed" : ""
+                          }`}
                           onClick={togglePasswordView}
                         />
                       ) : (
                         <FaRegEyeSlash
-                          className={`transition-all duration-300 ease-in-out cursor-pointer mr-1 ${isPasswordInvalid ? "text-issueRed" : ""}`}
+                          className={`transition-all duration-300 ease-in-out cursor-pointer mr-1 ${
+                            isPasswordInvalid ? "text-issueRed" : ""
+                          }`}
                           onClick={togglePasswordView}
                         />
                       )}
@@ -345,7 +380,10 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
 
                 {/* CREATE BUTTON */}
                 <div className="!mt-10 flex justify-center">
-                  <Button className={`${isLoading ? "animate-pulse-strong" : ""}`} onClick={() => handleSubmit()}>
+                  <Button
+                    className={`${isLoading ? "animate-pulse-strong" : ""}`}
+                    onClick={() => handleSubmit()}
+                  >
                     Create Account
                   </Button>
                 </div>

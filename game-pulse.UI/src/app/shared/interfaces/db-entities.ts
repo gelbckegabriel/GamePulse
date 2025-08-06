@@ -10,3 +10,8 @@ export interface User {
     country: string;
     address: string;
 }
+
+export interface Sport {
+    id: number;
+    name: string;
+}

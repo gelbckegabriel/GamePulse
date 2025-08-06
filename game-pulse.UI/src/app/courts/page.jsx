@@ -1,15 +1,25 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, MenuHandler, MenuList, MenuItem, Button, Checkbox, Slider, Select, Option } from "@material-tailwind/react";
-import Paginator from "../shared/utilities/paginator";
+import {
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+  Button,
+  Checkbox,
+  Select,
+  Option,
+} from "@material-tailwind/react";
 import { Container } from "../shared/utilities/container";
 import { CourtsCard } from "./components/courts-card";
 import { apiClient } from "../services/apiClient";
 import InstallGamePulse from "../shared/install-button/install-button";
+import { sportsService } from "../services/cache/sports-info";
 
 export default function Courts() {
   const [isLoading, setIsLoading] = useState(true);
+  const [sports, setSports] = useState(sportsService.getSports() || []);
   const [sportFilter, setSportFilter] = useState([]);
   const [distanceFilter, setDistanceFilter] = useState(50);
   const [locationFilter, setLocationFilter] = useState({
@@ -64,16 +74,8 @@ export default function Courts() {
   // GET BASIC COURTS INFO
   useEffect(() => {
     // Get Sports for Filter
-    apiClient("Sports/GetSports").then((response) => {
-      const availableSports = [];
-
-      response.forEach((element) => {
-        availableSports.push({
-          name: element,
-          checked: true,
-        });
-      });
-      setSportFilter(availableSports);
+    sportsService.sports$.subscribe((result) => {
+      setSports(result);
     });
 
     // Get Available Courts
@@ -101,13 +103,28 @@ export default function Courts() {
     });
   }, []);
 
+  // UPDATE SPORTS FILTER
+  useEffect(() => {
+    const availableSports = [];
+
+    sports.forEach((sport) => {
+      availableSports.push({
+        name: sport.sportName,
+        checked: true,
+      });
+      setSportFilter(availableSports);
+    });
+  }, [sports]);
+
   // UPDATE LOCATIONS FILTER
   useEffect(() => {
-    apiClient("Courts/GetLocations", "POST", locationFilter).then((response) => {
-      setCountryFilter(response.country);
-      setStateFilter(response.state);
-      setCityFilter(response.city);
-    });
+    apiClient("Courts/GetLocations", "POST", locationFilter).then(
+      (response) => {
+        setCountryFilter(response.country);
+        setStateFilter(response.state);
+        setCityFilter(response.city);
+      }
+    );
   }, [locationFilter]);
 
   const handleFavoriteToggle = (index) => {
@@ -139,7 +156,10 @@ export default function Courts() {
               }}
             >
               <MenuHandler>
-                <Button className="bg-white text-black w-[105px] hover:scale-105 hover:bg-white/80"> Sports </Button>
+                <Button className="bg-white text-black w-[105px] hover:scale-105 hover:bg-white/80">
+                  {" "}
+                  Sports{" "}
+                </Button>
               </MenuHandler>
               <MenuList>
                 {sportFilter.map((sport, index) => {
@@ -148,11 +168,17 @@ export default function Courts() {
                       <Checkbox
                         id={sport.name}
                         label={sport.name}
-                        checked={sportFilter.find((item) => item.name === sport.name)?.checked}
+                        checked={
+                          sportFilter.find((item) => item.name === sport.name)
+                            ?.checked
+                        }
                         onChange={() => {
                           const updatedSportFilter = [...sportFilter];
-                          const sportIndex = updatedSportFilter.findIndex((item) => item.name === sport.name);
-                          updatedSportFilter[sportIndex].checked = !updatedSportFilter[sportIndex].checked;
+                          const sportIndex = updatedSportFilter.findIndex(
+                            (item) => item.name === sport.name
+                          );
+                          updatedSportFilter[sportIndex].checked =
+                            !updatedSportFilter[sportIndex].checked;
                           setSportFilter(updatedSportFilter);
                         }}
                       />
@@ -172,13 +198,26 @@ export default function Courts() {
               }}
             >
               <MenuHandler>
-                <Button className="bg-white text-black w-[105px] hover:scale-105 hover:bg-white/80"> Location </Button>
+                <Button className="bg-white text-black w-[105px] hover:scale-105 hover:bg-white/80">
+                  {" "}
+                  Location{" "}
+                </Button>
               </MenuHandler>
               <MenuList className="!min-h-[40vh] flex flex-col items-center">
                 {/* Country Filter */}
                 <Select
-                  onChange={(val) => setLocationFilter(() => ({ country: val, state: "", city: "" }))}
-                  label={locationFilter.country == "" ? "Select Country" : locationFilter.country}
+                  onChange={(val) =>
+                    setLocationFilter(() => ({
+                      country: val,
+                      state: "",
+                      city: "",
+                    }))
+                  }
+                  label={
+                    locationFilter.country == ""
+                      ? "Select Country"
+                      : locationFilter.country
+                  }
                 >
                   <Option value="">-</Option>
                   {countryFilter.map((country, index) => {
@@ -194,8 +233,18 @@ export default function Courts() {
 
                 {/* State Filter */}
                 <Select
-                  onChange={(val) => setLocationFilter((prev) => ({ ...prev, state: val, city: "" }))}
-                  label={locationFilter.state == "" ? "Select State" : locationFilter.state}
+                  onChange={(val) =>
+                    setLocationFilter((prev) => ({
+                      ...prev,
+                      state: val,
+                      city: "",
+                    }))
+                  }
+                  label={
+                    locationFilter.state == ""
+                      ? "Select State"
+                      : locationFilter.state
+                  }
                 >
                   <Option value="">-</Option>
                   {stateFilter.map((state, index) => {
@@ -211,8 +260,14 @@ export default function Courts() {
 
                 {/* City Filter */}
                 <Select
-                  onChange={(val) => setLocationFilter((prev) => ({ ...prev, city: val }))}
-                  label={locationFilter.city == "" ? "Select City" : locationFilter.city}
+                  onChange={(val) =>
+                    setLocationFilter((prev) => ({ ...prev, city: val }))
+                  }
+                  label={
+                    locationFilter.city == ""
+                      ? "Select City"
+                      : locationFilter.city
+                  }
                 >
                   <Option value="">-</Option>
                   {cityFilter.map((city, index) => {
@@ -271,12 +326,18 @@ export default function Courts() {
 
           {/* COURTS */}
           {/* {courts.length > 0 && ()} */}
-          <CourtsCard courts={courts} isLoading={isLoading} onFavoriteToggle={() => handleFavoriteToggle(index)} />
+          <CourtsCard
+            courts={courts}
+            isLoading={isLoading}
+            onFavoriteToggle={() => handleFavoriteToggle(index)}
+          />
 
           <br />
           <br />
 
-          <div className="flex justify-center my-5">{/* <Paginator index={1} /> */}</div>
+          <div className="flex justify-center my-5">
+            {/* <Paginator index={1} /> */}
+          </div>
           <br />
           <br />
           <br />

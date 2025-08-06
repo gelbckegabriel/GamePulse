@@ -1,7 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useAnimate, useDragControls, useMotionValue, motion } from "framer-motion";
+import {
+  useAnimate,
+  useDragControls,
+  useMotionValue,
+  motion,
+} from "framer-motion";
 import { FaRegUserCircle, FaRunning } from "react-icons/fa";
 import { IoMdPerson, IoMdPin } from "react-icons/io";
 import useMeasure from "react-use-measure";
@@ -10,28 +15,36 @@ import { Option, Select } from "@material-tailwind/react";
 import { apiClient } from "@/app/services/apiClient";
 import Swal from "sweetalert2";
 import { userService } from "@/app/services/cache/user-info";
+import { sportsService } from "@/app/services/cache/sports-info";
 
-export const ProviderAuth = ({ openProvider, setOpenProvider, setAuthOpen }) => {
+export const ProviderAuth = ({
+  openProvider,
+  setOpenProvider,
+  setAuthOpen,
+}) => {
   // FORM
   const [user, setUser] = useState(userService.getCurrentUser());
   const [name, setName] = useState(user.name);
   const [nickname, setNickname] = useState(user.nickname);
   const [isLoading, setIsLoading] = useState(false);
   const [favoriteSport, setFavoriteSport] = useState();
-  const [sports, setSports] = useState([]);
+  const [sports, setSports] = useState(sportsService.getSports());
 
   useEffect(() => {
-    const subscription = userService.user$.subscribe((result) => {
+    const userSubscription = userService.user$.subscribe((result) => {
       setUser(result);
     });
-    return () => subscription.unsubscribe(); // Clean up on unmount
-  }, []);
 
-  useEffect(() => {
-    apiClient("Sports/GetSports", "GET").then((response) => {
-      setSports(response);
+    const sportsSubscription = sportsService.sports$.subscribe((result) => {
+      setSports(result);
     });
-  }, []);
+
+    // Clean up on unmount
+    return () => {
+      userSubscription.unsubscribe();
+      sportsSubscription.unsubscribe();
+    };
+  }, [openProvider]);
 
   const handleSubmit = () => {
     setIsLoading(true);
@@ -151,7 +164,9 @@ export const ProviderAuth = ({ openProvider, setOpenProvider, setAuthOpen }) => 
 
             <div className="relative z-0 h-full overflow-y-auto p-4 pt-12">
               <div className="mx-auto max-w-2xl space-y-4 text-neutral-400 text-white">
-                <h2 className="pt-2 text-3xl md:text-4xl lg:text-4xl font-bold text-center">Finish Account Setup</h2>
+                <h2 className="pt-2 text-3xl md:text-4xl lg:text-4xl font-bold text-center">
+                  Finish Account Setup
+                </h2>
 
                 {/* DISPLAY UPDATE FORM IF NEW USER DETECTED */}
                 <motion.div
@@ -238,7 +253,12 @@ export const ProviderAuth = ({ openProvider, setOpenProvider, setAuthOpen }) => 
 
                   {/* SUBMIT BUTTON */}
                   <div className="!mt-14 pb-6 flex justify-center">
-                    <Button className={`w-[30%] ${isLoading ? "!animate-pulse-strong" : ""}`} onClick={() => handleSubmit()}>
+                    <Button
+                      className={`w-[30%] ${
+                        isLoading ? "!animate-pulse-strong" : ""
+                      }`}
+                      onClick={() => handleSubmit()}
+                    >
                       Submit
                     </Button>
                   </div>

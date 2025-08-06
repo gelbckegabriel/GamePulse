@@ -8,11 +8,16 @@ import { Tooltip } from "@material-tailwind/react";
 import { Button } from "../utilities/button";
 import { ProviderAuth } from "./provider-auth";
 import { firebaseAuth, googleProvider } from "@/app/services/firebase";
-import { getRedirectResult, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import {
+  getRedirectResult,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import { apiClient } from "@/app/services/apiClient";
 import { userService } from "@/app/services/cache/user-info";
-import { User } from "../interfaces/db-entities";
+import { Sport, User } from "../interfaces/db-entities";
 import { SwalErrorTrigger } from "../utilities/swal-trigger";
+import { sportsService } from "@/app/services/cache/sports-info";
 
 type Props = {
   isOpen: boolean;
@@ -38,6 +43,22 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
     return () => {
       document.body.style.overflow = "";
     };
+  }, [isOpen]);
+
+  useEffect(() => {
+    console.log("Fetching sports data...");
+    apiClient<Sport[]>("Sports/GetSports", "GET")
+      .then((response) => {
+        sportsService.addSports(response);
+      })
+      .catch((error) => {
+        console.error("Error fetching sports data:", error);
+        SwalErrorTrigger(
+          "Sports Data Error",
+          "An error occurred while fetching sports data. Please try again later.",
+          error
+        );
+      });
   }, [isOpen]);
 
   useEffect(() => {
@@ -89,9 +110,11 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
       })
       .catch((error) => {
         console.error(error);
-        SwalErrorTrigger("Authentication Error", "An error occurred while trying to sign you in. Please try again later.", error).then(() =>
-          setIsLoading(false)
-        );
+        SwalErrorTrigger(
+          "Authentication Error",
+          "An error occurred while trying to sign you in. Please try again later.",
+          error
+        ).then(() => setIsLoading(false));
       });
   };
 
@@ -103,7 +126,10 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
         userService.signInUser({
           id: response.user.uid,
           name: response.user.displayName || "Unknown User",
-          nickname: response.user.displayName?.split(" ")[response.user.displayName?.split(" ").length - 1],
+          nickname:
+            response.user.displayName?.split(" ")[
+              response.user.displayName?.split(" ").length - 1
+            ],
           email: response.user.email || undefined,
         });
         verifyUserExists(response.user.uid);
@@ -111,7 +137,11 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
       })
       .catch((error) => {
         console.error(error);
-        SwalErrorTrigger("Authentication Error", "An error occurred while trying to sign in with Popup. Please try again later.", error);
+        SwalErrorTrigger(
+          "Authentication Error",
+          "An error occurred while trying to sign in with Popup. Please try again later.",
+          error
+        );
       });
   };
 
@@ -137,7 +167,11 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
         }
       })
       .catch((error) => {
-        SwalErrorTrigger("Authentication Error", "An error occurred while trying to verify your user. Please try again later.", error).then(() => {
+        SwalErrorTrigger(
+          "Authentication Error",
+          "An error occurred while trying to verify your user. Please try again later.",
+          error
+        ).then(() => {
           setIsLoading(false);
         });
       });
@@ -170,7 +204,10 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
               className="m-auto w-full md:w-[70%] lg:w-[55%] xl:w-[35%] h-fit p-4 md:p-8 lg:p-12 text-white bg-backgroundModal bg-opacity-90 backdrop-blur-md border border-transparent border-opacity-70 rounded-lg shadow-lg"
             >
               {/* CLOSE BUTTON */}
-              <div className="absolute right-2 top-2 md:right-3 md:top-3 lg:right-3 lg:top-3 w-8 h-8" onClick={() => setIsOpen(false)}>
+              <div
+                className="absolute right-2 top-2 md:right-3 md:top-3 lg:right-3 lg:top-3 w-8 h-8"
+                onClick={() => setIsOpen(false)}
+              >
                 <IoIosCloseCircleOutline className="mx-auto mt-1 cursor-pointer text-xl md:text-xl" />
               </div>
 
@@ -184,7 +221,11 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                       className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex justify-center items-center gap-2 p-2 rounded-xl cursor-pointer transition-all duration-300 hover:bg-opacity-25"
                     >
                       <span className="flex items-center">
-                        <img src="auth/google.webp" alt="google logo" className="h-8 w-8" />
+                        <img
+                          src="auth/google.webp"
+                          alt="google logo"
+                          className="h-8 w-8"
+                        />
                       </span>
                     </div>
                   </div>
@@ -194,7 +235,11 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                     <Tooltip content="Not available yet !">
                       <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex justify-center items-center gap-2 p-2 rounded-xl cursor-pointer transition-all duration-300 hover:bg-opacity-25">
                         <span className="flex items-center">
-                          <img src="auth/facebook.webp" alt="facebook logo" className="h-8 w-8" />
+                          <img
+                            src="auth/facebook.webp"
+                            alt="facebook logo"
+                            className="h-8 w-8"
+                          />
                         </span>
                       </div>
                     </Tooltip>
@@ -222,7 +267,9 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                 </div>
                 <div className="mt-6 flex justify-between">
                   <p className="text-sm2 mb-1">Password</p>
-                  <p className="text-sm text-gray-500 text-opacity-90 cursor-pointer hover:text-[gray-700] hover:underline">Forgot Password?</p>
+                  <p className="text-sm text-gray-500 text-opacity-90 cursor-pointer hover:text-[gray-700] hover:underline">
+                    Forgot Password?
+                  </p>
                 </div>
                 <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                   <FaFingerprint />
@@ -232,14 +279,25 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                     className="bg-transparent pl-1 border-0 w-full outline-none text-sm2"
                   />
                   {showPassword ? (
-                    <FaRegEye className="cursor-pointer mr-1" onClick={togglePasswordView} />
+                    <FaRegEye
+                      className="cursor-pointer mr-1"
+                      onClick={togglePasswordView}
+                    />
                   ) : (
-                    <FaRegEyeSlash className="cursor-pointer mr-1" onClick={togglePasswordView} />
+                    <FaRegEyeSlash
+                      className="cursor-pointer mr-1"
+                      onClick={togglePasswordView}
+                    />
                   )}
                 </div>
 
                 <div className="mt-8 flex justify-center">
-                  <Button className={`w-[50%] hover:scale-110 ${isLoading ? "animate-pulse-strong" : ""} `} onClick={() => handlePasswordSignIn()}>
+                  <Button
+                    className={`w-[50%] hover:scale-110 ${
+                      isLoading ? "animate-pulse-strong" : ""
+                    } `}
+                    onClick={() => handlePasswordSignIn()}
+                  >
                     Login
                   </Button>
                 </div>
@@ -262,9 +320,17 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
         )}
       </AnimatePresence>
 
-      <CreateUser openCreate={openCreate} setOpenCreate={setOpenCreate} setAuthOpen={setIsOpen} />
+      <CreateUser
+        openCreate={openCreate}
+        setOpenCreate={setOpenCreate}
+        setAuthOpen={setIsOpen}
+      />
       {/* TODO: CREATE A LOGIC TO OPEN ONLY WHEN IT IS A NEW USER AUTHENTICATING WITH THE PROVIDER. */}
-      <ProviderAuth openProvider={openProvider} setOpenProvider={setOpenProvider} setAuthOpen={setIsOpen} />
+      <ProviderAuth
+        openProvider={openProvider}
+        setOpenProvider={setOpenProvider}
+        setAuthOpen={setIsOpen}
+      />
     </>
   );
 };
