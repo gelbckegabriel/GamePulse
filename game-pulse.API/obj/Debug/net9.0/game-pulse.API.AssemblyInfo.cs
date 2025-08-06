@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("game-pulse.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ac5e441007333322f42a721f355a5fcc78e14b62")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fbef5078a54b0525c1b01bdb6c872931fbc2a032")]
 [assembly: System.Reflection.AssemblyProductAttribute("game-pulse.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("game-pulse.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
