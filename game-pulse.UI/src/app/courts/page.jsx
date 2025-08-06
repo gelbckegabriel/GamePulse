@@ -16,18 +16,11 @@ import { CourtsCard } from "./components/courts-card";
 import { apiClient } from "../services/apiClient";
 import InstallGamePulse from "../shared/install-button/install-button";
 import { sportsService } from "../services/cache/sports-info";
+import { FaSearch } from "react-icons/fa";
 
 export default function Courts() {
   const [isLoading, setIsLoading] = useState(true);
   const [sports, setSports] = useState(sportsService.getSports() || []);
-  const [sportFilter, setSportFilter] = useState([]);
-  const [distanceFilter, setDistanceFilter] = useState(50);
-  const [locationFilter, setLocationFilter] = useState({
-    country: "",
-    state: "",
-    city: "",
-  });
-  const [orderFilter, setOrderFilter] = useState("distance");
   const [courts, setCourts] = useState([
     {
       id: 0,
@@ -39,7 +32,7 @@ export default function Courts() {
       map: "",
       redirect_link: "/",
       src: "",
-      sports: "",
+      sports: [],
     },
     {
       id: 0,
@@ -51,7 +44,7 @@ export default function Courts() {
       map: "",
       redirect_link: "/",
       src: "",
-      sports: "",
+      sports: [],
     },
     {
       id: 0,
@@ -63,9 +56,18 @@ export default function Courts() {
       map: "",
       redirect_link: "/",
       src: "",
-      sports: "",
+      sports: [],
     },
   ]);
+  const [courtNameFilter, setCourtNameFilter] = useState("");
+  const [sportFilter, setSportFilter] = useState([]);
+  const [distanceFilter, setDistanceFilter] = useState(50);
+  const [locationFilter, setLocationFilter] = useState({
+    country: "",
+    state: "",
+    city: "",
+  });
+  const [orderFilter, setOrderFilter] = useState("distance");
 
   const [countryFilter, setCountryFilter] = useState([]);
   const [stateFilter, setStateFilter] = useState([]);
@@ -87,7 +89,9 @@ export default function Courts() {
           id: element.id,
           name: element.name,
           distance: 0,
-          city: `${element.city}, ${element.state}`,
+          city: element.city,
+          state: element.state,
+          country: element.country,
           address: element.address,
           web_address: element.gMaps,
           map: element.map,
@@ -132,6 +136,33 @@ export default function Courts() {
     updatedCourts[index].favorite = !updatedCourts[index].favorite;
     setCourts(updatedCourts);
   };
+
+  const filteredCourts = courts.filter((court) => {
+    const matchName = court.name
+      .toLowerCase()
+      .includes(courtNameFilter.toLowerCase());
+
+    const matchCountry =
+      locationFilter.country === "" ||
+      court.country.includes(locationFilter.country);
+
+    const matchState =
+      locationFilter.state === "" || court.city.includes(locationFilter.state);
+
+    const matchCity =
+      locationFilter.city === "" || court.city.includes(locationFilter.city);
+
+    const matchSport =
+      sportFilter.filter((sport) => sport.checked).length === 0 ||
+      court.sports.some((sport) =>
+        sportFilter
+          .filter((s) => s.checked)
+          .map((s) => s.name)
+          .includes(sport)
+      );
+
+    return matchName && matchSport && matchCountry && matchState && matchCity;
+  });
 
   return (
     <>
@@ -322,12 +353,32 @@ export default function Courts() {
               </Menu> */}
           </div>
 
+          <div className="flex justify-center mb-6">
+            <div className="w-full max-w-sm min-w-[200px]">
+              <div className="relative">
+                <input
+                  className="w-full bg-transparent placeholder:text-white/40 text-white/80 text-sm border border-white/[0.2] rounded-md pl-3 pr-28 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+                  placeholder="Court name..."
+                  value={courtNameFilter}
+                  onChange={(e) => setCourtNameFilter(e.target.value)}
+                />
+                <button
+                  className="absolute top-1 right-1 flex items-center rounded bg-white/10 py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  type="button"
+                >
+                  <FaSearch className="pr-1" />
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
+
           <br />
 
           {/* COURTS */}
           {/* {courts.length > 0 && ()} */}
           <CourtsCard
-            courts={courts}
+            courts={filteredCourts}
             isLoading={isLoading}
             onFavoriteToggle={() => handleFavoriteToggle(index)}
           />

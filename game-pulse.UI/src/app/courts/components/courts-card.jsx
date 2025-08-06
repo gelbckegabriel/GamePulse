@@ -109,7 +109,7 @@ export function CourtsCard({ courts = [], isLoading, onFavoriteToggle }) {
                           {active.name} (~{active.distance} km)
                         </motion.h3>
                         <motion.p layoutId={`description-${active.name}-${id}`} className="text-gray-700">
-                          {active.city}
+                          {active.city}, {active.state}
                         </motion.p>
                       </>
                     )}
@@ -246,7 +246,7 @@ export function CourtsCard({ courts = [], isLoading, onFavoriteToggle }) {
                 ) : (
                   <>
                     <motion.p layoutId={`description-${court.name}-${id}`} className="text-gray-700 text-center md:text-left">
-                      {court.city}
+                      {court.city}, {court.state}
                     </motion.p>
                   </>
                 )}
