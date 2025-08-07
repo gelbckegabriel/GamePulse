@@ -68,6 +68,7 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
       return;
     }
 
+    // TODO: When searching remember to also add the sport filter
     apiClient("Games/GetCourtGames", "POST", {
       CourtId: court.id,
       GameDate: userFilter.date,
