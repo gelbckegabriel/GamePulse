@@ -2,9 +2,15 @@
 {
     public class UserNextGamesDto
     {
+        public int GameId { get; set; }
+
         public int CourtId { get; set; }
 
-        public string Sport { get; set; } = null!;
+        public string CourtName { get; set; } = null!;
+
+        public int SportId { get; set; }
+
+        public string SportName { get; set; } = null!;
 
         public DateTime GameTime { get; set; }
 

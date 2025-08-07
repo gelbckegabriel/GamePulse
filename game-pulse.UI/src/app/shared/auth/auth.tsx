@@ -15,7 +15,7 @@ import {
 } from "firebase/auth";
 import { apiClient } from "@/app/services/apiClient";
 import { userService } from "@/app/services/cache/user-info";
-import { Sport, User } from "../interfaces/db-entities";
+import { Sport, User } from "../../interfaces/db-entities";
 import { SwalErrorTrigger } from "../utilities/swal-trigger";
 import { sportsService } from "@/app/services/cache/sports-info";
 

@@ -93,8 +93,11 @@ namespace game_pulse.Services
             var data = await query
                 .Select(gp => new UserNextGamesDto
                 {
+                    GameId = gp.Game.Id,
                     CourtId = gp.Game.CourtId,
-                    Sport = gp.Game.Sport.Name,
+                    CourtName = gp.Game.Court.Name,
+                    SportId = gp.Game.Sport.Id,
+                    SportName = gp.Game.Sport.Name,
                     GameTime = gp.Game.GameTime,
                     UserId = gp.UserId,
                     Presence = gp.Presence
