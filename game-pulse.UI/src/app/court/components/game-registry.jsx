@@ -60,20 +60,31 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
     });
   }, [isOpen]);
 
+  const areFiltersValid = () => {
+    const { date, startTime, endTime } = userFilter;
+
+    // Check if all fields are filled
+    if (!date || !startTime || !endTime) return false;
+
+    // Check if start time is before end time
+    return startTime < endTime;
+  };
+
   const handleSubmit = () => {
-    if (userFilter.date && userFilter.startTime && userFilter.endTime) {
-      apiClient("Games/GetCourtGames", "POST", {
-        CourtId: court.id,
-        GameDate: userFilter.date,
-        GameTimeStart: userFilter.startTime,
-        GameTimeEnd: userFilter.endTime,
-      }).then((response) => {
-        setCourtGames(response);
-        setIsSearched(true);
-      });
-    } else {
-      window.alert("Please fill all fields before submitting.");
+    if (!areFiltersValid()) {
+      window.alert("Please fill all fields correctly before submitting.");
+      return;
     }
+
+    apiClient("Games/GetCourtGames", "POST", {
+      CourtId: court.id,
+      GameDate: userFilter.date,
+      GameTimeStart: userFilter.startTime,
+      GameTimeEnd: userFilter.endTime,
+    }).then((response) => {
+      setCourtGames(response);
+      setIsSearched(true);
+    });
   };
 
   const showDatePicker = () => {
@@ -109,8 +120,6 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
       return;
     }
 
-    // TODO: Check if it is creating ok
-    // TODO: Create an error handler
     apiClient("Games/CreateGame", "POST", {
       userId: userService.getUserId(),
       courtId: court.id,
@@ -234,6 +243,7 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                       <input
                         ref={dateInputRef}
                         type="date"
+                        min={new Date().toISOString().split("T")[0]}
                         onChange={(e) =>
                           setUserFilter({ ...userFilter, date: e.target.value })
                         }
@@ -245,7 +255,7 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                   {/* SPORT */}
                   <div className="w-full">
                     <p className="text-sm2 mb-1">Sport</p>
-                    <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
+                    <div className="relative z-10 bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                       <FaRunning />
                       <Select
                         onChange={(value) =>
