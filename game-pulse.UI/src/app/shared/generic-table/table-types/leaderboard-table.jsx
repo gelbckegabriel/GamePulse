@@ -22,9 +22,9 @@ export const LeaderboardBodyTable = ({ data, isLoading }) => {
       {data.map((row, index) => (
         <React.Fragment key={index}>
           <tr className="row">
-            <td className="position">{index + 1}</td>
+            <td className="position text-[0.8rem] md:text-[1.1rem]">{index + 1}</td>
             <td
-              className="row text-[0.875rem] md:text-[1.1rem] px-4 py-2 text-left border-l-4"
+              className="row text-[0.8rem] md:text-[1.1rem] px-4 py-2 text-left border-l-4"
               style={isLoading ? { borderColor: "#616161" } : { borderColor: sportColors[row.sport] }}
             >
               <div className="flex items-center">
@@ -46,7 +46,13 @@ export const LeaderboardBodyTable = ({ data, isLoading }) => {
                         </>
                       ) : (
                         <>
-                          <p>
+                          {/* Smaller Screens */}
+                          <p className="block sm:hidden">
+                            {firstName.charAt(0)}. <strong>{lastName}</strong>
+                          </p>
+
+                          {/* Medium and Larger Screens*/}
+                          <p className="hidden sm:block">
                             {firstName} <strong>{lastName}</strong>
                           </p>
                         </>
@@ -56,7 +62,11 @@ export const LeaderboardBodyTable = ({ data, isLoading }) => {
                 })()}
                 {isLoading ? (
                   <>
-                    <Typography as="div" variant="span" className="ml-3 min-w-[3rem] md:min-w-[4rem] h-2 rounded-sm bg-gray-700 animate-pulse-strong">
+                    <Typography
+                      as="div"
+                      variant="span"
+                      className="ml-3 min-w-[3rem] md:min-w-[4rem] h-2 rounded-sm bg-gray-700 animate-pulse-strong"
+                    >
                       &nbsp;
                     </Typography>
                   </>

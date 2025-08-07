@@ -46,7 +46,6 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
   }, [isOpen]);
 
   useEffect(() => {
-    console.log("Fetching sports data...");
     apiClient<Sport[]>("Sports/GetSports", "GET")
       .then((response) => {
         sportsService.addSports(response);
