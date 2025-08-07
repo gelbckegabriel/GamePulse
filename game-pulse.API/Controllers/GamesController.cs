@@ -34,7 +34,12 @@ namespace game_pulse.Controllers
         [HttpPost("CreateGame")]
         public async Task<IActionResult> CreateGame(GameCreateModel details)
         {
+            // Create game.
             var data = await _gamesService.CreateGame(details);
+
+            // Subscribe creator of the game to play.
+            await _gamesService.SubscribePlayerToGame(data, details.UserId);
+
             return Ok(data);
         }
 

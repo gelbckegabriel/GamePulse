@@ -59,7 +59,7 @@ export default function AboutPage() {
   return (
     <>
       <div className="bg-black text-white">
-        <div className="w-[100%] mx-auto rounded-md h-[25rem] overflow-hidden">
+        <div className="w-full mx-auto rounded-md h-[25rem] overflow-hidden">
           <Vortex backgroundColor="#00000000" className="flex items-center flex-col justify-center px-2 md:px-10 py-4 w-full h-full">
             <h2 className="text-2xl md:text-4xl font-bold text-center">Game Pulse</h2>
             <p className="text-sm md:text-xl max-w-xl mt-6 text-center">Learn more about the project and the developer.</p>
@@ -103,7 +103,7 @@ export default function AboutPage() {
           {/* GitHub Repo */}
           <div className="mt-20 pb-10 flex items-center gap-4">
             {/* GitHub Repo Card */}
-            <div className="border border-white/[0.2] flex flex-col items-start max-w-[100%] md:max-w-sm mx-auto p-4 relative h-[30rem]">
+            <div className="border border-white/[0.2] flex flex-col items-start max-w-full md:max-w-sm mx-auto p-4 relative h-[30rem]">
               <Icon className="absolute h-6 w-6 -top-3 -left-3 text-white" />
               <Icon className="absolute h-6 w-6 -bottom-3 -left-3 text-white" />
               <Icon className="absolute h-6 w-6 -top-3 -right-3 text-white" />

@@ -10,7 +10,7 @@ export const SportCard = ({ backgroundImage, name }: Props) => {
     <>
       {/* CHOOSE DATA-EFFECT BETWEEN: 'zoom', 'blur' and 'color' */}
       <div className="column">
-        <div className="card w-[100%] max-w-[22rem] h-[10rem]" data-effect="blur">
+        <div className="card w-full max-w-[22rem] h-[10rem]" data-effect="blur">
           <button className="card__save" type="button">
             <i></i>
           </button>

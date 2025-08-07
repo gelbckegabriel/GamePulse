@@ -13,6 +13,8 @@ namespace game_pulse.Interfaces
 
         public Task<List<UserNextGamesDto>> GetUserNextGamesAsync(GamesFilterModel filter);
 
-        public Task<Game> CreateGame(GameCreateModel details);
+        public Task<int> CreateGame(GameCreateModel details);
+
+        public Task<GamePlayer> SubscribePlayerToGame(int gameId, string userId);
     }
 }

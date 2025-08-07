@@ -68,7 +68,7 @@ export default function InstallGamePulse() {
   return (
     <>
       {!isStandalone && (
-        <div className="border border-white/[0.2] flex flex-col max-w-[100%] mx-auto p-8 relative">
+        <div className="border border-white/[0.2] flex flex-col max-w-full mx-auto p-8 relative">
           <Icon className="absolute h-6 w-6 -top-3 -left-3 text-white" />
           <Icon className="absolute h-6 w-6 -bottom-3 -left-3 text-white" />
           <Icon className="absolute h-6 w-6 -top-3 -right-3 text-white" />

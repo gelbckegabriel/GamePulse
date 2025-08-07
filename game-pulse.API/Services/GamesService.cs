@@ -104,7 +104,7 @@ namespace game_pulse.Services
             return (data);
         }
 
-        public async Task<Game> CreateGame(GameCreateModel details)
+        public async Task<int> CreateGame(GameCreateModel details)
         {
             var gameDateTime = details.GameDate.ToDateTime(details.GameTimeStart);
 
@@ -119,9 +119,7 @@ namespace game_pulse.Services
             _context.Games.Add(courtGame);
             await _context.SaveChangesAsync();
 
-            await SubscribePlayerToGame(courtGame.Id, details.UserId);
-
-            return courtGame;
+            return courtGame.Id;
         }
 
         public async Task<GamePlayer> SubscribePlayerToGame(int gameId, string userId)

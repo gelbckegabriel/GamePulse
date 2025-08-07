@@ -242,7 +242,7 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
 
             <div className="relative z-0 h-full overflow-y-scroll p-4 pt-12">
               <div className="mx-auto max-w-2xl space-y-4 text-neutral-400 text-white">
-                <h2 className="text-3xl md:text-4xl lg:text-4xl font-bold text-center">
+                <h2 className="text-3xl md:text-4xl font-bold text-center">
                   Create a new account
                 </h2>
 
