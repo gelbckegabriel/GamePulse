@@ -1,19 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  useAnimate,
-  useDragControls,
-  useMotionValue,
-  motion,
-} from "framer-motion";
-import {
-  FaFingerprint,
-  FaRegEye,
-  FaRegEyeSlash,
-  FaRegUserCircle,
-  FaRunning,
-} from "react-icons/fa";
+import { useAnimate, useDragControls, useMotionValue, motion } from "framer-motion";
+import { FaFingerprint, FaRegEye, FaRegEyeSlash, FaRegUserCircle, FaRunning } from "react-icons/fa";
 import { IoMdPerson, IoMdPin } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import useMeasure from "react-use-measure";
@@ -242,9 +231,7 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
 
             <div className="relative z-0 h-full overflow-y-scroll p-4 pt-12">
               <div className="mx-auto max-w-2xl space-y-4 text-neutral-400 text-white">
-                <h2 className="text-3xl md:text-4xl font-bold text-center">
-                  Create a new account
-                </h2>
+                <h2 className="text-3xl md:text-4xl font-bold text-center">Create a new account</h2>
 
                 <form className="form !mt-8">
                   {/* NAME FIELD */}
@@ -341,9 +328,7 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
                       }`}
                     >
                       <FaFingerprint
-                        className={`transition-all duration-300 ease-in-out ${
-                          isPasswordInvalid ? "text-issueRed" : ""
-                        }`}
+                        className={`transition-all duration-300 ease-in-out ${isPasswordInvalid ? "text-issueRed" : ""}`}
                       />
                       <input
                         required
@@ -380,10 +365,7 @@ export const CreateUser = ({ openCreate, setOpenCreate, setAuthOpen }) => {
 
                 {/* CREATE BUTTON */}
                 <div className="!mt-10 flex justify-center">
-                  <Button
-                    className={`${isLoading ? "animate-pulse-strong" : ""}`}
-                    onClick={() => handleSubmit()}
-                  >
+                  <Button className={`${isLoading ? "animate-pulse-strong" : ""}`} onClick={() => handleSubmit()}>
                     Create Account
                   </Button>
                 </div>

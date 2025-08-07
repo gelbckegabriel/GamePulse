@@ -1,5 +1,20 @@
 import Swal, { SweetAlertResult } from "sweetalert2";
 
+export function SwalConfirmTrigger(title: string, description: string) {
+  return Swal.fire({
+    icon: "warning",
+    title: title,
+    html: `${description}`,
+    showCancelButton: true,
+    cancelButtonText: "Cancel",
+    confirmButtonColor: "#1b741b",
+    confirmButtonText: "Confirm",
+    reverseButtons: true,
+    background: "#555",
+    color: "#EEE",
+  });
+}
+
 export function SwalSuccessTrigger(title: string, description: string) {
   return Swal.fire({
     icon: "success",

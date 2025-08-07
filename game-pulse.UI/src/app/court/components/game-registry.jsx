@@ -1,13 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import {
-  useAnimate,
-  useDragControls,
-  useMotionValue,
-  motion,
-  AnimatePresence,
-} from "framer-motion";
+import { useAnimate, useDragControls, useMotionValue, motion, AnimatePresence } from "framer-motion";
 import { FaCheck, FaRunning } from "react-icons/fa";
 import { IoIosCalendar, IoIosTime, IoIosTimer } from "react-icons/io";
 import useMeasure from "react-use-measure";
@@ -16,11 +10,7 @@ import { Option, Select } from "@material-tailwind/react";
 import { apiClient } from "@/app/services/apiClient";
 import { GridGamesColored } from "@/app/shared/grid-card-glows/grid-cards";
 import { sportsService } from "@/app/services/cache/sports-info";
-import {
-  SwalAlertTrigger,
-  SwalErrorTrigger,
-  SwalSuccessTrigger,
-} from "@/app/shared/utilities/swal-trigger";
+import { SwalAlertTrigger, SwalConfirmTrigger, SwalErrorTrigger, SwalSuccessTrigger } from "@/app/shared/utilities/swal-trigger";
 import { userService } from "@/app/services/cache/user-info";
 
 export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
@@ -63,16 +53,18 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
   const areFiltersValid = () => {
     const { date, startTime, endTime } = userFilter;
 
-    // Check if all fields are filled
     if (!date || !startTime || !endTime) return false;
 
-    // Check if start time is before end time
     return startTime < endTime;
+  };
+
+  const isUserLoggedIn = () => {
+    return userService.getUserId() !== "";
   };
 
   const handleSubmit = () => {
     if (!areFiltersValid()) {
-      window.alert("Please fill all fields correctly before submitting.");
+      SwalAlertTrigger("Form Incomplete", "Please fill all fields correctly before submitting.");
       return;
     }
 
@@ -91,34 +83,65 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
     dateInputRef.current?.showPicker();
   };
 
-  const subscribeToGame = (userId, gameId) => {
-    console.log(`userId: ${userId} & gameId: ${gameId}`);
+  const subscribeToGame = (gameId) => {
+    // Validate if user is logged in
+    if (!isUserLoggedIn()) {
+      SwalAlertTrigger("Not Logged In", "You must be logged in to create a game.");
+      return;
+    }
+
+    SwalConfirmTrigger("Confirm Subscription", "Are you sure you want to subscribe to this game?").then((result) => {
+      if (result.isConfirmed) {
+        handleSubscribeToGame(gameId);
+      }
+    });
+  };
+
+  const handleSubscribeToGame = (gameId) => {
+    apiClient("Games/SubscribeToGame", "POST", {
+      gameId: gameId,
+      userId: userService.getUserId(),
+    })
+      .then(() => {
+        SwalSuccessTrigger("Subscribed to Game", "You have successfully subscribed to the game.");
+      })
+      .catch((error) => {
+        console.error("Error subscribing to game: ", error);
+        SwalErrorTrigger(
+          "Error Subscribing to Game",
+          "There was an error subscribing to the game. Please try again later.",
+          error
+        );
+      })
+      .finally(() => {
+        // Reset state after creating game
+        setUserFilter({
+          date: null,
+          startTime: null,
+          endTime: null,
+          sportId: null,
+        });
+        setCourtGames([]);
+        setIsSearched(false);
+        setIsCreatingGame(false);
+        setIsOpen(false);
+      });
   };
 
   const createGame = () => {
-    if (
-      !userFilter.date ||
-      !userFilter.startTime ||
-      !userFilter.endTime ||
-      !userFilter.sportId
-    ) {
-      SwalAlertTrigger(
-        "Form Incomplete",
-        "Please fill all fields before creating a game."
-      );
+    // Validate form fields
+    if (!areFiltersValid() || !userFilter.sportId) {
+      SwalAlertTrigger("Form Incomplete", "Please fill all fields correctly before submitting.");
+      return;
+    }
+
+    // Validate if user is logged in
+    if (!isUserLoggedIn()) {
+      SwalAlertTrigger("Not Logged In", "You must be logged in to create a game.");
       return;
     }
 
     setIsCreatingGame(true);
-
-    if (userService.getUserId() === "") {
-      SwalAlertTrigger(
-        "Something went wrong...",
-        "You must be logged in to create a game."
-      );
-      setIsCreatingGame(false);
-      return;
-    }
 
     apiClient("Games/CreateGame", "POST", {
       userId: userService.getUserId(),
@@ -128,19 +151,11 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
       gameTimeStart: userFilter.startTime,
     })
       .then(() => {
-        SwalSuccessTrigger(
-          "Game Created",
-          "Your game has been successfully created."
-        );
+        SwalSuccessTrigger("Game Created", "Your game has been successfully created.");
       })
       .catch((error) => {
         console.error("Error creating game: ", error);
-
-        SwalErrorTrigger(
-          "Error Creating Game",
-          "There was an error creating your game. Please try again later.",
-          error
-        );
+        SwalErrorTrigger("Error Creating Game", "There was an error creating your game. Please try again later.", error);
       })
       .finally(() => {
         // Reset state after creating game
@@ -171,9 +186,7 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
 
     const yStart = typeof y.get() === "number" ? y.get() : 0;
 
-    await animate("#drawer", {
-      y: [yStart, height],
-    });
+    await animate("#drawer", { y: [yStart, height] });
 
     setIsOpen(false);
   };
@@ -230,9 +243,7 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
 
             <div className="relative z-0 h-full overflow-y-auto p-4 pt-12">
               <div className="mx-auto max-w-2xl md:max-w-4xl space-y-4 text-neutral-400 text-white">
-                <h2 className="pt-2 text-2xl md:text-4xl font-bold text-center">
-                  When would you like to play?
-                </h2>
+                <h2 className="pt-2 text-2xl md:text-4xl font-bold text-center">When would you like to play?</h2>
                 {/* PICK */}
                 <div className="!relative !z-20 pt-8 md:pt-20 grid grid-cols-2 md:grid-cols-4 gap-4">
                   {/* DATE */}
@@ -244,9 +255,7 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                         ref={dateInputRef}
                         type="date"
                         min={new Date().toISOString().split("T")[0]}
-                        onChange={(e) =>
-                          setUserFilter({ ...userFilter, date: e.target.value })
-                        }
+                        onChange={(e) => setUserFilter({ ...userFilter, date: e.target.value })}
                         className="bg-transparent h-10 w-full cursor-pointer"
                       />
                     </div>
@@ -258,9 +267,7 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                     <div className="relative z-10 bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                       <FaRunning />
                       <Select
-                        onChange={(value) =>
-                          setUserFilter({ ...userFilter, sportId: value })
-                        }
+                        onChange={(value) => setUserFilter({ ...userFilter, sportId: value })}
                         containerProps={{
                           className: "!min-w-0 w-full",
                         }}
@@ -281,9 +288,7 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                     <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                       <IoIosTime />
                       <Select
-                        onChange={(value) =>
-                          setUserFilter({ ...userFilter, startTime: value })
-                        }
+                        onChange={(value) => setUserFilter({ ...userFilter, startTime: value })}
                         containerProps={{
                           className: "!min-w-0 w-full",
                         }}
@@ -304,9 +309,7 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                     <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex items-center gap-2 p-2 rounded-xl">
                       <IoIosTimer />
                       <Select
-                        onChange={(value) =>
-                          setUserFilter({ ...userFilter, endTime: value })
-                        }
+                        onChange={(value) => setUserFilter({ ...userFilter, endTime: value })}
                         containerProps={{
                           className: "!min-w-0 w-full",
                         }}
@@ -336,11 +339,7 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                     >
                       <Button
                         className={`z-10 ${
-                          userFilter.date &&
-                          userFilter.startTime &&
-                          userFilter.endTime
-                            ? ""
-                            : "bg-gray-500 cursor-not-allowed"
+                          userFilter.date && userFilter.startTime && userFilter.endTime ? "" : "bg-gray-500 cursor-not-allowed"
                         }`}
                         onClick={() => handleSubmit()}
                       >
@@ -360,22 +359,15 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                           transition={{
                             duration: 0.4,
                             scale: {
-                              // type: "tween",
-                              // visualDuration: 0.4,
-                              // bounce: 0.5,
                               type: "spring",
                               stiffness: 300,
                               damping: 30,
                             },
                           }}
-                          className={`${
-                            !isSearched ? "pointer-events-none" : ""
-                          }`}
+                          className={`${!isSearched ? "pointer-events-none" : ""}`}
                         >
                           <Button
-                            className={`z-0 bg-[#18631565] text-white" ${
-                              isCreatingGame ? "!animate-pulse-strong" : ""
-                            }`}
+                            className={`z-0 bg-[#18631565] text-white" ${isCreatingGame ? "!animate-pulse-strong" : ""}`}
                             onClick={() => createGame()}
                           >
                             Create Game
@@ -397,24 +389,12 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                               <React.Fragment key={index}>
                                 <GridGamesColored
                                   area="md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]"
-                                  icon={
-                                    <FaCheck className="h-4 w-4 text-gray-700" />
-                                  }
-                                  date={game.gameTime
-                                    .split("T")[0]
-                                    .split("-")
-                                    .reverse()
-                                    .join("/")}
+                                  icon={<FaCheck className="h-4 w-4 text-gray-700" />}
+                                  date={game.gameTime.split("T")[0].split("-").reverse().join("/")}
                                   time={game.gameTime.split("T")[1].slice(0, 5)}
                                   sport={game.sport}
                                   players={game.players}
-                                  onClick={
-                                    () =>
-                                      subscribeToGame(
-                                        1,
-                                        game.gameId
-                                      ) /* TODO: Replace 1 with actual userId */
-                                  }
+                                  onClick={() => subscribeToGame(game.gameId)}
                                 />
                               </React.Fragment>
                             ))}

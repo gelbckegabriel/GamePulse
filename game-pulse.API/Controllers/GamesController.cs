@@ -43,11 +43,19 @@ namespace game_pulse.Controllers
             return Ok(data);
         }
 
+        [HttpPost("SubscribeToGame")]
+        public async Task<IActionResult> SubscribeToGame(GameSubscribeModel details)
+        {
+            var data = await _gamesService.SubscribePlayerToGame(details.GameId, details.UserId);
+            return Ok(data);
+        }
+
         [HttpPost("GetCourtGames")]
         public async Task<IActionResult> GetCourtGames(GamesFilterModel filter)
         {
             var data = await _gamesService.GetCourtGamesFilteredAsync(filter);
             return Ok(data);
         }
+
     }
 }
