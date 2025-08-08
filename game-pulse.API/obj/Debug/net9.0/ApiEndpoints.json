@@ -123,8 +123,40 @@
   },
   {
     "ContainingType": "game_pulse.Controllers.GamesController",
+    "Method": "GetUserPreviousGames",
+    "RelativePath": "Games/GetUserPreviousGames",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filter",
+        "Type": "game_pulse.Interfaces.Filters.GamesFilterModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "game_pulse.Controllers.GamesController",
     "Method": "SubscribeToGame",
     "RelativePath": "Games/SubscribeToGame",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "details",
+        "Type": "game_pulse.Interfaces.Models.GameSubscribeModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "game_pulse.Controllers.GamesController",
+    "Method": "UnsubscribeToGame",
+    "RelativePath": "Games/UnsubscribeToGame",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

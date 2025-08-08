@@ -80,15 +80,20 @@ namespace game_pulse.Services
             return games; 
         }
 
-        public async Task<List<UserNextGamesDto>> GetUserNextGamesAsync(GamesFilterModel filter)
+        public async Task<List<UserNextGamesDto>> GetUserGamesAsync(GamesFilterModel filter, bool isUpcoming = true)
         {
             var query = _context.GamePlayers
                 .Where(gp => gp.UserId == filter.UserId)
-                .Where(gp => gp.Game.GameTime > DateTime.Now)
                 .AsQueryable();
 
             if (filter.CourtId.HasValue)
                 query = query.Where(gp => gp.Game.CourtId == filter.CourtId);
+
+            query = isUpcoming
+                ? query.Where(gp => gp.Game.GameTime > DateTime.Now)
+                : query.Where(gp => gp.Game.GameTime < DateTime.Now);
+
+            query = query.OrderBy(gp => gp.Game.GameTime);
 
             var data = await query
                 .Select(gp => new UserNextGamesDto

@@ -11,7 +11,7 @@ namespace game_pulse.Interfaces
 
         public Task<List<CourtGameDto>> GetCourtGamesFilteredAsync(GamesFilterModel filter);
 
-        public Task<List<UserNextGamesDto>> GetUserNextGamesAsync(GamesFilterModel filter);
+        public Task<List<UserNextGamesDto>> GetUserGamesAsync(GamesFilterModel filter, bool isUpcoming = true);
 
         public Task<int> CreateGame(GameCreateModel details);
 

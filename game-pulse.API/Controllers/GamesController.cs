@@ -24,10 +24,17 @@ namespace game_pulse.Controllers
             return Ok(data);
         }
 
+        [HttpPost("GetUserPreviousGames")]
+        public async Task<IActionResult> GetUserPreviousGames(GamesFilterModel filter)
+        {
+            var data = await _gamesService.GetUserGamesAsync(filter: filter, isUpcoming: false);
+            return Ok(data);
+        }
+
         [HttpPost("GetUserNextGames")]
         public async Task<IActionResult> GetUserNextGames(GamesFilterModel filter)
         {
-            var data = await _gamesService.GetUserNextGamesAsync(filter);
+            var data = await _gamesService.GetUserGamesAsync(filter);
             return Ok(data);
         }
 
@@ -48,6 +55,14 @@ namespace game_pulse.Controllers
         {
             var data = await _gamesService.SubscribePlayerToGame(details.GameId, details.UserId);
             return Ok(data);
+        }
+
+        [HttpPost("UnsubscribeToGame")]
+        public async Task<IActionResult> UnsubscribeToGame(GameSubscribeModel details)
+        {
+            // TODO
+            //var data = await _gamesService.
+            return Ok();
         }
 
         [HttpPost("GetCourtGames")]

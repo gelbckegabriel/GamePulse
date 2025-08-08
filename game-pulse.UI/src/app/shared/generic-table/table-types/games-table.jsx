@@ -26,7 +26,7 @@ export const GamesBodyTable = ({ data, isLoading }) => {
             <td className="position">{index + 1}</td>
             <td
               className="row text-[0.875rem] md:text-[1.1rem] px-4 py-2 text-left border-l-4"
-              style={isLoading ? { borderColor: "#616161" } : { borderColor: sportColors[row.sport.toLowerCase()] }}
+              style={isLoading ? { borderColor: "#616161" } : { borderColor: sportColors[row.sport_name.toLowerCase()] }}
             >
               <div className="flex items-center">
                 {(() => {
@@ -63,7 +63,7 @@ export const GamesBodyTable = ({ data, isLoading }) => {
                   </>
                 ) : (
                   <>
-                    <span className="text-[0.65rem] md:text-[0.8rem]">{capitalize(row.sport)}</span>
+                    <span className="text-[0.65rem] md:text-[0.8rem]">{capitalize(row.sport_name)}</span>
                   </>
                 )}
               </div>
@@ -81,7 +81,7 @@ export const GamesBodyTable = ({ data, isLoading }) => {
                 </>
               ) : (
                 <>
-                  <span className="text-[0.65rem] md:text-[0.8rem]">{row.date}</span>
+                  <span className="text-[0.65rem] md:text-[0.8rem]">{row.game_date_formatted}</span>
                 </>
               )}
             </td>
@@ -98,7 +98,7 @@ export const GamesBodyTable = ({ data, isLoading }) => {
                 </>
               ) : (
                 <>
-                  <span className="text-[0.65rem] md:text-[0.8rem]">{row.time}</span>
+                  <span className="text-[0.65rem] md:text-[0.8rem]">{row.game_date_formatted}</span>
                 </>
               )}
             </td>
@@ -115,7 +115,7 @@ export const GamesBodyTable = ({ data, isLoading }) => {
                 </>
               ) : (
                 <>
-                  <span className="text-[0.65rem] md:text-[0.8rem] !bg-teal-600 cursor-pointer">{row.players}</span>
+                  <span className="text-[0.65rem] md:text-[0.8rem] !bg-teal-600 cursor-pointer">View</span>
                 </>
               )}
             </td>
