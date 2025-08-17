@@ -5,7 +5,7 @@
 
 import React, { useState } from "react";
 import { Container } from "../shared/utilities/container";
-import { WorldMap } from "../shared/utilities/world-map";
+import { WorldMap } from "./components/world-map";
 import { motion } from "framer-motion";
 import { GenericTable } from "../shared/generic-table/generic-table";
 import { Card, CardCarousel } from "../shared/utilities/card-carousel";

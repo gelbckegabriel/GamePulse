@@ -5,7 +5,7 @@ import { Container } from "../shared/utilities/container";
 import { Vortex } from "../shared/utilities/vortex";
 import { motion } from "framer-motion";
 import { EvervaultCard, Icon } from "../shared/utilities/evervault-card";
-import { CodeBlock } from "../shared/utilities/code-block";
+import { CodeBlock } from "./components/code-block";
 
 export default function AboutPage() {
   const ref = useRef(null);

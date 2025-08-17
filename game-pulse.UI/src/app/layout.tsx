@@ -5,7 +5,12 @@ import Header from "./shared/header";
 import Footer from "./shared/footer";
 
 import "./globals.css";
-import { ScrollToTopButton } from "./shared/utilities/scroll-to-top";
+import { FloatingDock } from "./shared/dock";
+import { FaHome, FaInfo } from "react-icons/fa";
+import { FaUserGroup } from "react-icons/fa6";
+import { PiCourtBasketballDuotone } from "react-icons/pi";
+import { MdOutlineSportsHandball } from "react-icons/md";
+import { IoMdPerson } from "react-icons/io";
 
 const roboto = Roboto({
   weight: ["400", "500", "700"],
@@ -22,6 +27,34 @@ const notoSans = Noto_Sans({
   variable: "--font-noto-sans",
   subsets: ["latin"],
 });
+
+const links = [
+  {
+    title: "Home",
+    icon: <FaHome className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />,
+    href: "/",
+  },
+  {
+    title: "About",
+    icon: <FaInfo className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />,
+    href: "/about",
+  },
+  {
+    title: "Leaderboard",
+    icon: <FaUserGroup className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />,
+    href: "/leaderboard",
+  },
+  {
+    title: "Courts",
+    icon: <PiCourtBasketballDuotone className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />,
+    href: "/courts",
+  },
+  {
+    title: "Games",
+    icon: <MdOutlineSportsHandball className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />,
+    href: "/games",
+  },
+];
 
 export default function RootLayout({
   children,
@@ -40,7 +73,12 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
-        <ScrollToTopButton />
+        {/* <ScrollToTopButton /> */}
+        <FloatingDock
+          desktopClassName="fixed bottom-5 left-1/2 -translate-x-1/2 z-[99]"
+          mobileClassName="fixed bottom-5 right-6 z-[99]"
+          items={links}
+        />
       </body>
     </html>
   );
