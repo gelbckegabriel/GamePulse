@@ -13,6 +13,7 @@ import { Subscription } from "rxjs";
 import { Loader } from "../shared/loader/loader";
 import { Vortex } from "../shared/utilities/vortex";
 import { SparklesCore } from "../shared/utilities/sparkles";
+import Link from "next/link";
 
 export default function GamesPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -97,41 +98,43 @@ export default function GamesPage() {
           ) : (
             <>
               {games.map((game) => (
-                <GamesCard key={game.id} className="-my-5 md:-my-10">
-                  <button
-                    type="button"
-                    className="my-10 flex w-80 cursor-pointer flex-col items-stretch rounded-[16px] border-0 bg-[#1F2121] p-2 saturate-0 md:my-20 md:p-4"
-                    aria-label="View invite F7RA"
-                    style={{
-                      transformStyle: "preserve-3d",
-                      transform: "none",
-                      opacity: 1,
-                    }}
-                  >
-                    <div className="mx-2 flex-1">
-                      <div className="relative mt-2 aspect-[3/4] w-full">
-                        <Image
-                          loading="lazy"
-                          className="absolute inset-0 h-full w-full rounded-[16px] bg-background object-cover contrast-75"
-                          alt={`${game.sport_name} Game`}
-                          src={`/games/${game.sport_name}.webp`}
-                          style={{
-                            boxShadow: "rgba(0, 0, 0, 0.05) 0px 5px 6px 0px",
-                            opacity: 1,
-                          }}
-                          fill
-                        />
+                <Link key={game.id} href={`/game?game_id=${game.id}`} passHref>
+                  <GamesCard className="-my-5 md:-my-10">
+                    <button
+                      type="button"
+                      className="my-10 flex w-80 cursor-pointer flex-col items-stretch rounded-[16px] border-0 bg-[#1F2121] p-2 saturate-0 md:my-20 md:p-4"
+                      aria-label="View invite F7RA"
+                      style={{
+                        transformStyle: "preserve-3d",
+                        transform: "none",
+                        opacity: 1,
+                      }}
+                    >
+                      <div className="mx-2 flex-1">
+                        <div className="relative mt-2 aspect-[3/4] w-full">
+                          <Image
+                            loading="lazy"
+                            className="absolute inset-0 h-full w-full rounded-[16px] bg-background object-cover contrast-75"
+                            alt={`${game.sport_name} Game`}
+                            src={`/games/${game.sport_name}.webp`}
+                            style={{
+                              boxShadow: "rgba(0, 0, 0, 0.05) 0px 5px 6px 0px",
+                              opacity: 1,
+                            }}
+                            fill
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div className="mt-2 flex flex-shrink-0 items-center justify-between p-4 text-white">
-                      <div className="text-sm2">{game.court_name}</div>
-                      <div className="min-w-fit text-xs text-gray-300 opacity-50 flex flex-col items-end">
-                        <span>{game.game_date_formatted}</span>
-                        <span>{game.game_day}</span>
+                      <div className="mt-2 flex flex-shrink-0 items-center justify-between p-4 text-white">
+                        <div className="text-sm2">{game.court_name}</div>
+                        <div className="min-w-fit text-xs text-gray-300 opacity-50 flex flex-col items-end">
+                          <span>{game.game_date_formatted}</span>
+                          <span>{game.game_day}</span>
+                        </div>
                       </div>
-                    </div>
-                  </button>
-                </GamesCard>
+                    </button>
+                  </GamesCard>
+                </Link>
               ))}
             </>
           )}
