@@ -1,9 +1,3 @@
-/**
- * Note: Use position fixed according to your needs
- * Desktop navbar is better positioned at the bottom
- * Mobile navbar is better positioned at bottom right.
- **/
-
 import { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { TbLayoutNavbarCollapse } from "react-icons/tb";
@@ -22,31 +16,29 @@ export const FloatingDock = ({
 
   // When the user scrolls down 20px from the top of the document, show the button
   useEffect(() => {
-    window.onscroll = function () {
-      scrollFunction();
+    const handleScroll = () => {
+      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        setShowDock(true);
+      } else {
+        setShowDock(false);
+      }
     };
+
+    // Utiliser requestAnimationFrame pour smoother
+    const onScroll = () => requestAnimationFrame(handleScroll);
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  function scrollFunction() {
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-      setShowDock(true);
-    } else {
-      setShowDock(false);
-    }
-  }
   return (
     <>
       <AnimatePresence>
         {showDock && (
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
+          <>
             <FloatingDockDesktop items={items} className={desktopClassName} />
             <FloatingDockMobile items={items} className={mobileClassName} />
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
@@ -61,8 +53,15 @@ const FloatingDockMobile = ({
   className?: string;
 }) => {
   const [open, setOpen] = useState(false);
+
   return (
-    <div className={twMerge("relative block md:hidden", className)}>
+    <motion.div
+      initial={{ opacity: 0, y: 300 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 300 }}
+      transition={{ type: "spring", stiffness: 160, damping: 15 }}
+      className={twMerge("relative block md:hidden", className)}
+    >
       <AnimatePresence>
         {open && (
           <motion.div layoutId="nav" className="absolute inset-x-0 bottom-full mb-2 flex flex-col gap-2">
@@ -98,7 +97,7 @@ const FloatingDockMobile = ({
       <button onClick={() => setOpen(!open)} className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-800">
         <TbLayoutNavbarCollapse className="h-5 w-5 text-white/70" />
       </button>
-    </div>
+    </motion.div>
   );
 };
 
@@ -112,9 +111,13 @@ const FloatingDockDesktop = ({
   const mouseX = useMotionValue(Infinity);
   return (
     <motion.div
+      initial={{ opacity: 0, y: 300, x: "-50%" }}
+      animate={{ opacity: 1, y: 0, x: "-50%" }}
+      exit={{ opacity: 0, y: 300, x: "-50%" }}
+      transition={{ type: "spring", stiffness: 160, damping: 15 }}
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
-      className={twMerge("mx-auto hidden h-16 items-end gap-4 rounded-2xl px-4 pb-3 md:flex bg-gray-900", className)}
+      className={twMerge("mx-auto bottom-10 hidden h-16 items-end gap-4 rounded-2xl px-4 pb-3 md:flex bg-gray-900", className)}
     >
       {items.map((item) => (
         <IconContainer mouseX={mouseX} key={item.title} {...item} />
