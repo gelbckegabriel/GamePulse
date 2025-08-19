@@ -4,7 +4,6 @@ using game_pulse.Interfaces;
 using game_pulse.Interfaces.Dto;
 using game_pulse.Interfaces.Filters;
 using game_pulse.Interfaces.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace game_pulse.Services
@@ -21,7 +20,56 @@ namespace game_pulse.Services
             _logger = logger;
         }
 
-        public async Task<List<PlayersLeaderboardTableDto>> GetCourtTopPlayersAsync(GamesFilterModel filter)
+        public async Task<int> CreateGame(GameCreateModel details)
+        {
+            var gameDateTime = details.GameDate.ToDateTime(details.GameTimeStart);
+
+            var courtGame = new Game
+            {
+                CourtId = details.CourtId,
+                SportId = details.SportId,
+                GameTime = gameDateTime,
+                BestPlayerId = null
+            };
+
+            _context.Games.Add(courtGame);
+            await _context.SaveChangesAsync();
+
+            return courtGame.Id;
+        }
+
+        public async Task<GameInfoDto> GetGameInfo(int gameId)
+        {
+            var game = await _context.Games
+                .Where(g => g.Id == gameId)
+                .Include(g => g.Court)
+                .ThenInclude(g => g.Sports)
+                .Select(g => new GameInfoDto
+                {
+                    Id = g.Id,
+                    BestPlayerName = g.BestPlayer != null ? g.BestPlayer.Name : "No best player",
+                    CourtName = g.Court.Name,
+                    City = $"{g.Court.City}, {g.Court.State} - {g.Court.Country}",
+                    Address = g.Court.Address,
+                    GoogleMaps = g.Court.GMaps,
+                    SportName = g.Sport.Name,
+                    Time = g.GameTime,
+                    Players = g.GamePlayers.Select(gp => new GamePlayerDto
+                    {
+                        Name = gp.User.Name,
+                        Nickname = gp.User.Nickname,
+                        Xp = gp.User.Xp
+                    }).ToList()
+                })
+                .FirstOrDefaultAsync();
+
+            //if (game == null) return null;
+
+            return game;
+
+        }
+
+        public async Task<List<PlayersLeaderboardTableDto>> GetCourtTopPlayers(GamesFilterModel filter)
         {
             var data = await _context.GamePlayers
                 .Where(gp => gp.Game.CourtId == filter.CourtId)
@@ -44,7 +92,7 @@ namespace game_pulse.Services
             return (data);
         }
 
-        public async Task<List<CourtGameDto>> GetCourtGamesFilteredAsync(GamesFilterModel filter)
+        public async Task<List<CourtGameDto>> GetCourtGamesFiltered(GamesFilterModel filter)
         {
             var query = _context.Games
                 .Include(g => g.Court)
@@ -80,7 +128,7 @@ namespace game_pulse.Services
             return games; 
         }
 
-        public async Task<List<UserNextGamesDto>> GetUserGamesAsync(GamesFilterModel filter, bool isUpcoming = true)
+        public async Task<List<UserNextGamesDto>> GetUserNextGames(GamesFilterModel filter, bool isUpcoming = true)
         {
             var query = _context.GamePlayers
                 .Where(gp => gp.UserId == filter.UserId)
@@ -112,24 +160,6 @@ namespace game_pulse.Services
             return (data);
         }
 
-        public async Task<int> CreateGame(GameCreateModel details)
-        {
-            var gameDateTime = details.GameDate.ToDateTime(details.GameTimeStart);
-
-            var courtGame = new Game
-            {
-                CourtId = details.CourtId,
-                SportId = details.SportId,
-                GameTime = gameDateTime,
-                BestPlayerId = null
-            };
-
-            _context.Games.Add(courtGame);
-            await _context.SaveChangesAsync();
-
-            return courtGame.Id;
-        }
-
         public async Task<GamePlayer> SubscribePlayerToGame(int gameId, string userId)
         {
             var gamePlayer = new GamePlayer
@@ -144,6 +174,11 @@ namespace game_pulse.Services
             await _context.SaveChangesAsync();
 
             return gamePlayer;
+        }
+
+        public async Task<bool> UnsubscribePlayerFromGame(int gameId, string userId)
+        {
+            return true;
         }
     }
 }

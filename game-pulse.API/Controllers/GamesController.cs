@@ -20,21 +20,14 @@ namespace game_pulse.Controllers
         [HttpPost("GetCourtTopPlayers")]
         public async Task<IActionResult> GetCourtTopPlayers(GamesFilterModel filter)
         {
-            var data = await _gamesService.GetCourtTopPlayersAsync(filter);
+            var data = await _gamesService.GetCourtTopPlayers(filter);
             return Ok(data);
         }
 
         [HttpPost("GetUserPreviousGames")]
         public async Task<IActionResult> GetUserPreviousGames(GamesFilterModel filter)
         {
-            var data = await _gamesService.GetUserGamesAsync(filter: filter, isUpcoming: false);
-            return Ok(data);
-        }
-
-        [HttpPost("GetUserNextGames")]
-        public async Task<IActionResult> GetUserNextGames(GamesFilterModel filter)
-        {
-            var data = await _gamesService.GetUserGamesAsync(filter);
+            var data = await _gamesService.GetUserNextGames(filter: filter, isUpcoming: false);
             return Ok(data);
         }
 
@@ -61,14 +54,28 @@ namespace game_pulse.Controllers
         public async Task<IActionResult> UnsubscribeToGame(GameSubscribeModel details)
         {
             // TODO
-            //var data = await _gamesService.
+            var data = await _gamesService.UnsubscribePlayerFromGame(details.GameId, details.UserId);
             return Ok();
+        }
+
+        [HttpGet("GetGameInfo")]
+        public async Task<IActionResult> GetGameInfo([FromQuery] int id)
+        {
+            var data = await _gamesService.GetGameInfo(id);
+            return Ok(data);
+        }
+
+        [HttpPost("GetUserNextGames")]
+        public async Task<IActionResult> GetUserNextGames(GamesFilterModel filter)
+        {
+            var data = await _gamesService.GetUserNextGames(filter);
+            return Ok(data);
         }
 
         [HttpPost("GetCourtGames")]
         public async Task<IActionResult> GetCourtGames(GamesFilterModel filter)
         {
-            var data = await _gamesService.GetCourtGamesFilteredAsync(filter);
+            var data = await _gamesService.GetCourtGamesFiltered(filter);
             return Ok(data);
         }
 

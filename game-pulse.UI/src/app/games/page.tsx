@@ -98,7 +98,7 @@ export default function GamesPage() {
           ) : (
             <>
               {games.map((game) => (
-                <Link key={game.id} href={`/game?game_id=${game.id}`} passHref>
+                <Link key={game.id} href={`/game?id=${game.id}`} passHref>
                   <GamesCard className="-my-5 md:-my-10">
                     <button
                       type="button"

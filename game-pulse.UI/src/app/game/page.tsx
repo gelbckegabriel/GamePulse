@@ -5,7 +5,7 @@ import { apiClient } from "../services/apiClient";
 import { Container } from "../shared/utilities/container";
 
 export default function CourtPage() {
-//   const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   // GET COURT DETAILS
   useEffect(() => {
@@ -18,11 +18,13 @@ export default function CourtPage() {
     const params = new URLSearchParams(url.search);
 
     // TODO: Get Game Details (API)
-    apiClient("Games/GetGame", "POST", {
-      game_id: params.get("game_id"),
-    }).then((response) => {
-      console.log("Game Details:", response);
-    });
+    apiClient(`Games/GetGameInfo?id=${params.get("id")}`)
+      .then((response) => {
+        console.log("Game Details:", response);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
   return (

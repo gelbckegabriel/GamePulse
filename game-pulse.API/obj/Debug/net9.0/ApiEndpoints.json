@@ -107,6 +107,22 @@
   },
   {
     "ContainingType": "game_pulse.Controllers.GamesController",
+    "Method": "GetGameInfo",
+    "RelativePath": "Games/GetGameInfo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "game_pulse.Controllers.GamesController",
     "Method": "GetUserNextGames",
     "RelativePath": "Games/GetUserNextGames",
     "HttpMethod": "POST",
