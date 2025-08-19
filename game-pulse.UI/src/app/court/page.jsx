@@ -70,7 +70,6 @@ export default function CourtPage() {
               icon={<FaLocationArrow className="h-4 w-4 text-gray-700" />}
               title={court.city + ", " + court.state}
               description={court.name + "."}
-              hover={false}
               isLoading={isLoading}
             />
             <GridItem
@@ -78,7 +77,6 @@ export default function CourtPage() {
               icon={<FaRunning className="h-4 w-4 text-gray-700" />}
               title="What you can play"
               description={court.sportsAvailable != undefined ? court.sportsAvailable.join(", ") : "Loading, loading, loading..."}
-              hover={false}
               isLoading={isLoading}
             />
             <GridItemColored
@@ -103,7 +101,6 @@ export default function CourtPage() {
               hover={!isLoading}
               isLoading={isLoading}
             />
-            {/* TODO: ADD A CARD OF NEXT RESERVATION?? */}
           </ul>
         </div>
 

@@ -171,8 +171,8 @@
   },
   {
     "ContainingType": "game_pulse.Controllers.GamesController",
-    "Method": "UnsubscribeToGame",
-    "RelativePath": "Games/UnsubscribeToGame",
+    "Method": "UnsubscribeFromGame",
+    "RelativePath": "Games/UnsubscribeFromGame",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

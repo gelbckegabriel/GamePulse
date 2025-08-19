@@ -50,10 +50,9 @@ namespace game_pulse.Controllers
             return Ok(data);
         }
 
-        [HttpPost("UnsubscribeToGame")]
-        public async Task<IActionResult> UnsubscribeToGame(GameSubscribeModel details)
+        [HttpPost("UnsubscribeFromGame")]
+        public async Task<IActionResult> UnsubscribeFromGame(GameSubscribeModel details)
         {
-            // TODO
             var data = await _gamesService.UnsubscribePlayerFromGame(details.GameId, details.UserId);
             return Ok();
         }

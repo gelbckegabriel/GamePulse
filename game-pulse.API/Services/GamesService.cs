@@ -49,13 +49,17 @@ namespace game_pulse.Services
                     Id = g.Id,
                     BestPlayerName = g.BestPlayer != null ? g.BestPlayer.Name : "No best player",
                     CourtName = g.Court.Name,
-                    City = $"{g.Court.City}, {g.Court.State} - {g.Court.Country}",
+                    City = $"{g.Court.City}, {g.Court.State}",
                     Address = g.Court.Address,
                     GoogleMaps = g.Court.GMaps,
                     SportName = g.Sport.Name,
-                    Time = g.GameTime,
+                    DateTime = g.GameTime,
+                    Date = g.GameTime.ToString("dd/MM/yyyy"),
+                    Time = g.GameTime.ToString("HH:mm"),
+                    DayOfWeek = g.GameTime.ToString("dddd"),
                     Players = g.GamePlayers.Select(gp => new GamePlayerDto
                     {
+                        Id = gp.User.Id,
                         Name = gp.User.Name,
                         Nickname = gp.User.Nickname,
                         Xp = gp.User.Xp
@@ -118,6 +122,7 @@ namespace game_pulse.Services
                     GameTime = g.GameTime,
                     Players = g.GamePlayers.Select(gp => new GamePlayerDto
                     {
+                        Id = gp.User.Id,
                         Name = gp.User.Name,
                         Nickname = gp.User.Nickname,
                         Xp = gp.User.Xp

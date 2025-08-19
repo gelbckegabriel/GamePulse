@@ -17,10 +17,18 @@ export function GridItem({ area, icon, title, description, isLoading }) {
               <div className="space-y-3">
                 {isLoading ? (
                   <>
-                    <Typography as="div" variant="paragraph" className="mt-2 h-6 w-[80%] rounded-sm bg-gray-700 animate-pulse-strong">
+                    <Typography
+                      as="div"
+                      variant="paragraph"
+                      className="mt-2 h-6 w-[80%] rounded-sm bg-gray-700 animate-pulse-strong"
+                    >
                       &nbsp;
                     </Typography>
-                    <Typography as="div" variant="paragraph" className="mt-2 h-3 w-[45%] rounded-sm bg-gray-700 animate-pulse-strong">
+                    <Typography
+                      as="div"
+                      variant="paragraph"
+                      className="mt-2 h-3 w-[45%] rounded-sm bg-gray-700 animate-pulse-strong"
+                    >
                       &nbsp;
                     </Typography>
                   </>
@@ -29,7 +37,7 @@ export function GridItem({ area, icon, title, description, isLoading }) {
                     <h3 className="-tracking-4 pt-0.5 font-sans text-xl/[1.375rem] font-semibold text-balance md:text-2xl/[1.875rem] text-white">
                       {title}
                     </h3>
-                    <h2 className="font-sans text-sm/[1.125rem] md:text-base/[1.375rem] text-gray-700 [&_b]:md:font-semibold [&_strong]:md:font-semibold">
+                    <h2 className="font-sans text-sm/[1.125rem] md:text-base/[1.375rem] text-gray-700 whitespace-pre-line [&_b]:md:font-semibold [&_strong]:md:font-semibold">
                       {description}
                     </h2>
                   </>
@@ -85,10 +93,18 @@ export function GridItemColored({ onClick, area, icon, title, description, hover
                 <div className="space-y-3">
                   {isLoading ? (
                     <>
-                      <Typography as="div" variant="paragraph" className="mt-2 h-6 w-[80%] rounded-sm bg-gray-700 animate-pulse-strong">
+                      <Typography
+                        as="div"
+                        variant="paragraph"
+                        className="mt-2 h-6 w-[80%] rounded-sm bg-gray-700 animate-pulse-strong"
+                      >
                         &nbsp;
                       </Typography>
-                      <Typography as="div" variant="paragraph" className="mt-2 h-3 w-[45%] rounded-sm bg-gray-700 animate-pulse-strong">
+                      <Typography
+                        as="div"
+                        variant="paragraph"
+                        className="mt-2 h-3 w-[45%] rounded-sm bg-gray-700 animate-pulse-strong"
+                      >
                         &nbsp;
                       </Typography>
                     </>
@@ -97,7 +113,7 @@ export function GridItemColored({ onClick, area, icon, title, description, hover
                       <h3 className="-tracking-4 pt-0.5 font-sans text-xl/[1.375rem] font-semibold text-balance md:text-2xl/[1.875rem] text-white">
                         {title}
                       </h3>
-                      <h2 className="font-sans text-sm/[1.125rem] md:text-base/[1.375rem] text-gray-700 [&_b]:md:font-semibold [&_strong]:md:font-semibold">
+                      <h2 className="font-sans text-sm/[1.125rem] md:text-base/[1.375rem] text-gray-700 whitespace-pre-line [&_b]:md:font-semibold [&_strong]:md:font-semibold">
                         {description}
                       </h2>
                     </>

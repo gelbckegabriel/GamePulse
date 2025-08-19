@@ -18,7 +18,13 @@ namespace game_pulse.Interfaces.Dto
 
         public string SportName { get; set; } = null!;
 
-        public DateTime Time { get; set; }
+        public DateTime DateTime { get; set; }
+
+        public string DayOfWeek { get; set; } = null!;
+
+        public string Date { get; set; } = null!;
+
+        public string Time { get; set; } = null!;
 
         public List<GamePlayerDto> Players { get; set; } = null!;
     }
