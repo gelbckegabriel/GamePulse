@@ -178,6 +178,17 @@ namespace game_pulse.Services
 
         public async Task<bool> UnsubscribePlayerFromGame(int gameId, string userId)
         {
+            var user = await _context.GamePlayers
+                .Where(gp => gp.GameId == gameId && gp.UserId == userId)
+                .FirstOrDefaultAsync();
+
+            if (user != null)
+            {
+                _context.GamePlayers.Remove(user);
+
+                await _context.SaveChangesAsync();
+            }
+
             return true;
         }
     }
