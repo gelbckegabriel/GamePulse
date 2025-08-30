@@ -1,4 +1,4 @@
-import InstallGamePulse from "./shared/install-button/install-button";
+import InstallGamePulse from "./shared/install-button";
 import { Hero } from "./shared/section/hero";
 import { HeroSub } from "./shared/section/hero-sub";
 import { SportsCarousel } from "./shared/section/sports-carousel";

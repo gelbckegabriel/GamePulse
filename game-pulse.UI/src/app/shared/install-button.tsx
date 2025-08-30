@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Button } from "../utilities/button";
-import { SwalAlertTrigger, SwalErrorTrigger } from "../utilities/swal-trigger";
-import { Icon } from "../utilities/evervault-card";
+import { Button } from "./utilities/button";
+import { SwalAlertTrigger, SwalErrorTrigger } from "./utilities/swal-trigger";
+import { Icon } from "./utilities/evervault-card";
 
 export default function InstallGamePulse() {
   const [defferedPrompt, setDefferedPrompt] = useState<BeforeInstallPromptEvent | null>(null);
@@ -30,20 +30,17 @@ export default function InstallGamePulse() {
     };
 
     window.addEventListener("beforeinstallprompt", handler);
-
-    return () => {
-      window.removeEventListener("beforeinstallprompt", handler);
-    };
+    return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
 
   const handleInstall = async () => {
-    if (!defferedPrompt) {
-      SwalAlertTrigger(
-        "Installation Not Available",
-        "Unfortunately, your browser doesn't support automatic installation of this app, or <strong>it may already be installed</strong>.<br><br>If it's not installed, try using <strong>Chrome</strong> or <strong>Edge</strong>. If you're using an <strong>iPhone</strong> or <strong>Mac</strong>, the installation process is slightly different."
-      );
-      return;
-    }
+    // if (!defferedPrompt) {
+    //   SwalAlertTrigger(
+    //     "Installation Not Available",
+    //     "Unfortunately, your browser doesn't support automatic installation of this app, or <strong>it may already be installed</strong>.<br><br>If it's not installed, try using <strong>Chrome</strong> or <strong>Edge</strong>. If you're using an <strong>iPhone</strong> or <strong>Mac</strong>, the installation process is slightly different."
+    //   );
+    //   return;
+    // }
 
     // TODO: Need to be worked.
     // if (!isInstallable) {
@@ -54,14 +51,18 @@ export default function InstallGamePulse() {
     // }
 
     try {
-      defferedPrompt.prompt();
-      const { outcome } = await defferedPrompt.userChoice;
+      defferedPrompt!.prompt();
+      const { outcome } = await defferedPrompt!.userChoice;
       console.log(`User response to the install prompt: ${outcome}`);
       // setIsInstallable(false);
       setDefferedPrompt(null);
     } catch (error) {
       console.error("Installation failed:", error);
-      SwalErrorTrigger("Installation Failed", "An error occurred while trying to install GamePulse. Please try again later.", error);
+      SwalErrorTrigger(
+        "Installation Failed",
+        "An error occurred while trying to install GamePulse. Please try again later. If the problem persists, verify if the application is not already installed.",
+        error
+      );
     }
   };
 
@@ -85,8 +86,12 @@ export default function InstallGamePulse() {
                 <img src="/logos/android.webp" alt="Android" className="h-10 w-10" />
               </div>
               <p className="mt-6 text-gray-300 text-center">
-                Simply click the button below to install GamePulse on your device while using Chrome or Edge. This will allow you to access GamePulse
-                directly from your home screen, just like a native app.
+                Simply click the button below to install GamePulse on your device while using Chrome or Edge. This will allow you
+                to access GamePulse directly from your home screen, just like a native app.
+                <br />
+                <i>
+                  <strong>Remember: </strong> If the application is already installed, the button may not work.
+                </i>
               </p>
               <br />
               <Button className="mt-2" onClick={handleInstall}>

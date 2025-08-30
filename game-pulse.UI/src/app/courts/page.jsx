@@ -14,7 +14,7 @@ import {
 import { Container } from "../shared/utilities/container";
 import { CourtsCard } from "./components/courts-card";
 import { apiClient } from "../services/apiClient";
-import InstallGamePulse from "../shared/install-button/install-button";
+import InstallGamePulse from "../shared/install-button";
 import { sportsService } from "../services/cache/sports-info";
 import { FaSearch } from "react-icons/fa";
 
