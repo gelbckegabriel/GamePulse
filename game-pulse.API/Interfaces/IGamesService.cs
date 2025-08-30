@@ -19,6 +19,6 @@ namespace game_pulse.Interfaces
 
         public Task<List<CourtGameDto>> GetCourtGamesFiltered(GamesFilterModel filter);
 
-        public Task<List<UserNextGamesDto>> GetUserNextGames(GamesFilterModel filter, bool isUpcoming = true);
+        public Task<List<UserNextGamesDto>> GetUserGames(GamesFilterModel filter, bool isUpcoming = true);
     }
 }

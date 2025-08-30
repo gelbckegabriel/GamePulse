@@ -105,7 +105,7 @@ export default function CourtPage() {
             <GridItem
               area="md:[grid-area:2/7/3/13] xl:[grid-area:1/5/3/10]"
               icon={<FaPeopleRoof className="h-4 w-4 text-gray-700" />}
-              title="Players!"
+              title="Players"
               description={gamePlayers ? gamePlayers.slice(0, -1) : "No players yet!"}
               hover={!isLoading}
               isLoading={isLoading}
@@ -122,11 +122,13 @@ export default function CourtPage() {
           </ul>
         </div>
 
-        <div className="mt-20 mb-32 flex justify-center">
-          <Button size="large" onClick={handlePresenceToggle}>
-            {isUserSubscribed ? "Cancel Presence" : "Confirm Presence"}
-          </Button>
-        </div>
+        {new Date(game.dateTime) > new Date() && (
+          <div className="mt-20 mb-32 flex justify-center">
+            <Button size="large" onClick={handlePresenceToggle}>
+              {isUserSubscribed ? "Cancel Presence" : "Confirm Presence"}
+            </Button>
+          </div>
+        )}
       </Container>
     </>
   );

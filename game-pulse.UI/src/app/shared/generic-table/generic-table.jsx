@@ -19,7 +19,7 @@ export const GenericTable = ({ tableType, columns, data, isLoading }) => {
 
   return (
     <>
-      <table className="text-white w-full mx-auto">
+      <table className="text-white max-w-none w-[100%] md:w-[80%] mx-auto">
         <thead>
           <tr>
             {columns.map((column, index) => (

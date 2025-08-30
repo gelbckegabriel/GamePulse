@@ -1,4 +1,5 @@
 import { Typography } from "@material-tailwind/react";
+import Link from "next/link";
 import React from "react";
 
 export const GamesBodyTable = ({ data, isLoading }) => {
@@ -25,7 +26,7 @@ export const GamesBodyTable = ({ data, isLoading }) => {
           <tr className="row">
             <td className="position">{index + 1}</td>
             <td
-              className="row text-[0.875rem] md:text-[1.1rem] px-4 py-2 text-left border-l-4"
+              className="row text-[0.8rem] md:text-[1.1rem] px-4 py-2 text-left border-l-4"
               style={isLoading ? { borderColor: "#616161" } : { borderColor: sportColors[row.sport_name.toLowerCase()] }}
             >
               <div className="flex items-center">
@@ -47,7 +48,13 @@ export const GamesBodyTable = ({ data, isLoading }) => {
                         </>
                       ) : (
                         <>
-                          <p>
+                          {/* Smaller Screens */}
+                          <p className="block sm:hidden">
+                            {firstName.charAt(0)}. <strong>{lastName}</strong>
+                          </p>
+
+                          {/* Medium and Larger Screens*/}
+                          <p className="hidden sm:block">
                             {firstName} <strong>{lastName}</strong>
                           </p>
                         </>
@@ -57,13 +64,17 @@ export const GamesBodyTable = ({ data, isLoading }) => {
                 })()}
                 {isLoading ? (
                   <>
-                    <Typography as="div" variant="span" className="ml-3 min-w-[3rem] md:min-w-[4rem] h-2 rounded-sm bg-gray-700 animate-pulse-strong">
+                    <Typography
+                      as="div"
+                      variant="span"
+                      className="ml-3 min-w-[3rem] md:min-w-[4rem] h-2 rounded-sm bg-gray-700 animate-pulse-strong"
+                    >
                       &nbsp;
                     </Typography>
                   </>
                 ) : (
                   <>
-                    <span className="text-[0.65rem] md:text-[0.8rem]">{capitalize(row.sport_name)}</span>
+                    <span className="hidden md:block text-[0.65rem] md:text-[0.8rem]">{capitalize(row.sport_name)}</span>
                   </>
                 )}
               </div>
@@ -81,7 +92,7 @@ export const GamesBodyTable = ({ data, isLoading }) => {
                 </>
               ) : (
                 <>
-                  <span className="text-[0.65rem] md:text-[0.8rem]">{row.game_date_formatted}</span>
+                  <span className="text-[0.65rem] md:text-[0.8rem]">{row.sport_name}</span>
                 </>
               )}
             </td>
@@ -115,7 +126,9 @@ export const GamesBodyTable = ({ data, isLoading }) => {
                 </>
               ) : (
                 <>
-                  <span className="text-[0.65rem] md:text-[0.8rem] !bg-teal-600 cursor-pointer">View</span>
+                  <Link href={`/game?id=${row.id}`} className="mx-auto">
+                    <span className="text-[0.65rem] md:text-[0.8rem] !bg-teal-600 cursor-pointer">View</span>
+                  </Link>
                 </>
               )}
             </td>

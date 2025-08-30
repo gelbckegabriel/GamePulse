@@ -24,13 +24,6 @@ namespace game_pulse.Controllers
             return Ok(data);
         }
 
-        [HttpPost("GetUserPreviousGames")]
-        public async Task<IActionResult> GetUserPreviousGames(GamesFilterModel filter)
-        {
-            var data = await _gamesService.GetUserNextGames(filter: filter, isUpcoming: false);
-            return Ok(data);
-        }
-
         [HttpPost("CreateGame")]
         public async Task<IActionResult> CreateGame(GameCreateModel details)
         {
@@ -64,10 +57,17 @@ namespace game_pulse.Controllers
             return Ok(data);
         }
 
+        [HttpPost("GetUserPreviousGames")]
+        public async Task<IActionResult> GetUserPreviousGames(GamesFilterModel filter)
+        {
+            var data = await _gamesService.GetUserGames(filter: filter, isUpcoming: false);
+            return Ok(data);
+        }
+
         [HttpPost("GetUserNextGames")]
         public async Task<IActionResult> GetUserNextGames(GamesFilterModel filter)
         {
-            var data = await _gamesService.GetUserNextGames(filter);
+            var data = await _gamesService.GetUserGames(filter);
             return Ok(data);
         }
 

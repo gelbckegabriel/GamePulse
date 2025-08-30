@@ -7,9 +7,9 @@ import Footer from "./shared/footer";
 import "./globals.css";
 import { FloatingDock } from "./shared/dock";
 import { FaHome, FaInfo } from "react-icons/fa";
-import { FaUserGroup } from "react-icons/fa6";
 import { PiCourtBasketballDuotone } from "react-icons/pi";
 import { MdOutlineSportsHandball } from "react-icons/md";
+import { ChartBarSquareIcon } from "@heroicons/react/24/outline";
 
 const roboto = Roboto({
   weight: ["400", "500", "700"],
@@ -40,7 +40,7 @@ const links = [
   },
   {
     title: "Leaderboard",
-    icon: <FaUserGroup className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />,
+    icon: <ChartBarSquareIcon className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />,
     href: "/leaderboard",
   },
   {
