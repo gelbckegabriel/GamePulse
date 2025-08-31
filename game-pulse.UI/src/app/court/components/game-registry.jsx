@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useAnimate, useDragControls, useMotionValue, motion, AnimatePresence } from "framer-motion";
 import { FaCheck, FaRunning } from "react-icons/fa";
 import { IoIosCalendar, IoIosTime, IoIosTimer } from "react-icons/io";
@@ -9,14 +9,12 @@ import { Button } from "../../shared/utilities/button";
 import { Option, Select } from "@material-tailwind/react";
 import { apiClient } from "@/app/services/apiClient";
 import { GridGamesColored } from "@/app/shared/grid-card-glows/grid-cards";
-import { sportsService } from "@/app/services/cache/sports-info";
 import { SwalAlertTrigger, SwalConfirmTrigger, SwalErrorTrigger, SwalSuccessTrigger } from "@/app/shared/utilities/swal-trigger";
 import { userService } from "@/app/services/cache/user-info";
 
-export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
+export const GameRegistration = ({ court, courtSports, isOpen, setIsOpen }) => {
   const dateInputRef = useRef(null);
   const [isCreatingGame, setIsCreatingGame] = useState(false);
-  const [sports, setSports] = useState(sportsService.getSports());
   const [isSearched, setIsSearched] = useState(false);
   const [userFilter, setUserFilter] = useState({
     date: null,
@@ -44,12 +42,6 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
   ];
   const [courtGames, setCourtGames] = useState([]);
 
-  useEffect(() => {
-    sportsService.sports$.subscribe((result) => {
-      setSports(result);
-    });
-  }, [isOpen]);
-
   const areFiltersValid = () => {
     const { date, startTime, endTime } = userFilter;
 
@@ -68,9 +60,9 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
       return;
     }
 
-    // TODO: When searching remember to also add the sport filter
     apiClient("Games/GetCourtGames", "POST", {
       CourtId: court.id,
+      SportId: userFilter.sportId || null,
       GameDate: userFilter.date,
       GameTimeStart: userFilter.startTime,
       GameTimeEnd: userFilter.endTime,
@@ -142,35 +134,41 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
       return;
     }
 
-    setIsCreatingGame(true);
+    SwalConfirmTrigger("Confirm Game Creation", `Are you sure you want to create a new game at ${userFilter.startTime}?`).then(
+      (result) => {
+        if (result.isConfirmed) {
+          setIsCreatingGame(true);
 
-    apiClient("Games/CreateGame", "POST", {
-      userId: userService.getUserId(),
-      courtId: court.id,
-      sportId: userFilter.sportId,
-      gameDate: userFilter.date,
-      gameTimeStart: userFilter.startTime,
-    })
-      .then(() => {
-        SwalSuccessTrigger("Game Created", "Your game has been successfully created.");
-      })
-      .catch((error) => {
-        console.error("Error creating game: ", error);
-        SwalErrorTrigger("Error Creating Game", "There was an error creating your game. Please try again later.", error);
-      })
-      .finally(() => {
-        // Reset state after creating game
-        setUserFilter({
-          date: null,
-          startTime: null,
-          endTime: null,
-          sportId: null,
-        });
-        setCourtGames([]);
-        setIsSearched(false);
-        setIsCreatingGame(false);
-        setIsOpen(false);
-      });
+          apiClient("Games/CreateGame", "POST", {
+            userId: userService.getUserId(),
+            courtId: court.id,
+            sportId: userFilter.sportId,
+            gameDate: userFilter.date,
+            gameTimeStart: userFilter.startTime,
+          })
+            .then(() => {
+              SwalSuccessTrigger("Game Created", "Your game has been successfully created.");
+            })
+            .catch((error) => {
+              console.error("Error creating game: ", error);
+              SwalErrorTrigger("Error Creating Game", "There was an error creating your game. Please try again later.", error);
+            })
+            .finally(() => {
+              // Reset state after creating game
+              setUserFilter({
+                date: null,
+                startTime: null,
+                endTime: null,
+                sportId: null,
+              });
+              setCourtGames([]);
+              setIsSearched(false);
+              setIsCreatingGame(false);
+              setIsOpen(false);
+            });
+        }
+      }
+    );
   };
 
   // ANIMATION
@@ -274,9 +272,9 @@ export const GameRegistration = ({ court, isOpen, setIsOpen }) => {
                         }}
                         className="!w-full !pl-1 !border-transparent !text-sm2 !bg-opacity-0 !text-white"
                       >
-                        {sports.map((sport) => (
+                        {courtSports.map((sport) => (
                           <Option key={sport.id} value={sport.id}>
-                            {sport.sportName}
+                            {sport.name}
                           </Option>
                         ))}
                       </Select>

@@ -101,7 +101,6 @@ namespace game_pulse.Services
             var query = _context.Games
                 .Include(g => g.Court)
                 .ThenInclude(g => g.Sports)
-                .Where(g => g.CourtId == filter.CourtId)
                 .Where(g => DateOnly.FromDateTime(g.GameTime) == filter.GameDate)
                 .Where(g => 
                     TimeOnly.FromDateTime(g.GameTime) >= filter.GameTimeStart &&
@@ -112,6 +111,9 @@ namespace game_pulse.Services
 
             if (filter.CourtId.HasValue)
                 query = query.Where(g => g.CourtId == filter.CourtId);
+
+            if (filter.SportId.HasValue)
+                query = query.Where(g => g.SportId == filter.SportId);
 
             var games = await query
                 .Select(g => new CourtGameDto

@@ -21,6 +21,7 @@ export default function CourtPage() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [court, setCourt] = useState({});
+  const [courtSports, setCourtSports] = useState([]);
 
   // GET COURT DETAILS
   useEffect(() => {
@@ -36,7 +37,15 @@ export default function CourtPage() {
       name: params.get("name"),
       city: params.get("city"),
     }).then((response) => {
+      const courtSports = [];
+      response.sports.forEach((sport) => {
+        courtSports.push({
+          id: sport.id,
+          name: sport.name,
+        });
+      });
       setCourt(response);
+      setCourtSports(courtSports);
       setIsLoading(false);
     });
 
@@ -143,8 +152,9 @@ export default function CourtPage() {
         <br />
 
         {/* TODO: Will I need 'User's next games' on the court? Or just on the 'Games' page? */}
-
-        {Object.keys(court).length > 0 && <GameRegistration court={court} isOpen={isDrawerOpen} setIsOpen={setIsDrawerOpen} />}
+        {Object.keys(court).length > 0 && (
+          <GameRegistration court={court} courtSports={courtSports} isOpen={isDrawerOpen} setIsOpen={setIsDrawerOpen} />
+        )}
       </Container>
     </>
   );

@@ -132,6 +132,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
       });
   };
 
+  // TODO: Implement a second sign in method.
   const handleAppleSignIn = async () => {};
 
   const verifyUserExists = async (userId: string) => {
@@ -204,7 +205,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
               <div className="flex flex-col align-center items-center justify-center">
                 <p className="text-sm2">Register with:</p>
                 <div className="w-full mt-4 flex justify-center gap-10 md:gap-20">
-                  <div className="w-[50%] md:w-[30%]">
+                  <div className="w-[100%] md:w-[80%]">
                     <div
                       onClick={() => handleGoogleSignIn()}
                       className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex justify-center items-center gap-2 p-2 rounded-xl cursor-pointer transition-all duration-300 hover:bg-opacity-25"
@@ -215,7 +216,8 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                     </div>
                   </div>
 
-                  <div className="w-[50%] md:w-[30%]">
+                  {/* TODO: Maybe add a second method? */}
+                  {/* <div className="w-[50%] md:w-[30%]">
                     <Tooltip content="Not available yet !">
                       <div
                         onClick={() => handleAppleSignIn()}
@@ -226,7 +228,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                         </span>
                       </div>
                     </Tooltip>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 
