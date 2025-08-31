@@ -8,11 +8,7 @@ import { Tooltip } from "@material-tailwind/react";
 import { Button } from "../utilities/button";
 import { ProviderAuth } from "./provider-auth";
 import { firebaseAuth, googleProvider } from "@/app/services/firebase";
-import {
-  getRedirectResult,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-} from "firebase/auth";
+import { getRedirectResult, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { apiClient } from "@/app/services/apiClient";
 import { userService } from "@/app/services/cache/user-info";
 import { Sport, User } from "../../interfaces/db-entities";
@@ -52,11 +48,6 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
       })
       .catch((error) => {
         console.error("Error fetching sports data:", error);
-        SwalErrorTrigger(
-          "Sports Data Error",
-          "An error occurred while fetching sports data. Please try again later.",
-          error
-        );
       });
   }, [isOpen]);
 
@@ -125,10 +116,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
         userService.signInUser({
           id: response.user.uid,
           name: response.user.displayName || "Unknown User",
-          nickname:
-            response.user.displayName?.split(" ")[
-              response.user.displayName?.split(" ").length - 1
-            ],
+          nickname: response.user.displayName?.split(" ")[response.user.displayName?.split(" ").length - 1],
           email: response.user.email || undefined,
         });
         verifyUserExists(response.user.uid);
@@ -143,6 +131,8 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
         );
       });
   };
+
+  const handleAppleSignIn = async () => {};
 
   const verifyUserExists = async (userId: string) => {
     // Verify if user exists on the DB
@@ -220,25 +210,19 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                       className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex justify-center items-center gap-2 p-2 rounded-xl cursor-pointer transition-all duration-300 hover:bg-opacity-25"
                     >
                       <span className="flex items-center">
-                        <img
-                          src="auth/google.webp"
-                          alt="google logo"
-                          className="h-8 w-8"
-                        />
+                        <img src="logos/google.webp" alt="google logo" className="h-8 w-8" />
                       </span>
                     </div>
                   </div>
 
-                  {/* TODO: Facebook might be implemented later on */}
                   <div className="w-[50%] md:w-[30%]">
                     <Tooltip content="Not available yet !">
-                      <div className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex justify-center items-center gap-2 p-2 rounded-xl cursor-pointer transition-all duration-300 hover:bg-opacity-25">
+                      <div
+                        onClick={() => handleAppleSignIn()}
+                        className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex justify-center items-center gap-2 p-2 rounded-xl cursor-pointer transition-all duration-300 hover:bg-opacity-25"
+                      >
                         <span className="flex items-center">
-                          <img
-                            src="auth/facebook.webp"
-                            alt="facebook logo"
-                            className="h-8 w-8"
-                          />
+                          <img src="logos/apple.webp" alt="apple logo" className="h-8 w-8" />
                         </span>
                       </div>
                     </Tooltip>
@@ -278,23 +262,15 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                     className="bg-transparent pl-1 border-0 w-full outline-none text-sm2"
                   />
                   {showPassword ? (
-                    <FaRegEye
-                      className="cursor-pointer mr-1"
-                      onClick={togglePasswordView}
-                    />
+                    <FaRegEye className="cursor-pointer mr-1" onClick={togglePasswordView} />
                   ) : (
-                    <FaRegEyeSlash
-                      className="cursor-pointer mr-1"
-                      onClick={togglePasswordView}
-                    />
+                    <FaRegEyeSlash className="cursor-pointer mr-1" onClick={togglePasswordView} />
                   )}
                 </div>
 
                 <div className="mt-8 flex justify-center">
                   <Button
-                    className={`w-[50%] hover:scale-110 ${
-                      isLoading ? "animate-pulse-strong" : ""
-                    } `}
+                    className={`w-[50%] hover:scale-110 ${isLoading ? "animate-pulse-strong" : ""} `}
                     onClick={() => handlePasswordSignIn()}
                   >
                     Login
@@ -319,17 +295,9 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
         )}
       </AnimatePresence>
 
-      <CreateUser
-        openCreate={openCreate}
-        setOpenCreate={setOpenCreate}
-        setAuthOpen={setIsOpen}
-      />
+      <CreateUser openCreate={openCreate} setOpenCreate={setOpenCreate} setAuthOpen={setIsOpen} />
       {/* TODO: CREATE A LOGIC TO OPEN ONLY WHEN IT IS A NEW USER AUTHENTICATING WITH THE PROVIDER. */}
-      <ProviderAuth
-        openProvider={openProvider}
-        setOpenProvider={setOpenProvider}
-        setAuthOpen={setIsOpen}
-      />
+      <ProviderAuth openProvider={openProvider} setOpenProvider={setOpenProvider} setAuthOpen={setIsOpen} />
     </>
   );
 };

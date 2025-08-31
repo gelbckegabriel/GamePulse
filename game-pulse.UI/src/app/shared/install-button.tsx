@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "./utilities/button";
-import { SwalAlertTrigger, SwalErrorTrigger } from "./utilities/swal-trigger";
+import { SwalErrorTrigger } from "./utilities/swal-trigger";
 import { Icon } from "./utilities/evervault-card";
 
 export default function InstallGamePulse() {
