@@ -6,6 +6,9 @@ import { Vortex } from "../shared/utilities/vortex";
 import { motion } from "framer-motion";
 import { EvervaultCard, Icon } from "../shared/utilities/evervault-card";
 import { CodeBlock } from "./components/code-block";
+import { FaLinkedin } from "react-icons/fa";
+import { TbBrandGmail } from "react-icons/tb";
+import { IoIosMail } from "react-icons/io";
 
 export default function AboutPage() {
   const ref = useRef(null);
@@ -60,7 +63,10 @@ export default function AboutPage() {
     <>
       <div className="bg-black text-white">
         <div className="w-full mx-auto rounded-md h-[25rem] overflow-hidden">
-          <Vortex backgroundColor="#00000000" className="flex items-center flex-col justify-center px-2 md:px-10 py-4 w-full h-full">
+          <Vortex
+            backgroundColor="#00000000"
+            className="flex items-center flex-col justify-center px-2 md:px-10 py-4 w-full h-full"
+          >
             <h2 className="text-2xl md:text-4xl font-bold text-center">Game Pulse</h2>
             <p className="text-sm md:text-xl max-w-xl mt-6 text-center">Learn more about the project and the developer.</p>
           </Vortex>
@@ -78,13 +84,29 @@ export default function AboutPage() {
             <motion.div variants={variantsLeft} className="w-[50%] md:w-[60%] flex flex-col justify-center">
               <h1 className="text-xl md:text-4xl font-bold">Gabriel Gelbcke</h1>
               <p className="pt-2 md:pt-5 text-gray-500 text-xs md:text-lg">
-                Gelbcke is the sole developer of this project, driven by his passion for sports, particularly Basketball. He enjoys playing at public
-                courts, competing against others, making new friends, and socializing. Inspired by these experiences, he developed an application to
-                encourage more people in his city to engage in similar activities.
+                Gelbcke is the sole developer of this project, driven by his passion for sports, particularly Basketball. He
+                enjoys playing at public courts, competing against others, making new friends, and socializing. Inspired by these
+                experiences, he developed an application to encourage more people in his city to engage in similar activities.
               </p>
+              <div className="flex flex-row items-center">
+                <a href="https://www.linkedin.com/in/gabrielgelbcke/" target="_blank" rel="noopener noreferrer">
+                  <p className="text-md lg:text-lg border font-light border-white/[0.2] rounded-full mt-4 text-white px-2 py-0.5 w-fit">
+                    <FaLinkedin className="inline" />
+                  </p>
+                </a>
+                <a href="mailto:gabrielgelbcke@gmail.com?subject=GamePulse - Contato">
+                  <p className="text-md lg:text-lg border font-light border-white/[0.2] rounded-full mt-4 text-white px-2 py-0.5 w-fit ml-4">
+                    <IoIosMail className="inline" />
+                  </p>
+                </a>
+              </div>
             </motion.div>
             <motion.div variants={variantsRight} className="w-[50%] md:w-[40%] flex justify-center">
-              <img src="./about/gelbcke.webp" alt="Gelbcke's Photo" className="w-[600px] h-[280px] md:h-[400px] object-cover rounded-lg" />
+              <img
+                src="./about/gelbcke.webp"
+                alt="Gelbcke's Photo"
+                className="w-[600px] h-[280px] md:h-[400px] object-cover rounded-lg"
+              />
             </motion.div>
           </motion.div>
 
@@ -94,14 +116,17 @@ export default function AboutPage() {
             <br />
             <br />
             <p className="text-gray-500 text-center">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero molestiae corporis dolores dolore nisi cupiditate quaerat veritatis?
-              Impedit deserunt numquam accusamus ut ratione inventore facilis, explicabo temporibus aut autem repellendus. This website aims to
-              enhance community interaction, allowing more individuals to benefit from the joy of sports and social connections.
+              The app emphasizes social wellbeing and local engagement: users can check in, track session activity and XP,
+              discover teammates, and receive notifications for upcoming games. Designed as a progressive web app, GamePulse
+              delivers native-like performance across devices while supporting quick installs. The stack pairs a modern
+              React/Next.js frontend with a scalable backend and PostgreSQL/Supabase-style data storage (with options for C# /
+              ASP.NET Core APIs), and supports secure sign-in via providers such as Google. GamePulse is focused on simple, fast
+              experiences that get people playing and connecting.
             </p>
           </div>
 
           {/* GitHub Repo */}
-          <div className="mt-20 pb-10 flex items-center gap-4">
+          <div className="my-20 pb-10 flex items-center gap-4">
             {/* GitHub Repo Card */}
             <div className="border border-white/[0.2] flex flex-col items-start max-w-full md:max-w-sm mx-auto p-4 relative h-[30rem]">
               <Icon className="absolute h-6 w-6 -top-3 -left-3 text-white" />
@@ -111,9 +136,13 @@ export default function AboutPage() {
 
               <EvervaultCard text="hover" />
 
-              <h2 className="text-white mt-4 text-sm font-light">Would you like to see the code behind this website and how everything was built?</h2>
+              <h2 className="text-white mt-4 text-sm font-light">
+                Would you like to see the code behind this website and how everything was built?
+              </h2>
               <a href="https://github.com/gelbckegabriel/GamePulse" target="_blank" rel="noopener noreferrer">
-                <p className="text-sm border font-light border-white/[0.2] rounded-full mt-4 text-white px-2 py-0.5">View GitHub Repo</p>
+                <p className="text-sm border font-light border-white/[0.2] rounded-full mt-4 text-white px-2 py-0.5">
+                  View GitHub Repo
+                </p>
               </a>
             </div>
 
@@ -126,8 +155,6 @@ export default function AboutPage() {
               </>
             ) : null}
           </div>
-
-          {/* TODO: Contact Information */}
         </Container>
       </div>
     </>

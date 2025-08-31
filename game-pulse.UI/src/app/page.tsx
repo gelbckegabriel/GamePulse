@@ -15,7 +15,7 @@ export default function Home() {
 
       <Container>
         {/* Install GamePulse */}
-        <div className="-mt-60 md:-mt-40 mb-12 max-w-[]">
+        <div className="-mt-60 md:-mt-40 mb-32 max-w-[]">
           <InstallGamePulse />
         </div>
       </Container>
