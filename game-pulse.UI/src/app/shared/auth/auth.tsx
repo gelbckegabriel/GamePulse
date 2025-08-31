@@ -4,7 +4,6 @@ import { FaFingerprint, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import { CreateUser } from "./create-user";
-import { Tooltip } from "@material-tailwind/react";
 import { Button } from "../utilities/button";
 import { ProviderAuth } from "./provider-auth";
 import { firebaseAuth, googleProvider } from "@/app/services/firebase";
@@ -133,7 +132,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
   };
 
   // TODO: Implement a second sign in method.
-  const handleAppleSignIn = async () => {};
+  // const handleAppleSignIn = async () => {};
 
   const verifyUserExists = async (userId: string) => {
     // Verify if user exists on the DB
