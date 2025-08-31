@@ -2,10 +2,11 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY . .
+
 # debug
 RUN pwd
 RUN ls -la
-RUN ls -la game-pulse.API
+
 RUN dotnet publish ./game-pulse.API.csproj -c Release -o /app
 
 # runtime
