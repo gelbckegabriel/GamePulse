@@ -1,8 +1,8 @@
 services:
   - type: web
-    name: minha-api
+    name: GamePulse
     env: dotnet
     rootDir: ./game-pulse.API
     buildCommand: dotnet publish -c Release -o out
-    startCommand: dotnet out/minha-api.dll
+    startCommand: dotnet out/GamePulse.dll
     plan: free
