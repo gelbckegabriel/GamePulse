@@ -1,3 +1,4 @@
+import Image from "next/image";
 import "./sport-card.scss";
 
 type Props = {
@@ -16,14 +17,12 @@ export const SportCard = ({ backgroundImage, name }: Props) => {
           </button>
 
           <figure className="card__image">
-            <img src={backgroundImage} />
+            <Image src={backgroundImage} alt={name} fill />
           </figure>
 
           <div className="card__body mt-[15%]">
             <h3 className="card__name">{name}</h3>
-            <p className="card__bio">
-              Filter locations where you can find a {name} court
-            </p>
+            <p className="card__bio">Filter locations where you can find a {name} court</p>
           </div>
         </div>
       </div>

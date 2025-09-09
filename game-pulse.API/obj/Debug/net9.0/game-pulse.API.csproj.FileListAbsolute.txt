@@ -324,5 +324,4 @@ C:\Users\Temp\Documents\Projects\GamePulse\game-pulse.API\obj\Debug\net9.0\refin
 C:\Users\Temp\Documents\Projects\GamePulse\game-pulse.API\obj\Debug\net9.0\game-pulse.API.pdb
 C:\Users\Temp\Documents\Projects\GamePulse\game-pulse.API\obj\Debug\net9.0\game-pulse.API.genruntimeconfig.cache
 C:\Users\Temp\Documents\Projects\GamePulse\game-pulse.API\obj\Debug\net9.0\ref\game-pulse.API.dll
-C:\Users\Temp\Documents\Projects\GamePulse\game-pulse.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\Temp\Documents\Projects\GamePulse\game-pulse.API\bin\Debug\net9.0\appsettings.Local.json

@@ -1,2 +1,0 @@
-C:\Users\Temp\Documents\Projects\GamePulse\game-pulse.API\wwwroot\SwaggerUI\SwaggerDark.css
-wwwroot\SwaggerUI\SwaggerDark.css

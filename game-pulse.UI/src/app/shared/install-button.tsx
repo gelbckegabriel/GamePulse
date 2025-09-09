@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Button } from "./utilities/button";
 import { SwalErrorTrigger } from "./utilities/swal-trigger";
 import { Icon } from "./utilities/evervault-card";
+import Image from "next/image";
 
 export default function InstallGamePulse() {
   const [defferedPrompt, setDefferedPrompt] = useState<BeforeInstallPromptEvent | null>(null);
@@ -30,6 +31,7 @@ export default function InstallGamePulse() {
     };
 
     window.addEventListener("beforeinstallprompt", handler);
+    console.log("beforeinstallprompt event listener added");
     return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
 
@@ -81,9 +83,9 @@ export default function InstallGamePulse() {
             <div className="md:w-1/2 flex flex-col items-center">
               {/* <h3 className="text-base md:text-2xl font-bold text-gray-500">Edge or Chrome</h3> */}
               <div className="flex gap-6">
-                <img src="/logos/windows.webp" alt="Windows" className="h-10 w-10" />
-                <img src="/logos/linux.webp" alt="Linux" className="h-10 w-10" />
-                <img src="/logos/android.webp" alt="Android" className="h-10 w-10" />
+                <Image src="/logos/windows.webp" alt="Windows" width={40} height={40} />
+                <Image src="/logos/linux.webp" alt="Linux" width={40} height={40} />
+                <Image src="/logos/android.webp" alt="Android" width={40} height={40} />
               </div>
               <p className="mt-6 text-gray-300 text-center">
                 Simply click the button below to install GamePulse on your device while using Chrome or Edge. This will allow you
@@ -106,7 +108,7 @@ export default function InstallGamePulse() {
             <div className="md:w-1/2 flex flex-col items-center">
               {/* <h3 className="text-base md:text-2xl font-bold text-gray-500">Safari</h3> */}
               <div className="flex gap-6">
-                <img src="/logos/apple.webp" alt="Apple" className="h-10 w-10" />
+                <Image src="/logos/apple.webp" alt="Apple" width={40} height={40} />
               </div>
               <p className="mt-6 text-gray-300 text-center">
                 To install GamePulse from Safari, tap the <strong>Share</strong> icon in the browser toolbar, then select{" "}

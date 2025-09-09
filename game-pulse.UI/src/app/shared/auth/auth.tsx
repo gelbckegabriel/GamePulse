@@ -13,6 +13,7 @@ import { userService } from "@/app/services/cache/user-info";
 import { Sport, User } from "../../interfaces/db-entities";
 import { SwalErrorTrigger } from "../utilities/swal-trigger";
 import { sportsService } from "@/app/services/cache/sports-info";
+import Image from "next/image";
 
 type Props = {
   isOpen: boolean;
@@ -210,7 +211,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                       className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex justify-center items-center gap-2 p-2 rounded-xl cursor-pointer transition-all duration-300 hover:bg-opacity-25"
                     >
                       <span className="flex items-center">
-                        <img src="logos/google.webp" alt="google logo" className="h-8 w-8" />
+                        <Image src="logos/google.webp" alt="google logo" width={32} height={32} />
                       </span>
                     </div>
                   </div>
@@ -223,7 +224,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                         className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex justify-center items-center gap-2 p-2 rounded-xl cursor-pointer transition-all duration-300 hover:bg-opacity-25"
                       >
                         <span className="flex items-center">
-                          <img src="logos/apple.webp" alt="apple logo" className="h-8 w-8" />
+                          <Image src="logos/apple.webp" alt="apple logo" width={32} height={32} />
                         </span>
                       </div>
                     </Tooltip>

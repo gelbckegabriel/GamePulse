@@ -9,6 +9,7 @@ import { CodeBlock } from "./components/code-block";
 import { FaLinkedin } from "react-icons/fa";
 import { TbBrandGmail } from "react-icons/tb";
 import { IoIosMail } from "react-icons/io";
+import Image from "next/image";
 
 export default function AboutPage() {
   const ref = useRef(null);
@@ -102,11 +103,9 @@ export default function AboutPage() {
               </div>
             </motion.div>
             <motion.div variants={variantsRight} className="w-[50%] md:w-[40%] flex justify-center">
-              <img
-                src="./about/gelbcke.webp"
-                alt="Gelbcke's Photo"
-                className="w-[600px] h-[280px] md:h-[400px] object-cover rounded-lg"
-              />
+              <div className="relative w-[600px] h-[280px] md:h-[400px]">
+                <Image src="/about/gelbcke.webp" alt="Gelbcke's Photo" fill className="object-cover rounded-lg" />
+              </div>
             </motion.div>
           </motion.div>
 
