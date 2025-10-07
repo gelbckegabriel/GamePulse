@@ -1,12 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  useAnimate,
-  useDragControls,
-  useMotionValue,
-  motion,
-} from "framer-motion";
+import { useAnimate, useDragControls, useMotionValue, motion } from "framer-motion";
 import { FaRegUserCircle, FaRunning } from "react-icons/fa";
 import { IoMdPerson, IoMdPin } from "react-icons/io";
 import useMeasure from "react-use-measure";
@@ -17,11 +12,7 @@ import Swal from "sweetalert2";
 import { userService } from "@/app/services/cache/user-info";
 import { sportsService } from "@/app/services/cache/sports-info";
 
-export const ProviderAuth = ({
-  openProvider,
-  setOpenProvider,
-  setAuthOpen,
-}) => {
+export const ProviderAuth = ({ openProvider, setOpenProvider, setAuthOpen }) => {
   // FORM
   const [user, setUser] = useState(userService.getCurrentUser());
   const [name, setName] = useState(user.name);
@@ -164,9 +155,7 @@ export const ProviderAuth = ({
 
             <div className="relative z-0 h-full overflow-y-auto p-4 pt-12">
               <div className="mx-auto max-w-2xl space-y-4 text-neutral-400 text-white">
-                <h2 className="pt-2 text-3xl md:text-4xl lg:text-4xl font-bold text-center">
-                  Finish Account Setup
-                </h2>
+                <h2 className="pt-2 text-3xl md:text-4xl lg:text-4xl font-bold text-center">Finish Account Setup</h2>
 
                 {/* DISPLAY UPDATE FORM IF NEW USER DETECTED */}
                 <motion.div
@@ -241,8 +230,8 @@ export const ProviderAuth = ({
                             className="!pl-1 !border-0 !border-transparent !w-full !outline-none !text-sm2 !bg-opacity-0 !text-white"
                           >
                             {sports.map((sport, index) => (
-                              <Option key={index} value={index + 1}>
-                                {sport}
+                              <Option key={index} value={sport.id}>
+                                {sport.sportName}
                               </Option>
                             ))}
                           </Select>
@@ -253,12 +242,7 @@ export const ProviderAuth = ({
 
                   {/* SUBMIT BUTTON */}
                   <div className="!mt-14 pb-6 flex justify-center">
-                    <Button
-                      className={`w-[30%] ${
-                        isLoading ? "!animate-pulse-strong" : ""
-                      }`}
-                      onClick={() => handleSubmit()}
-                    >
+                    <Button className={`w-[30%] ${isLoading ? "!animate-pulse-strong" : ""}`} onClick={() => handleSubmit()}>
                       Submit
                     </Button>
                   </div>

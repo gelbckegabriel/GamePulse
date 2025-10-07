@@ -34,7 +34,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
-    } // Nettoyage au démontage
+    }
 
     return () => {
       document.body.style.overflow = "";
@@ -211,7 +211,7 @@ export const UserAuth = ({ isOpen, setIsOpen }: Props) => {
                       className="bg-white bg-opacity-15 backdrop-blur-md shadow-lg w-full flex justify-center items-center gap-2 p-2 rounded-xl cursor-pointer transition-all duration-300 hover:bg-opacity-25"
                     >
                       <span className="flex items-center">
-                        <Image src="logos/google.webp" alt="google logo" width={32} height={32} />
+                        <Image src="/logos/google.webp" alt="google logo" width={32} height={32} />
                       </span>
                     </div>
                   </div>

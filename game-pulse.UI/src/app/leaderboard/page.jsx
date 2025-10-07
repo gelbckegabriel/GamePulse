@@ -19,11 +19,11 @@ export default function Leaderboard() {
     { name: "Rodolfo Malagueta", sport: "volleyball", awards: 15, points: 1.359 },
     { name: "Peter Jaine", sport: "basketball", awards: 3, points: 1.299 },
     { name: "Pedro Pedrado da Pedra Rochosa", sport: "volleyball", awards: 9, points: 1.099 },
-    { name: "Paula Tejando Torando", sport: "football", awards: 7, points: 873 },
+    { name: "Paula Grubner", sport: "football", awards: 7, points: 873 },
     { name: "Mary Doe", sport: "tennis", awards: 4, points: 674 },
     { name: "Josefina Margherita", sport: "volleyball", awards: 11, points: 529 },
     { name: "Dolores Analgésica", sport: "football", awards: 9, points: 468 },
-    { name: "Jacinto Lévis", sport: "football", awards: 1, points: 314 },
+    { name: "Jacir Dominicado", sport: "football", awards: 1, points: 314 },
   ]);
   const [basketballPlayers, setBasketballPlayers] = useState([
     { name: "Gabriel Gelbcke", sport: "basketball", awards: 17, points: "Leader" },
