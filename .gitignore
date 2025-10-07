@@ -40,3 +40,7 @@ game-pulse.UI/.vercel
 # typescript
 game-pulse.UI/*.tsbuildinfo
 game-pulse.UI/next-env.d.ts
+
+# bin
+game-pulse.API/bin
+game-pulse.API/debug
